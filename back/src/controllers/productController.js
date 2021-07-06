@@ -9,11 +9,20 @@ async function getProducts(req, res, next) {
   }
 }
 
+//Recive un array de productos por body
+//Devuelve producto creado.
+async function createProducts(req, res, next) {
+  try {
+    return;
+  } catch {
+    return;
+  }
+}
 module.exports = {
   getProducts,
+  createProducts,
   /* getProduct,
   searchProducts,
-  createProduct,
   deleteProduct,
   updateProduct,
   productsByCategory,
