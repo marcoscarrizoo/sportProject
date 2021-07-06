@@ -16,8 +16,8 @@ async function getProducts(req, res, next) {
 async function createProducts(req, res, next) {
   try {  
     const product = { name,description,images,price,stock } = req.body;
-    console.log('Prueba verdad',name && description && images && price);//undefined
-    // if(name &&)
+    console.log('Prueba verdad',);//undefined
+    if(name && description && images && price){}
   //   const [product] = await Pokemon.findOrCreate({
   //     where:{
   //         name
