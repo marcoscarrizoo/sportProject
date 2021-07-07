@@ -20,7 +20,7 @@ export default function Catalogo({products}) {
                         <Link to={`/${product.id}`} key={product.id}>
                             <ProductCard
                                 name={product.name}
-                                image={ product.images[0]}
+                                images={ product.images[0]}
                                 price={ product.price}
                                 categories={ product.categories.name} />
                         </Link>)
