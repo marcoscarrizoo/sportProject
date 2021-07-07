@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/NavBar';
 import Plans from './components/Plans/Plans';
 import Catalogo from './components/Catalogo/Catalogo';
 import {products} from './seeds'
+import ProductDetail from './components/ProductDetail/ProductDetail';
 
 function App() {
   return (
