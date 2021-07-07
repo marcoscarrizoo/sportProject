@@ -2,17 +2,12 @@ import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function Catalogo(products) {
+export default function Catalogo({products}) {
 
-    //provisorio hasta que traiga del global state
-    products = products.products
-
+    //no funciona
     const styles = makeStyles(() => ({
         container: {
-            width: '80vw',
-            minheight: '100vw',
-            display: 'flex',
-            flexWrap: 'wrap'
+            textDecoration: 'none'
         }
     }))
 
@@ -23,7 +18,11 @@ export default function Catalogo(products) {
                     && products.length !== 0
                     ? products.map(product =>
                         <Link to={`/${product.id}`} key={product.id}>
-                            <ProductCard product={product}/>
+                            <ProductCard
+                                name={product.name}
+                                image={ product.images[0]}
+                                price={ product.price}
+                                categories={ product.categories.name} />
                         </Link>)
                     //esta parte podriamos cambiarla por un componente 404, agregue este ProductCard provisorio por si no llegan los productos
                     : <ProductCard product={{

@@ -4,7 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Plans from './components/Plans/Plans';
 import Catalogo from './components/Catalogo/Catalogo';
-import { products } from './seeds';
+import {products} from './seeds'
 
 function App() {
   return (
