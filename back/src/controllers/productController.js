@@ -1,5 +1,5 @@
 const { Category, Product, Review, User } = require("../db");
-const { products:productSeed } = require('../../seeds');
+const { products: productsSeed } = require('../../seeds');
 //const { Op } = require("sequelize");
 
 async function getProducts(req, res, next) {
@@ -11,45 +11,42 @@ async function getProducts(req, res, next) {
 }
 
 //Recibe un array de productos por body
-//Devuelve producto creado.
-//Cada producto tiene: name,description,image(array),price,stock
+//Devuelve array de productos creados.
+//Cada producto tiene: name,description,images(array),price,stock,
+//categories(array de objetos, name, image)
 async function createProducts(req, res, next) {
-  try {  
-    const product = { name,description,images,price,stock } = req.body;
-    console.log('Prueba verdad',name && description && images && price);//undefined
-    // if(name &&)
-  //   const [product] = await Pokemon.findOrCreate({
-  //     where:{
-  //         name
-  //     },
-  //     defaults: { name, life, strength, defense, speed, height, weight, img },
-  // });
-    console.log('Products db', product)
-    console.log('ruta creacion producto')
-    res.send(product)
-    return;
-  } catch {
-    return;
+  try {
+    //Comprueba si req.body es array con por lo menos un indice
+    if (req.body.length > 0) {
+      const products = productsSeed.concat(req.body);
+      products.forEach(async ({ name, description, images, price, stock, categories }) => {
+        const [product] = await Product.findOrCreate({
+          where: {
+            name
+          },
+          defaults: { description, images, price, stock, }
+        });
+
+        categories.forEach(async ({ name, image }) => {
+          const [category] = await Category.findOrCreate({
+            where: {
+              name
+            },
+            defaults:{image}
+          });
+          product.addCategories(category);
+        })
+      });
+      //Devuelve productos creados
+      res.send(products)
+    }
+    else {
+      res.send('Product is not create');
+    }
+  } catch (error) {
+    console.error(error);
   }
-  // name: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  // },
-  // description: {
-  //   type: DataTypes.TEXT,
-  //   allowNull: false,
-  // },
-  // image: {
-  //   type: DataTypes.ARRAY(DataTypes.STRING),
-  // },
-  // price: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  // },
-  // stock: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  // },
+
 }
 module.exports = {
   getProducts,
