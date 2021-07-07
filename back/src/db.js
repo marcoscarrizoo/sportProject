@@ -40,7 +40,7 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 const { Product, Category, Order, User, Plan } = sequelize.models;
-Product.belongsToMany(Category, { through: "productCategory" });
+Product.belongsToMany(Category, { through: "product_category" });
 Category.belongsToMany(Product, { through: "productCategory" });
 
 Order.belongsTo(User);
