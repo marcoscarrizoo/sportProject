@@ -1,4 +1,5 @@
 const products = [{
+    id:1,
     name: "True Made Whey Protein Ena 1kg Concentrada Isolada Truemade",
     description: "ENA TRUEMADE WHEY PROTEIN 2LBS - 30 MEDIDAS BLEND DE PROTEINA ISOLADA + CONCENTRADA",
     images: [
@@ -13,9 +14,10 @@ const products = [{
 
     }]
 }, {
+    id:2,
     name: "Ena Protein Bar Caja X 16u 46g - Barras De Proteina Sabores ",
     description: "ENA PROTEIN BAR",
-    image: [
+    images: [
         "https://http2.mlstatic.com/D_NQ_NP_707077-MLA40743470620_022020-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_779555-MLA40743624545_022020-O.webp",
     ],
@@ -26,9 +28,10 @@ const products = [{
         image: "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg"
     }]
 }, {
+    id:3,
     name: "Fish Oil 1200mg Nature's Bounty Aceite De Pescado Omega 3",
     description: "Un suplemento dietario que contiene ácidos grasos omega-3, incluidos EPA y DHA.",
-    image: [
+    images: [
         "https://http2.mlstatic.com/D_NQ_NP_904826-MLA44008957239_112020-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_779555-MLA40743624545_022020-O.https://http2.mlstatic.com/D_NQ_NP_687475-MLA41534188094_042020-O.webp",
     ],

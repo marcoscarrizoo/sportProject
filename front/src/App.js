@@ -3,18 +3,16 @@ import {Route} from 'react-router-dom'
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Plans from './components/Plans/Plans';
-import ProductCard from "./components/ProductCard/ProductCard";
+import Catalogo from './components/Catalogo/Catalogo';
+import {products} from './seeds'
 import ProductDetail from './components/ProductDetail/ProductDetail';
 
 function App() {
   return (
     <React.Fragment>
-
       <Route path='/' component={NavBar}/>
       <Route path='/asociate' component={Plans}/>
-      <Route path='/detalle' component={ProductDetail}/>
-       <Route path="/card" component={ProductCard} />
-
+      <Route path='/productos' render={() => <Catalogo products={products}/>}/>
     </React.Fragment>
   );
 }
