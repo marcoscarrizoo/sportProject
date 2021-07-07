@@ -4,6 +4,7 @@ const { products: productsSeed } = require('../../seeds');
 
 async function getProducts(req, res, next) {
   try {
+    console.log('Function get')
     return;
   } catch {
     return;
