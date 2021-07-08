@@ -13,6 +13,7 @@ function App() {
       <Route path='/' component={NavBar}/>
       <Route path='/asociate' component={Plans}/>
       <Route path='/productos' render={() => <Catalogo products={products}/>}/>
+      <Route path='/producto/:id' component={ProductDetail}/>
     </React.Fragment>
   );
 }

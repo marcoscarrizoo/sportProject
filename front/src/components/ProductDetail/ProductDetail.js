@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useSelector, useDispatch } from 'react-redux';
+import {useParams} from 'react-router'
+import { getProductDetail } from '../../redux/actions/productsActions';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,6 +18,9 @@ import { red } from '@material-ui/core/colors';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    marginTop: '100px',
+    marginLeft: '38%',
+    boxShadow: '0  0 20px'
   },
   media: {
     height: 0,
@@ -41,28 +46,39 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductDetail() {
   const classes = useStyles();
- 
+  const detail = useSelector(store => store.products.productDetail)
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getProductDetail(id));
+    
+  }, [dispatch, id]);
+  
+  
   return (
+    
     <Card className={classes.root}>
+      
       <CardHeader
         
-        title="NOMBRE DEL PRODUCTO"
+        title={detail.name}
         
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={detail.images}
         title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          aca va la description del producto
+        <Typography variant="body2"  component="p">
+          Descripcion:  {detail.description} <hr></hr>
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          PRICE
+        <Typography variant="h5"  component="p">
+         Precio: ${detail.price}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          STOCK
+        <Typography variant="body2" component="p">
+          Disponible: {detail.stock}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -71,6 +87,7 @@ export default function ProductDetail() {
         
         
       </CardActions>
+       
       
     </Card>
   );
