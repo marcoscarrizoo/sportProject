@@ -11,9 +11,12 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
+
 const useStyles = makeStyles(() => ({
     sortContainer: {
-        backgroundColor: '#3f51b5',
         width: '90%',
         height: '700px',
         display: 'flex',
@@ -22,34 +25,56 @@ const useStyles = makeStyles(() => ({
     info: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent:'space-around',
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     grid: {
-        margin: '10px 0'
+        margin: '20px 10px',
+        backgroundColor: '#ffffff',
+        padding: '15px',
+        borderRadius: '15px',
+        width: '100%'
     }
 }));
 
 export default function SortBar() {
 
-    const [filOrder, setOrder] = useState({
+    const [filOrder, setfilOrder] = useState({
         order: "",
-        category: ""
+        category: []
     })
     const classes = useStyles()
 
     function handleChange(e) {
+        e.preventDefault()
+        console.log(e.target)
         const n = e.target.name;
-        setOrder({
-            ...filOrder,
-            [n]: e.target.value
-        })
+        if(n === "order") {
+            setfilOrder({
+                ...filOrder,
+                [n]: e.target.value
+            }) 
+        }else if ( n === "category") {
+            filOrder[n].includes(e.target.value) 
+            ? setfilOrder({
+                ...filOrder,
+                [n]: filOrder[n].filter(c => c !== n)
+            })
+            : setfilOrder({
+                ...filOrder,
+                [n]: [...filOrder[n], e.target.value]
+            });
+            e.target.checked = !e.target.checked
+        }
     }
 
     return (
         <div className={classes.sortContainer}>
             <Grid container className={classes.info}>
-                <Grid item xs={12} className={classes.grid}>
+
+            </Grid>
+            <Grid container className={classes.info}>
+                <Grid item className={classes.grid}>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Orden</FormLabel>
                         <RadioGroup aria-label="Orden" name="order" value={filOrder.order} onChange={handleChange}>
@@ -60,35 +85,26 @@ export default function SortBar() {
                         </RadioGroup>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12}>
-                    <Paper elevation={3} className={classes.paper}> Ordenar por: </Paper>
-                    <FormControl variant="filled" >
-                        <InputLabel>Orden</InputLabel>
-                        <Select
-                            native
-                            value={filOrder.category}
-                            onChange={handleChange}
-                            inputProps={{
-                                name: 'category',
-                                id: 'outlined-age-native-simple',
-                            }}
-                        >
-                            <option aria-label="None" value="gsdg" />
-                            <option value="A-Z">A-Z</option>
-                            <option value="Z-A">Z-A</option>
-                            <option value="Min-Max">Price Min-Max</option>
-                            <option value="Max-Min">Price Max-Min</option>
-                        </Select>
+                <Grid item className={classes.grid}>
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Categorias : </FormLabel>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Checkbox value="Mancuernas"  onChange={() => handleChange} name="category" />}
+                                label="Mancuernas"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox value="Barras"  onChange={() => handleChange} name="category" />}
+                                label="Barras"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox value="Suplementos"  onChange={() => handleChange} name="category" />}
+                                label="Suplementos"
+                            />
+                        </FormGroup>
+                        <FormHelperText>Encuentra por categoria</FormHelperText>
                     </FormControl>
                 </Grid>
-                {/* <Grid item xs={6}>
-                    <Paper elevation={3}> Ordenar por: </Paper>
-
-                </Grid> */}
-                <Paper elevation={3}></Paper>
-                <Paper elevation={3}></Paper>
-                <Paper elevation={3}></Paper>
-                <Paper elevation={3}></Paper>
             </Grid>
         </div>
     )
