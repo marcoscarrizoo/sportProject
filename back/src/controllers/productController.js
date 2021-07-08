@@ -68,9 +68,28 @@ async function createProducts(req, res, next) {
   }
 
 }
+
+
+async function getProductById(req, res, next) {
+let {id} = req.params
+
+try {
+ if(id) {
+   let detail = await Product.findOne({
+     where: {id}
+   })
+
+  return res.json(detail)
+ }
+}
+catch(error) {
+  console.log(error)
+}
+}
 module.exports = {
   getProducts,
   createProducts,
+  getProductById,
   /* getProduct,
   searchProducts,
   deleteProduct,
