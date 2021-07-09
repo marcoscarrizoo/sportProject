@@ -6,6 +6,7 @@ import Plans from './components/Plans/Plans';
 import Catalogo from './components/Catalogo/Catalogo';
 import {products} from './seeds'
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import CreateCategory from './components/Admin/CreateCategory';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path='/asociate' component={Plans}/>
       <Route path='/productos' render={() => <Catalogo products={products}/>}/>
       <Route path='/producto/:id' component={ProductDetail}/>
+      <Route path='/admin' component={CreateCategory}/>
     </React.Fragment>
   );
 }
