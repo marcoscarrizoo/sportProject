@@ -18,6 +18,13 @@ import {useHistory} from 'react-router-dom'
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
+  textDeco: {
+  textDecoration: 'none'
+  },
+  text: {
+    color : 'white',
+    
+  },
   link: {
     textDecoration: 'none',
     color: 'white'
@@ -207,12 +214,12 @@ export default function PrimarySearchAppBar() {
             
           
           <div className={classes.buttons}>
-        <Link to='/sedes'> <Button>Sedes</Button> </Link>
-        <Link to='/actividades'> <Button>actividades</Button> </Link>
-        <Link to='/planes'> <Button>nuestros planes</Button> </Link> 
-        <Link to='/productos'> <Button>productos</Button> </Link>
+        <Link className={classes.textDeco} to='/sedes'> <Button className={classes.text}>Sedes</Button> </Link>
+        <Link className={classes.textDeco} to='/actividades'> <Button className={classes.text}>actividades</Button> </Link>
+        <Link className={classes.textDeco} to='/planes'> <Button className={classes.text}>nuestros planes</Button> </Link> 
+        <Link className={classes.textDeco} to='/productos'> <Button className={classes.text}>productos</Button> </Link>
         </div>
-        <Link to='/asociate'><Button className={classes.asociate} variant='contained' color='secondary'>ASOCIATE</Button> </Link>
+        <Link className={classes.textDeco} to='/asociate'><Button className={classes.asociate} variant='contained' color='secondary'>ASOCIATE</Button> </Link>
 
 
           <div className={classes.grow} />

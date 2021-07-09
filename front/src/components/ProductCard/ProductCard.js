@@ -9,8 +9,10 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles({
+  
   root: {
     maxWidth: 345,
+   
   },
 });
 
@@ -19,6 +21,7 @@ export default function ProductCard({ name, images, price, categories }) {
   const classes = useStyles();
 
   return (
+    
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
@@ -41,5 +44,7 @@ export default function ProductCard({ name, images, price, categories }) {
         </CardContent>
       </CardActionArea>
     </Card>
+    
+   
   );
 }
