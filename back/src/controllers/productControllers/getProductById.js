@@ -1,23 +1,21 @@
 const { Category, Product, Review, User } = require("../../db");
-const { products: productsSeed } = require('../../../seeds');
+const { products: productsSeed } = require("../../../seeds");
 //const { Op } = require("sequelize");
 
 //endPoint localhost:3001/product/:id
 async function getProductById(req, res, next) {
-    let { id } = req.params
-    try {
-        if (id) {
-            let detail = await Product.findOne({
-                where: { id }
-            })
-            return res.json(detail)
-        }
+  let { id } = req.params;
+  try {
+    if (id) {
+      let detail = await Product.findOne({
+        where: { id },
+      });
+      return res.json(detail);
     }
-    catch (error) {
-        console.log(error)
-    }
+  } catch (error) {
+    console.log(error);
+  }
 }
-
 
 module.exports = {
   // createProducts,
