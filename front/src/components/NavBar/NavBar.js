@@ -186,7 +186,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-          <Link className={classes.link} href='/'>
+          <Link className={classes.link} to='/'>
             SportGYM
           </Link>
           </Typography>
@@ -212,7 +212,7 @@ export default function PrimarySearchAppBar() {
         <Link to='/planes'> <Button>nuestros planes</Button> </Link> 
         <Link to='/productos'> <Button>productos</Button> </Link>
         </div>
-        <Link href='/asociate'><Button className={classes.asociate} variant='contained' color='secondary'>ASOCIATE</Button> </Link>
+        <Link to='/asociate'><Button className={classes.asociate} variant='contained' color='secondary'>ASOCIATE</Button> </Link>
 
 
           <div className={classes.grow} />
