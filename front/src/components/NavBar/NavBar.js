@@ -11,10 +11,11 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { Button, Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useHistory} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -185,7 +186,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-          <Link className={classes.link} href='/'>
+          <Link className={classes.link} to='/'>
             SportGYM
           </Link>
           </Typography>
@@ -206,12 +207,12 @@ export default function PrimarySearchAppBar() {
             
           
           <div className={classes.buttons}>
-        <Link href='/sedes'> <Button>Sedes</Button> </Link>
-        <Link href='/actividades'> <Button>actividades</Button> </Link>
-        <Link href='/planes'> <Button>nuestros planes</Button> </Link> 
-        <Link href='/productos'> <Button>productos</Button> </Link>
+        <Link to='/sedes'> <Button>Sedes</Button> </Link>
+        <Link to='/actividades'> <Button>actividades</Button> </Link>
+        <Link to='/planes'> <Button>nuestros planes</Button> </Link> 
+        <Link to='/productos'> <Button>productos</Button> </Link>
         </div>
-        <Link href='/asociate'><Button className={classes.asociate} variant='contained' color='secondary'>ASOCIATE</Button> </Link>
+        <Link to='/asociate'><Button className={classes.asociate} variant='contained' color='secondary'>ASOCIATE</Button> </Link>
 
 
           <div className={classes.grow} />
