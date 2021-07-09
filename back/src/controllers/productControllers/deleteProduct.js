@@ -1,7 +1,4 @@
 const { Product } = require("../../db");
-
-//endPoint localhost:3001/product/delete/:id
-//Elimina de la Base de Datos por ID
 async function deleteProduct(req, res, next) {
   try {
     const {id} = req.params;
@@ -15,15 +12,6 @@ async function deleteProduct(req, res, next) {
   }
 }
 
-
 module.exports = {
   deleteProduct,
-  // createProducts,
-  // getProductById,
-  /* getProduct,
-  searchProducts,
-  deleteProduct,
-  updateProduct,
-  productsByCategory,
-  updateStock, */
 };

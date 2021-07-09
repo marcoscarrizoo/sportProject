@@ -1,4 +1,4 @@
-const { Category } = require("../db");
+const { Category } = require("../../db");
 const { Op } = require("sequelize");
 
 async function getCategories(_req, res, next) {
