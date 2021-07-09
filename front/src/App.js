@@ -6,7 +6,6 @@ import theme from "./themeconfig";
 import NavBar from './components/NavBar/NavBar';
 import Plans from './components/Plans/Plans';
 import Catalogo from './components/Catalogo/Catalogo';
-import {products} from './seeds'
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import CreateCategory from './components/Admin/CreateCategory';
