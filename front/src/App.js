@@ -24,10 +24,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Route path="/" component={NavBar} />
         <Route path="/asociate" component={Plans} />
-        <Route
-          path="/productos"
-          render={() => <Catalogo products={products} />}
-        />
+        <Route path="/productos" component={Catalogo} />
         <Route path="/producto/:id" component={ProductDetail} />
         <Route path="/admin/createproduct" component={CreateProduct} />
           <Route path='/admin' component={CreateCategory}/>
