@@ -45,7 +45,7 @@ export default function SortBar() {
     const state = useSelector((state) => state)
     const [filOrder, setfilOrder] = useState({
         order: "",
-        category: ""
+        category: state.products.categorySelected
     })
 
     useEffect(() => {
@@ -64,6 +64,10 @@ export default function SortBar() {
             dispatch(orderProducts(e.target.value))
 
         } else if (targetName === "category") {
+            setfilOrder({
+                ...filOrder,
+                [targetName]: e.target.value
+            })
             if (e.target.value === "Todas") dispatch(getProducts())
             else dispatch(filterProducts(e.target.value))
         }

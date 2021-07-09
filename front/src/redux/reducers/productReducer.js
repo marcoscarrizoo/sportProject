@@ -6,6 +6,7 @@ const initialState = {
     productDetail: [],
     products: null,
     categories: null,
+    categorySelected: "Todas"
 }
 
 
@@ -27,9 +28,12 @@ export default function reducer(state = initialState, action) {
                 categories: action.payload
             }
         case FILTER_PRODUCTS:
+            let payload = action.payload;
+
             return {
                 ...state,
-                products: action.payload.filter( 
+                categorySelected: action.category,
+                products: payload.filter( 
                     p => p.categories.find( 
                         c => c.name === action.category))
             }
