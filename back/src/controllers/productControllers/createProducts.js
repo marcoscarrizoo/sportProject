@@ -80,7 +80,10 @@ async function createProductsSeeds(req, res) {
         }
       );
       //Devuelve productos creados
-  } catch (error) {
+  }
+      )
+}
+ catch(error) {
     console.error(error);
   }
 }
