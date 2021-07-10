@@ -7,6 +7,8 @@ async function createProducts(req, res, next) {
   try {
     //Comprueba si req.body es array con por lo menos un indice
     if (req.body.length) {
+
+
       //const products = productsSeed.concat(req.body);
       const products = req.body;
       products.forEach(
@@ -59,22 +61,30 @@ async function createProductsSeeds(req, res) {
         
         categories.forEach(async ({ name, image }) => {
           const [category] = await Category.findOrCreate({
-            where: {
-              name
-            },
-            defaults:{image}
-          });
-          product.addCategories(category);
-        })
-      });
-      //Devuelve productos creados
 
-      // res.send('Base de datos cargada');
-      return console.log('Base de datos cargada');
+            where: {
+              name,
+            },
+            defaults: { description, images, price, stock },
+          });
+
+          categories.forEach(async ({ name, image }) => {
+            const [category] = await Category.findOrCreate({
+              where: {
+                name,
+              },
+              defaults: { image },
+            });
+            product.addCategories(category);
+          });
+        }
+      );
+      //Devuelve productos creados
   } catch (error) {
     console.error(error);
   }
 }
+
 module.exports = {
   // deleteProduct,
   createProducts,
