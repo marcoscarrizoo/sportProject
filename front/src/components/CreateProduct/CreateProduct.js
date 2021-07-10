@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   FormControlLabel,
@@ -6,10 +6,13 @@ import {
   FormLabel,
   FormGroup,
   Checkbox,
+  Button,
 } from "@material-ui/core";
+import Swal from "sweetalert2";
 import { makeStyles } from "@material-ui/core/styles";
+import { postProduct } from "../../redux/actions/adminActions";
 import { getCategories } from "../../redux/actions/productsActions";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,63 +25,134 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateProduct() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const categories = useSelector((store) => store.products.categories);
 
-  const [state, setState] = React.useState({
-    gilad: false,
-    jason: false,
-    antoine: false,
+  const [product, setProduct] = useState({
+    name: " ",
+    description: " ",
+    images: " ",
+    price: null,
+    stock: null,
+    categories: [],
   });
 
   useEffect(() => {
-    getCategories();
-  }, []);
+    dispatch(getCategories());
+  }, [dispatch]);
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const handleChangeCategory = (e) => {
+    if (product.categories.includes(e.target.name)) {
+      setProduct({
+        ...product,
+        categories: product.categories.filter(
+          (element) => element.name !== e.target.name
+        ),
+      });
+    } else {
+      setProduct({
+        ...product,
+        categories: [
+          ...product.categories,
+          {
+            name: e.target.name,
+            image: "",
+          },
+        ],
+      });
+    }
   };
 
-  const { gilad, jason, antoine } = state;
-  const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
+  function handleChangeProduct(e) {
+    setProduct({
+      ...product,
+      [e.target.id]: e.target.value,
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const info = [
+      {
+        name: product.name,
+        description: product.description,
+        images: [product.images],
+        price: parseFloat(product.price),
+        stock: parseInt(product.stock),
+        categories: product.categories,
+      },
+    ];
+    console.log("AQUIIIIIIIIII", info);
+    dispatch(postProduct(info));
+    setProduct([
+      {
+        ...product,
+        name: " ",
+        description: " ",
+        images: " ",
+        price: null,
+        stock: null,
+        categories: [],
+      },
+    ]);
+    Swal.fire({
+      text: "Producto creado exitosamente",
+      icon: "success",
+      width: "20rem",
+      timer: "3000",
+      showConfirmButton: false,
+    });
+  };
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={(e) => handleSubmit(e)}
+    >
       <div>
         <TextField
           required
-          id="outlined-required"
+          id="name"
           label="Nombre"
           defaultValue=""
           variant="outlined"
+          onChange={(e) => handleChangeProduct(e)}
         />
         <TextField
           required
-          id="outlined-required"
+          id="description"
           label="Descripcion"
           defaultValue=""
           variant="outlined"
+          onChange={(e) => handleChangeProduct(e)}
         />
         <TextField
           required
-          id="outlined-required"
+          id="images"
           label="Imagenes"
+          type="url"
           defaultValue=""
           variant="outlined"
+          onChange={(e) => handleChangeProduct(e)}
         />
 
         <TextField
-          id="outlined-number"
+          id="price"
           label="Precio"
           type="number"
           InputLabelProps={{
             shrink: true,
           }}
           variant="outlined"
+          onChange={(e) => handleChangeProduct(e)}
         />
         <TextField
-          id="outlined-number"
+          id="stock"
           label="Stock"
           type="number"
-          variant="outlined"
+          onChange={(e) => handleChangeProduct(e)}
         />
       </div>
       <div className={classes.root}>
@@ -88,78 +162,35 @@ export default function CreateProduct() {
           </p>
 
           <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={gilad}
-                  onChange={handleChange}
-                  name="gilad"
-                />
-              }
-              label="Gilad Gray"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={jason}
-                  onChange={handleChange}
-                  name="jason"
-                />
-              }
-              label="Jason Killian"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={antoine}
-                  onChange={handleChange}
-                  name="antoine"
-                />
-              }
-              label="Antoine Llorca"
-            />
-          </FormGroup>
-        </FormControl>
-        <FormControl
-          required
-          error={error}
-          component="fieldset"
-          className={classes.formControl}
-        >
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={gilad}
-                  onChange={handleChange}
-                  name="gilad"
-                />
-              }
-              label="Gilad Gray"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={jason}
-                  onChange={handleChange}
-                  name="jason"
-                />
-              }
-              label="Jason Killian"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={antoine}
-                  onChange={handleChange}
-                  name="antoine"
-                />
-              }
-              label="Antoine Llorca"
-            />
+            {categories ? (
+              categories.map((e) => {
+                return (
+                  <FormControlLabel
+                    key={e.id}
+                    control={
+                      <Checkbox
+                        onChange={(e) => handleChangeCategory(e)}
+                        name={e.name}
+                      />
+                    }
+                    label={e.name}
+                  />
+                );
+              })
+            ) : (
+              <span>No hay categorias existentes</span>
+            )}
           </FormGroup>
         </FormControl>
       </div>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+      >
+        Agregar Producto
+      </Button>
     </form>
   );
 }
