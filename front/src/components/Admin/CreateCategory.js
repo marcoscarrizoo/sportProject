@@ -59,6 +59,7 @@ setData({
     name: '',
     image: ''
 })
+
 Swal.fire(
     {
       text:'categoria creada exitosamente',
@@ -90,6 +91,7 @@ Swal.fire(
                         label="Ingresar nombre"
                         name="name"
                         autoFocus
+                        value={data.name}
                     />
                     <TextField
                     onChange={handleInput}
@@ -100,6 +102,7 @@ Swal.fire(
                         label="Ingresar imagen"
                         type="url"
                         id="image"
+                        value={data.image}
                         
                     />
 

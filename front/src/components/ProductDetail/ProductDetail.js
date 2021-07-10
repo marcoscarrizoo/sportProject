@@ -55,7 +55,7 @@ export default function ProductDetail() {
     
   }, [dispatch, id]);
   
-  
+  console.log(detail.categories)
   return (
     
     <Card className={classes.root}>
@@ -79,6 +79,9 @@ export default function ProductDetail() {
         </Typography>
         <Typography variant="body2" component="p">
           Disponible: {detail.stock}
+        </Typography>
+        <Typography variant="body2" component="p">
+          Categoria: no disponible 
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
