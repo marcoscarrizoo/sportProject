@@ -8,8 +8,7 @@ import {postCategory} from '../../redux/actions/adminActions'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import DeleteCategory from './DeleteCategory';
-
+import {deleteCategory} from '../../redux/actions/adminActions'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,36 +31,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
- function CreateCategory() {
+export default function DeleteCategory() {
     const classes = useStyles();
-    const [data, setData] = useState({name: '', image: ''})
+    const [name, setName] = useState('')
     const dispatch = useDispatch()
 
 const handleInput = (e) => {
-    setData({
-        ...data, //me trae los estados (name y image)
-        [e.target.id ] : e.target.value 
-        //es el id del form     // 
-    })
+    setName(e.target.value)
     
 
 }
 
 const handleSubmit = (e) => {
 e.preventDefault()
-const info = {
-    name: data.name,
-    image: data.image
-}
-dispatch(postCategory(info))
-setData({
-    ...data, 
-    name: '',
-    image: ''
-})
+dispatch(deleteCategory(name))
+
 Swal.fire(
     {
-      text:'categoria creada exitosamente',
+      text:'categoria eliminada',
       icon: 'success', 
       width:'20rem', 
       timer: '3000', 
@@ -77,7 +64,7 @@ Swal.fire(
             <div className={classes.paper}>
 
                 <Typography component="h1" variant="h5">
-                    Crear Categoria
+                    Eliminar Categoria
                 </Typography>
                 <form onSubmit={handleSubmit} className={classes.form} noValidate >
                     <TextField
@@ -91,17 +78,7 @@ Swal.fire(
                         name="name"
                         autoFocus
                     />
-                    <TextField
-                    onChange={handleInput}
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        name="image"
-                        label="Ingresar imagen"
-                        type="url"
-                        id="image"
-                        
-                    />
+                    
 
                     <Button
                         type="submit"
@@ -110,16 +87,13 @@ Swal.fire(
                         color="primary"
                         className={classes.submit}
                     >
-                        Agregar Categoria
+                        Eliminar
                     </Button>
                    
 
                 </form>
             </div>
-            <DeleteCategory/>
 
         </Container>
     );
 }
-
-export default CreateCategory

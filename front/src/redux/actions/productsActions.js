@@ -6,19 +6,19 @@ export const ORDER_PRODUCTS = 'ORDER_PRODUCTS';
 export const FILTER_PRODUCTS = 'FILTER_PRODUCTS';
 
 
-//marcos 
+//marcos
 export function getProductDetail(id) {
-    return function(dispatch) {
-        fetch('http://localhost:3001/product/' + id)
-        .then(res => res.json())
-        .then(detail => dispatch({
-            type: GET_PRODUCT_DETAIL,
-            payload : detail 
-        }))
-    }
+  return function (dispatch) {
+    fetch("http://localhost:3001/product/" + id)
+      .then((res) => res.json())
+      .then((detail) =>
+        dispatch({
+          type: GET_PRODUCT_DETAIL,
+          payload: detail,
+        })
+      );
+  };
 }
-
-
 export function getProducts() {
     return function(dispatch) {
         fetch('http://localhost:3001/product')

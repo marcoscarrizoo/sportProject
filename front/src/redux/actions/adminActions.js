@@ -24,3 +24,13 @@ export const postProduct = (form) => async (dispatch) => {
     console.log(e);
   }
 };
+export const deleteCategory = (name) => async (dispatch) => {
+  try {
+    const info = await axios.delete(
+      "http://localhost:3001/category/delete/" + name
+    );
+    console.log(info);
+  } catch (e) {
+    console.log(e);
+  }
+};
