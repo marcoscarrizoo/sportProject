@@ -5,12 +5,12 @@ const { products: productsSeed } = require("../../../seeds");
 //endPoint localhost:3001/product
 async function getProducts(req, res, next) {
   try {
-    const products1 = await Product.findAll({
+    const products = await Product.findAll({
       include: {
         model: Category,
       },
     });
-    res.json(products1);
+    res.json(products);
   } catch (error) {
     console.error(error);
   }

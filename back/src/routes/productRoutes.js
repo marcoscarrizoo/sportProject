@@ -9,14 +9,15 @@ const { createProductsSeeds } = require("../controllers/productControllers/creat
 
 const router = Router();
 
+
 router.get("/", getProducts);
 router.post("/addReview", createReview);
 router.post("/addProducts", createProducts);
 router.get("/:id", getProductById);
 router.delete("/delete/:id", deleteProduct);
 router.put("/update/:id", updateProductById);
-//RUTA PARA CREAR DEL SEEDS
-router.post("/addProducts/seeds", createProductsSeeds);
 
 
+//Esta funcion carga productos del archivo seeds en la DB
+createProductsSeeds();
 module.exports = router;

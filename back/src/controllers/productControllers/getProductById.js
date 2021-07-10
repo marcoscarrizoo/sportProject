@@ -4,11 +4,14 @@ const { products: productsSeed } = require("../../../seeds");
 
 //endPoint localhost:3001/product/:id
 async function getProductById(req, res, next) {
-  let { id } = req.params;
+  const { id } = req.params;
   try {
     if (id) {
-      let detail = await Product.findOne({
+      const detail = await Product.findOne({
         where: { id },
+        include: {
+          model: Category,
+        },
       });
       return res.json(detail);
     }
