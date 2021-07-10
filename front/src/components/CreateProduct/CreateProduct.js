@@ -29,11 +29,11 @@ export default function CreateProduct() {
   const categories = useSelector((store) => store.products.categories);
 
   const [product, setProduct] = useState({
-    name: " ",
-    description: " ",
-    images: " ",
-    price: null,
-    stock: null,
+    name: "",
+    description: "",
+    images: [],
+    price: "",
+    stock: "",
     categories: [],
   });
 
@@ -42,6 +42,7 @@ export default function CreateProduct() {
   }, [dispatch]);
 
   const handleChangeCategory = (e) => {
+    console.log("e.target.name", e.target.name);
     if (product.categories.includes(e.target.name)) {
       setProduct({
         ...product,

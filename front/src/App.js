@@ -9,12 +9,14 @@ import Catalogo from "./components/Catalogo/Catalogo";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 //import CreateCategory from './components/Admin/CreateCategory';
 import Admin from "./components/Admin/Admin";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <Route path="/" component={NavBar} />
+        <Route exact path="/" component={Home} />
         <Route path="/asociate" component={Plans} />
         <Route path="/productos" component={Catalogo} />
         <Route path="/producto/:id" component={ProductDetail} />
