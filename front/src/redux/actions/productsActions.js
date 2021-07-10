@@ -29,6 +29,7 @@ export function getProducts(query) {
         })
       );
   };
+}
 
 
 export const searchProducts = (input) => {
