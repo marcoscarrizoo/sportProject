@@ -38,7 +38,31 @@ const products = [{
         name: "zapatillas",
         image: "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg"
     }]
-}
+},{
+        name: "Shaker Vaso Mezclador Para Proteinas",
+        description: "Mezclador Proteina",
+        images: [
+            "https://http2.mlstatic.com/D_NQ_NP_749209-MLA32861738659_112019-O.webp",
+        ],
+        price: 349,
+        stock: 6,
+        categories: [{
+            name: "articulos",
+            image: "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100"
+        }]
+},{
+    name: "Mancuerna Acero Pintado Ajustable 20kg",
+    description: "Equipamiento profesional que se adapta perfectamente a tus necesidades de ejercicio y entrenamiento sin ir al gimnasio.",
+    images: [
+        "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1000x1000-FITNES34.jpg&w=500&q=100",
+    ],
+    price: 10805,
+    stock: 6,
+    categories: [{
+        name: "articulos",
+        image: "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100"
+    }]
+},
 ];
 module.exports = {
     products

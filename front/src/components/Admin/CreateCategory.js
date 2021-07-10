@@ -8,6 +8,7 @@ import {postCategory} from '../../redux/actions/adminActions'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import DeleteCategory from './DeleteCategory';
 
 
 
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CreateCategory() {
+ function CreateCategory() {
     const classes = useStyles();
     const [data, setData] = useState({name: '', image: ''})
     const dispatch = useDispatch()
@@ -58,6 +59,7 @@ setData({
     name: '',
     image: ''
 })
+
 Swal.fire(
     {
       text:'categoria creada exitosamente',
@@ -89,6 +91,7 @@ Swal.fire(
                         label="Ingresar nombre"
                         name="name"
                         autoFocus
+                        value={data.name}
                     />
                     <TextField
                     onChange={handleInput}
@@ -99,6 +102,7 @@ Swal.fire(
                         label="Ingresar imagen"
                         type="url"
                         id="image"
+                        value={data.image}
                         
                     />
 
@@ -115,7 +119,10 @@ Swal.fire(
 
                 </form>
             </div>
+            <DeleteCategory/>
 
         </Container>
     );
 }
+
+export default CreateCategory
