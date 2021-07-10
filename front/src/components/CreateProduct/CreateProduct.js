@@ -29,11 +29,11 @@ export default function CreateProduct() {
   const categories = useSelector((store) => store.products.categories);
 
   const [product, setProduct] = useState({
-    name: " ",
-    description: " ",
-    images: " ",
-    price: null,
-    stock: null,
+    name: "",
+    description: "",
+    images: "",
+    price: "",
+    stock: "",
     categories: [],
   });
 
@@ -42,6 +42,7 @@ export default function CreateProduct() {
   }, [dispatch]);
 
   const handleChangeCategory = (e) => {
+    console.log("e.target.name",e.target.name)
     if (product.categories.includes(e.target.name)) {
       setProduct({
         ...product,
@@ -61,6 +62,7 @@ export default function CreateProduct() {
         ],
       });
     }
+
   };
 
   function handleChangeProduct(e) {
@@ -84,17 +86,15 @@ export default function CreateProduct() {
     ];
     console.log("AQUIIIIIIIIII", info);
     dispatch(postProduct(info));
-    setProduct([
-      {
-        ...product,
-        name: " ",
-        description: " ",
-        images: " ",
-        price: null,
-        stock: null,
-        categories: [],
-      },
-    ]);
+    setProduct({
+      ...product,
+      name: "",
+      description: "",
+      images: "",
+      price: "",
+      stock: "",
+      categories: [],
+    });
     Swal.fire({
       text: "Producto creado exitosamente",
       icon: "success",
@@ -102,6 +102,7 @@ export default function CreateProduct() {
       timer: "3000",
       showConfirmButton: false,
     });
+    console.log("State product", product);
   };
 
   return (
@@ -119,6 +120,7 @@ export default function CreateProduct() {
           defaultValue=""
           variant="outlined"
           onChange={(e) => handleChangeProduct(e)}
+          value={product.name}
         />
         <TextField
           required
@@ -127,6 +129,8 @@ export default function CreateProduct() {
           defaultValue=""
           variant="outlined"
           onChange={(e) => handleChangeProduct(e)}
+          value={product.description}
+
         />
         <TextField
           required
@@ -136,23 +140,29 @@ export default function CreateProduct() {
           defaultValue=""
           variant="outlined"
           onChange={(e) => handleChangeProduct(e)}
+          value={product.images}
+
         />
 
         <TextField
           id="price"
           label="Precio"
           type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          // InputLabelProps={{
+          //   shrink: true,
+          // }}
           variant="outlined"
           onChange={(e) => handleChangeProduct(e)}
+          value={product.price}
+
         />
         <TextField
           id="stock"
           label="Stock"
           type="number"
           onChange={(e) => handleChangeProduct(e)}
+          value={product.stock}
+
         />
       </div>
       <div className={classes.root}>
