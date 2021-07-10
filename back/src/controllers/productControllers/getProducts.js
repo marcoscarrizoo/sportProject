@@ -1,5 +1,5 @@
 const { Category, Product, Review, User } = require("../../db");
-const { products: productsSeed } = require('../../../seeds');
+const { products: productsSeed } = require("../../../seeds");
 //const { Op } = require("sequelize");
 
 //endPoint localhost:3001/product
@@ -10,17 +10,16 @@ async function getProducts(req, res, next) {
         model: Category,
       },
     });
-    res.send(products1);
+    res.json(products1);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
-
 
 module.exports = {
   // createProducts,
   // getProductById,
-  getProducts
+  getProducts,
   /* getProducts,
   searchProducts,
   deleteProduct,
