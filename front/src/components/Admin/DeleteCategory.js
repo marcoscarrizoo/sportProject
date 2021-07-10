@@ -55,6 +55,7 @@ Swal.fire(
       showConfirmButton: false 
     }
   )
+  setName('')
 
 }
 
@@ -77,6 +78,7 @@ Swal.fire(
                         label="Ingresar nombre"
                         name="name"
                         autoFocus
+                        value={name}
                     />
                     
 
