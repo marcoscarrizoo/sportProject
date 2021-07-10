@@ -38,7 +38,9 @@ export default function Catalogo() {
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(getProducts());
+    if (!state.products.products?.length) {
+      dispatch(getProducts());
+    }
   }, [dispatch]);
 
   return (

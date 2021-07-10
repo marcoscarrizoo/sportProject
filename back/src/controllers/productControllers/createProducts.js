@@ -7,8 +7,8 @@ async function createProducts(req, res, next) {
   try {
     //Comprueba si req.body es array con por lo menos un indice
     if (req.body.length) {
-      //const products = productsSeed.concat(req.body);
-      const products = req.body;
+      const products = productsSeed.concat(req.body);
+      /* const products = req.body; */
       products.forEach(
         async ({ name, description, images, price, stock, categories }) => {
           const [product] = await Product.findOrCreate({
