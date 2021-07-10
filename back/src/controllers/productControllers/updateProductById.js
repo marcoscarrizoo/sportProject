@@ -9,10 +9,10 @@ async function updateProductById(req, res, next) {
         const { name, description, images, price, stock } = req.body;
         const product = await Product.findByPk(id);
         await product.update({ name, description, images, price, stock });
-        res.send(`Producto actualizado`);
+        res.send(`Producto ${name} actualizado ${id}`);
     } catch (error) {
-        next(error);
         res.send(`Producto no actualizado`);
+        next(error);
     }
 }
 

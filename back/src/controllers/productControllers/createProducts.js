@@ -34,7 +34,7 @@ async function createProducts(req, res, next) {
       }
       if (products.length === 1) {
         const productName = products.map((e) => e.name);
-        res.json(`el producto ${productName} ha sido creado`);
+        res.json(`El producto ${productName} ha sido creado`);
       }
     } else {
       res.json("Oops!, error en la base de datos");
@@ -46,7 +46,7 @@ async function createProducts(req, res, next) {
 }
 // localhost:3001/product/addProducts/seeds
 // Solo crea productos del seeds
-async function createProductsSeeds(req, res, next) {
+async function createProductsSeeds(req, res) {
   try {
     const products = productsSeed;
       products.forEach(async ({ name, description, images, price, stock, categories }) => {
@@ -56,6 +56,7 @@ async function createProductsSeeds(req, res, next) {
           },
           defaults: { description, images, price, stock, }
         });
+        
         categories.forEach(async ({ name, image }) => {
           const [category] = await Category.findOrCreate({
             where: {
@@ -67,7 +68,9 @@ async function createProductsSeeds(req, res, next) {
         })
       });
       //Devuelve productos creados
-      res.send(products);
+
+      // res.send('Base de datos cargada');
+      return console.log('Base de datos cargada');
   } catch (error) {
     console.error(error);
   }
