@@ -1,18 +1,17 @@
 import React from "react";
 import CreateCategory from "./CreateCategory";
 import CreateProduct from "../CreateProduct/CreateProduct";
+import "./admin.css";
 
 const Admin = () => {
   return (
-    <div>
-        
+    <div className="body">
       <table>
-          
-        <th>
-        <h1>Crear Productos</h1>
+        <th className="forms">
+          <h1>Crear Productos</h1>
           <CreateProduct />
         </th>
-        <th>
+        <th className="forms">
           <CreateCategory />
         </th>
       </table>

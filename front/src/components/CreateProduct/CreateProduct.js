@@ -31,7 +31,9 @@ export default function CreateProduct() {
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    images: "",
+
+    images: [],
+
     price: "",
     stock: "",
     categories: [],
@@ -42,7 +44,8 @@ export default function CreateProduct() {
   }, [dispatch]);
 
   const handleChangeCategory = (e) => {
-    console.log("e.target.name",e.target.name)
+
+
     if (product.categories.includes(e.target.name)) {
       setProduct({
         ...product,
