@@ -6,7 +6,6 @@ const { products: productsSeed } = require('../../../seeds');
 async function getProducts(req, res, next) {
   try {
     const products1 = await Product.findAll({
-      exclude: 'product_category',
       include: {
         model: Category,
       },
