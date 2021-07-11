@@ -5,6 +5,7 @@ export default makeStyles({
     maxWidth: "100%",
     flexGrow: 1,
     background: "#141A32",
+    
   },
   header: {
     display: "flex",
@@ -13,7 +14,7 @@ export default makeStyles({
     height: 0,
   },
   img: {
-    height: 500,
+    height: 670,
     display: "block",
     //maxWidth: 15000,
 
