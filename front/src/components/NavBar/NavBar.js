@@ -124,6 +124,12 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
+  const handleAdmin = () => {
+    history.push('/admin')
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -139,11 +145,12 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-
+ 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -229,9 +236,11 @@ export default function PrimarySearchAppBar() {
               ASOCIATE
             </Button>{" "}
           </Link>
+         
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          
             <IconButton color="inherit">
               <Badge color="secondary">
                 <ShoppingCartIcon />
