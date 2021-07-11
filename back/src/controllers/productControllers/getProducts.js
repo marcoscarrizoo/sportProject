@@ -5,7 +5,6 @@ const { Op } = require("sequelize");
 
 async function getProducts(req, res, next) {
   try {
-
     const { string } = req.query;
 
     if (string) {
@@ -26,7 +25,7 @@ async function getProducts(req, res, next) {
         model: Category,
       },
     });
-    res.json(products);
+    res.json(products1);
   } catch (error) {
     console.error(error);
   }

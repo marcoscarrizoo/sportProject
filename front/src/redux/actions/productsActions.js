@@ -18,7 +18,7 @@ export function getProductDetail(id) {
   };
 }
 
-export function getProducts(query) {
+export function getProducts() {
   return function (dispatch) {
     fetch("http://localhost:3001/product")
       .then((res) => res.json())
@@ -29,7 +29,6 @@ export function getProducts(query) {
         })
       );
   };
-
 
 export const searchProducts = (input) => {
   return async (dispatch) => {
@@ -60,14 +59,15 @@ export function orderProducts(payload) {
 }
 
 export function filterProducts(category) {
-
-    return function(dispatch) {
-        fetch('http://localhost:3001/product')
-        .then(res => res.json())
-        .then(payload => dispatch({
-            type: FILTER_PRODUCTS,
-            payload,
-            category
-        }))
-    }
+  return function (dispatch) {
+    fetch("http://localhost:3001/product")
+      .then((res) => res.json())
+      .then((payload) =>
+        dispatch({
+          type: FILTER_PRODUCTS,
+          payload,
+          category,
+        })
+      );
+  };
 }
