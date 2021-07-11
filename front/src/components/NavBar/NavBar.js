@@ -1,6 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 
 import Search from "./Search";
+import { getProducts } from "../../redux/actions/productsActions";
 
 /* styles */
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -18,8 +21,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   textDeco: {
@@ -105,6 +106,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -208,10 +210,15 @@ export default function PrimarySearchAppBar() {
               {" "}
               <Button className={classes.text}>nuestros planes</Button>{" "}
             </Link>
-            <Link className={classes.textDeco} to="/productos">
-              {" "}
-              <Button className={classes.text}>productos</Button>{" "}
-            </Link>
+            <Button
+              className={classes.text}
+              onClick={() => {
+                dispatch(getProducts());
+                history.push("/productos");
+              }}
+            >
+              productos
+            </Button>
           </div>
           <Link className={classes.textDeco} to="/asociate">
             <Button
