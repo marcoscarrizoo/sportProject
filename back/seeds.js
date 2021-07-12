@@ -1,5 +1,5 @@
 const products = [{
-    name: "True Made Whey Protein Ena 1kg Concentrada Isolada Truemade",
+    name: "True Made Whey Protein",
     description: "ENA TRUEMADE WHEY PROTEIN 2LBS - 30 MEDIDAS BLEND DE PROTEINA ISOLADA + CONCENTRADA",
     images: [
         "https://http2.mlstatic.com/D_NQ_NP_2X_871368-MLA31115313342_062019-F.webp",
@@ -8,12 +8,12 @@ const products = [{
     price: 2250.00,
     stock: 3,
     categories: [{
-        name: "ropa",
+        name: "suplemento",
         image: "https://http2.mlstatic.com/D_NQ_NP_756133-MLA41827275963_052020-O.webp"
 
     }]
 },{
-    name: "Ena Protein Bar Caja X 16u 46g - Barras De Proteina Sabores ",
+    name: "Ena Protein Bar Caja X 16u 46g",
     description: "ENA PROTEIN BAR",
     images: [
         "https://http2.mlstatic.com/D_NQ_NP_707077-MLA40743470620_022020-O.webp",
@@ -22,12 +22,12 @@ const products = [{
     price: 1315.00,
     stock: 4,
     categories: [{
-        name: "zapatillas",
+        name: "suplemento",
         image: "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg"
     }]
 },{
-    name: "Fish Oil 1200mg Nature's Bounty Aceite De Pescado Omega 3",
-    description: "Un suplemento dietario que contiene ácidos grasos omega-3, incluidos EPA y DHA.",
+    name: "Fish Oil 1200mg Nature's Bounty",
+    description: "Un suplemento dietario que contiene ácidos grasos omega-3, incluidos EPA y DHA. Aceite De Pescado Omega 3",
     images: [
         "https://http2.mlstatic.com/D_NQ_NP_904826-MLA44008957239_112020-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_779555-MLA40743624545_022020-O.https://http2.mlstatic.com/D_NQ_NP_687475-MLA41534188094_042020-O.webp",
@@ -35,7 +35,7 @@ const products = [{
     price: 1011.10,
     stock: 5,
     categories: [{
-        name: "zapatillas",
+        name: "suplemento",
         image: "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg"
     }]
 },{
@@ -47,7 +47,7 @@ const products = [{
         price: 349,
         stock: 6,
         categories: [{
-            name: "articulos",
+            name: "Shaker",
             image: "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100"
         }]
 },{
@@ -59,7 +59,7 @@ const products = [{
     price: 10805,
     stock: 6,
     categories: [{
-        name: "articulos",
+        name: "articulos de gimnasio",
         image: "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100"
     }]
 },
