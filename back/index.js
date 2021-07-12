@@ -25,6 +25,6 @@ conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     console.log("%s listening at 3001");
     //Esta funcion carga productos del archivo seeds en la DB
-    await createProductsSeeds();
+    await createProductsSeeds(); 
   });
 });
