@@ -61,7 +61,6 @@ export function orderProducts(payload) {
 }
 
 export function filterProducts(category) {
-
     return function(dispatch) {
         fetch('http://localhost:3001/product')
         .then(res => res.json())

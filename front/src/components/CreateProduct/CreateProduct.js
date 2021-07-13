@@ -11,7 +11,7 @@ import {
 import Swal from "sweetalert2";
 import { makeStyles } from "@material-ui/core/styles";
 import { postProduct } from "../../redux/actions/adminActions";
-import { getCategories } from "../../redux/actions/productsActions";
+import { getCategories, getProducts } from "../../redux/actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +75,7 @@ export default function CreateProduct() {
     });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const info = [
       {
@@ -98,7 +98,7 @@ export default function CreateProduct() {
       stock: "",
       categories: [],
     });
-    Swal.fire({
+    await Swal.fire({
       text: "Producto creado exitosamente",
       icon: "success",
       width: "20rem",
@@ -106,6 +106,7 @@ export default function CreateProduct() {
       showConfirmButton: false,
     });
     console.log("State product", product);
+    dispatch(getProducts())
   };
 
   return (
