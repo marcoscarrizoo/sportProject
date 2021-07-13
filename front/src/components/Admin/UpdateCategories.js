@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Swal from "sweetalert2";
-import {postCategory} from '../../redux/actions/adminActions'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import DeleteCategory from './DeleteCategory';
-import UpdateCategory from './UpdateCategories';
+import InputLabel from '@material-ui/core/InputLabel';
+import  FormControl  from '@material-ui/core/FormControl';
+import { Select } from '@material-ui/core';
+import {updateCategory} from '../../redux/actions/adminActions'
+
 
 
 
@@ -31,13 +33,23 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing(2),
+      }
+    
 }));
 
- function CreateCategory() {
+ function UpdateCategory() {
     const classes = useStyles();
     const [data, setData] = useState({name: '', image: ''})
+    const [idCategory, setIdCategory] = useState(null)
     const dispatch = useDispatch()
-
+    const category = useSelector(store=> store.products.categories)
+    
 const handleInput = (e) => {
     setData({
         ...data, //me trae los estados (name y image)
@@ -54,7 +66,7 @@ const info = {
     name: data.name,
     image: data.image
 }
-dispatch(postCategory(info))
+dispatch(updateCategory(idCategory,info))
 setData({
     ...data, 
     name: '',
@@ -63,7 +75,7 @@ setData({
 
 Swal.fire(
     {
-      text:'categoria creada exitosamente',
+      text:'categoria editada exitosamente',
       icon: 'success', 
       width:'20rem', 
       timer: '3000', 
@@ -72,27 +84,41 @@ Swal.fire(
   )
 
 }
+ 
+const handleOptions = (id) => {
+setIdCategory(id)
 
+}
+
+console.log(idCategory)
+ 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
 
                 <Typography component="h1" variant="h5">
-                    Crear Categoria
+                    Editar Categoria
                 </Typography>
-                <form onSubmit={handleSubmit} className={classes.form} noValidate >
+                   <form onSubmit={handleSubmit} className={classes.formControl}>
+                       <InputLabel htmlFor="age-native-simple">seleccionar categoria</InputLabel>
+                    <Select className={classes.formControl}
+                     
+                    >
+                       {category?.map(e =><option  onClick={() =>{handleOptions(e.id)}} value={e.id}>{e.name}</option> )} 
+                    </Select>
+               
                     <TextField
                         onChange={handleInput}
                         variant="outlined"
                         margin="normal"
-                        required
                         fullWidth
-                        id="name"
-                        label="Ingresar nombre"
                         name="name"
-                        autoFocus
+                        label="Ingresar nombre"
+                        type="text"
+                        id="name"
                         value={data.name}
+                        
                     />
                     <TextField
                     onChange={handleInput}
@@ -107,6 +133,11 @@ Swal.fire(
                         
                     />
 
+                   
+
+
+
+
                     <Button
                         type="submit"
                         fullWidth
@@ -114,16 +145,16 @@ Swal.fire(
                         color="primary"
                         className={classes.submit}
                     >
-                        Agregar Categoria
+                        ACTUALIZAR
                     </Button>
                    
-
-                </form>
+                    </form>
+                
             </div>
-            <DeleteCategory/>
-            <UpdateCategory/>
+            
+
         </Container>
     );
 }
 
-export default CreateCategory
+export default UpdateCategory
