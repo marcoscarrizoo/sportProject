@@ -129,7 +129,16 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   }
-
+  const handleSignUp = () => {
+    history.push('/registrarse')
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+ const handleLoggin = () => {
+  history.push('/iniciarSesion')
+  setAnchorEl(null);
+  handleMobileMenuClose();
+ }
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -146,8 +155,8 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLoggin}>Inicar Sesion</MenuItem>
+      <MenuItem onClick={handleSignUp}>Registrarse</MenuItem>
     </Menu>
   );
  
