@@ -2,6 +2,7 @@ import React from "react";
 import CreateCategory from "./CreateCategory";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import "./admin.css";
+import AdmProducts from "./AdmProducts";
 
 const Admin = () => {
   return (
@@ -15,6 +16,7 @@ const Admin = () => {
           <CreateCategory />
         </th>
       </table>
+      <AdmProducts/>
     </div>
   );
 };

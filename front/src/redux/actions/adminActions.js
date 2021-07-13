@@ -1,5 +1,9 @@
 import axios from "axios";
 
+export const DELETE_PRODUCT = "DELETE_PRODUCT"
+
+
+
 export const postCategory = (form) => async (dispatch) => {
   try {
     const info = await axios.post(
@@ -34,3 +38,15 @@ export const deleteCategory = (name) => async (dispatch) => {
     console.log(e);
   }
 };
+
+
+export function deleteProduct(id) {
+  return async function(dispatch) {
+    try {
+      await axios.delete("http://localhost:3001/product/delete/" + id)
+      dispatch({ type: DELETE_PRODUCT, payload: id} )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

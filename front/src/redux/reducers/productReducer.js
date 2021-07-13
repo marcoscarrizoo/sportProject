@@ -1,4 +1,5 @@
 //actions
+import { DELETE_PRODUCT } from "../actions/adminActions";
 import {
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS,
@@ -27,6 +28,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         products: action.payload,
       };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter( p => p.id !== action.payload)
+      };  
     case GET_CATEGORIES:
       return {
         ...state,
