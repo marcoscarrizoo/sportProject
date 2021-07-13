@@ -1,3 +1,4 @@
+const { createProductsSeeds } = require('./src/controllers/productControllers/createProductsSeeds');
 //                       _oo0oo_
 //                      o8888888o
 //                      88" . "88
@@ -21,7 +22,9 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+  server.listen(3001, async () => {
     console.log("%s listening at 3001");
+    //Esta funcion carga productos del archivo seeds en la DB
+    await createProductsSeeds(); 
   });
 });
