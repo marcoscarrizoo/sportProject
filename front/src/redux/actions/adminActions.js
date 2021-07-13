@@ -28,6 +28,16 @@ export const postProduct = (form) => async (dispatch) => {
     console.log(e);
   }
 };
+export const updateCategory = (idCategory, info) => async(dispatch) => {
+  try{
+    const data = await axios.put('http://localhost:3001/category/update/' + idCategory, info)
+    console.log(data)
+  }
+  catch(e) {
+    console.log(e)
+  }
+}
+
 export const deleteCategory = (name) => async (dispatch) => {
   try {
     const info = await axios.delete(
