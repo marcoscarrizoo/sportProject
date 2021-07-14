@@ -4,7 +4,10 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 
 export const ORDER_PRODUCTS = "ORDER_PRODUCTS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
-import {BASE_URL_API} from '../../index';
+//import {BASE_URL_API} from '../../';
+// const {BASE_URL_API} = process.env;
+// const url = BASE_URL_API || "http://localhost:3001";
+const BASE_URL_API = require('../../index')
 
 export function getProductDetail(id) {
   return function (dispatch) {
@@ -22,16 +25,15 @@ export function getProductDetail(id) {
 export function getProducts(query) {
   return function (dispatch) {
     fetch("http://localhost:3001/product")
-    .then((res) => res.json())
-    .then((products) =>
-    dispatch({
-      type: GET_PRODUCTS,
-      payload: products,
+      .then((res) => res.json())
+      .then((products) =>
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: products,
         })
-        );
-      };
-    }
-
+      );
+  };
+}
     
     export const searchProducts = (input) => {
   return async (dispatch) => {

@@ -1,4 +1,16 @@
 # Instrucciones Deploy Heroku
+Basico
+Avisar al grupo el uso de BASE_URL_API
+Agregar un process.env.PORT y agregarlo en el .env PORT = 3000
+```
+DB_USER=postgres
+DB_PASSWORD=postgres1
+DB_HOST=localhost
+DB_NAME=sportgym
+PORT = 3000
+```
+
+
 Installar libreria cors
 
 npm i cors
@@ -47,8 +59,41 @@ const sequelize =
       );
 ```
 
+La base de datos PARECE que debe estar en la conexion que se reconstruya cuando se modifica el codigo. 
+
+```
+conn.sync({ force: true })
+
+```
+
+Agregar un process.env.PORT y agregarlo en el .env PORT = 3000
 
 
+```
+conn.sync({ force: true }).then(() => {
+  server.listen(process.env.PORT, () => {
+    console.log("%s listening at 3000"); // eslint-disable-line no-console
+  });
+});
+```
+
+Con axios debe agregar esta configuracion, que si tiene una api externa la tome como la base de url de axios, si no, tome la url local. Con fetch habra que pensar un poco, como se modifica.
+back/index.js
+
+```
+import dotenv from "dotenv";
+dotenv.config();
+
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+//Yo la hice asi pero en app
+const BASE_URL = process.env.REACT_APP_API || "http://localhost:3001";
+
+```
+
+Videos Diego Rodriguez
+Link de Vimeo: https://vimeo.com/510792531/20d64d4a98
+
+Otro video de Diego: https://drive.google.com/file/d/1WJwrpz5o-iIyFKKixMotsxfU_xAEw7UB/view
 --------------------------------------------------------------------------
 SPANISH README ->
 
