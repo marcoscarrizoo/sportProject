@@ -70,6 +70,7 @@ export default function Catalogo() {
                     name={product.name}
                     images={product.images[0]}
                     price={product.price}
+                    stock={product.stock}
                     categories={product.categories.name}
                   />
                 </Link>
