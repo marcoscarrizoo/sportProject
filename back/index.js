@@ -30,6 +30,7 @@ conn.sync({ force: true }).then(() => {
     server.listen(process.env.PORT, async () => {
     console.log(`listening at PORT ${process.env.PORT}`);
     //Esta funcion carga productos del archivo seeds en la DB
+
     await createProductsSeeds();
   });
 });
