@@ -20,11 +20,17 @@ const { createProductsSeeds } = require('./src/controllers/productControllers/cr
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-
+require("dotenv").config();
+/**
+ * ****************************************************************
+ * Agregar un process.env.PORT y agregarlo en el .env PORT = 3000 *
+ * ************************************************************** */
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, async () => {
-    console.log("%s listening at 3001");
+  // server.listen(3000, async () => {
+    server.listen(process.env.PORT, async () => {
+    console.log(`listening at PORT ${process.env.PORT}`);
     //Esta funcion carga productos del archivo seeds en la DB
-    //await createProductsSeeds(); 
+
+    await createProductsSeeds();
   });
 });

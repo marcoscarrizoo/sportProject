@@ -1,7 +1,17 @@
 .body {
-  background-color: grey;
+  width: 100vw;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #ededed;
 }
 
 .forms {
-  background-color: honeydew;
+  border-radius: 10px;
+}
+
+.table-forms {
+  width: 80vw;
+  padding: 10px 10px;
 }
