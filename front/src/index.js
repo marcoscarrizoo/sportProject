@@ -7,6 +7,13 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import generatorStore from './redux/store'
+import dotenv from "dotenv";
+dotenv.config();
+
+
+
+//Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
+export const BASE_URL_API = process.env.REACT_APP_API || "http://localhost:3001";
 
 let store = generatorStore()
 

@@ -1,5 +1,52 @@
 # Instrucciones Deploy Heroku
-This is our final project required to graduate from the Henry Bootcamp
+Installar libreria cors
+
+npm i cors
+Requerirlo en app, del back
+var cors = require('cors');
+
+Para aceptar URLS remotas se agrega un asterisco para no configurar cuales son las URLS, con el '*' acepta todos.
+back/app.js
+res.header("Access-Control-Allow-Origin", "*")
+
+Configuracion Sequelize para Heroku
+back/db.js
+En esta estapa usamos un "___true/false?true:false(no recuerdo el nombre)_____" para que si el proyecto esta montado en heroku la tome, si no tome la configurarion local.
+sequelize<produccion> ? sequelize<local>
+
+```
+const sequelize =
+  process.env.NODE_ENV === "production"
+  //Si esta en produccion, toma este sequelize para heroku
+    ? new Sequelize({
+        database: DB_NAME,
+        dialect: "postgres",
+        host: DB_HOST,
+        port: 5432,
+        username: DB_USER,
+        password: DB_PASSWORD,
+        pool: {
+          max: 3,
+          min: 1,
+          idle: 10000,
+        },
+        dialectOptions: {
+          ssl: {
+            require: true,
+            // Ref.: https://github.com/brianc/node-postgres/issues/2009
+            rejectUnauthorized: false,
+          },
+          keepAlive: true,
+        },
+        ssl: true,
+      })
+//Si esta en desarrollo, toma este sequelize local.
+    : new Sequelize(
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/{DB_NAME}`,
+        { logging: false, native: false }
+      );
+```
+
 
 
 --------------------------------------------------------------------------
