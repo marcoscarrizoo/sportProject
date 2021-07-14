@@ -60,3 +60,13 @@ export function deleteProduct(id) {
     }
   }
 }
+
+export function editProduct(info, id) {
+  return async function() {
+    try {
+      await axios.put("http://localhost:3001/product/update/" + id, info)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

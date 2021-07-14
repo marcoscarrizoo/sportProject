@@ -10,24 +10,35 @@ import {
 } from "@material-ui/core";
 import Swal from "sweetalert2";
 import { makeStyles } from "@material-ui/core/styles";
-import { postProduct } from "../../redux/actions/adminActions";
+import { editProduct, postProduct } from "../../redux/actions/adminActions";
 import { getCategories, getProducts } from "../../redux/actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "100%",
     },
+    width: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
   },
 }));
 
-export default function CreateProduct() {
+export default function CreateProduct({edit}) {
+
+  let history = useHistory()
+  const {id} = useParams()
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const categories = useSelector((store) => store.products.categories);
 
+  
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -38,6 +49,10 @@ export default function CreateProduct() {
     stock: "",
     categories: [],
   });
+
+  if(edit) setProduct({
+    ...edit
+  })
 
   useEffect(() => {
     dispatch(getCategories());
@@ -87,25 +102,44 @@ export default function CreateProduct() {
         categories: product.categories,
       },
     ];
-    console.log("AQUIIIIIIIIII", info);
-    dispatch(postProduct(info));
-    setProduct({
-      ...product,
-      name: "",
-      description: "",
-      images: "",
-      price: "",
-      stock: "",
-      categories: [],
-    });
-    await Swal.fire({
-      text: "Producto creado exitosamente",
-      icon: "success",
-      width: "20rem",
-      timer: "3000",
-      showConfirmButton: false,
-    });
-    console.log("State product", product);
+    
+    if( id ) {
+      let newinfo = info[0] 
+
+      dispatch(editProduct(newinfo, id));
+
+      await Swal.fire({
+        text: "Producto editado exitosamente",
+        icon: "success",
+        width: "20rem",
+        timer: "2000",
+        showConfirmButton: false,
+      });
+
+      history.push("/admin");
+      
+    } else {
+      dispatch(postProduct(info));
+      
+      setProduct({
+        ...product,
+        name: "",
+        description: "",
+        images: "",
+        price: "",
+        stock: "",
+        categories: [],
+      });
+      await Swal.fire({
+        text: "Producto creado exitosamente",
+        icon: "success",
+        width: "20rem",
+        timer: "3000",
+        showConfirmButton: false,
+      });
+  
+    }
+    
     dispatch(getProducts())
   };
 

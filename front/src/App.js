@@ -9,6 +9,7 @@ import Catalogo from "./components/Catalogo/Catalogo";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Admin from "./components/Admin/Admin";
 import Home from "./components/Home/Home";
+import EditProduct from "./components/Admin/AdmProducts/EditProduct";
 
 function App() {
   return (
