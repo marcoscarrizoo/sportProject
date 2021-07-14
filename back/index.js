@@ -21,10 +21,10 @@ const { createProductsSeeds } = require('./src/controllers/productControllers/cr
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("%s listening at 3001");
     //Esta funcion carga productos del archivo seeds en la DB
-    await createProductsSeeds(); 
+    //await createProductsSeeds(); 
   });
 });
