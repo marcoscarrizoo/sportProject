@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-
+// console.log('process.env',process.env)
 //Evalua si esta en produccion o desarrollo.
 const sequelize =
   process.env.NODE_ENV === "production"

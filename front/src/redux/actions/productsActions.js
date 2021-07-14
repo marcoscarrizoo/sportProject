@@ -7,7 +7,9 @@ export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 //import {BASE_URL_API} from '../../';
 // const {BASE_URL_API} = process.env;
 // const url = BASE_URL_API || "http://localhost:3001";
-const BASE_URL_API = require('../../index')
+// const {BASE_URL_API} = require('../../index')
+// require("dotenv").config();
+
 
 export function getProductDetail(id) {
   return function (dispatch) {
@@ -25,17 +27,17 @@ export function getProductDetail(id) {
 export function getProducts(query) {
   return function (dispatch) {
     fetch("http://localhost:3001/product")
-      .then((res) => res.json())
-      .then((products) =>
-        dispatch({
-          type: GET_PRODUCTS,
-          payload: products,
-        })
-      );
+    .then((res) => res.json())
+    .then((products) =>
+    dispatch({
+      type: GET_PRODUCTS,
+      payload: products,
+    })
+    );
   };
 }
-    
-    export const searchProducts = (input) => {
+
+export const searchProducts = (input) => {
   return async (dispatch) => {
     const res = await fetch(`http://localhost:3001/product?string=${input}`);
     const resJson = await res.json();
@@ -47,7 +49,8 @@ export function getProducts(query) {
 };
 
 export function getCategories() {
-  console.log('BASE_URL_API',BASE_URL_API);
+  console.log('Aquie estoy en productActions.js', process.env.PUBLIC_URL)
+  // console.log('BASE_URL_API',BASE_URL_API);
   return function (dispatch) {
     fetch("http://localhost:3001/category")
     .then((res) => res.json())

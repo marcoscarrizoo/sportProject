@@ -1,27 +1,25 @@
-# Instrucciones Deploy Heroku
-Basico
+# Instrucciones Deploy Heroku back y front vercel
+# IMPORTANTE
 Avisar al grupo el uso de BASE_URL_API
 Agregar un process.env.PORT y agregarlo en el .env PORT = 3000
-```
-DB_USER=postgres
+```DB_USER=postgres
 DB_PASSWORD=postgres1
 DB_HOST=localhost
 DB_NAME=sportgym
 PORT = 3000
 ```
 
-
-Installar libreria cors
+## Installar libreria cors
 
 npm i cors
 Requerirlo en app, del back
 var cors = require('cors');
 
-Para aceptar URLS remotas se agrega un asterisco para no configurar cuales son las URLS, con el '*' acepta todos.
+## Para aceptar URLS remotas se agrega un asterisco para no configurar cuales son las URLS, con el '*' acepta todos.
 back/app.js
 res.header("Access-Control-Allow-Origin", "*")
 
-Configuracion Sequelize para Heroku
+## Configuracion Sequelize para Heroku
 back/db.js
 En esta estapa usamos un "___true/false?true:false(no recuerdo el nombre)_____" para que si el proyecto esta montado en heroku la tome, si no tome la configurarion local.
 sequelize<produccion> ? sequelize<local>
@@ -59,15 +57,15 @@ const sequelize =
       );
 ```
 
-La base de datos PARECE que debe estar en la conexion que se reconstruya cuando se modifica el codigo. 
+## La base de datos PARECE que debe estar en la conexion que se reconstruya cuando se modifica el codigo. 
 
 ```
 conn.sync({ force: true })
 
 ```
 
-Agregar un process.env.PORT y agregarlo en el .env PORT = 3000
 
+## Agregar un process.env.PORT y agregarlo en el .env PORT = 3000
 
 ```
 conn.sync({ force: true }).then(() => {
@@ -76,18 +74,30 @@ conn.sync({ force: true }).then(() => {
   });
 });
 ```
+# Front vercel
 
-Con axios debe agregar esta configuracion, que si tiene una api externa la tome como la base de url de axios, si no, tome la url local. Con fetch habra que pensar un poco, como se modifica.
-back/index.js
+# https://vercel.com
 
+## Instalar dotenv
+```
+npm i dotenv
+```
+## Axios / Fetch
+Con axios debe agregar esta configuracion, que si tiene una api externa la toma como la base de url de axios, usando la propiedad default, si no, toma la url local. Con fetch, por el index no me lo exporta (se pede verificar) asi que lo hice de otra manera.
+front/index.js
 ```
 import dotenv from "dotenv";
 dotenv.config();
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
-//Yo la hice asi pero en app
-const BASE_URL = process.env.REACT_APP_API || "http://localhost:3001";
+```
+Lo hice de esta forma
+front/App.js
+```
+import dotenv from "dotenv";
+dotenv.config();
 
+BASE_URL_API = process.env.REACT_APP_API || "http://localhost:3001";
 ```
 
 Videos Diego Rodriguez
