@@ -8,6 +8,7 @@ import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import generatorStore from './redux/store'
 
+
 let store = generatorStore()
 
 ReactDOM.render(
