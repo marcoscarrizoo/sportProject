@@ -54,20 +54,21 @@ export default function ProductDetail() {
     dispatch(getProductDetail(id));
   }, [dispatch, id]);
 
-  console.log(detail)
+  console.log('detail', detail)
+
+  //Transformar string a minuscula y luego la primera a mayuscula.Knut
+  function capitalize(word) {
+    word = word.toLowerCase();
+    return word[0].toUpperCase() + word.slice(1);
+  }
 
   return (
-
     <Card className={classes.root}>
-
       {
         detail &&
         <div>
-
           <CardHeader
-
             title={detail.name}
-
           />
           <CardMedia
             className={classes.media}
@@ -85,14 +86,15 @@ export default function ProductDetail() {
               Disponible: {detail.stock}
             </Typography>
             <Typography variant="body2" component="p">
-              Categoria: no disponible
+              Categoria: {detail.categories.length ?
+              detail.categories.map(category => <li>{capitalize(category.name)}</li>)
+              :
+              <span>Sin categoria asociada</span>
+              }
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-
             <Button className={classes.buyButton} variant='contained' color='secondary'>agregar al carrito</Button>
-
-
           </CardActions>
         </div>
       }
