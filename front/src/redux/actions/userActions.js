@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { url } from '../../App'
 
 export const LOGIN_WITH_USER = 'LOGIN_WiTH_USER'
 export const LOGIN_SUCESS = 'LOGIN_SUCESS'
@@ -14,7 +15,7 @@ export let doUserLogin = () => (dispatch, getState) => {
 
 export let newUser = (form) => async(dispatch) => {
     try{
-        const data = await axios.post('http://localhost:3001/user/create', form)
+        const data = await axios.post( url + '/user/create', form)
         console.log('dataaaa',data)
 
     }

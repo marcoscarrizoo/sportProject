@@ -1,4 +1,5 @@
 import axios from "axios";
+import { url } from "../../App";
 
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
 
@@ -7,7 +8,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT"
 export const postCategory = (form) => async (dispatch) => {
   try {
     const info = await axios.post(
-      "http://localhost:3001/category/create",
+      url + "/category/create",
       form
     );
     console.log(info.data);
@@ -20,7 +21,7 @@ export const postProduct = (form) => async (dispatch) => {
   console.log("Form actions", form);
   try {
     const info = await axios.post(
-      "http://localhost:3001/product/addProducts",
+      url + "/product/addProducts",
       form
     );
     console.log(info.data);
@@ -28,12 +29,12 @@ export const postProduct = (form) => async (dispatch) => {
     console.log(e);
   }
 };
-export const updateCategory = (idCategory, info) => async(dispatch) => {
-  try{
-    const data = await axios.put('http://localhost:3001/category/update/' + idCategory, info)
+export const updateCategory = (idCategory, info) => async (dispatch) => {
+  try {
+    const data = await axios.put(url + '/category/update/' + idCategory, info)
     console.log(data)
   }
-  catch(e) {
+  catch (e) {
     console.log(e)
   }
 }
@@ -41,7 +42,7 @@ export const updateCategory = (idCategory, info) => async(dispatch) => {
 export const deleteCategory = (name) => async (dispatch) => {
   try {
     const info = await axios.delete(
-      "http://localhost:3001/category/delete/" + name
+      url + "/category/delete/" + name
     );
     console.log(info);
   } catch (e) {
@@ -51,10 +52,10 @@ export const deleteCategory = (name) => async (dispatch) => {
 
 
 export function deleteProduct(id) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
-      await axios.delete("http://localhost:3001/product/delete/" + id)
-      dispatch({ type: DELETE_PRODUCT, payload: id} )
+      await axios.delete(url + "/product/delete/" + id)
+      dispatch({ type: DELETE_PRODUCT, payload: id })
     } catch (error) {
       console.log(error)
     }
@@ -62,9 +63,9 @@ export function deleteProduct(id) {
 }
 
 export function editProduct(info, id) {
-  return async function() {
+  return async function () {
     try {
-      await axios.put("http://localhost:3001/product/update/" + id, info)
+      await axios.put(url + "/product/update/" + id, info)
     } catch (error) {
       console.log(error)
     }
