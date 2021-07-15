@@ -1,3 +1,5 @@
+import { url } from "../../App";
+
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const RESET_PRODUCT_DETAIL = "RESET_PRODUCT_DETIAL"
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -14,14 +16,14 @@ export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 
 export function getProductDetail(id) {
   return function (dispatch) {
-    fetch("http://localhost:3001/product/" + id)
-    .then((res) => res.json())
-    .then((detail) =>
-    dispatch({
-      type: GET_PRODUCT_DETAIL,
-      payload: detail,
-    })
-    );
+    fetch(url + "/product/" + id)
+      .then((res) => res.json())
+      .then((detail) =>
+        dispatch({
+          type: GET_PRODUCT_DETAIL,
+          payload: detail,
+        })
+      );
   };
 }
 
@@ -31,20 +33,20 @@ export function resetProductDetail() {
 
 export function getProducts(query) {
   return function (dispatch) {
-    fetch("http://localhost:3001/product")
-    .then((res) => res.json())
-    .then((products) =>
-    dispatch({
-      type: GET_PRODUCTS,
-      payload: products,
-    })
-    );
+    fetch(url + "/product")
+      .then((res) => res.json())
+      .then((products) =>
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: products,
+        })
+      );
   };
 }
 
 export const searchProducts = (input) => {
   return async (dispatch) => {
-    const res = await fetch(`http://localhost:3001/product?string=${input}`);
+    const res = await fetch(url + `/product?string=${input}`);
     const resJson = await res.json();
     dispatch({
       type: GET_PRODUCTS,
@@ -56,29 +58,29 @@ export const searchProducts = (input) => {
 export function getCategories() {
 
   return function (dispatch) {
-    fetch("http://localhost:3001/category")
-    .then((res) => res.json())
-    .then((categories) =>
+    fetch(url + "/category")
+      .then((res) => res.json())
+      .then((categories) =>
         dispatch({
           type: GET_CATEGORIES,
           payload: categories,
         })
-        );
-      };
-    }
-    
+      );
+  };
+}
+
 export function orderProducts(payload) {
   return { type: ORDER_PRODUCTS, payload };
 }
 
 export function filterProducts(category) {
-  return function(dispatch) {
-    fetch('http://localhost:3001/product')
-        .then(res => res.json())
-        .then(payload => dispatch({
-            type: FILTER_PRODUCTS,
-            payload,
-            category
-        }))
-    }
+  return function (dispatch) {
+    fetch(url + '/product')
+      .then(res => res.json())
+      .then(payload => dispatch({
+        type: FILTER_PRODUCTS,
+        payload,
+        category
+      }))
+  }
 }

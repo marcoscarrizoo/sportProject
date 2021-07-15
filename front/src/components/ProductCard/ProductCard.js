@@ -7,8 +7,6 @@ import {
   CardMedia,
   Typography,
   Button,
-  CardHeader,
-  Avatar
 } from "@material-ui/core";
 import BlockIcon from '@material-ui/icons/Block';
 
