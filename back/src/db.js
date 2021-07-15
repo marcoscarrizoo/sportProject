@@ -43,7 +43,14 @@ const sequelize =
     //     ssl: true,
     //   })
 //Si esta en desarrollo, toma este sequelize local.
-console.log('Prueba DATABASE_URL', process.env.DATABASE_URL);
+// console.log('Prueba DATABASE_URL', process.env.DATABASE_URL);
+:new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 const basename = path.basename(__filename);
 
 try {
