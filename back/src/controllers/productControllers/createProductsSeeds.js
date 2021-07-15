@@ -27,6 +27,7 @@ async function createProductsSeeds() {
     );
     console.log('DB precargada con seeds')
   } catch (error) {
+    console.error('Error en createProductsSeeds');
     console.error(error);
   }
 }

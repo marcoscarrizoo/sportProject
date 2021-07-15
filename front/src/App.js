@@ -11,6 +11,11 @@ import Home from "./components/Home/Home";
 import SignUp from './components/SignUp_SignIn/SignUp';
 import SignIn from "./components/SignUp_SignIn/SignIn";
 
+// URL_BASE_API = imprime
+//Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
+//export const BASE_URL_API = process.env.REACT_APP_API || "http://localhost:3001";
+
+
 function App() {
   return (
     <React.Fragment>
