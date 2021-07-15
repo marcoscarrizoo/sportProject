@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import useStyles from "./signupStyles";
 import {newUser} from '../../redux/actions/userActions'
+
+
 import axios from 'axios'
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -50,17 +52,21 @@ export default function SignUp() {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, pass)
-      .then(res =>  history.push("/"),
-        Swal.fire(
-          {
-            text:'Te registraste exitosamente',
-            icon: 'success', 
-            width:'20rem', 
-            timer: '3000', 
-            showConfirmButton: false 
-          }
-        )
+      .then(res => {
+      let newUserData = {id: res.user.uid , email: res.user.email, firstName: firstName, lastName: lastName}
+      dispatch(newUser(newUserData) ) 
+      }
       )
+      .then(resp => history.push("/"),
+      Swal.fire(
+        {
+          text:'Te registraste exitosamente',
+          icon: 'success', 
+          width:'20rem', 
+          timer: '3000', 
+          showConfirmButton: false 
+        }
+      ))
 
       .catch((e) => {
         if (e.code === "auth/invalid-email") {
