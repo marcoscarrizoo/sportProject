@@ -14,7 +14,7 @@ import EditProduct from "./components/Admin/AdmProducts/EditProduct";
 //Heroku y vercel pero hay que configurar el codigo para que que dsdaf
 // URL_BASE_API = imprime
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
-export const BASE_URL_API = process.env.REACT_APP_API || "http://localhost:3001";
+//export const BASE_URL_API = process.env.REACT_APP_API || "http://localhost:3001";
 
 function App() {
   return (
