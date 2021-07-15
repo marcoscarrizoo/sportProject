@@ -61,7 +61,10 @@ export default function ProductCard({ name, images, price, categories, stock }) 
             {categories}
           </Typography>
           <Button className={classes.button} variant='contained' color='primary'>
-          comprar
+          comprar ahora
+          </Button>
+          <Button className={classes.button} variant='contained' color='secondary'>
+          agregar al carrito
           </Button>
         </CardContent>
       </CardActionArea>
