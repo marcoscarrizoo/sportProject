@@ -1,6 +1,6 @@
 .sidebar {
-    /* background-color: #3535351c; */
-    background-color: #ffff00;
+    background-color: #212121;
+    /* background-color: #ffff00; */
     /* border-right: solid 2px black; */
     box-shadow: 0 10px 25px 5px black;
     width: 20%;
@@ -9,7 +9,8 @@
     flex-direction: column;
     align-items: center;
     padding: 35px 10px;
-    color: rgb(0, 0, 0);
+    color: #ffff00;
+    /* color: rgb(0, 0, 0); */
 }
 
 h2 {
