@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-//import { auth } from "../../../firebase";
+import {auth} from '../../firebase'
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import useStyles from "./signupStyles";
-
+import {newUser} from '../../redux/actions/userActions'
+import axios from 'axios'
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,6 +18,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useDispatch } from 'react-redux';
+
 
 function Copyright() {
   return (
@@ -33,45 +36,48 @@ function Copyright() {
 
 export default function SignUp() {
   const classes = useStyles();
+  const dispatch = useDispatch()
+   const [firstName, setFirstName] = useState("")
+   const [lastName, setLastName] = useState("")
+   const [email, setEmail] = useState("");
+   const [user, setUser] = useState(null)
+   const [pass, setPass] = useState("");
+    const [msgError, setMsgError] = useState(null);
+  
+  const history = useHistory();
 
-//   const [email, setEmail] = useState("");
-//   const [pass, setPass] = useState("");
-//   const [msgError, setMsgError] = useState(null);
+  const SingUpNewUser = (e) => {
+    e.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(email, pass)
+      .then(res =>  history.push("/"),
+        Swal.fire(
+          {
+            text:'Te registraste exitosamente',
+            icon: 'success', 
+            width:'20rem', 
+            timer: '3000', 
+            showConfirmButton: false 
+          }
+        )
+      )
 
-//   const history = useHistory();
+      .catch((e) => {
+        if (e.code === "auth/invalid-email") {
+          setMsgError("formato de email, incorrect");
+        }
 
-//   const SingUpNewUser = (e) => {
-//     e.preventDefault();
-//     auth
-//       .createUserWithEmailAndPassword(email, pass)
-//       .then(
-//         (res) => history.push("/"),
-//         Swal.fire(
-//           {
-//             text:'Te registraste exitosamente',
-//             icon: 'success', 
-//             width:'20rem', 
-//             timer: '3000', 
-//             showConfirmButton: false 
-//           }
-//         )
-//       )
+        if (e.code === "auth/weak-password") {
+          setMsgError("formato de password, incorrect");
+        }
+        if (e.code === "auth/invalid-email" && "auth/weak-password") {
+          setMsgError(
+            "tanto el mail como la password, son formatos incorrectos"
+          );
+        }
+      });
+  };
 
-//       .catch((e) => {
-//         if (e.code === "auth/invalid-email") {
-//           setMsgError("formato de email, incorrect");
-//         }
-
-//         if (e.code === "auth/weak-password") {
-//           setMsgError("formato de password, incorrect");
-//         }
-//         if (e.code === "auth/invalid-email" && "auth/weak-password") {
-//           setMsgError(
-//             "tanto el mail como la password, son formatos incorrectos"
-//           );
-//         }
-//       });
-//   };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -83,14 +89,44 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Registrarse
         </Typography>
-        <form  className={classes.form} noValidate>
+        <form onSubmit={SingUpNewUser} className={classes.form} noValidate>
           <Grid container spacing={2}>
+          <Grid item xs={12}>
+              <TextField
+                type="text"
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="Nombre"
+                name="firstName"
+                autoComplete="firstName"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Apellido"
+                name="lastName"
+                autoComplete="lastName"
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 type="email"
-                // onChange={(e) => {
-                //   setEmail(e.target.value);
-                // }}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 variant="outlined"
                 required
                 fullWidth
@@ -102,9 +138,9 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                // onChange={(e) => {
-                //   setPass(e.target.value);
-                // }}
+                onChange={(e) => {
+                  setPass(e.target.value);
+                }}
                 variant="outlined"
                 required
                 fullWidth
@@ -115,13 +151,8 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
-            {/* {msgError != null ? <div>{msgError} </div> : <span></span>} */}
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Quiero recibir informacion y promociones via mail"
-              />
-            </Grid>
+            {msgError != null ? <div>{msgError} </div> : <span></span>}
+            
           </Grid>
           <Button
             type="submit"

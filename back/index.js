@@ -20,6 +20,7 @@ const { createProductsSeeds } = require('./src/controllers/productControllers/cr
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
+
 require("dotenv").config();
 /**
  * ****************************************************************
@@ -32,5 +33,6 @@ conn.sync({ force: true }).then(() => {
     //Esta funcion carga productos del archivo seeds en la DB
 
     await createProductsSeeds();
+
   });
 });

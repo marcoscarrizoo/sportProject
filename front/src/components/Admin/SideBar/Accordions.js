@@ -21,11 +21,20 @@ const useStyles = makeStyles((theme) => ({
     },
     info: {
         paddingLeft: '10%',
-        borderTop: "solid 1px #3535351c"
+        borderTop: "solid 1px #3535351c",
+        transition: '1s',
+        '&:hover': {
+            background: "#ffff00",
+            boxShadow: '5px 5px 10px 1px grey',
+        }
     },
     link: {
         textDecoration: 'none',
         color: 'black'
+    },
+    summary: {
+        backgroundColor: '#ededed'
+        // backgroundColor: '#ffff00'
     }
 }));
 
@@ -46,6 +55,7 @@ export default function ControlledAccordions() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
+                    className={classes.summary}
                 >
                     <Typography className={classes.heading}>PRODUCTOS</Typography>
                 </AccordionSummary>
@@ -69,6 +79,7 @@ export default function ControlledAccordions() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2bh-content"
                     id="panel2bh-header"
+                    className={classes.summary}
                 >
                     <Typography className={classes.heading}>CATEGORIAS</Typography>
                 </AccordionSummary>
@@ -92,6 +103,7 @@ export default function ControlledAccordions() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel3bh-content"
                     id="panel3bh-header"
+                    className={classes.summary}
                 >
                     <Typography className={classes.heading}>USUARIOS</Typography>
                 </AccordionSummary>
@@ -115,6 +127,7 @@ export default function ControlledAccordions() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel4bh-content"
                     id="panel4bh-header"
+                    className={classes.summary}
                 >
                     <Typography className={classes.heading}>SUCURSALES</Typography>
                 </AccordionSummary>

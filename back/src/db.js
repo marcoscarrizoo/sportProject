@@ -7,6 +7,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 //Evalua si esta en produccion o desarrollo.
 const sequelize =
   process.env.NODE_ENV === "production"
+
     //Si esta en produccion, toma este sequelize para heroku
     ? 
     new Sequelize(process.env.DATABASE_URL, {
@@ -41,14 +42,7 @@ const sequelize =
     //     },
     //     ssl: true,
     //   })
-    //Si esta en desarrollo, toma este sequelize local.
-    : new Sequelize(
-      `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-      {
-        logging: false,
-        native: false,
-      }
-    );
+//Si esta en desarrollo, toma este sequelize local.
 console.log('Prueba DATABASE_URL', process.env.DATABASE_URL);
 const basename = path.basename(__filename);
 
