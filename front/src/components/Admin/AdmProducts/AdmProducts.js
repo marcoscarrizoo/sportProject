@@ -27,9 +27,10 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px'
     },
     description: {
-        backgroundColor: '#ffff00',
+        backgroundColor: '#ededed',
         padding: '10px',
-        color: 'black'
+        color: 'black',
+        maxHeight: '50px'
     },
     info: {
         marginTop: '10px',
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'end',
         marginTop: '10px',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     button: {
         margin: theme.spacing(1),
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     products: {
         margin: '10px 0',
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+        maxHeight: '80px'
     }
 }));
 
@@ -66,7 +68,7 @@ export default function AdmProducts() {
         if (!products?.length) {
             dispatch(getProducts());
         }
-    }, [dispatch]);
+    }, [dispatch, products?.length]);
 
     return (
         <div className={classes.root} >

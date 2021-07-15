@@ -13,11 +13,11 @@ const useStyles = makeStyles({
   
   root: {
     maxWidth: 345,
-   
+    height: 420,
   },
   button: {
     width: '100%'
-  }
+  },
 });
 
 export default function ProductCard({ name, images, price, categories }) {
@@ -27,7 +27,7 @@ export default function ProductCard({ name, images, price, categories }) {
   return (
     
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea >
         <CardMedia
           component="img"
           alt={name}
@@ -35,11 +35,11 @@ export default function ProductCard({ name, images, price, categories }) {
           image={images}
           title={name}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent >
+          <Typography gutterBottom variant="h6" >
             {name}
           </Typography>
-          <Typography gutterBottom variant="h4" component="h2">
+          <Typography gutterBottom variant="h4" >
             ${price}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">

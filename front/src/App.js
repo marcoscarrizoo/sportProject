@@ -10,8 +10,6 @@ import Admin from "./components/Admin/Admin";
 import Home from "./components/Home/Home";
 import SignUp from './components/SignUp_SignIn/SignUp';
 import SignIn from "./components/SignUp_SignIn/SignIn";
-import EditProduct from "./components/Admin/AdmProducts/EditProduct";
-
 
 function App() {
   return (
