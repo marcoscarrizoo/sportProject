@@ -4,11 +4,13 @@ module.exports = (sequelize) => {
   sequelize.define(
     "user",
     {
-      // uuid: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      //   primaryKey: true,
-      // },
+
+      id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        primaryKey: true,
+      },
+
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -18,35 +20,15 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING,
       },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        default: false,
-      },
-      shippingCost: {
-        type: DataTypes.FLOAT,
-      },
-      shippingAddress: {
-        type: DataTypes.STRING,
-      },
-      shippingZip: {
-        type: DataTypes.STRING,
-      },
-      shippingCity: {
-        type: DataTypes.STRING,
-      },
-      shippingState: {
-        type: DataTypes.STRING,
+      userType: {
+        type: DataTypes.ENUM("S", "A", "B", "C"), // usuario S superusuario, A admin, B usuario normal. C invitado / usuario no registrado
+        default: "B", // por defecto se crean usuarios normales
+        allowNull: true,
       },
       firstName: {
         type: DataTypes.STRING,
       },
       lastName: {
-        type: DataTypes.STRING,
-      },
-      comments: {
-        type: DataTypes.STRING,
-      },
-      paymentDetails: {
         type: DataTypes.STRING,
       },
     },
