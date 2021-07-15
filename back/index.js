@@ -23,7 +23,7 @@ const { conn } = require("./src/db.js");
 require("dotenv").config();
 /**
  * ****************************************************************
- * Agregar un process.env.PORT y agregarlo en el .env PORT = 3000 *
+ * Agregar un process.env.PORT y agregarlo en el .env PORT = 3001 *
  * ************************************************************** */
 conn.sync({ force: true }).then(() => {
   // server.listen(3000, async () => {
