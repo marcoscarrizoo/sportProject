@@ -49,8 +49,7 @@ export const searchProducts = (input) => {
 };
 
 export function getCategories() {
-  console.log('Aquie estoy en productActions.js', process.env.PUBLIC_URL)
-  // console.log('BASE_URL_API',BASE_URL_API);
+
   return function (dispatch) {
     fetch("http://localhost:3001/category")
     .then((res) => res.json())

@@ -24,7 +24,7 @@ back/db.js
 En esta estapa usamos un "___true/false?true:false(no recuerdo el nombre)_____" para que si el proyecto esta montado en heroku la tome, si no tome la configurarion local.
 sequelize<produccion> ? sequelize<local>
 
-```
+```js
 const sequelize =
   process.env.NODE_ENV === "production"
   //Si esta en produccion, toma este sequelize para heroku
