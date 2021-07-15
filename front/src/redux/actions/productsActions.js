@@ -1,4 +1,5 @@
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
+export const RESET_PRODUCT_DETAIL = "RESET_PRODUCT_DETIAL"
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 
@@ -22,6 +23,10 @@ export function getProductDetail(id) {
     })
     );
   };
+}
+
+export function resetProductDetail() {
+  return { type: RESET_PRODUCT_DETAIL };
 }
 
 export function getProducts(query) {

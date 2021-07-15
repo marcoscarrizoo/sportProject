@@ -8,7 +8,6 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { red } from "@material-ui/core/colors";
 import styles from "./homeStyles";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -78,7 +77,7 @@ function Home() {
         enableMouseEvents
       >
         {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
+          <div key={index}>
             {Math.abs(activeStep - index) <= 2 ? (
               <img
                 className={classes.img}
