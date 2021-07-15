@@ -6,11 +6,12 @@ import {
   ORDER_PRODUCTS,
   GET_CATEGORIES,
   FILTER_PRODUCTS,
+  RESET_PRODUCT_DETAIL
 } from "../actions/productsActions";
 
 //states
 const initialState = {
-  productDetail: [],
+  productDetail: null,
   products: null,
   categories: null,
   categorySelected: "Todas",
@@ -22,6 +23,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         productDetail: action.payload,
+      };
+    case RESET_PRODUCT_DETAIL:
+      return {
+        ...state,
+        productDetail: null,
       };
     case GET_PRODUCTS:
       return {

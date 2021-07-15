@@ -16,8 +16,7 @@ const useStyles = makeStyles({
   
   root: {
     maxWidth: 345,
-    
-   
+    height: 420,
   },
   button: {
     width: '100%'
@@ -42,7 +41,7 @@ export default function ProductCard({ name, images, price, categories, stock }) 
     <div>
     {stock? 
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea >
         <CardMedia
           component="img"
           alt={name}
@@ -50,11 +49,11 @@ export default function ProductCard({ name, images, price, categories, stock }) 
           image={images}
           title={name}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent >
+          <Typography gutterBottom variant="h6" >
             {name}
           </Typography>
-          <Typography gutterBottom variant="h4" component="h2">
+          <Typography gutterBottom variant="h4" >
             ${price}
           </Typography>
           
@@ -62,7 +61,10 @@ export default function ProductCard({ name, images, price, categories, stock }) 
             {categories}
           </Typography>
           <Button className={classes.button} variant='contained' color='primary'>
-          comprar
+          comprar ahora
+          </Button>
+          <Button className={classes.button} variant='contained' color='secondary'>
+          agregar al carrito
           </Button>
         </CardContent>
       </CardActionArea>

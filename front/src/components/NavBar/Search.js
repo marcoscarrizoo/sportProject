@@ -66,7 +66,7 @@ export default function Search() {
 
   /* Logic for ClickOutside */
   useEffect(() => {
-    console.log("USE EFFECT::::");
+    // console.log("USE EFFECT::::");
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -93,10 +93,13 @@ export default function Search() {
   }
 
   /* Input State Handler */
-  function handleState(e) {
-    e.preventDefault();
-    setinput(e.target.value);
-  }
+  // function handleState(e) {
+  //   e.preventDefault();
+  //   setinput(e.target.value);
+  // }
+
+
+
   /* Display State Handler */
   const displayHandler = (e) => {
     setinput(e);
@@ -124,7 +127,7 @@ export default function Search() {
         );
       });
   }
-  console.log("Options: ", options);
+  // console.log("Options: ", options);
 
   return (
     <form className={classes.search} ref={wrapperRef} onSubmit={handleSearch}>

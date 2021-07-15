@@ -1,4 +1,5 @@
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
+export const RESET_PRODUCT_DETAIL = "RESET_PRODUCT_DETIAL"
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 
@@ -22,6 +23,10 @@ export function getProductDetail(id) {
     })
     );
   };
+}
+
+export function resetProductDetail() {
+  return { type: RESET_PRODUCT_DETAIL };
 }
 
 export function getProducts(query) {
@@ -49,8 +54,7 @@ export const searchProducts = (input) => {
 };
 
 export function getCategories() {
-  console.log('Aquie estoy en productActions.js', process.env.PUBLIC_URL)
-  // console.log('BASE_URL_API',BASE_URL_API);
+
   return function (dispatch) {
     fetch("http://localhost:3001/category")
     .then((res) => res.json())

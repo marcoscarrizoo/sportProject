@@ -24,7 +24,7 @@ back/db.js
 En esta estapa usamos un "___true/false?true:false(no recuerdo el nombre)_____" para que si el proyecto esta montado en heroku la tome, si no tome la configurarion local.
 sequelize<produccion> ? sequelize<local>
 
-```
+```js
 const sequelize =
   process.env.NODE_ENV === "production"
   //Si esta en produccion, toma este sequelize para heroku
@@ -59,7 +59,7 @@ const sequelize =
 
 ## La base de datos PARECE que debe estar en la conexion que se reconstruya cuando se modifica el codigo. 
 
-```
+```js
 conn.sync({ force: true })
 
 ```
@@ -67,7 +67,7 @@ conn.sync({ force: true })
 
 ## Agregar un process.env.PORT y agregarlo en el .env PORT = 3000
 
-```
+```js
 conn.sync({ force: true }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3000"); // eslint-disable-line no-console
@@ -85,7 +85,7 @@ npm i dotenv
 ## Axios / Fetch
 Con axios debe agregar esta configuracion, que si tiene una api externa la toma como la base de url de axios, usando la propiedad default, si no, toma la url local. Con fetch, por el index no me lo exporta (se pede verificar) asi que lo hice de otra manera.
 front/index.js
-```
+```js
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -93,13 +93,15 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 ```
 Lo hice de esta forma
 front/App.js
-```
+```js
 import dotenv from "dotenv";
 dotenv.config();
 
 BASE_URL_API = process.env.REACT_APP_API || "http://localhost:3001";
 ```
+En heroku
 
+nodemon no puede estar como dependencia desarrollo, para el heroku
 Videos Diego Rodriguez
 Link de Vimeo: https://vimeo.com/510792531/20d64d4a98
 

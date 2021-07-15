@@ -41,7 +41,7 @@ export default function Catalogo() {
     if (!state.products.products?.length) {
       dispatch(getProducts());
     }
-  }, [dispatch]);
+  }, [dispatch, state.products.products?.length]);
 
   return (
     <div>
