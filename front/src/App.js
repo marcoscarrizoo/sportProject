@@ -10,8 +10,6 @@ import Admin from "./components/Admin/Admin";
 import Home from "./components/Home/Home";
 import SignUp from './components/SignUp_SignIn/SignUp';
 import SignIn from "./components/SignUp_SignIn/SignIn";
-import EditProduct from "./components/Admin/AdmProducts/EditProduct";
-
 
 // URL_BASE_API = imprime
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
