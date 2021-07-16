@@ -28,6 +28,7 @@ const shippingStateValidate = (shippingState) => {
   if (shippingState === 'processing') return true;
   if (shippingState === 'cancelled') return true;
   if (shippingState === 'completed') return true;
+  if (shippingState === undefined) return true;
   return false;
 }
 
@@ -37,14 +38,35 @@ const shippingStateValidate = (shippingState) => {
 // shippingLocation: type: DataTypes.STRING
 // shippingCost: type: DataTypes.FLOAT
 // paymentMethod: type: DataTypes.STRING
+
 async function createOrder(req, res, _next) {
   console.log('Entre en createOrder');
   try {
-    const { orderState, shippingState, shippingLocation, shippingCost, paymentMethod } = req.body;
+    const {
+      orderState,
+      shippingState,
+      shippingLocation,
+      shippingCost,
+      paymentMethod,
+      productId,
+      price,
+      quantity,
+      userId,//Verificar como viene del front
+    } = req.body;
     console.log('orderStateValidate', orderStateValidate(orderState));
     console.log('shippingState', shippingStateValidate(shippingState));
     if (!orderStateValidate(orderState)) res.send('Estado orden debe ser: cart, processing, cancelled o completed');
     if (!shippingStateValidate(shippingState)) res.send('Estado shipping debe ser: initial, created, processing, cancelled o completed');
+    //Si orderState === 'cart' deben venir los productos del carrito.
+    if (orderState === 'cart') {
+        const order = await Order.create({orderState});
+        const user = await User.findById(userId);
+        const product = await Product.findById(productId);
+      //Asociarlos
+
+    }
+    // userID
+    // ProductId
     res.send('Paso');
     // const order = await Order.findOrCreat({})
     //   } else {

@@ -22,9 +22,9 @@ module.exports = (sequelize) => {
       shippingLocation: {
         type: DataTypes.STRING,
       },
-      shippingCost: {
-        type: DataTypes.FLOAT,
-      },
+      // shippingCost: {
+      //   type: DataTypes.FLOAT,
+      // },Elena nos comento que no era necesario
       paymentMethod: {
         type: DataTypes.STRING,
       },

@@ -64,42 +64,57 @@ const products = [{
     }]
 },
 ];
-const users = [{
-    "id":"d1687b07-058c-414a-bb5a-77a8d897be57",
-    "firstName": "Knut",
-    "lastName": "Waale",
-    "email": "knutwaale@gmail.com",
-    "password": "1234",
-},
-{
-    "id":"e8dfefe1-fda2-4edd-b188-970a39d70685",
-    "firstName": "Marcos",
-    "lastName": "Carrizo",
-    "email": "mcarrizo@gmail.com",
-    "password": "1234",
-},
-{
-    "id":"04752f7e-e5e4-483d-bcdb-c1d500a9ed94",
-    "firstName": "Brian",
-    "lastName": "Santaran",
-    "email": "bsantaran@gmail.com",
-    "password": "1234",
-},
-{
-    "id":"14744522-4890-462e-8b7b-ed79fa2cf78d",
-    "firstName": "Daniel",
-    "lastName": "Maers",
-    "email": "dmaers@gmail.com",
-    "password": "1234",
-},
-{
-    "id":"49750430-28da-4202-bb69-30dd23d918c4",
-    "firstName": "Francisco",
-    "lastName": "Garrido",
-    "email": "fgarrido@gmail.com",
-    "password": "1234",
-}];
+const users = [
+    {
+        "id": "d1687b07-058c-414a-bb5a-77a8d897be57",
+        "firstName": "Knut",
+        "lastName": "Waale",
+        "email": "knutwaale@gmail.com",
+        "password": "1234",
+        "userType": "S"
+    },
+    {
+        "id": "e8dfefe1-fda2-4edd-b188-970a39d70685",
+        "firstName": "Marcos",
+        "lastName": "Carrizo",
+        "email": "mcarrizo@gmail.com",
+        "password": "1234",
+        "userType": "C"
+    },
+    {
+        "id": "04752f7e-e5e4-483d-bcdb-c1d500a9ed94",
+        "firstName": "Brian",
+        "lastName": "Santaran",
+        "email": "bsantaran@gmail.com",
+        "password": "1234",
+        "userType": "A"
 
+    },
+    {
+        "id": "14744522-4890-462e-8b7b-ed79fa2cf78d",
+        "firstName": "Daniel",
+        "lastName": "Maers",
+        "email": "dmaers@gmail.com",
+        "password": "1234"
+    },
+    {
+        "id": "49750430-28da-4202-bb69-30dd23d918c4",
+        "firstName": "Francisco",
+        "lastName": "Garrido",
+        "email": "fgarrido@gmail.com",
+        "password": "1234"
+    }
+];
+const orders = [
+    {
+        orderState: "cart",
+        shippingState: undefined,
+        shippingLocation: undefined,
+        paymentMethod: undefined,
+    },
+    {},
+    {}
+];
 module.exports = {
     products,
     users,

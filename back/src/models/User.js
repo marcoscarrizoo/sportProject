@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       },
       userType: {
         type: DataTypes.ENUM("S", "A", "B", "C"), // usuario S superusuario, A admin, B usuario normal. C invitado / usuario no registrado
-        default: "B", // por defecto se crean usuarios normales
+        defaultValue: "B", // por defecto se crean usuarios normales
         allowNull: true,
       },
       firstName: {
