@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "OrderLines",
+    "order_product",
     {
       price: {
         type: DataTypes.FLOAT,
