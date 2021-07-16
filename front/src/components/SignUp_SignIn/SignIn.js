@@ -180,12 +180,12 @@ if(log === true) {
             </div>
             <Grid container>
               <Grid item xs>
-                <Link href="/resetPassword" variant="body2">
+                <Link href="/restablecer" variant="body2">
                   Olvidaste tu contraseña?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signUp" variant="body2">
+                <Link href="/registrarse" variant="body2">
                   {"Crear cuenta"}
                 </Link>
               </Grid>

@@ -172,7 +172,7 @@ export default function SignUp() {
 
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/iniciarSesion" variant="body2">
                 Ya tienes una cuenta? Ingresa
               </Link>
             </Grid>
