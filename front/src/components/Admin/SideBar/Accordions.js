@@ -146,6 +146,23 @@ export default function ControlledAccordions() {
                 </AccordionDetails>
                     </Link>
             </Accordion>
+            <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel4bh-content"
+                    id="panel4bh-header"
+                    className={classes.summary}
+                >
+                    <Typography className={classes.heading}>ORDENES</Typography>
+                </AccordionSummary>
+                    <Link to="/admin/ordenes" className={classes.link}>
+                <AccordionDetails className={classes.info}>
+                        <Typography >
+                            Listar 
+                        </Typography>
+                </AccordionDetails>
+                    </Link>
+            </Accordion>
         </div>
     )
 }

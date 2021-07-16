@@ -16,7 +16,7 @@ export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 
 export function getProductDetail(id) {
   return function (dispatch) {
-    fetch(url + "/product/" + id)
+    fetch(`${url}/product/` + id)
       .then((res) => res.json())
       .then((detail) =>
         dispatch({
@@ -33,7 +33,7 @@ export function resetProductDetail() {
 
 export function getProducts(query) {
   return function (dispatch) {
-    fetch(url + "/product")
+    fetch(`${url}/product`)
       .then((res) => res.json())
       .then((products) =>
         dispatch({

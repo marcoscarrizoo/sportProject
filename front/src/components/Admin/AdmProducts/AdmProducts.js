@@ -1,8 +1,13 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import { getProducts } from "../../../redux/actions/productsActions";
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
@@ -48,7 +53,12 @@ const useStyles = makeStyles((theme) => ({
     },
     delete: {
         margin: theme.spacing(1),
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        color: 'white',
+        '&:hover': {
+            background: "white",
+            color: 'red'
+         },
     },
     products: {
         margin: '10px 0',
@@ -63,12 +73,29 @@ export default function AdmProducts() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products.products);
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    const [id, setId] = useState(null)
 
     useEffect(() => {
         if (!products?.length) {
             dispatch(getProducts());
         }
     }, [dispatch, products?.length]);
+
+
+    const handleClickOpen = (e) => {
+        setId(e)
+        setOpen(true);
+    };
+ 
+    const handleDelete = (e) => {
+        dispatch(deleteProduct(id))
+        setOpen(false);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className={classes.root} >
@@ -96,7 +123,7 @@ export default function AdmProducts() {
                     products !== null &&
                     products.map(p =>
                         <Grid container xs={12} key={p.id} className={classes.products}>
-                            <Grid xs={2} sm={2} md={3} lg={5} className={classes.info} style={{"paddingLeft": "10px"}}>
+                            <Grid xs={2} sm={2} md={3} lg={5} className={classes.info} style={{ "paddingLeft": "10px" }}>
                                 <h4>{p.name}</h4>
                             </Grid>
                             <Grid xs={2} sm={2} md={2} lg={1} className={classes.info}>
@@ -120,7 +147,8 @@ export default function AdmProducts() {
                             </Grid>
                             <Grid xs={3} sm={3} md={2} lg={2} className={classes.infob}>
                                 <Button
-                                    onClick={() => dispatch(deleteProduct(p.id))}
+                                    onClick={() => handleClickOpen(p.id)}
+                                    name={p.id}
                                     variant="contained"
                                     color="primary"
                                     className={classes.delete}
@@ -133,19 +161,30 @@ export default function AdmProducts() {
                     )
                 }
             </Grid>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Alerta!"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Estas seguro/a que quieres eliminar este producto ?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cancelar
+                    </Button>
+                    <Button onClick={handleDelete} color="primary" className={classes.delete} autoFocus>
+                        Confirmar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
 
 
 
-    //     <div>
-    //         { products !== null &&
-    //             products.map( p => 
-    //                 <div style={{ width:"100%"}}>
-    //                     <p>{p.name}</p>
-    //                 </div>
-    //             )
-    //         }
-    //     </div>
-    // )

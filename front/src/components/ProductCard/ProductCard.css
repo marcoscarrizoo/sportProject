@@ -1,0 +1,8 @@
+.text {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: Ellipsis;
+    /* background-color: #25252542; */
+  }
