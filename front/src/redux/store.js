@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import productReducer from '../redux/reducers/productReducer'
 import userReducer from '../redux/reducers/userReducer'
-
+import {restoreSessionAction} from '../redux/actions/userActions'
 //aca van los reducers 
 
 let rootReducer = combineReducers({
@@ -19,5 +19,6 @@ export default function generatorStore() {
         rootReducer,
         composeEnhancers(applyMiddleware(thunk))
     )
+    restoreSessionAction()(store.dispatch)
     return store
 }

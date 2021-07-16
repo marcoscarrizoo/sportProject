@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import Search from "./Search";
 import { getProducts } from "../../redux/actions/productsActions";
-
+import {doLogOut} from '../../redux/actions/userActions'
 /* styles */
+import Swal from "sweetalert2";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,6 +20,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { auth } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   textDeco: {
@@ -101,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const user = useSelector(store => store.user.loggedIn)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -141,6 +144,20 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogOut = () => {
+    dispatch(doLogOut())
+    Swal.fire(
+      {
+        text:'Esperamos verte pronto',
+        icon: 'success', 
+        width:'20rem', 
+        timer: '3000', 
+        showConfirmButton: false 
+      }
+    )
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -152,9 +169,19 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+      {!user? 
+      <div>
       <MenuItem onClick={handleLoggin}>Inicar Sesion</MenuItem>
       <MenuItem onClick={handleSignUp}>Registrarse</MenuItem>
+      </div>
+
+      :
+      <div>
+      <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+      <MenuItem onClick={handleLogOut}>Cerrar Sesion</MenuItem>
+      </div>
+      
+}
     </Menu>
   );
  
