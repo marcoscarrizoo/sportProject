@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Container from '@material-ui/core/Container';
 import Swal from 'sweetalert2'
-import { doUserLogin } from '../../redux/actions/userActions';
+import { doUserLogin, LOGIN_SUCESS } from '../../redux/actions/userActions';
 
 function Copyright() {
   return (
@@ -70,7 +70,18 @@ export default function SignIn() {
   const loginUser = (e) => {
     e.preventDefault()
     auth.signInWithEmailAndPassword(email, pass)
-    .then (res => setLog(true), history.push('/'), Swal.fire(
+    .then(user => {
+      dispatch({
+        type: LOGIN_SUCESS,
+        payload: {
+          uid: user.user.uid,
+          email: user.user.email,
+          
+        }
+      })
+    })
+    .then (res => setLog(true))
+    .then( resp => history.push('/'), Swal.fire(
       {
         text:'Bienvenido',
         icon: 'success', 
@@ -78,7 +89,7 @@ export default function SignIn() {
         timer: '3000', 
         showConfirmButton: false 
       }
-    ) )
+    ))
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
         setMsgError('password incorrecta')
@@ -94,6 +105,7 @@ export default function SignIn() {
   }
 if(log === true) {
     dispatch(doUserLogin())
+    
   }  
 
   

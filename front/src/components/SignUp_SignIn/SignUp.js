@@ -52,7 +52,7 @@ export default function SignUp() {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, pass)
-      .then(res => {
+      .then(res => { console.log(res)
       let newUserData = {id: res.user.uid , email: res.user.email, firstName: firstName, lastName: lastName}
       dispatch(newUser(newUserData) ) 
       }

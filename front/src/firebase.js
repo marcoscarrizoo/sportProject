@@ -31,3 +31,4 @@ import 'firebase/firestore'       //firestore es lo que nos ofrece una base de d
   //iniciar sesion con google 
 
   //cerrar sesion con google 
+

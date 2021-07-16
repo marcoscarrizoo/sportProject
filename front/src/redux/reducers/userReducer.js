@@ -1,9 +1,10 @@
 //actions
-import { LOGIN_WITH_USER, LOGIN_SUCESS, LOGIN_ERROR } from "../actions/userActions"
+import { LOGIN_WITH_USER, LOGIN_SUCESS, LOGIN_ERROR, USER_LOG_OUT } from "../actions/userActions"
 
 
 //states 
 const initialState = {
+user: [],
 loggedIn: false, 
 fetching: false //el fetching es el que usamos cuando nos logueamos y esta cargando... cuando ingresa exitosamente, pasa el fetching a false y el loggedIn a true
 }
@@ -11,6 +12,11 @@ fetching: false //el fetching es el que usamos cuando nos logueamos y esta carga
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case USER_LOG_OUT: 
+        return {
+            ...state,
+            loggedIn: false
+        }
        case LOGIN_WITH_USER:
         return {
             ...state, 
