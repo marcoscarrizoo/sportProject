@@ -1,6 +1,4 @@
 import React from "react";
-import CreateCategory from "./CreateCategory";
-import CreateProduct from "../Admin/CreateProduct/CreateProduct";
 import "./admin.css";
 import AdmProducts from "./AdmProducts/AdmProducts";
 import EditProduct from "./AdmProducts/EditProduct";
