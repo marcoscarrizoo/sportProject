@@ -23,12 +23,14 @@ import 'firebase/firestore'       //firestore es lo que nos ofrece una base de d
   export {auth}
 
   //loggearse con email y password 
-  export function loginUser() {
-      auth.signInWithEmailAndPassword()
-      
-  }
+  
 
   //iniciar sesion con google 
+export function loginWithGoogle() {
+  let provider = new firebase.auth.GoogleAuthProvider() //el provider seria la red social
+  return firebase.auth().signInWithPopup(provider)
+  .then(snap => snap.user) 
+}
 
   //cerrar sesion con google 
 

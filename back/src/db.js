@@ -67,8 +67,8 @@ User.hasMany(Order);
 Plan.belongsTo(Category);
 Category.hasMany(Plan);
 
-Order.belongsToMany(Product, { through: "order_lines" });
-Product.belongsToMany(Order, { through: "order_lines" });
+Order.belongsToMany(Product, { through: "order_product" });
+Product.belongsToMany(Order, { through: "order_product" });
 
 User.hasMany(Order);
 Order.belongsTo(User);
