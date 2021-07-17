@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
 import { loadCart } from "../../redux/actions/cartActions";
 import { Container, makeStyles, Typography } from "@material-ui/core";
+import { url } from "../../App";
 
 const useStyle = makeStyles({
   cart: {
@@ -18,11 +19,14 @@ export default function Cart() {
   const classes = useStyle();
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = JSON.parse(localStorage.getItem("cart"));
+
   useEffect(() => {
     console.log("useEffect de cart");
     dispatch(loadCart());
   }, [dispatch]);
+
+  console.log(cartItems);
 
   return (
     <Container className={classes.cart}>
@@ -35,7 +39,11 @@ export default function Cart() {
           <Container>
             <Container>
               {cartItems.map((product) => (
-                <CartItem key={product.id} product={product} />
+                <CartItem
+                  key={product.id}
+                  id={product.id}
+                  Qty={product.quantity}
+                />
               ))}
             </Container>
           </Container>

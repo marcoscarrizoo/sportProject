@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { url } from "../../App";
 import {
   removeFromCart,
   changeProductQuantity,
 } from "../../redux/actions/cartActions";
+import "./cart.css";
 
 import defaultImg from "../../defaultImgs/imagenotfound.jpg";
 
@@ -15,6 +16,7 @@ import {
   Typography,
   makeStyles,
   TextField,
+  Input,
 } from "@material-ui/core";
 
 {
@@ -42,16 +44,28 @@ const useStyle = makeStyles({
 });
 
 //function
-export default function ({ key, product }) {
+export default function (props) {
+  const { id, Qty } = props;
+
+  //.log("props ", props);
   const dispatch = useDispatch();
   const classes = useStyle();
   const history = useHistory();
 
-  const [quantity, setQuantity] = useState(product.quantity);
+  //console.log(`${url}/product/` + id);
+
+  const [detail, setDetail] = useState({});
+  useEffect(() => {
+    fetch(`${url}/product/` + id)
+      .then((res) => res.json())
+      .then((data) => setDetail(data));
+  }, []);
+
+  //console.log(detail);
 
   const removeProductFromCart = () =>
     dispatch(
-      removeFromCart(product.id),
+      removeFromCart(id),
       /* history.push("/"), */
       history.push("/cart"),
       window.scrollTo(0, 0)
@@ -59,39 +73,41 @@ export default function ({ key, product }) {
 
   const handleChangeQuantity = (e) => {
     const { value } = e.target;
-    if (
-      quantity >= 1 &&
-      quantity <= product.stock &&
-      value >= 1 &&
-      value <= product.stock
-    ) {
-      dispatch(changeProductQuantity(product.id, Number(value)));
-      setQuantity(value);
-    }
+    dispatch(changeProductQuantity(id, Number(value)));
   };
 
+  //console.log("detail", detail);
+
   return (
-    <Container className={classes.item}>
-      <div>
-        <img
-          className={classes.image}
-          src={product.image || defaultImg}
-          alt={product.name}
-        />
-      </div>
-      <Typography variant="span">{product.name}</Typography>
-      <Typography variant="span">${product.price}</Typography>
-      <Typography variant="span">{product.stock}</Typography>
-      <TextField
-        type="number"
-        value={quantity}
-        min={1}
-        max={product.stock}
-        onChange={handleChangeQuantity}
-      />
-      <Button variant="contained" onClick={removeProductFromCart}>
-        <i class="fa fa-trash" aria-hidden="true"></i>
-      </Button>
-    </Container>
+    <div>
+      {detail ? (
+        <Container className={classes.item}>
+          <div>
+            <img
+              className={classes.image}
+              src={detail.images || defaultImg}
+              alt={detail.name}
+            />
+          </div>
+          <Typography variant="span">{detail.name}</Typography>
+          <Typography variant="span">${detail.price}</Typography>
+          <Typography variant="span">{detail.stock}</Typography>
+
+          <input
+            type="number"
+            defaultValue={Qty}
+            min={1}
+            max={detail.stock}
+            onChange={handleChangeQuantity}
+          />
+          <Button variant="contained" onClick={removeProductFromCart}>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            borrar
+          </Button>
+        </Container>
+      ) : (
+        <Typography>Vacio</Typography>
+      )}
+    </div>
   );
 }

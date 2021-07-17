@@ -147,7 +147,7 @@ export default function ProductCard({
                 color="secondary"
                 onClick={() => {
                   if (detail) {
-                    dispatch(addToCart(detail));
+                    dispatch(addToCart(detail.id, 1, detail.price));
                   }
                 }}
               >

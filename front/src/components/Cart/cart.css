@@ -1,0 +1,7 @@
+input {
+  height: 1.5rem;
+  width: 4rem;
+  border-radius: 5px;
+  font-size: medium;
+  text-align: center;
+}

@@ -98,8 +98,9 @@ export default function ProductDetail() {
               variant="contained"
               color="secondary"
               onClick={() => {
-                console.log("Add: ", typeof id, 1);
-                dispatch(addToCart(id, 1));
+                if (detail) {
+                  dispatch(addToCart(detail.id, 1, detail.price));
+                }
               }}
             >
               agregar al carrito

@@ -8,10 +8,11 @@ export const CART_RESET = "CART_RESET";
 export const CHANGE_PRODUCT_QTY = "CHANGE_PRODUCT_QTY";
 export const LOAD_CART = "LOAD_CART";
 
-export const addToCart = (id, quantity) => async (dispatch) => {
+export const addToCart = (id, quantity, price) => async (dispatch) => {
   let product = {
     id,
     quantity,
+    price,
   };
   //console.log(product);
   try {
@@ -26,7 +27,8 @@ export const addToCart = (id, quantity) => async (dispatch) => {
       } else {
         for (var item of cart) {
           if (item.id === id) {
-            item.quantity += quantity;
+            item.quantity = quantity;
+            item.price = price;
           }
         }
       }
@@ -48,7 +50,7 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
   let newCart = cart.filter((e) => e.id !== id);
   dispatch({
     type: REMOVE_FROM_CART,
-    payload: id,
+    payload: newCart,
   });
   localStorage.setItem("cart", JSON.stringify(newCart));
   //sweetAlert("Eliminado", "success", "OK", 1000);
