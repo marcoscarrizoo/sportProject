@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { url } from "../../App";
 import { auth, loginWithGoogle } from "../../firebase";
 
@@ -39,6 +38,22 @@ export let doLogOut = () => (dispatch) => {
   });
   localStorage.clear()
 };
+
+
+// action para recuperar la sesion iniciada
+export let restoreSessionAction = () => (dispatch) => {
+  let storage = localStorage.getItem("storage");
+  storage = JSON.parse(storage);
+  if (storage && storage.loggedIn === true) {
+    dispatch({
+      type: LOGIN_SUCESS,
+      payload: storage,
+    });
+  }
+};
+
+
+
 
 // action para recuperar la sesion iniciada y que no se borre en el estado redux la info(esto va en la store)
 export let restoreSessionAction = () => (dispatch) => {
@@ -88,3 +103,4 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
 
 
 //cierra sesion de google 
+
