@@ -20,6 +20,9 @@ export const useStyles = makeStyles((theme) => ({
       },
       bod: {
         background: '#080F28'
+      },
+      button: {
+
       }
     }));
 
