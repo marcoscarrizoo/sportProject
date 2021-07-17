@@ -1,16 +1,5 @@
-const { User, Product, Order } = require("../../db");
+const { User, Product, Order, order_porduct } = require("../../db");
 
-//Valida si orderState es opcion valida.
-//Retorna true o false
-// const orderStateValidate = (orderState) => {
-//   if (orderState === "cart" ||
-//     orderState === "processing" ||
-//     orderState === "cancelled" ||
-//     orderState === "completed") {
-//     return true;
-//   }
-//   return false;
-// }
 //Valida si orderState es opcion valida de la DB.
 //Retorna true o false
 const orderStateValidate = (orderState) => {
@@ -23,6 +12,7 @@ const orderStateValidate = (orderState) => {
 //Valida si shippingState es opcion valida de la DB.
 //Retorna true o false
 const shippingStateValidate = (shippingState) => {
+  if (shippingState === 'not initialized') return true;
   if (shippingState === 'initial') return true;
   if (shippingState === 'created') return true;
   if (shippingState === 'processing') return true;
@@ -37,7 +27,7 @@ const shippingStateValidate = (shippingState) => {
 // shippingState type: DataTypes.ENUM("initial","created","processing","cancelled","completed")
 // shippingLocation: type: DataTypes.STRING
 // shippingCost: type: DataTypes.FLOAT
-// paymentMethod: type: DataTypes.STRING
+// paymentState: type: DataTypes.STRING
 
 async function createOrder(req, res, _next) {
   console.log('Entre en createOrder');
@@ -47,7 +37,7 @@ async function createOrder(req, res, _next) {
       shippingState,
       shippingLocation,
       shippingCost,
-      paymentMethod,
+      paymentState,
       productId,
       price,
       quantity,
@@ -60,19 +50,23 @@ async function createOrder(req, res, _next) {
     //Si orderState === 'cart' deben venir los productos del carrito.
     if (orderState === 'cart') {
         const order = await Order.create({orderState});
-        const user = await User.findById(userId);
-        const product = await Product.findById(productId);
+          console.log('order', order);
+          // console.log("*isNewRecord",order.isNewRecord)
+          // console.log('order.id', order.id);
+        //const user = await User.findById(userId);
+          // console.log('user', user);
+        //const product = await Product.findById(productId);
+          // console.log('product', product);
       //Asociarlos
-
+      res.send(order);
     }
     // userID
     // ProductId
-    res.send('Paso');
     // const order = await Order.findOrCreat({})
     //   } else {
     //     const products = req.body;
     //     console.log(products)
-    //     products.forEach(
+    
     //       async ({ name, description, images, price, stock, categories }) => {
     //         const [product] = await Product.findOrCreate({
     //           where: {
@@ -103,7 +97,7 @@ async function createOrder(req, res, _next) {
     //   }
   } catch (error) {
     console.error(error);
-    res.send('Product is not create ERROR');
+    res.send('Order is not create ERROR');
   }
  
       // orderState: {
