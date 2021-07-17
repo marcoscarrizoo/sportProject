@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       userType: {
-        type: DataTypes.ENUM("S", "A", "B", "C"), // usuario S superusuario, A admin, B usuario normal. C invitado / usuario no registrado
+        type: DataTypes.ENUM("S", "A", "B", "C", "D", "F"), // usuario S superusuario, A admin, B usuario normal. C invitado / usuario no registrado, D usuario baneado, F usuario inactivo
         default: "B", // por defecto se crean usuarios normales
         allowNull: true,
       },
