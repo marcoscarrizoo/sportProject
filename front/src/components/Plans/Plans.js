@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./planStyles";
 import CheckIcon from "@material-ui/icons/Check";
+import './active.css'
 
 export default function OutlinedCard() {
   const classes = useStyles();
