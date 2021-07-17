@@ -5,12 +5,13 @@ import "firebase/firestore"; //firestore es lo que nos ofrece una base de datos 
 //esta informacion la sacamos de la web cuando creamos proyecto, lo encontramos en
 //configuracion del proyecto y se llama CONFIGURACION DEL SDK
 const firebaseConfig = {
-  apiKey: "AIzaSyBAjB7JUJkHdTJZDtv2Ot713ZG7dT0gcOw",
-  authDomain: "sportsapp-bbdfb.firebaseapp.com",
-  projectId: "sportsapp-bbdfb",
-  storageBucket: "sportsapp-bbdfb.appspot.com",
-  messagingSenderId: "853642120596",
-  appId: "1:853642120596:web:7bdcdfebd349d6e1a35381",
+    apiKey: "AIzaSyAOLhRNkKn76hFHGAJamRvduBzrb-OE8yo",
+    authDomain: "sportgym-ea9c4.firebaseapp.com",
+    projectId: "sportgym-ea9c4",
+    storageBucket: "sportgym-ea9c4.appspot.com",
+    messagingSenderId: "160238185093",
+    appId: "1:160238185093:web:33e70feb53164bd48e17ec",
+    measurementId: "G-28YWTW7WQX"
 };
 // inicializamos Firebase
 firebase.initializeApp(firebaseConfig);
@@ -18,13 +19,20 @@ firebase.initializeApp(firebaseConfig);
 let auth = firebase.auth();
 
 //exportamos auth para poder utilizarlo en otros archivos y componentes
+
 export { auth };
 
 //loggearse con email y password
 export function loginUser() {
   auth.signInWithEmailAndPassword();
+
+
+ //iniciar sesion con google 
+export function loginWithGoogle() {
+  let provider = new firebase.auth.GoogleAuthProvider() //el provider seria la red social
+  return firebase.auth().signInWithPopup(provider)
+  .then(snap => snap.user) 
 }
 
-//iniciar sesion con google
 
 //cerrar sesion con google

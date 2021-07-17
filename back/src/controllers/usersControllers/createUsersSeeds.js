@@ -1,37 +1,19 @@
-const { Category, Product } = require("../../db");
-const { products: productsSeed } = require("../../../seeds");
-//const { Op } = require("sequelize");
+const { Category, Product, User } = require("../../db");
+const { products: productsSeed, users } = require("../../../seeds");
 
-// Solo crea productos del seeds
-async function createProductsSeeds() {
+
+// Solo crea users del seeds
+async function createUsersSeeds() {
   try {
-    const products = productsSeed;
-    products.forEach(
-      async ({ name, description, images, price, stock, categories }) => {
-        const [product] = await Product.findOrCreate({
-          where: {
-            name,
-          },
-          defaults: { description, images, price, stock },
-        });
-        categories.forEach(async ({ name, image }) => {
-          const [category] = await Category.findOrCreate({
-            where: {
-              name,
-            },
-            defaults: { image },
-          });
-          product.addCategory(category);
-        });
-      }
-    );
-    console.log('DB precargada con seeds')
-  } catch (error) {
-    console.error('Error en createProductsSeeds');
-    console.error(error);
-  }
+    users.forEach(async ({id,firstName,lastName,email,password,userType}) => await User.findOrCreate({ where: { id},
+      defaults: { firstName,lastName,email,password,userType}, }));
+     console.log('DB precargada con users seeds');
+    }catch(err){
+      console.log(err);
+      console.log('Error en create users seeds');
+    }
 }
 
 module.exports = {
-  createProductsSeeds
+  createUsersSeeds
 };
