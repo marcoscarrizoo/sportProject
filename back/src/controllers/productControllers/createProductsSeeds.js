@@ -24,14 +24,15 @@ async function createProductsSeeds() {
           product.addCategory(category);
         });
       }
-    );
+
     console.log('DB precargada con seeds')
   } catch (error) {
     console.error('Error en createProductsSeeds');
+
     console.error(error);
   }
 }
 
 module.exports = {
-  createProductsSeeds
+  createProductsSeeds,
 };
