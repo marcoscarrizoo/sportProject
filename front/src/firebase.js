@@ -4,7 +4,7 @@ import "firebase/firestore"; //firestore es lo que nos ofrece una base de datos 
 
 //esta informacion la sacamos de la web cuando creamos proyecto, lo encontramos en
 //configuracion del proyecto y se llama CONFIGURACION DEL SDK
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBAjB7JUJkHdTJZDtv2Ot713ZG7dT0gcOw",
   authDomain: "sportsapp-bbdfb.firebaseapp.com",
   projectId: "sportsapp-bbdfb",

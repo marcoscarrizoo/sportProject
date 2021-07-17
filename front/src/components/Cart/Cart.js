@@ -20,6 +20,7 @@ export default function Cart() {
 
   const cartItems = useSelector((state) => state.cart.items);
   useEffect(() => {
+    console.log("useEffect de cart");
     dispatch(loadCart());
   }, [dispatch]);
 

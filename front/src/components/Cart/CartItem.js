@@ -42,7 +42,7 @@ const useStyle = makeStyles({
 });
 
 //function
-export default function ({ product }) {
+export default function ({ key, product }) {
   const dispatch = useDispatch();
   const classes = useStyle();
   const history = useHistory();

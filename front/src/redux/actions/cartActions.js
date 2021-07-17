@@ -1,4 +1,5 @@
 import axios from "axios";
+import { newUser } from "./userActions";
 //import { url } from "../../App";
 
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -7,26 +8,35 @@ export const CART_RESET = "CART_RESET";
 export const CHANGE_PRODUCT_QTY = "CHANGE_PRODUCT_QTY";
 export const LOAD_CART = "LOAD_CART";
 
-export const addToCart = (product) => async (dispatch) => {
-  const { id, quantity } = product;
-  console.log(product);
+export const addToCart = (id, quantity) => async (dispatch) => {
+  let product = {
+    id,
+    quantity,
+  };
+  //console.log(product);
   try {
     let cart = JSON.parse(localStorage.getItem("cart"));
-    console.log(cart);
+
     if (!cart || !cart.length) {
       localStorage.setItem("cart", JSON.stringify([product]));
     } else {
-      for (var item of cart) {
-        if (item.id === id) {
-          item.quantity += quantity;
+      let ids = cart.map((e) => e.id);
+      if (!ids.includes(id)) {
+        cart.push(product);
+      } else {
+        for (var item of cart) {
+          if (item.id === id) {
+            item.quantity += quantity;
+          }
         }
       }
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
     dispatch({
       type: ADD_TO_CART,
-      payload: cart,
+      payload: JSON.parse(localStorage.getItem("cart")),
     });
-    localStorage.setItem("cart", JSON.stringify(cart));
+    //localStorage.setItem("cart", JSON.stringify(cart));
     //sweetAlert("Agregado", "success", "OK", 1000);
   } catch (e) {
     console.log(e);

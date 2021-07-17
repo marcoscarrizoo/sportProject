@@ -4,9 +4,12 @@ import { checkout } from "../../redux/actions/cartActions";
 import { Container, Typography, Button } from "@material-ui/core";
 
 export default function CartTotal() {
-  useEffect(() => {}, [cart]);
-
   const cart = useSelector((state) => state.cart.items);
+
+  useEffect(() => {
+    console.log("");
+  }, [cart]);
+
   //const cartItemsLocalStorage = localStorage.getItem("cart");
   const dispatch = useDispatch();
   const total = cart.reduce(
