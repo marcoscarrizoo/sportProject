@@ -1,4 +1,4 @@
-const { User, Product, Order, order_porduct } = require("../../db");
+const { User, Product, Order } = require("../../db");
 
 //Valida si orderState es opcion valida de la DB.
 //Retorna true o false
@@ -22,6 +22,7 @@ const shippingStateValidate = (shippingState) => {
   return false;
 }
 
+
 //Ruta localhost:3001/order/addOrder
 // orderState type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
 // shippingState type: DataTypes.ENUM("initial","created","processing","cancelled","completed")
@@ -30,7 +31,7 @@ const shippingStateValidate = (shippingState) => {
 // paymentState: type: DataTypes.STRING
 
 async function createOrder(req, res, _next) {
-  console.log('Entre en createOrder');
+  console.log('Entra en createOrder');
   try {
     const {
       orderState,
@@ -39,62 +40,26 @@ async function createOrder(req, res, _next) {
       shippingCost,
       paymentState,
       productId,
-      price,
       quantity,
       userId,//Verificar como viene del front
     } = req.body;
-    console.log('orderStateValidate', orderStateValidate(orderState));
-    console.log('shippingState', shippingStateValidate(shippingState));
     if (!orderStateValidate(orderState)) res.send('Estado orden debe ser: cart, processing, cancelled o completed');
+    const order = await Order.create({ orderState, userId });
+    console.log('order', order.id);
     if (!shippingStateValidate(shippingState)) res.send('Estado shipping debe ser: initial, created, processing, cancelled o completed');
-    //Si orderState === 'cart' deben venir los productos del carrito.
-    if (orderState === 'cart') {
-        const order = await Order.create({orderState});
-          console.log('order', order);
-          // console.log("*isNewRecord",order.isNewRecord)
-          // console.log('order.id', order.id);
-        //const user = await User.findById(userId);
-          // console.log('user', user);
-        //const product = await Product.findById(productId);
-          // console.log('product', product);
-      //Asociarlos
-      res.send(order);
-    }
-    // userID
-    // ProductId
-    // const order = await Order.findOrCreat({})
-    //   } else {
-    //     const products = req.body;
-    //     console.log(products)
-    
-    //       async ({ name, description, images, price, stock, categories }) => {
-    //         const [product] = await Product.findOrCreate({
-    //           where: {
-    //             name,
-    //           },
-    //           defaults: { description, images, price, stock },
-    //         });
-    //         categories.forEach(async ({ name, image }) => {
-    //           const [category] = await Category.findOrCreate({
-    //             where: {
-    //               name,
-    //             },
-    //             defaults: { image },
-    //           });
-    //           product.addCategory(category);
-    //         });
-    //         console.log(`Producto creado ${product.name}`);
-    //       }
-    //     );
-    //     if (products.length > 1) {
-    //       const productsNames = products.map((e) => e.name);
-    //       res.json(`los productos ${productsNames} han sido creados exitosamente.`);
-    //     }
-    //     if (products.length === 1) {
-    //       const productName = products.map((e) => e.name);
-    //       res.json(`El producto ${productName} ha sido creado exitosamente.`);
-    //     }
-    //   }
+    const product = await Product.findByPk(productId);
+    console.log('product', product.name);
+    const user = await User.findByPk(userId);
+    console.log('user', user.name);
+    product.addOrder(order, {
+      through: {
+        price: product.price,
+        quantity: quantity
+      }
+    });
+    user.addOrder(order);
+    const order1 = await Order.findByPk(order.id);
+    res.json(order1);
   } catch (error) {
     console.error(error);
     res.send('Order is not create ERROR');
@@ -114,6 +79,9 @@ async function createOrder(req, res, _next) {
       //     "completed"
              
   res.json('orders');
+}
+const metodoPrueba = async ()=>{
+  const orderProduct = await order.findAll();
 }
 
 module.exports = {

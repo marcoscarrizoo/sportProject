@@ -27,6 +27,7 @@ module.exports = (sequelize) => {
       },
       shippingLocation: {
         type: DataTypes.STRING,
+        defaultValue: "not initialized"
       },
       paymentState: {
         type: DataTypes.ENUM(
