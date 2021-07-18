@@ -209,7 +209,7 @@ export default function ProductDetail() {
                   dispatch(addToCart(detail.id, 1, detail.price));
                 }
               }}
-            >
+              >
               agregar al carrito
             </Button>
           </CardActions>
@@ -217,42 +217,42 @@ export default function ProductDetail() {
       )}
     </Card>
   );
+    {/* } */}
 
-             // <CardContent>
-               // <Typography variant="h5" component="p">
-                //  Precio: ${detail.price}
-               // </Typography>
-               // <Typography variant="body2" component="p">
-               //   Disponible: {detail.stock}
-               // </Typography>
-               // <Typography variant="body2" component="p">
-                 // Categoria:{" "}
-                 // {detail.categories.length ? (
-                 //   detail.categories.map((category) => (
-                  //    <li>{capitalize(category.name)}</li>
-                    //))
-                  //) : (
-                   // <span>Sin categoria asociada</span>
-                  //)}
-                //</Typography>
-              //</CardContent>
-              //<CardActions disableSpacing>
-                //<Button
-                 // className={classes.buyButton}
-          //        variant="contained"
-            //      color="secondary"
-              //  >
-                //  agregar al carrito
-       //         </Button>
-        //      </CardActions>
-         //   </div>
-         // </div>
-       // </div>
-       // <div>
-        //  <p>{detail.description}</p>
-        //</div>
-      //</div>
-    //);
-  //}
+             {/* <CardContent>
+               <Typography variant="h5" component="p">
+                  Precio: ${detail.price}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Disponible: {detail.stock}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Categoria:{" "}
+                  {detail.categories.length ? (
+                   detail.categories.map((category) => (
+                     <li>{capitalize(category.name)}</li>
+                    ))
+                  ) : (
+                   <span>Sin categoria asociada</span>
+                  )}
+                </Typography>
+              </CardContent>
+              <CardActions disableSpacing>
+                <Button
+                 className={classes.buyButton}
+                 variant="contained"
+                 color="secondary"
+               >
+                 agregar al carrito
+               </Button>
+             </CardActions>
+           </div>
+         </div>
+       </div>
+       <div>
+         <p>{detail.description}</p>
+        </div>
+      </div>
+    );
+  } */}
 
-}

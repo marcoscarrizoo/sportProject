@@ -25,7 +25,7 @@ export { auth };
 //loggearse con email y password
 export function loginUser() {
   auth.signInWithEmailAndPassword();
-
+}
 
  //iniciar sesion con google 
 export function loginWithGoogle() {
