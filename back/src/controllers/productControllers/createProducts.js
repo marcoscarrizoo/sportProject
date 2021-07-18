@@ -2,7 +2,7 @@ const { Category, Product, Review, User } = require("../../db");
 const { products: productsSeed } = require("../../../seeds");
 //const { Op } = require("sequelize");
 
-//endPoint localhost:3001/product
+//endPoint localhost:3001/product/addProducts
 async function createProducts(req, res, next) {
   try {
     if (!req.body.length) {
