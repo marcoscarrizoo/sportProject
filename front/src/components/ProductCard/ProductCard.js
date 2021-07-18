@@ -15,6 +15,7 @@ import {
 import BlockIcon from "@material-ui/icons/Block";
 import Popover from "@material-ui/core/Popover";
 import "./ProductCard.css";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles({
   root: {
@@ -84,8 +85,16 @@ export default function ProductCard({
   };
 
   const handleAddToCart = () => {
-    toast("agregado", { type: "success" });
     dispatch(addToCart(id, 1, price));
+    Swal.fire(
+      {
+        text:'se agrego al carrito',
+        icon: 'success', 
+        width:'20rem', 
+        timer: '3000', 
+        showConfirmButton: false 
+      }
+    )
   };
 
   const open = Boolean(anchorEl);
@@ -135,7 +144,7 @@ export default function ProductCard({
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
-                <Typography variant="h5">{name}</Typography>
+                <Typography variant="h5" className={classes.pop} >{name}</Typography>
               </Popover>
               <Typography gutterBottom variant="h4">
                 ${price}

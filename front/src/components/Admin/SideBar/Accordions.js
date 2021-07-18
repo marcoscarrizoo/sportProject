@@ -114,13 +114,13 @@ export default function ControlledAccordions() {
                         </Typography>
                 </AccordionDetails>
                     </Link>
-                    <Link to="/admin/crear-usuario-categoria" className={classes.link}>
+                    {/* <Link to="/admin/crear-usuario-categoria" className={classes.link}>
                 <AccordionDetails className={classes.info}>
                         <Typography >
                             Crear
                         </Typography>
                 </AccordionDetails>
-                    </Link>
+                    </Link> */}
             </Accordion>
             <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary
