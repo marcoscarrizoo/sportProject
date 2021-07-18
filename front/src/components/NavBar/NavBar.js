@@ -1,26 +1,26 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import Search from "./Search";
 import { getProducts } from "../../redux/actions/productsActions";
-
+import { doLogOut } from "../../redux/actions/userActions";
 /* styles */
+import Swal from "sweetalert2";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { auth } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   textDeco: {
@@ -103,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const user = useSelector((store) => store.user.loggedIn);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -125,15 +126,36 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleAdmin = () => {
-    history.push('/admin')
+    history.push("/admin");
     setAnchorEl(null);
     handleMobileMenuClose();
-  }
-
+  };
+  const handleSignUp = () => {
+    history.push("/registrarse");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+  const handleLoggin = () => {
+    history.push("/iniciarSesion");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogOut = () => {
+    dispatch(doLogOut());
+    Swal.fire({
+      text: "Esperamos verte pronto",
+      icon: "success",
+      width: "20rem",
+      timer: "3000",
+      showConfirmButton: false,
+    });
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -145,12 +167,20 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {!user ? (
+        <div>
+          <MenuItem onClick={handleLoggin}>Inicar Sesion</MenuItem>
+          <MenuItem onClick={handleSignUp}>Registrarse</MenuItem>
+        </div>
+      ) : (
+        <div>
+          <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+          <MenuItem onClick={handleLogOut}>Cerrar Sesion</MenuItem>
+        </div>
+      )}
     </Menu>
   );
- 
+
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -236,16 +266,16 @@ export default function PrimarySearchAppBar() {
               ASOCIATE
             </Button>{" "}
           </Link>
-         
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          
-            <IconButton color="inherit">
-              <Badge color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            <Link className={classes.text} to="/cart">
+              <IconButton color="inherit">
+                <Badge color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Link>
 
             <IconButton
               edge="end"

@@ -1,14 +1,35 @@
-const { Category, Product, Review, User } = require("../../db");
+const { Category, Product, Review, User, product_category } = require("../../db");
 const { products: productsSeed } = require('../../../seeds');
 //const { Op } = require("sequelize");
 
 //endPoint localhost:3001/product/update/:id
 async function updateProductById(req, res, next) {
     try {
-        const { id } = req.params;
-        const { name, description, images, price, stock } = req.body;
-        const product = await Product.findByPk(id);
+        let { id } = req.params;
+        id = parseInt(id)
+        const { name, description, images, price, stock, categories } = req.body;
+
+        console.log(id)
+        await product_category.destroy({
+            where: {
+                productId: id
+            }
+        });
+
+        const product = await Product.findByPk(parseInt(id));
+
         await product.update({ name, description, images, price, stock });
+
+        categories.forEach(async ({ name, image }) => {
+            const [category] = await Category.findOrCreate({
+                where: {
+                    name,
+                },
+                defaults: { image },
+            });
+            await product.addCategory(category);
+        });
+        // console.log(`Producto ${name} actualizado ${id}`)
         res.send(`Producto ${name} actualizado ${id}`);
     } catch (error) {
         res.send(`Producto no actualizado`);

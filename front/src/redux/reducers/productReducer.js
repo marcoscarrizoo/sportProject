@@ -1,15 +1,17 @@
 //actions
+import { DELETE_PRODUCT } from "../actions/adminActions";
 import {
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS,
   ORDER_PRODUCTS,
   GET_CATEGORIES,
   FILTER_PRODUCTS,
+  RESET_PRODUCT_DETAIL
 } from "../actions/productsActions";
 
 //states
 const initialState = {
-  productDetail: [],
+  productDetail: null,
   products: null,
   categories: null,
   categorySelected: "Todas",
@@ -22,11 +24,21 @@ export default function reducer(state = initialState, action) {
         ...state,
         productDetail: action.payload,
       };
+    case RESET_PRODUCT_DETAIL:
+      return {
+        ...state,
+        productDetail: null,
+      };
     case GET_PRODUCTS:
       return {
         ...state,
         products: action.payload,
       };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter( p => p.id !== action.payload)
+      };  
     case GET_CATEGORIES:
       return {
         ...state,

@@ -1,0 +1,116 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CartItem from "./CartItem";
+import Swal from "sweetalert2";
+import {
+  loadCart,
+  cartReset,
+  updateTotal,
+} from "../../redux/actions/cartActions";
+import { Container, makeStyles, Typography, Button } from "@material-ui/core";
+import { useHistory } from 'react-router-dom';
+
+const useStyle = makeStyles({
+  cart: {
+    marginLeft: "0px",
+  },
+  title: {
+    color: "gray",
+  },
+});
+
+export default function Cart() {
+  const classes = useStyle();
+  const dispatch = useDispatch();
+  const history = useHistory()
+  let cartItems = JSON.parse(localStorage.getItem("cart"));
+  const total = useSelector((state) => state.cart.total);
+
+  const [state, setstate] = useState("");
+
+if(!total ) {
+  history.push('/productos')
+  Swal.fire(
+    {
+      text:'carrito vacio',
+      icon: 'warning', 
+      width:'20rem', 
+      timer: '3000', 
+      showConfirmButton: false 
+    }
+  )
+}
+  useEffect(() => {
+    console.log("useEffect de cart");
+    dispatch(loadCart());
+    dispatch(updateTotal());
+    cartItems = JSON.parse(localStorage.getItem("cart"));
+    setstate(cartItems);
+  }, [dispatch]);
+
+
+  console.log(cartItems);
+
+  return (
+    <Container className={classes.cart}>
+      {cartItems.length ? (
+        <Container>
+          <div>
+            <h4 className={classes.title}>Mis Productos</h4>
+          </div>
+          <hr />
+          <Container>
+            <Container>
+              {cartItems.map((product) => (
+                <CartItem
+                  key={product.id}
+                  id={product.id}
+                  Qty={product.quantity}
+                />
+              ))}
+            </Container>
+          </Container>
+          <hr />
+          <Container>
+            <Typography> Total: $ {total}</Typography>
+            <Button>Comprar</Button>
+            <Button
+              onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+            >
+              Vaciar Carrito
+            </Button>
+          </Container>
+        </Container>
+      ) : (
+        <Typography>Vacio</Typography>
+      )}
+    </Container>
+  );
+}
+
+/* const cart = [
+  {
+    image: "image1",
+    name: "mancuerna",
+    precio: 300,
+    cantidad: 1,
+    descripcion:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in laoreet felis. In fermentum massa pharetra egestas rutrum. Sed varius nibh vitae libero bibendum, a imperdiet diam mattis. Duis volutpat libero non odio viverra, id semper elit convallis. Sed molestie nibh nec nulla elementum sodales. Phasellus maximus sapien a tincidunt elementum. Proin vitae mauris non quam sollicitudin semper sit amet quis mauris. ",
+  },
+  {
+    image: "image2",
+    name: "vitaminas",
+    precio: 150,
+    cantidad: 1,
+    descripcion:
+      "Proin id ipsum nec lorem aliquam eleifend a et nisi. Donec mattis turpis ut urna lacinia faucibus. Phasellus eleifend lacus nec quam pharetra sagittis. Integer massa quam, tincidunt id nibh vitae, tempor aliquam felis. Aliquam pulvinar nisl erat, ut mollis mauris volutpat vitae. Ut sit amet ipsum pharetra, aliquam magna nec, tincidunt lectus. Duis metus ante, sollicitudin a leo at, eleifend pretium est.",
+  },
+  {
+    image: "image3",
+    name: "musculosa",
+    precio: 340,
+    cantidad: 1,
+    descripcion:
+      "Fusce non consectetur odio. Quisque augue quam, porta vitae nisi nec, porta congue erat. Aliquam erat volutpat. Vivamus turpis felis, porttitor semper pharetra non, efficitur quis augue. Mauris sit amet egestas quam. Suspendisse eget sollicitudin libero. Maecenas id elementum nibh.",
+  },
+]; */

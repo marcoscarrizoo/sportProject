@@ -1,13 +1,22 @@
+import { url } from "../../App";
+
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
+export const RESET_PRODUCT_DETAIL = "RESET_PRODUCT_DETIAL"
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 
 export const ORDER_PRODUCTS = "ORDER_PRODUCTS";
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
+//import {BASE_URL_API} from '../../';
+// const {BASE_URL_API} = process.env;
+// const url = BASE_URL_API || "http://localhost:3001";
+// const {BASE_URL_API} = require('../../index')
+// require("dotenv").config();
+
 
 export function getProductDetail(id) {
   return function (dispatch) {
-    fetch("http://localhost:3001/product/" + id)
+    fetch(`${url}/product/` + id)
       .then((res) => res.json())
       .then((detail) =>
         dispatch({
@@ -18,9 +27,13 @@ export function getProductDetail(id) {
   };
 }
 
+export function resetProductDetail() {
+  return { type: RESET_PRODUCT_DETAIL };
+}
+
 export function getProducts(query) {
   return function (dispatch) {
-    fetch("http://localhost:3001/product")
+    fetch(`${url}/product`)
       .then((res) => res.json())
       .then((products) =>
         dispatch({
@@ -31,10 +44,9 @@ export function getProducts(query) {
   };
 }
 
-
 export const searchProducts = (input) => {
   return async (dispatch) => {
-    const res = await fetch(`http://localhost:3001/product?string=${input}`);
+    const res = await fetch(url + `/product?string=${input}`);
     const resJson = await res.json();
     dispatch({
       type: GET_PRODUCTS,
@@ -44,8 +56,9 @@ export const searchProducts = (input) => {
 };
 
 export function getCategories() {
+
   return function (dispatch) {
-    fetch("http://localhost:3001/category")
+    fetch(url + "/category")
       .then((res) => res.json())
       .then((categories) =>
         dispatch({
@@ -61,14 +74,13 @@ export function orderProducts(payload) {
 }
 
 export function filterProducts(category) {
-
-    return function(dispatch) {
-        fetch('http://localhost:3001/product')
-        .then(res => res.json())
-        .then(payload => dispatch({
-            type: FILTER_PRODUCTS,
-            payload,
-            category
-        }))
-    }
+  return function (dispatch) {
+    fetch(url + '/product')
+      .then(res => res.json())
+      .then(payload => dispatch({
+        type: FILTER_PRODUCTS,
+        payload,
+        category
+      }))
+  }
 }

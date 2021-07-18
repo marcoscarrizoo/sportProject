@@ -9,12 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import DeleteCategory from './DeleteCategory';
+import UpdateCategory from './UpdateCategories';
 
 
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        // marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -120,7 +121,7 @@ Swal.fire(
                 </form>
             </div>
             <DeleteCategory/>
-
+            <UpdateCategory/>
         </Container>
     );
 }
