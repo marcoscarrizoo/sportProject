@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
+
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
@@ -47,19 +48,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductDetail() {
   const classes = useStyles();
-  const detail = useSelector((store) => store.products.productDetail);
+  const detail = useSelector((store) => store.products.productDetail);    
   const dispatch = useDispatch();
-  const { id } = useParams();
-  let startingImg;
-  if (detail) {
-    startingImg = detail.images[0];
-  }
-  const [image, setImage] = React.useState(startingImg);
+
+  const { id } = useParams();  
+  const [image, setImage] = React.useState(null);
+
   useEffect(() => {
     dispatch(getProductDetail(id));
+    if(detail){
+    setImage(detail.images[0])}
+    return ()=>dispatch(resetProductDetail())
   }, [dispatch, id]);
 
-  console.log("AAAAAAAAAAA", detail);
 
   function changeImg(e) {
     setImage(e.target.src);
@@ -69,17 +70,28 @@ export default function ProductDetail() {
     word = word.toLowerCase();
     return word[0].toUpperCase() + word.slice(1);
   }
-  if (!detail) {
+  if (detail=== null) {
     return (
-      <div class="lds-spinner">
-        <img src={loader} alt="" />
+      <div className="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     );
   } else {
     return (
-      <div>
+      <div className="div">
         <div className="bigone">
-          <div className="firstblock">
+          
             <div className="miniblock">
               {detail ? (
                 detail.images.map((e) => (
@@ -97,7 +109,7 @@ export default function ProductDetail() {
             <div className="secondblock">
               <img src={detail.images[0]} alt={image} className="centerimage" />
             </div>
-            <hr className="hr"></hr>
+           
             <div className="thirdblock">
               <h2>{detail.name}</h2>
 
@@ -140,10 +152,9 @@ export default function ProductDetail() {
                   agregar al carrito
                 </Button>
               </CardActions>
-            </div>
-          </div>
+            </div>          
         </div>
-        <div>
+        <div className="detail">
           <p>{detail.description}</p>
         </div>
       </div>
