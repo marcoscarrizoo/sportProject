@@ -7,6 +7,7 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const CART_RESET = "CART_RESET";
 export const CHANGE_PRODUCT_QTY = "CHANGE_PRODUCT_QTY";
 export const LOAD_CART = "LOAD_CART";
+export const UPDATE_TOTAL = "UPDATE_TOTAL";
 
 export const addToCart = (id, quantity, price) => async (dispatch) => {
   let product = {
@@ -94,4 +95,15 @@ export const checkout = () => async (dispatch, getState) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+export const updateTotal = () => async (dispatch) => {
+  var cart = JSON.parse(localStorage.getItem("cart"));
+  var total = 0;
+  if (cart?.length) {
+    for (var i of cart) {
+      total += parseFloat(i.price) * parseFloat(i.quantity);
+    }
+  }
+  dispatch({ type: UPDATE_TOTAL, payload: total });
 };
