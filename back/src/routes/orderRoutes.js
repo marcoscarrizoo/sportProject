@@ -12,6 +12,6 @@ router.post("/addOrder", createOrder);
 router.get("/", getAllOrders);
 router.get("/update:id", updateOrderById);
 router.get("/delete/:id", deleteOrderById);
-router.get("/:idUser", getOrdersByUserId);
+router.get("/:userId", getOrdersByUserId);
 
 module.exports = router;

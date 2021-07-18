@@ -15,7 +15,7 @@ const products = [
         "image":
           "https://http2.mlstatic.com/D_NQ_NP_756133-MLA41827275963_052020-O.webp",
       },
-    ],
+    ]
   },
   {
     "name": "Ena Protein Bar Caja X 16u 46g",
@@ -31,8 +31,8 @@ const products = [
         "name": "suplemento",
         "image":
           "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg",
-      },
-    ],
+      }
+    ]
   },
   {
     "name": "Fish Oil 1200mg Nature's Bounty",
@@ -48,9 +48,9 @@ const products = [
       {
         "name": "suplemento",
         "image":
-          "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg",
-      },
-    ],
+          "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg"
+      }
+    ]
   },
   {
     "name": "Shaker Vaso Mezclador Para Proteinas",
@@ -65,8 +65,8 @@ const products = [
         "name": "Shaker",
         "image":
           "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
-      },
-    ],
+      }
+    ]
   },
   {
     "name": "Mancuerna Acero Pintado Ajustable 20kg",
@@ -83,10 +83,9 @@ const products = [
         "image":
           "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
       },
-    ],
-  },
+    ]
+  }
 ];
-
 
 const users = [
     {
