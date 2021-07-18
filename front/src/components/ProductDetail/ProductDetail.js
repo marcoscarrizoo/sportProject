@@ -3,7 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import "./ProductDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { getProductDetail, resetProductDetail } from "../../redux/actions/productsActions";
+import { getProductDetail } from "../../redux/actions/productsActions";
+import { addToCart } from "../../redux/actions/cartActions";
+import Swal from "sweetalert2";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
@@ -132,6 +138,15 @@ export default function ProductDetail() {
                   color="secondary"
                   onClick={() => {
                     dispatch(addToCart(detail.id, 1, detail.price));
+                    Swal.fire(
+                      {
+                        text:'agregado al carrito',
+                        icon: 'success', 
+                        width:'20rem', 
+                        timer: '3000', 
+                        showConfirmButton: false 
+                      }
+                    )
                   }}
                 >
                   agregar al carrito

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { url } from "../../App";
+import Swal from "sweetalert2";
 import {
   removeFromCart,
   changeProductQuantity,
@@ -66,7 +67,17 @@ export default function (props) {
 
   const removeProductFromCart = () => {
     dispatch(removeFromCart(id));
+    Swal.fire(
+      {
+        text:'eliminado',
+        icon: 'error', 
+        width:'20rem', 
+        timer: '3000', 
+        showConfirmButton: false 
+      }
+    )
     dispatch(updateTotal());
+   
   };
 
   const handleChangeQuantity = (e) => {
