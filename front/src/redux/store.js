@@ -1,23 +1,24 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunk from 'redux-thunk';
-import productReducer from '../redux/reducers/productReducer'
-import userReducer from '../redux/reducers/userReducer'
+import { createStore, applyMiddleware, combineReducers, compose } from "redux";
+import thunk from "redux-thunk";
+import productReducer from "./reducers/productReducer";
+import userReducer from "./reducers/userReducer";
+import cartReducer from "./reducers/cartReducer";
+import { restoreSessionAction } from "./actions/userActions";
 
-//aca van los reducers 
-
+//aca van los reducers
 let rootReducer = combineReducers({
-products : productReducer,
-user: userReducer
-})
+  products: productReducer,
+  user: userReducer,
+  cart: cartReducer,
+});
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function generatorStore() {
-    let store = createStore(
-        rootReducer,
-        composeEnhancers(applyMiddleware(thunk))
-    )
-    return store
+  let store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunk))
+  );
+  restoreSessionAction()(store.dispatch);
+  return store;
 }

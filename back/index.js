@@ -1,6 +1,5 @@
-const {
-  createProductsSeeds,
-} = require("./src/controllers/productControllers/createProductsSeeds");
+const { createProductsSeeds } = require("./src/controllers/productControllers/createProductsSeeds");
+const { createUsersSeeds } = require("./src/controllers/usersControllers/createUsersSeeds");
 //                       _oo0oo_
 //                      o8888888o
 //                      88" . "88
@@ -34,6 +33,9 @@ conn.sync({ force: true }).then(() => {
     console.log(`listening at PORT ${process.env.PORT}`);
     //Esta funcion carga productos del archivo seeds en la DB
 
-    // await createProductsSeeds();
+
+    await createProductsSeeds();
+    await createUsersSeeds();
+
   });
 });

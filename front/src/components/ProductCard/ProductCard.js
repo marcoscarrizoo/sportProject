@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { addToCart } from "../../redux/actions/cartActions";
+import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -8,46 +12,46 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import BlockIcon from '@material-ui/icons/Block';
-import Popover from '@material-ui/core/Popover';
-import './ProductCard.css'
+import BlockIcon from "@material-ui/icons/Block";
+import Popover from "@material-ui/core/Popover";
+import "./ProductCard.css";
 
 const useStyles = makeStyles({
-
   root: {
     maxWidth: 345,
-    display: 'flex',
-    justifyContent :'center'
+    display: "flex",
+    justifyContent: "center",
   },
   button: {
-    width: '100%',
-    margin: '2px 0'
+    width: "100%",
+    margin: "2px 0",
   },
   noStock: {
-    background: '#e0e0e0',
+    background: "#e0e0e0",
     maxWidth: 345,
   },
   avatar: {
-    backgroundColor: 'gray',
+    backgroundColor: "gray",
   },
   popover: {
-    pointerEvents: 'none',
-    backgroundColor: '#25252542'
+    pointerEvents: "none",
+    backgroundColor: "#25252542",
   },
   paper: {
     maxWidth: 300,
-    display: 'flex',
-    alignContent:'center'
+    display: "flex",
+    alignContent: "center",
   },
-  img:{
-    width: 'auto',
+  img: {
+    width: "auto",
   },
   card: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '90%'
+    display: "flex",
+    flexDirection: "column",
+    width: "90%",
   },
   div: {
+<<<<<<< HEAD
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
@@ -59,7 +63,29 @@ const useStyles = makeStyles({
 });
 
 export default function ProductCard({ name, images, price, categories, stock }) {
+=======
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    // alignContent: 'center',
+    // justifyContent: 'space-around',
+  },
+});
+
+export default function ProductCard({
+  name,
+  id,
+  images,
+  price,
+  categories,
+  stock,
+}) {
+  // { name, price, image, categories } props
+>>>>>>> dev
   const classes = useStyles();
+
+  const detail = useSelector((state) => state.products.productDetail);
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -71,24 +97,33 @@ export default function ProductCard({ name, images, price, categories, stock }) 
     setAnchorEl(null);
   };
 
+  const handleAddToCart = () => {
+    toast("agregado", { type: "success" });
+    dispatch(addToCart(id, 1, price));
+  };
+
   const open = Boolean(anchorEl);
 
   return (
     <div>
-      {stock ?
+      {stock ? (
         <Card className={classes.root}>
           <CardActionArea className={classes.div}>
-            <CardMedia
-              component="img"
-              alt={name}
-              height='230'
-              image={images}
-              title={name}
-              className={classes.img}
-            />
+            <Link to={`/producto/${id}`} style={{ textDecoration: "none" }}>
+              <CardMedia
+                component="img"
+                alt={name}
+                height="230"
+                image={images}
+                title={name}
+                className={classes.img}
+              />
+            </Link>
             <CardContent className={classes.card}>
-              <Typography gutterBottom variant="h6"
-                aria-owns={open ? 'mouse-over-popover' : undefined}
+              <Typography
+                gutterBottom
+                variant="h6"
+                aria-owns={open ? "mouse-over-popover" : undefined}
                 aria-haspopup="true"
                 onMouseEnter={handlePopoverOpen}
                 onMouseLeave={handlePopoverClose}
@@ -104,47 +139,56 @@ export default function ProductCard({ name, images, price, categories, stock }) 
                 open={open}
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
+                  vertical: "bottom",
+                  horizontal: "left",
                 }}
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
+                  vertical: "top",
+                  horizontal: "left",
                 }}
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
                 <Typography variant="h5" className={classes.pop} >{name}</Typography>
               </Popover>
-              <Typography gutterBottom variant="h4" >
+              <Typography gutterBottom variant="h4">
                 ${price}
               </Typography>
 
               <Typography variant="body2" color="textSecondary" component="p">
                 {categories}
               </Typography>
-              <Button className={classes.button} variant='contained' color='primary'>
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+              >
                 comprar ahora
               </Button>
-              <Button className={classes.button} variant='contained' color='secondary'>
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="secondary"
+                onClick={handleAddToCart}
+              >
                 agregar al carrito
               </Button>
             </CardContent>
           </CardActionArea>
         </Card>
-        :
+      ) : (
         <Card className={classes.noStock}>
           <CardActionArea>
-
-
-            <CardMedia
-              component="img"
-              alt={name}
-              height='230'
-              width='230'
-              image={images}
-              title={name}
-            />
+            <Link to={`/producto/${id}`} style={{ textDecoration: "none" }}>
+              <CardMedia
+                component="img"
+                alt={name}
+                height="230"
+                width="230"
+                image={images}
+                title={name}
+              />
+            </Link>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {name}
@@ -156,15 +200,17 @@ export default function ProductCard({ name, images, price, categories, stock }) 
               <Typography variant="body2" color="textSecondary" component="p">
                 {categories}
               </Typography>
-              <Button className={classes.button} variant='outlined' color='primary'>
+              <Button
+                className={classes.button}
+                variant="outlined"
+                color="primary"
+              >
                 NO DISPONIBLE <BlockIcon />
               </Button>
             </CardContent>
           </CardActionArea>
         </Card>
-      }
+      )}
     </div>
   );
-
-
 }

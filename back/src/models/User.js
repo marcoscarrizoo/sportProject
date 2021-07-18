@@ -4,13 +4,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "user",
     {
-
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
       },
-
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,8 +19,8 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       userType: {
-        type: DataTypes.ENUM("S", "A", "B", "C"), // usuario S superusuario, A admin, B usuario normal. C invitado / usuario no registrado
-        default: "B", // por defecto se crean usuarios normales
+        type: DataTypes.ENUM("S", "A", "B", "C", "D", "F"), // usuario S superusuario, A admin, B usuario normal. C invitado / usuario no registrado, D usuario baneado, F usuario inactivo
+        defaultValue: "B", // por defecto se crean usuarios normales
         allowNull: true,
       },
       firstName: {

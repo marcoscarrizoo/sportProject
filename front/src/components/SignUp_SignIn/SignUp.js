@@ -52,12 +52,12 @@ export default function SignUp() {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, pass)
-      .then(res => {
+      .then(res => { console.log(res)
       let newUserData = {id: res.user.uid , email: res.user.email, firstName: firstName, lastName: lastName}
       dispatch(newUser(newUserData) ) 
       }
       )
-      .then(resp => history.push("/"),
+      .then(resp =>{ history.push("/")
       Swal.fire(
         {
           text:'Te registraste exitosamente',
@@ -66,21 +66,15 @@ export default function SignUp() {
           timer: '3000', 
           showConfirmButton: false 
         }
-      ))
-
+      )})
+      
       .catch((e) => {
-        if (e.code === "auth/invalid-email") {
-          setMsgError("formato de email, incorrect");
+        
+        if (e.code === "auth/email-already-in-use") {
+          setMsgError("el correo ingresado ya esta en uso");
         }
 
-        if (e.code === "auth/weak-password") {
-          setMsgError("formato de password, incorrect");
-        }
-        if (e.code === "auth/invalid-email" && "auth/weak-password") {
-          setMsgError(
-            "tanto el mail como la password, son formatos incorrectos"
-          );
-        }
+        
       });
   };
 
@@ -172,7 +166,7 @@ export default function SignUp() {
 
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/iniciarSesion" variant="body2">
                 Ya tienes una cuenta? Ingresa
               </Link>
             </Grid>

@@ -1,7 +1,79 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CartItem from "./CartItem";
+import {
+  loadCart,
+  cartReset,
+  updateTotal,
+} from "../../redux/actions/cartActions";
+import { Container, makeStyles, Typography, Button } from "@material-ui/core";
 
-const cart = [
+const useStyle = makeStyles({
+  cart: {
+    marginLeft: "0px",
+  },
+  title: {
+    color: "gray",
+  },
+});
+
+export default function Cart() {
+  const classes = useStyle();
+  const dispatch = useDispatch();
+
+  let cartItems = JSON.parse(localStorage.getItem("cart"));
+  const total = useSelector((state) => state.cart.total);
+
+  const [state, setstate] = useState("");
+
+  useEffect(() => {
+    console.log("useEffect de cart");
+    dispatch(loadCart());
+    dispatch(updateTotal());
+    cartItems = JSON.parse(localStorage.getItem("cart"));
+    setstate(cartItems);
+  }, [dispatch]);
+
+  console.log(cartItems);
+
+  return (
+    <Container className={classes.cart}>
+      {cartItems.length ? (
+        <Container>
+          <div>
+            <h4 className={classes.title}>Mis Productos</h4>
+          </div>
+          <hr />
+          <Container>
+            <Container>
+              {cartItems.map((product) => (
+                <CartItem
+                  key={product.id}
+                  id={product.id}
+                  Qty={product.quantity}
+                />
+              ))}
+            </Container>
+          </Container>
+          <hr />
+          <Container>
+            <Typography> Total: $ {total}</Typography>
+            <Button>Comprar</Button>
+            <Button
+              onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+            >
+              Vaciar Carrito
+            </Button>
+          </Container>
+        </Container>
+      ) : (
+        <Typography>Vacio</Typography>
+      )}
+    </Container>
+  );
+}
+
+/* const cart = [
   {
     image: "image1",
     name: "mancuerna",
@@ -26,8 +98,4 @@ const cart = [
     descripcion:
       "Fusce non consectetur odio. Quisque augue quam, porta vitae nisi nec, porta congue erat. Aliquam erat volutpat. Vivamus turpis felis, porttitor semper pharetra non, efficitur quis augue. Mauris sit amet egestas quam. Suspendisse eget sollicitudin libero. Maecenas id elementum nibh.",
   },
-];
-
-export default function Cart() {
-  return <div>{/* {cart?} */}</div>;
-}
+]; */

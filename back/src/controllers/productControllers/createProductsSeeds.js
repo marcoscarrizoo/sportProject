@@ -1,11 +1,12 @@
 const { Category, Product } = require("../../db");
 const { products: productsSeed } = require("../../../seeds");
+const e = require("express");
 //const { Op } = require("sequelize");
 
 // Solo crea productos del seeds
 async function createProductsSeeds() {
   try {
-    const products = productsSeed;
+    /* const products = productsSeed;
     products.forEach(
       async ({ name, description, images, price, stock, categories }) => {
         const [product] = await Product.findOrCreate({
@@ -24,14 +25,14 @@ async function createProductsSeeds() {
           product.addCategory(category);
         });
       }
-    );
-    console.log('DB precargada con seeds')
-  } catch (error) {
-    console.error('Error en createProductsSeeds');
-    console.error(error);
+
+  } catch (e) {
+    console.log(e)
+    console.log('Error en create users seeds');
+
   }
 }
 
 module.exports = {
-  createProductsSeeds
+  createProductsSeeds,
 };

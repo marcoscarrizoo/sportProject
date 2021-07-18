@@ -18,7 +18,8 @@ import Typography from '@material-ui/core/Typography';
 
 import Container from '@material-ui/core/Container';
 import Swal from 'sweetalert2'
-import { doUserLogin } from '../../redux/actions/userActions';
+import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn,saveStorage } from '../../redux/actions/userActions';
+
 
 function Copyright() {
   return (
@@ -48,29 +49,24 @@ export default function SignIn() {
   const loggedIn = useSelector(store => store.user.loggedIn)
   const fetching = useSelector(store => store.user.fetching)
 
-  //   function doLogin() {
-  //     dispatch(doGoogleLoginAction())
-  //     history.push('/')
-  //     Swal.fire(
-  //       {
-  //         text:'Bienvenido',
-  //         icon: 'success', 
-  //         width:'20rem', 
-  //         timer: '8000', 
-  //         showConfirmButton: false 
-  //       }
-  //     )
-  //   }
-
-  //   function logOut() {
-  //     dispatch(logOutAction())
-  //   }
-
+  
   //hace el loggin con mail y password
-  const loginUser = (e) => {
+  const loginUser = (e) =>  {
     e.preventDefault()
     auth.signInWithEmailAndPassword(email, pass)
-    .then (res => setLog(true), history.push('/'), Swal.fire(
+    .then(user => {
+      dispatch({
+        type: LOGIN_SUCESS,
+        payload: {
+          uid: user.user.uid,
+          email: user.user.email,
+          
+          
+        }
+      })
+      dispatch(doUserLogin())
+    })
+    .then( resp => history.push('/'), Swal.fire(
       {
         text:'Bienvenido',
         icon: 'success', 
@@ -78,7 +74,8 @@ export default function SignIn() {
         timer: '3000', 
         showConfirmButton: false 
       }
-    ) )
+      
+    ))
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
         setMsgError('password incorrecta')
@@ -92,18 +89,15 @@ export default function SignIn() {
     })
     
   }
-if(log === true) {
-    dispatch(doUserLogin())
-  }  
 
   
+let googleLogIn = () => {
+  dispatch(doGoogleLogIn())
+}
 
 
 
-
-  //  const restorePass = () => {
-  //    auth.sendPasswordResetEmail()
-  //  }
+  
 
   return (
      
@@ -145,13 +139,13 @@ if(log === true) {
             />
         {msgError != null? <div>{msgError} </div>: <span></span>}
            
-            <div className={classes.button}>
+            
               <Button
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 className={classes.submit}
-              // onClick={doLogin}
+              onClick={googleLogIn}
               >
                 Ingresar con google
               </Button>
@@ -165,15 +159,15 @@ if(log === true) {
               >
                 Ingresar
               </Button>
-            </div>
+            
             <Grid container>
               <Grid item xs>
-                <Link href="/resetPassword" variant="body2">
+                <Link href="/restablecer" variant="body2">
                   Olvidaste tu contraseña?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signUp" variant="body2">
+                <Link href="/registrarse" variant="body2">
                   {"Crear cuenta"}
                 </Link>
               </Grid>

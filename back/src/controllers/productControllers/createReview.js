@@ -4,7 +4,7 @@ const { products: productsSeed } = require("../../../seeds");
 
 //endPoint localhost:3001/product
 async function createReview(req, res, next) {
-  console.log("createProducts");
+  console.log("createReview");
   try {
   } catch (error) {
     console.error(error);
