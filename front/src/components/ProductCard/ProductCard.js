@@ -135,7 +135,7 @@ export default function ProductCard({
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
-                <Typography variant="h5">{name}</Typography>
+                <Typography variant="h5" className={classes.pop} >{name}</Typography>
               </Popover>
               <Typography gutterBottom variant="h4">
                 ${price}
