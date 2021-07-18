@@ -19,6 +19,15 @@ module.exports = (sequelize) => {
         ),
         allowNull: true,
       },
+      shippingLocation: {
+        type: DataTypes.STRING,
+      },
+      shippingCost: {
+        type: DataTypes.FLOAT,
+      },
+      paymentMethod: {
+        type: DataTypes.STRING,
+      },
     },
     { timestamps: false }
     // createdAT does not appear
