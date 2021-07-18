@@ -1,5 +1,7 @@
 const { User, Product, Order } = require("../../db");
 
+//Ruta localhost:3001/order/update/:id
+//Recive un id por params y devuelve una order, actualizada.
 async function updateOrderById(req, res, next) {
   try {
     const { id } = req.params;
