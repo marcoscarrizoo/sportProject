@@ -26,9 +26,10 @@ async function createProductsSeeds() {
         });
       }
 
-    )  */
   } catch (e) {
-    console.log(e);
+    console.log(e)
+    console.log('Error en create users seeds');
+
   }
 }
 
