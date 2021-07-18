@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
       orderState: {
         type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
         defaultValue: "cart",
-        allowNull: true,
+        allowNull: false,
       },
       shippingState: {
         type: DataTypes.ENUM(
@@ -27,6 +27,7 @@ module.exports = (sequelize) => {
       },
       shippingLocation: {
         type: DataTypes.STRING,
+        defaultValue: "not initialized"
       },
       paymentState: {
         type: DataTypes.ENUM(

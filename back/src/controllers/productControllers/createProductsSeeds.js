@@ -6,7 +6,7 @@ const e = require("express");
 // Solo crea productos del seeds
 async function createProductsSeeds() {
   try {
-    const products = productsSeed;
+    /* const products = productsSeed;
     products.forEach(
       async ({ name, description, images, price, stock, categories }) => {
         const [product] = await Product.findOrCreate({
@@ -26,13 +26,12 @@ async function createProductsSeeds() {
         });
       }
 
-    ) 
-  }catch(e) {
+  } catch (e) {
     console.log(e)
+    console.log('Error en create users seeds');
+
   }
-
 }
-
 
 module.exports = {
   createProductsSeeds,
