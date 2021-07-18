@@ -24,11 +24,10 @@ const shippingStateValidate = (shippingState) => {
 
 
 //Ruta localhost:3001/order/addOrder
-// orderState type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
-// shippingState type: DataTypes.ENUM("initial","created","processing","cancelled","completed")
-// shippingLocation: type: DataTypes.STRING
-// shippingCost: type: DataTypes.FLOAT
-// paymentState: type: DataTypes.STRING
+//Recive order state, productId, quantity, userId.
+//Retorna un orderId
+//Si no la encuentra devuelve, 'Order is not create ERROR'
+
 
 async function createOrder(req, res, _next) {
   console.log('Entra en createOrder');
@@ -58,37 +57,20 @@ async function createOrder(req, res, _next) {
       }
     });
     user.addOrder(order);
-    const order1 = await Order.findByPk(order.id);
-    res.json(order1);
+    res.json(order.id);
   } catch (error) {
     console.error(error);
     res.send('Order is not create ERROR');
   }
- 
-      // orderState: {
-      //   type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
-      //   defaultValue: "cart",
-      //   allowNull: true,
-      // },
-      // shippingState: {
-      //   type: DataTypes.ENUM(
-      //     "initial", //appears as soon as payment is verified
-      //     "created",
-      //     "processing",
-      //     "cancelled",
-      //     "completed"
-             
   res.json('orders');
 }
-const metodoPrueba = async ()=>{
-  const orderProduct = await order.findAll();
-}
+
+// orderState type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
+// shippingState type: DataTypes.ENUM("initial","created","processing","cancelled","completed")
+// shippingLocation: type: DataTypes.STRING
+// shippingCost: type: DataTypes.FLOAT
+// paymentState: type: DataTypes.STRING
 
 module.exports = {
   createOrder,
-  /*   createOrder,
-  deleteOrder,
-  updateOrder,
-  deleteUserOrders
-  */
 };

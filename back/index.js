@@ -34,8 +34,8 @@ conn.sync({ force: true }).then(() => {
     //Esta funcion carga productos del archivo seeds en la DB
 
 
-    //await createProductsSeeds();
-    //await createUsersSeeds();
+    await createProductsSeeds();
+    await createUsersSeeds();
 
   });
 });
