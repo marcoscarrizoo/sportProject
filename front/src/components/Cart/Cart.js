@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
+import Swal from "sweetalert2";
 import {
   loadCart,
   cartReset,
   updateTotal,
 } from "../../redux/actions/cartActions";
 import { Container, makeStyles, Typography, Button } from "@material-ui/core";
+import { useHistory } from 'react-router-dom';
 
 const useStyle = makeStyles({
   cart: {
@@ -20,12 +22,24 @@ const useStyle = makeStyles({
 export default function Cart() {
   const classes = useStyle();
   const dispatch = useDispatch();
-
+  const history = useHistory()
   let cartItems = JSON.parse(localStorage.getItem("cart"));
   const total = useSelector((state) => state.cart.total);
 
   const [state, setstate] = useState("");
 
+if(!total ) {
+  history.push('/productos')
+  Swal.fire(
+    {
+      text:'carrito vacio',
+      icon: 'warning', 
+      width:'20rem', 
+      timer: '3000', 
+      showConfirmButton: false 
+    }
+  )
+}
   useEffect(() => {
     console.log("useEffect de cart");
     dispatch(loadCart());
@@ -33,6 +47,7 @@ export default function Cart() {
     cartItems = JSON.parse(localStorage.getItem("cart"));
     setstate(cartItems);
   }, [dispatch]);
+
 
   console.log(cartItems);
 
