@@ -51,19 +51,6 @@ const useStyles = makeStyles({
     width: "90%",
   },
   div: {
-<<<<<<< HEAD
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-  },
-  pop :{
-    padding: "5px",
-    textAlign: 'center',
-  }
-});
-
-export default function ProductCard({ name, images, price, categories, stock }) {
-=======
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
@@ -81,7 +68,6 @@ export default function ProductCard({
   stock,
 }) {
   // { name, price, image, categories } props
->>>>>>> dev
   const classes = useStyles();
 
   const detail = useSelector((state) => state.products.productDetail);
