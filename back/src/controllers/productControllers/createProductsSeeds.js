@@ -25,11 +25,11 @@ const e = require("express");
           product.addCategory(category);
         });
       }
-
+    )
+    console.log("DB precargada con products seeds");
   } catch (e) {
     console.log(e)
     console.log('Error en create users seeds');
-
   }
 }
   
