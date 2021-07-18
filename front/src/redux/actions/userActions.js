@@ -41,7 +41,7 @@ export let doLogOut = () => (dispatch) => {
 
 
 // action para recuperar la sesion iniciada
-export let restoreSessionAction = () => (dispatch) => {
+/* export let restoreSessionAction = () => (dispatch) => {
   let storage = localStorage.getItem("storage");
   storage = JSON.parse(storage);
   if (storage && storage.loggedIn === true) {
@@ -50,7 +50,7 @@ export let restoreSessionAction = () => (dispatch) => {
       payload: storage,
     });
   }
-};
+}; */
 
 
 
