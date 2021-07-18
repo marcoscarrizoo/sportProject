@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { addToCart } from "../../redux/actions/cartActions";
+import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -59,6 +61,7 @@ const useStyles = makeStyles({
 
 export default function ProductCard({
   name,
+  id,
   images,
   price,
   categories,
@@ -80,6 +83,11 @@ export default function ProductCard({
     setAnchorEl(null);
   };
 
+  const handleAddToCart = () => {
+    toast("agregado", { type: "success" });
+    dispatch(addToCart(id, 1, price));
+  };
+
   const open = Boolean(anchorEl);
 
   return (
@@ -87,14 +95,16 @@ export default function ProductCard({
       {stock ? (
         <Card className={classes.root}>
           <CardActionArea className={classes.div}>
-            <CardMedia
-              component="img"
-              alt={name}
-              height="230"
-              image={images}
-              title={name}
-              className={classes.img}
-            />
+            <Link to={`/producto/${id}`} style={{ textDecoration: "none" }}>
+              <CardMedia
+                component="img"
+                alt={name}
+                height="230"
+                image={images}
+                title={name}
+                className={classes.img}
+              />
+            </Link>
             <CardContent className={classes.card}>
               <Typography
                 gutterBottom
@@ -145,11 +155,7 @@ export default function ProductCard({
                 className={classes.button}
                 variant="contained"
                 color="secondary"
-                onClick={() => {
-                  if (detail) {
-                    dispatch(addToCart(detail.id, 1, detail.price));
-                  }
-                }}
+                onClick={handleAddToCart}
               >
                 agregar al carrito
               </Button>
@@ -159,14 +165,16 @@ export default function ProductCard({
       ) : (
         <Card className={classes.noStock}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              alt={name}
-              height="230"
-              width="230"
-              image={images}
-              title={name}
-            />
+            <Link to={`/producto/${id}`} style={{ textDecoration: "none" }}>
+              <CardMedia
+                component="img"
+                alt={name}
+                height="230"
+                width="230"
+                image={images}
+                title={name}
+              />
+            </Link>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {name}

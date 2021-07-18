@@ -51,6 +51,7 @@ const products = [
           "https://blog.runnics.com/wp-content/uploads/2019/10/zapatillas-correr-tipos-1024x529-1.jpg"
       }
     ]
+
   },
   {
     "name": "Shaker Vaso Mezclador Para Proteinas",

@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
+import "./ProductDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { getProductDetail } from "../../redux/actions/productsActions";
-import { addToCart } from "../../redux/actions/cartActions";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+import { getProductDetail, resetProductDetail } from "../../redux/actions/productsActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
+import loader from "../../defaultImgs/loader.gif";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,77 +40,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// export default function ProductDetail() {
-//   const classes = useStyles();
-//   const detail = useSelector(store => store.products.productDetail)
-//   const dispatch = useDispatch();
-//   const { id } = useParams();
-
-//   useEffect(() => {
-//     dispatch(getProductDetail(id));
-//   }, [dispatch, id]);
-
-//   console.log('detail', detail)
-
-//   //Transformar string a minuscula y luego la primera a mayuscula.Knut
-//   function capitalize(word) {
-//     word = word.toLowerCase();
-//     return word[0].toUpperCase() + word.slice(1);
-//   }
-
-//   return (
-//     <Card className={classes.root}>
-//       {
-//         detail &&
-//         <div>
-//           <CardHeader
-//             title={detail.name}
-//           />
-//           <CardMedia
-//             className={classes.media}
-//             image={detail.images}
-//             title="Paella dish"
-//           />
-//           <CardContent>
-//             <Typography variant="body2" component="p">
-//               Descripcion:  {detail.description} <hr></hr>
-//             </Typography>
-//             <Typography variant="h5" component="p">
-//               Precio: ${detail.price}
-//             </Typography>
-//             <Typography variant="body2" component="p">
-//               Disponible: {detail.stock}
-//             </Typography>
-//             <Typography variant="body2" component="p">
-//               Categoria: {detail.categories.length ?
-//               detail.categories.map(category => <li>{capitalize(category.name)}</li>)
-//               :
-//               <span>Sin categoria asociada</span>
-//               }
-//             </Typography>
-//           </CardContent>
-//           <CardActions disableSpacing>
-//             <Button className={classes.buyButton} variant='contained' color='secondary'>agregar al carrito</Button>
-//           </CardActions>
-//         </div>
-//       }
-//     </Card>
-
-//   );
-// }
-
 export default function ProductDetail() {
   const classes = useStyles();
-  const detail = useSelector((store) => store.products.productDetail);
+  const detail = useSelector((store) => store.products.productDetail);    
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [image, setImage] = React.useState(
-    detail ? detail.images[0] : undefined
-  );
+
+  const { id } = useParams();  
+  const [image, setImage] = React.useState(null);
+
   useEffect(() => {
     dispatch(getProductDetail(id));
+    if(detail){
+    setImage(detail.images[0])}
+    return ()=>dispatch(resetProductDetail())
   }, [dispatch, id]);
-
 
 
   function changeImg(e) {
@@ -124,9 +64,9 @@ export default function ProductDetail() {
     word = word.toLowerCase();
     return word[0].toUpperCase() + word.slice(1);
   }
-  if (!detail) {
+  if (detail=== null) {
     return (
-      <div class="lds-spinner">
+      <div className="lds-spinner">
         <div></div>
         <div></div>
         <div></div>
@@ -143,9 +83,9 @@ export default function ProductDetail() {
     );
   } else {
     return (
-      <div>
+      <div className="div">
         <div className="bigone">
-          <div className="firstblock">
+          
             <div className="miniblock">
               {detail ? (
                 detail.images.map((e) => (
@@ -161,98 +101,48 @@ export default function ProductDetail() {
               )}
             </div>
             <div className="secondblock">
-              <img src={image} alt={image} className="centerimage" />
+              <img src={detail.images[0]} alt={image} className="centerimage" />
             </div>
-            <hr className="hr"></hr>
+           
             <div className="thirdblock">
               <h2>{detail.name}</h2>
 
-
-  return (
-    <Card className={classes.root}>
-      {detail && (
-        <div>
-          <CardHeader title={detail.name} />
-          <CardMedia
-            className={classes.media}
-            image={detail.images}
-            title="Paella dish"
-          />
-          <CardContent>
-            <Typography variant="body2" component="p">
-              Descripcion: {detail.description} <hr></hr>
-            </Typography>
-            <Typography variant="h5" component="p">
-              Precio: ${detail.price}
-            </Typography>
-            <Typography variant="body2" component="p">
-              Disponible: {detail.stock}
-            </Typography>
-            <Typography variant="body2" component="p">
-              Categoria:{" "}
-              {detail.categories.length ? (
-                detail.categories.map((category) => (
-                  <li>{capitalize(category.name)}</li>
-                ))
-              ) : (
-                <span>Sin categoria asociada</span>
-              )}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <Button
-              className={classes.buyButton}
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                if (detail) {
-                  dispatch(addToCart(detail.id, 1, detail.price));
-                }
-              }}
-            >
-              agregar al carrito
-            </Button>
-          </CardActions>
+              <CardContent>
+                <Typography variant="h5" component="p">
+                  Precio: ${detail.price}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Disponible: {detail.stock}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Categoria:{" "}
+                  {detail.categories.length ? (
+                    detail.categories.map((category) => (
+                      <li>{capitalize(category.name)}</li>
+                    ))
+                  ) : (
+                    <span>Sin categoria asociada</span>
+                  )}
+                </Typography>
+              </CardContent>
+              <CardActions disableSpacing>
+                <Button
+                  className={classes.buyButton}
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    dispatch(addToCart(detail.id, 1, detail.price));
+                  }}
+                >
+                  agregar al carrito
+                </Button>
+              </CardActions>
+            </div>          
         </div>
-      )}
-    </Card>
-  );
-
-             // <CardContent>
-               // <Typography variant="h5" component="p">
-                //  Precio: ${detail.price}
-               // </Typography>
-               // <Typography variant="body2" component="p">
-               //   Disponible: {detail.stock}
-               // </Typography>
-               // <Typography variant="body2" component="p">
-                 // Categoria:{" "}
-                 // {detail.categories.length ? (
-                 //   detail.categories.map((category) => (
-                  //    <li>{capitalize(category.name)}</li>
-                    //))
-                  //) : (
-                   // <span>Sin categoria asociada</span>
-                  //)}
-                //</Typography>
-              //</CardContent>
-              //<CardActions disableSpacing>
-                //<Button
-                 // className={classes.buyButton}
-          //        variant="contained"
-            //      color="secondary"
-              //  >
-                //  agregar al carrito
-       //         </Button>
-        //      </CardActions>
-         //   </div>
-         // </div>
-       // </div>
-       // <div>
-        //  <p>{detail.description}</p>
-        //</div>
-      //</div>
-    //);
-  //}
-
+        <div className="detail">
+          <p>{detail.description}</p>
+        </div>
+      </div>
+    );
+  }
 }
