@@ -9,6 +9,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
+import loader from "../../defaultImgs/loader.gif";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,9 +44,9 @@ export default function ProductDetail() {
   const classes = useStyles();
   const detail = useSelector((store) => store.products.productDetail);    
   const dispatch = useDispatch();
+
   const { id } = useParams();  
   const [image, setImage] = React.useState(null);
-
 
   useEffect(() => {
     dispatch(getProductDetail(id));
@@ -54,7 +55,6 @@ export default function ProductDetail() {
     return ()=>dispatch(resetProductDetail())
   }, [dispatch, id]);
 
-  
 
   function changeImg(e) {
     setImage(e.target.src);
@@ -101,7 +101,7 @@ export default function ProductDetail() {
               )}
             </div>
             <div className="secondblock">
-              <img src={image} alt={image} className="centerimage" />
+              <img src={detail.images[0]} alt={image} className="centerimage" />
             </div>
            
             <div className="thirdblock">
@@ -130,12 +130,14 @@ export default function ProductDetail() {
                   className={classes.buyButton}
                   variant="contained"
                   color="secondary"
+                  onClick={() => {
+                    dispatch(addToCart(detail.id, 1, detail.price));
+                  }}
                 >
                   agregar al carrito
                 </Button>
               </CardActions>
-            </div>
-          
+            </div>          
         </div>
         <div className="detail">
           <p>{detail.description}</p>

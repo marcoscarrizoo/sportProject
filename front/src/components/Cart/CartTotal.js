@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkout } from "../../redux/actions/cartActions";
 import { Container, Typography, Button } from "@material-ui/core";
 
-export default function CartTotal() {
+export default function CartTotal({ state }) {
   var cart = JSON.parse(localStorage.getItem("cart"));
   console.log("total ", cart);
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export default function CartTotal() {
     }
     console.log(num);
     settotal(num);
-  }, [dispatch]);
+  }, [state]);
 
   //const cartItemsLocalStorage = localStorage.getItem("cart");
 

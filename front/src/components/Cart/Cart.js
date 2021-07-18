@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
-import CartTotal from "./CartTotal";
-import { loadCart } from "../../redux/actions/cartActions";
-import { Container, makeStyles, Typography } from "@material-ui/core";
-import { url } from "../../App";
+import {
+  loadCart,
+  cartReset,
+  updateTotal,
+} from "../../redux/actions/cartActions";
+import { Container, makeStyles, Typography, Button } from "@material-ui/core";
 
 const useStyle = makeStyles({
   cart: {
@@ -19,11 +21,17 @@ export default function Cart() {
   const classes = useStyle();
   const dispatch = useDispatch();
 
-  const cartItems = JSON.parse(localStorage.getItem("cart"));
+  let cartItems = JSON.parse(localStorage.getItem("cart"));
+  const total = useSelector((state) => state.cart.total);
+
+  const [state, setstate] = useState("");
 
   useEffect(() => {
     console.log("useEffect de cart");
     dispatch(loadCart());
+    dispatch(updateTotal());
+    cartItems = JSON.parse(localStorage.getItem("cart"));
+    setstate(cartItems);
   }, [dispatch]);
 
   console.log(cartItems);
@@ -48,7 +56,15 @@ export default function Cart() {
             </Container>
           </Container>
           <hr />
-          <CartTotal cartItems={cartItems} />
+          <Container>
+            <Typography> Total: $ {total}</Typography>
+            <Button>Comprar</Button>
+            <Button
+              onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+            >
+              Vaciar Carrito
+            </Button>
+          </Container>
         </Container>
       ) : (
         <Typography>Vacio</Typography>

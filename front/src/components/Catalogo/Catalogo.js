@@ -62,18 +62,14 @@ export default function Catalogo() {
                 className={classes.card}
                 key={product.id}
               >
-                <Link
-                  to={`/producto/${product.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <ProductCard
-                    name={product.name}
-                    images={product.images[0]}
-                    price={product.price}
-                    stock={product.stock}
-                    categories={product.categories.name}
-                  />
-                </Link>
+                <ProductCard
+                  name={product.name}
+                  id={product.id}
+                  images={product.images[0]}
+                  price={product.price}
+                  stock={product.stock}
+                  categories={product.categories.name}
+                />
               </Grid>
             ))
           ) : (
