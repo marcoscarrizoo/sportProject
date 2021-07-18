@@ -25,12 +25,12 @@ async function createProductsSeeds() {
           product.addCategory(category);
         });
       }
-
-    ) 
-  }catch(e) {
+    )
+    console.log("DB precargada con products seeds");
+  } catch (e) {
     console.log(e)
+    console.log('Error en create users seeds');
   }
-
 }
 
 
