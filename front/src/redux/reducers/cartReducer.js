@@ -4,10 +4,12 @@ import {
   CART_RESET,
   CHANGE_PRODUCT_QTY,
   LOAD_CART,
+  UPDATE_TOTAL,
 } from "../actions/cartActions";
 
 const initialState = {
   items: JSON.parse(localStorage.getItem("cart") || "[]"),
+  total: 0,
 };
 
 export default function cartReducers(state = initialState, action) {
@@ -36,6 +38,11 @@ export default function cartReducers(state = initialState, action) {
       return {
         ...state,
         items: action.payload,
+      };
+    case UPDATE_TOTAL:
+      return {
+        ...state,
+        total: action.payload,
       };
 
     default:

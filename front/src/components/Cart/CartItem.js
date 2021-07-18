@@ -5,6 +5,7 @@ import { url } from "../../App";
 import {
   removeFromCart,
   changeProductQuantity,
+  updateTotal,
 } from "../../redux/actions/cartActions";
 import "./cart.css";
 
@@ -63,17 +64,15 @@ export default function (props) {
 
   //console.log(detail);
 
-  const removeProductFromCart = () =>
-    dispatch(
-      removeFromCart(id),
-      /* history.push("/"), */
-      history.push("/cart"),
-      window.scrollTo(0, 0)
-    );
+  const removeProductFromCart = () => {
+    dispatch(removeFromCart(id));
+    dispatch(updateTotal());
+  };
 
   const handleChangeQuantity = (e) => {
     const { value } = e.target;
     dispatch(changeProductQuantity(id, Number(value)));
+    dispatch(updateTotal());
   };
 
   //console.log("detail", detail);
