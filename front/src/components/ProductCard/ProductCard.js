@@ -51,13 +51,14 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
-    // alignContent: 'center',
-    // justifyContent: 'space-around',
+  },
+  pop :{
+    padding: "5px",
+    textAlign: 'center',
   }
 });
 
 export default function ProductCard({ name, images, price, categories, stock }) {
-  // { name, price, image, categories } props
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -113,7 +114,7 @@ export default function ProductCard({ name, images, price, categories, stock }) 
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
-                <Typography variant="h5">{name}</Typography>
+                <Typography variant="h5" className={classes.pop} >{name}</Typography>
               </Popover>
               <Typography gutterBottom variant="h4" >
                 ${price}
