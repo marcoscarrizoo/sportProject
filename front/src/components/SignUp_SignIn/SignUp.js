@@ -57,7 +57,7 @@ export default function SignUp() {
       dispatch(newUser(newUserData) ) 
       }
       )
-      .then(resp =>{ history.push("/")
+      .then(resp =>{ history.push("/iniciarSesion")
       Swal.fire(
         {
           text:'Te registraste exitosamente',

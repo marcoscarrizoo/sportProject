@@ -36,6 +36,7 @@ export let doLogOut = () => (dispatch) => {
   dispatch({
     type: USER_LOG_OUT,
   });
+  
   localStorage.clear()
 };
 
