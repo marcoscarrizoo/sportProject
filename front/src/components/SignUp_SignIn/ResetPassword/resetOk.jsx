@@ -1,13 +1,18 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
-  button: {
+  data: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backGround: "red",
+    
   },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    
+  }
 }));
 
 export default useStyles;
