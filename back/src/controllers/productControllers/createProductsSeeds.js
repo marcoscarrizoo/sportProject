@@ -4,9 +4,9 @@ const e = require("express");
 //const { Op } = require("sequelize");
 
 // Solo crea productos del seeds
-// async function createProductsSeeds() {
-//   try {
-    /* const products = productsSeed;
+async function createProductsSeeds() {
+  try {
+     const products = productsSeed;
     products.forEach(
       async ({ name, description, images, price, stock, categories }) => {
         const [product] = await Product.findOrCreate({
@@ -35,4 +35,4 @@ const e = require("express");
   
 module.exports = {
   createProductsSeeds,
-}*/
+}
