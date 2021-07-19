@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import loader from "../../defaultImgs/loader.gif";
+import { resetProductDetail } from "../../redux/actions/productsActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {

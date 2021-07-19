@@ -47,6 +47,7 @@ async function getOrdersByUserId(req, res, _next) {
     }
     res.json(response); 
   } catch (error) {
+    console.log(error);
   }
 }
 

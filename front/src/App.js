@@ -11,6 +11,9 @@ import Home from "./components/Home/Home";
 import SignUp from './components/SignUp_SignIn/SignUp';
 import SignIn from "./components/SignUp_SignIn/SignIn";
 import Cart from "./components/Cart/Cart";
+import Sedes from './components/Dashboard/Sedes';
+import Activities from './components/Dashboard/Activities';
+import OurPlans from './components/Dashboard/OurPlans';
 
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
 export const url = process.env.REACT_APP_API || "http://localhost:3001";
@@ -29,6 +32,9 @@ function App() {
         <Route path='/registrarse' component={SignUp}/>
         <Route path='/iniciarSesion' component={SignIn}/>
         <Route path='/cart' component={Cart}/>  
+        <Route path='/sedes' component={Sedes}/>
+        <Route path='/actividades' component={Activities}/>
+        <Route path='/planes' component={OurPlans}/>
       </ThemeProvider>
     </React.Fragment>
   );
