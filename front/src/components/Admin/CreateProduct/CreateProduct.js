@@ -61,7 +61,7 @@ export default function CreateProduct({ edit }) {
         ...edit
       })
     }
-  }, [dispatch, edit, categories]);
+  }, [dispatch, edit]);
 
   const handleChangeCategory = (e) => {
 
