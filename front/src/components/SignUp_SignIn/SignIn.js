@@ -39,12 +39,13 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const history = useHistory()
-  
+  const user = useSelector(store => store.user)
+
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [msgError, setMsgError] = useState(null)
   const [log, setLog] = useState(null)
-  const [user, setUser] = useState(null)
+
 
   const loggedIn = useSelector(store => store.user.loggedIn)
   const fetching = useSelector(store => store.user.fetching)
@@ -66,16 +67,6 @@ export default function SignIn() {
       })
       dispatch(doUserLogin())
     })
-    .then( resp => history.push('/'), Swal.fire(
-      {
-        text:'Bienvenido',
-        icon: 'success', 
-        width:'20rem', 
-        timer: '3000', 
-        showConfirmButton: false 
-      }
-      
-    ))
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
         setMsgError('password incorrecta')
@@ -95,7 +86,18 @@ let googleLogIn = () => {
   dispatch(doGoogleLogIn())
 }
 
-
+if(loggedIn) {
+  history.push("/")
+      Swal.fire(
+        {
+          text:'Bienvenido',
+          icon: 'success', 
+          width:'20rem', 
+          timer: '3000', 
+          showConfirmButton: false 
+        }
+      )
+}
 
   
 
