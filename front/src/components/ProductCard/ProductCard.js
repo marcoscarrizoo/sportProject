@@ -71,7 +71,10 @@ export default function ProductCard({
   // { name, price, image, categories } props
   const classes = useStyles();
 
+  // const { user } = JSON.parse(window.localStorage.getItem("storage"))
+
   const detail = useSelector((state) => state.products.productDetail);
+  const userId = useSelector(store => store.user.uid);
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -85,7 +88,8 @@ export default function ProductCard({
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart(id, 1, price));
+
+    dispatch(addToCart(id, "add", price, userId));
     Swal.fire(
       {
         text:'se agrego al carrito',

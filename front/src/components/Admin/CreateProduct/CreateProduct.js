@@ -55,6 +55,7 @@ export default function CreateProduct({ edit }) {
 
   useEffect(() => {
     
+    dispatch(getCategories())
 
     if (edit) {
       setProduct({
