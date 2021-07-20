@@ -5,6 +5,7 @@ const { User, Product, Order } = require("../../db");
 //Si no la encuentra devuelve que no se encuentra la order con el ID.
 async function deleteOrderById(req, res, next) {
   try {
+    //Debe es cambiar el estado
     const { id } = req.params;
     const order = await Order.findByPk(id);
     await order.destroy();
