@@ -1,3 +1,11 @@
+/*****************************************************************
+
+No se ha comenzado
+
+
+****************************************************************/
+
+
 const { User, Product, Order } = require("../../db");
 
 //Valida si orderState es opcion valida de la DB.
@@ -24,13 +32,13 @@ const shippingStateValidate = (shippingState) => {
 
 
 //Ruta localhost:3001/order/addOrder
-//Recive order state, productId, quantity, userId.
+//Recibe order state, productId, quantity, userId.
 //Retorna un orderId
 //Si no la encuentra devuelve, 'Order is not create ERROR'
 
 
-async function createOrder(req, res, _next) {
-  console.log('Entra en createOrder');
+async function createOrders(req, res, _next) {
+  console.log('Entra en createOrders');
   try {
     const {
       orderState,
@@ -73,5 +81,5 @@ async function createOrder(req, res, _next) {
 // paymentState: type: DataTypes.STRING
 
 module.exports = {
-  createOrder,
+  createOrders,
 };

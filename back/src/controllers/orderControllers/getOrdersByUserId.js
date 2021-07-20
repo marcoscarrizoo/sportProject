@@ -1,7 +1,7 @@
 const { User, Product, Order } = require("../../db");
 
 //Ruta localhost:3001/order/:userId
-//Recive un userId por params y devuelve ordenes por usurio
+//Recibe un userId por params y devuelve ordenes por usurio
 //
 //Si no lo consigue devuelve: user id not found;
 async function getOrdersByUserId(req, res, _next) {
@@ -56,7 +56,7 @@ async function getOrdersByUserId(req, res, _next) {
 
 module.exports = {
   getOrdersByUserId,
-  /*   createOrder,
+  /*   createOrders,
   deleteOrder,
   updateOrder,
   deleteUserOrders

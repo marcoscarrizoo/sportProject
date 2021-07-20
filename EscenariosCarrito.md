@@ -37,12 +37,12 @@ const body = {
         quantity
     }
 ```
-## 4-Cuando un usuario se loguea y tiene carrito
+## 4-Cuando un usuario se loguea y tiene carrito (Falta verificar si es de tipo cart)
 
 La ruta es put porque si tiene orden previa se va a fusionar, si no, se crea. (Creo que debe funcionar)
 ```js
 //Ruta
-//PUT /no se todavía la ruta
+//PUT /localhost:3001/order/addOrder
 //Back recibe body:
 const body = {
         userId,
@@ -59,6 +59,44 @@ const body = {
         ]
     }
 ```
+## Consulta Ruta prueba
+```js
+//PUT /localhost:3001/order/addOrder
+//Consulta 1
+{
+        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+        "products":[
+            {
+                "productId":1,
+                "quantity":3
+            },
+            {
+                "productId":2,
+                "quantity":6
+            }
+        ]
+    }
+//Consulta 2
+{
+    "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+        "products": [
+            {
+                "productId": 3,
+                "quantity": 13
+            },
+            {
+                "productId": 2,
+                "quantity": 6
+            },
+            {
+                "productId": 1,
+                "quantity": 6
+            }
+        ]
+}
+
+```
+
 ## Json que devuelve la ruta getOrdersByUserId
 Modelo
 ```js
