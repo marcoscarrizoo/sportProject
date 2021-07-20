@@ -15,7 +15,7 @@ async function getAllOrders(req, res, _next) {
 
 module.exports = {
   getAllOrders,
-  /*   createOrder,
+  /*   createOrders,
   deleteOrder,
   updateOrder,
   deleteUserOrders

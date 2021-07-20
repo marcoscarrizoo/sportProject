@@ -1,7 +1,7 @@
 const { User, Product, Order } = require("../../db");
 
 //Ruta localhost:3001/order/delete/:id
-//Recive un id por params y devuelve mensaje del ID de la order eliminada.
+//Recibe un id por params y devuelve mensaje del ID de la order eliminada.
 //Si no la encuentra devuelve que no se encuentra la order con el ID.
 async function deleteOrderById(req, res, next) {
   try {
@@ -18,7 +18,7 @@ async function deleteOrderById(req, res, next) {
 
 module.exports = {
   deleteOrderById,
-  /*   createOrder,
+  /*   createOrders,
   deleteOrder,
   updateOrder,
   deleteUserOrders

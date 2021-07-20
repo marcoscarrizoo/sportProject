@@ -12,7 +12,7 @@ const router = Router();
 //Si no, crea la orden.
 router.put("/addOrder", createOrders);
 router.get("/", getAllOrders);
-router.get("/update/:id", updateOrderById);
+router.get("/update:id", updateOrderById);
 router.get("/delete/:id", deleteOrderById);
 router.get("/:userId", getOrdersByUserId);
 
