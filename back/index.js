@@ -35,7 +35,7 @@ conn.sync({ force: false }).then(() => {
 
 
     //await createProductsSeeds();
-    //await createUsersSeeds();
+   // await createUsersSeeds();
 
   });
 });

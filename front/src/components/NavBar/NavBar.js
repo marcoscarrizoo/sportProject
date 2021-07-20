@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import Search from "./Search";
 import { getProducts } from "../../redux/actions/productsActions";
 import { doLogOut } from "../../redux/actions/userActions";
 /* styles */
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Swal from "sweetalert2";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -104,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const user = useSelector((store) => store.user.loggedIn);
+  const userName = useSelector((store) => store.user.email);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -146,6 +148,7 @@ export default function PrimarySearchAppBar() {
 
   const handleLogOut = () => {
     dispatch(doLogOut());
+    
     Swal.fire({
       text: "Esperamos verte pronto",
       icon: "success",
@@ -153,6 +156,7 @@ export default function PrimarySearchAppBar() {
       timer: "3000",
       showConfirmButton: false,
     });
+    
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -174,6 +178,7 @@ export default function PrimarySearchAppBar() {
         </div>
       ) : (
         <div>
+          <MenuItem onClick={handleAdmin}><AccountCircleIcon/>{userName}</MenuItem>
           <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
           <MenuItem onClick={handleLogOut}>Cerrar Sesion</MenuItem>
         </div>
@@ -276,7 +281,7 @@ export default function PrimarySearchAppBar() {
                 </Badge>
               </IconButton>
             </Link>
-
+              {user? 
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -285,8 +290,18 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
-            </IconButton>
+              <AccountCircle color='secondary'/>Bienvenido
+            </IconButton> :
+ <IconButton
+ edge="end"
+ aria-label="account of current user"
+ aria-controls={menuId}
+ aria-haspopup="true"
+ onClick={handleProfileMenuOpen}
+ color="inherit"
+>
+ <AccountCircle/>
+</IconButton> }
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
