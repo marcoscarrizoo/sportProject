@@ -83,7 +83,7 @@ export const changeProductQuantity =
     localStorage.setItem("cart", JSON.stringify(cart));
 
     // RUTA DE ACTUALIZACION AL BACK                                                  ---------
-    if(userId) await axios.put( url + "/update/" + userId, {userId, productId: id})
+    if(userId) await axios.put( url + "/update/" + userId, {userId, productId: id, quantity})
   };
 
 export const loadCart = () => {
