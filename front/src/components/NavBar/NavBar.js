@@ -106,6 +106,8 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const user = useSelector((store) => store.user.loggedIn);
   const userName = useSelector((store) => store.user.email);
+  const products = useSelector(store => store.cart)
+  const carrito = products.items.length
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -276,7 +278,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             <Link className={classes.text} to="/cart">
               <IconButton color="inherit">
-                <Badge color="secondary">
+                <Badge badgeContent={carrito} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
