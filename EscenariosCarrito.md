@@ -1,3 +1,67 @@
+# Escenarios
+
+## 1-Eliminar producto carrito
+
+```js
+//Ruta
+//DELETE /no se todavía la ruta
+//Back recibe body:
+const body = {
+    productId,
+    userId
+}
+```
+
+## 2-Cambiar stock de products, cuando orderState === 'processing'
+
+```js
+//Ruta
+//PUT /no se todavía la ruta
+//Back recibe body:
+const body = {
+        orderState === 'processing'
+        userId,
+        productsId:[]
+    }
+```
+## 3-Cambiar quantity de un producto del cart
+
+```js
+//Ruta
+//PUT /no se todavía la ruta
+//Back recibe body:
+const body = {
+        userId,
+        productId,
+//Por defecto quantity agrega 1, si no, establece el quantity en el valor que se pase por body. Es decir, si no se pasa valor se iguala a uno mas.
+        quantity
+    }
+```
+## 4-Cuando un usuario se loguea y tiene carrito
+
+La ruta es put porque si tiene orden previa se va a fusionar, si no, se crea. (Creo que debe funcionar)
+```js
+//Ruta
+//PUT /no se todavía la ruta
+//Back recibe body:
+const body = {
+        userId,
+//array de productos, con id y cantidad
+        products:[
+            {
+                productId,
+                quantity
+            },
+            {
+                productId,
+                quantity
+            },
+        ]
+    }
+```
+## Json que devuelve la ruta getOrdersByUserId
+Modelo
+```js
 [
   {
     "id": "7155b2bd-ece6-438a-b665-c76033564aac",
@@ -111,3 +175,4 @@
     }
   }
 ]
+```

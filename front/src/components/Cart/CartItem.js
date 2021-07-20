@@ -53,6 +53,7 @@ export default function (props) {
   const dispatch = useDispatch();
   const classes = useStyle();
   const history = useHistory();
+  const userId = useSelector(store => store.user.uid);  
 
   //console.log(`${url}/product/` + id);
 
@@ -82,7 +83,7 @@ export default function (props) {
 
   const handleChangeQuantity = (e) => {
     const { value } = e.target;
-    dispatch(changeProductQuantity(id, Number(value)));
+    dispatch(changeProductQuantity(id, Number(value)), userId);
     dispatch(updateTotal());
   };
 
@@ -105,7 +106,7 @@ export default function (props) {
 
           <input
             type="number"
-            defaultValue={Qty}
+            defaultValue={Qty > detail.stock ? detail.stock : Qty}
             min={1}
             max={detail.stock}
             onChange={handleChangeQuantity}
