@@ -55,13 +55,14 @@ export default function CreateProduct({ edit }) {
 
   useEffect(() => {
     
+    dispatch(getCategories())
 
     if (edit) {
       setProduct({
         ...edit
       })
     }
-  }, [dispatch, edit, categories]);
+  }, [dispatch, edit]);
 
   const handleChangeCategory = (e) => {
 

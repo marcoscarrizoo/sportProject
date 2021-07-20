@@ -1,6 +1,7 @@
 import axios from "axios";
 import { newUser } from "./userActions";
-//import { url } from "../../App";
+
+import { url } from "../../App";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
@@ -9,7 +10,7 @@ export const CHANGE_PRODUCT_QTY = "CHANGE_PRODUCT_QTY";
 export const LOAD_CART = "LOAD_CART";
 export const UPDATE_TOTAL = "UPDATE_TOTAL";
 
-export const addToCart = (id, quantity, price) => async (dispatch) => {
+export const addToCart = (id, quantity, price, userId) => async (dispatch) => {
   let product = {
     id,
     quantity,
@@ -20,15 +21,15 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
 
     if (!cart || !cart.length) {
-      localStorage.setItem("cart", JSON.stringify([product]));
+      localStorage.setItem("cart", JSON.stringify([{...product, quantity: 1}]));
     } else {
       let ids = cart.map((e) => e.id);
       if (!ids.includes(id)) {
-        cart.push(product);
+        cart.push({...product, quantity: 1});
       } else {
         for (var item of cart) {
           if (item.id === id) {
-            item.quantity = quantity;
+            item.quantity = quantity === "add" ? ++item.quantity : quantity;
             item.price = price;
           }
         }
@@ -39,6 +40,10 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
       type: ADD_TO_CART,
       payload: JSON.parse(localStorage.getItem("cart")),
     });
+
+    // RUTA DE ACTUALIZACION AL BACK                                                --------
+    if(userId) await axios.put( url + "/update/" + userId, {userId, productId: id})           
+
     //localStorage.setItem("cart", JSON.stringify(cart));
     //sweetAlert("Agregado", "success", "OK", 1000);
   } catch (e) {
@@ -67,7 +72,7 @@ export const cartReset = () => (dispatch) => {
 };
 
 export const changeProductQuantity =
-  (id, quantity) => async (dispatch, getState) => {
+  (id, quantity, userId) => async (dispatch, getState) => {
     let cart = getState().cart.items;
     for (var item of cart) {
       if (item.id === id) {
@@ -76,6 +81,9 @@ export const changeProductQuantity =
     }
     dispatch({ type: CHANGE_PRODUCT_QTY, payload: cart });
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    // RUTA DE ACTUALIZACION AL BACK                                                  ---------
+    if(userId) await axios.put( url + "/update/" + userId, {userId, productId: id, quantity})
   };
 
 export const loadCart = () => {
