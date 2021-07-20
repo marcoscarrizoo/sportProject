@@ -106,7 +106,7 @@ export default function (props) {
 
           <input
             type="number"
-            defaultValue={Qty}
+            defaultValue={Qty > detail.stock ? detail.stock : Qty}
             min={1}
             max={detail.stock}
             onChange={handleChangeQuantity}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { addToCart } from "../../redux/actions/cartActions";
 import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
@@ -76,6 +76,7 @@ export default function ProductCard({
   const detail = useSelector((state) => state.products.productDetail);
   const userId = useSelector(store => store.user.uid);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -88,17 +89,35 @@ export default function ProductCard({
   };
 
   const handleAddToCart = () => {
+    let cart = JSON.parse(window.localStorage.getItem("cart"))
 
-    dispatch(addToCart(id, "add", price, userId));
-    Swal.fire(
-      {
-        text:'se agrego al carrito',
-        icon: 'success', 
-        width:'20rem', 
-        timer: '3000', 
-        showConfirmButton: false 
-      }
-    )
+    let product = cart?.find( e => e.id === id)
+
+    if(cart && product?.quantity >= stock) {
+
+      Swal.fire(
+        {
+          text: 'Ups! Alcanzo el maximo del stock',
+          icon: 'warning', 
+          width:'20rem', 
+          timer: '3000', 
+          showConfirmButton: false 
+        }
+      )
+      history.push("/cart")
+    }
+    else {
+      dispatch(addToCart(id, "add", price, userId));
+      Swal.fire(
+        {
+          text:'Se agrego al carrito',
+          icon: 'success', 
+          width:'20rem', 
+          timer: '3000', 
+          showConfirmButton: false 
+        }
+      )
+    }
   };
 
   const open = Boolean(anchorEl);
