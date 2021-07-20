@@ -47,6 +47,7 @@ async function createOrder(req, res, _next) {
     console.log('order', order.id);
     if (!shippingStateValidate(shippingState)) res.send('Estado shipping debe ser: initial, created, processing, cancelled o completed');
     const product = await Product.findByPk(productId);
+    //hacer un array de productos
     console.log('product', product.name);
     const user = await User.findByPk(userId);
     console.log('user', user.name);
