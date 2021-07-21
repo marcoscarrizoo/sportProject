@@ -7,7 +7,7 @@ async function getAllOrders(req, res, _next) {
       include: [Product, User]
     });
     
-    res.json(orders);
+    return res.json(orders);
   } catch (error) {
     console.log(error);
   }

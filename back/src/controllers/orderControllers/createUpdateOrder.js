@@ -1,6 +1,6 @@
 const { User, Product, Order, Order_Product } = require("../../db");
 
-/*Ruta PUT localhost:3001/order/addOrder
+/*Ruta PUT localhost:3001/order/create/update
 -Retorna un orderId
 -Si no la encuentra devuelve, 'Order is not create ERROR'
 -Recibo un body:
@@ -21,29 +21,31 @@ body = {
 }
 */
 
-async function createOrders(req, res, _next) {
-  console.log('Entra en createOrders');
+async function createUpdateOrder(req, res, _next) {
   try {
     const {
       products,
-      userId,
-      orderState,
-      shippingState,
-      shippingCost,
-      paymentState,
-      // quantity,
+      userId
     } = req.body;
-    if (!orderStateValidate(orderState)) res.send('Estado orden debe ser: cart, processing, cancelled o completed');
-    //Verificar si tiene un orderState cart
-    // const orderExists = await Order.findOne({ userId });
-    const orderExists = await Order.findOne({ userId }, { raw: true });
+    //Se busca la orden por userId y que sea orderState 'cart'
+    const orderExists = await Order.findOne({ where:{
+      userId,
+      orderState: 'cart',
+    }
+   });
     //Si la order no existe, se crea y se retorna el orderId
     if (!orderExists) {
+      //Crea la orden
       const order = await Order.create({ userId });
+      //Busca el usuario por userId
       const user = await User.findByPk(userId);
+      //Asocia user a la order
       user.addOrder(order);
+      //Recorre los productos que vienen por body
       products.forEach(async product => {
+        //Busca el producto por productId
         const productData = await Product.findByPk(product.productId);
+        //Asocia product a la order, con la cantidad y el precio (de la DB);
         order.addProduct(productData, {
           through: {
             quantity: product.quantity,
@@ -51,17 +53,18 @@ async function createOrders(req, res, _next) {
           }
         });
       }); 
-      res.json(`Order creada ID:${order.id}`);
+      return res.json(`Orden creada ID:${order.id}`);
       //Si la orden existe se fusiona
     } else {
+      //Array de productos actuales de la orden
       const order_Products = await Order_Product.findAll({ where: { orderId: orderExists.id } });
       //Por cada product que llega
-      // console.log('order_Products.id:', order_Products[0]);
       products.forEach(async product => {
+        //Buscamos el producto en la DB
         const productData = await Product.findByPk(product.productId);
-        // console.log(`product.productId: ${product.productId}`);
+        // console.log('productData', productData);
         const productExists = order_Products.find(op => op.productId === product.productId);
-        //Si no lo encuentra lo agrega, si lo encuentra lo actualiza
+        //Si no lo encuentra lo agrega a la orden
         if (!productExists) {
           orderExists.addProduct(productData, {
             through: {
@@ -77,39 +80,16 @@ async function createOrders(req, res, _next) {
             price: productData.price
           });
         }
-      });
+      }); 
     }
-    res.send(`Actualizo la orden ID: ${orderExists.id}`);
+    return res.json(`Orden actualizada ID:${orderExists.id}`);
   } catch (err) {
     console.log(err);
-    res.send('Order is not created ERROR');
+    return res.send('Order is not created ERROR');
   }
 }
      
    
 module.exports = {
-  createOrders,
+  createUpdateOrder,
 };
-//Valida si orderState es opcion valida de la DB.
-//Retorna true o false
-const orderStateValidate = (orderState) => {
-  if (orderState === 'cart') return true;
-  if (orderState === 'processing') return true;
-  if (orderState === 'cancelled') return true;
-  if (orderState === 'completed') return true;
-  if (orderState === undefined) return true;
-
-  return false;
-}
-//Valida si shippingState es opcion valida de la DB.
-//Retorna true o false
-const shippingStateValidate = (shippingState) => {
-  if (shippingState === 'not initialized') return true;
-  if (shippingState === 'initial') return true;
-  if (shippingState === 'created') return true;
-  if (shippingState === 'processing') return true;
-  if (shippingState === 'cancelled') return true;
-  if (shippingState === 'completed') return true;
-  if (shippingState === undefined) return true;
-  return false;
-}

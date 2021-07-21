@@ -5,10 +5,10 @@ async function deleteProduct(req, res, next) {
     const product = await Product.findByPk(id);
     await product.destroy();
     console.log(`Deleted ${product.name} ID:${id}`)
-    res.send(`Deleted ${product.name} ID:${id}`)
+    return res.send(`Deleted ${product.name} ID:${id}`)
   } catch (error) {
-    res.send('No se enconctro el producto');
     console.error(error)
+    return res.send('No se enconctro el producto');
   }
 }
 

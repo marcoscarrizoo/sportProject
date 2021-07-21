@@ -26,10 +26,10 @@ async function createProductsSeeds() {
         });
       }
     )
-    console.log("DB precargada con products seeds");
+    return console.log("DB precargada con products seeds");
   } catch (e) {
     console.log(e)
-    console.log('Error en create users seeds');
+    return console.log('Error en create users seeds');
   }
 }
   
