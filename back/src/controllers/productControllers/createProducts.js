@@ -6,7 +6,7 @@ const { products: productsSeed } = require("../../../seeds");
 async function createProducts(req, res, next) {
   try {
     if (!req.body.length) {
-      res.send('Producto debe ser un array de al menos 1 elemento.');
+      return res.send('Producto debe ser un array de al menos 1 elemento.');
     } else {
       const products = req.body;
       console.log(products)
@@ -32,16 +32,16 @@ async function createProducts(req, res, next) {
       );
       if (products.length > 1) {
         const productsNames = products.map((e) => e.name);
-        res.json(`los productos ${productsNames} han sido creados exitosamente.`);
+        return res.json(`los productos ${productsNames} han sido creados exitosamente.`);
       }
       if (products.length === 1) {
         const productName = products.map((e) => e.name);
-        res.json(`El producto ${productName} ha sido creado exitosamente.`);
+        return res.json(`El producto ${productName} ha sido creado exitosamente.`);
       }
     }
   } catch (error) {
     console.error(error);
-    res.send('Product is not create ERROR');
+    return res.send('Product is not create ERROR');
   }
 }
 
