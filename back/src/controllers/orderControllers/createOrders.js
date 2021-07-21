@@ -33,6 +33,9 @@ async function createOrders(req, res, _next) {
       paymentState,
       // quantity,
     } = req.body;
+
+    console.log("pppppppppp", products)
+    console.log("uuuuuuuuuu", userId)
     if (!orderStateValidate(orderState)) res.send('Estado orden debe ser: cart, processing, cancelled o completed');
     //Verificar si tiene un orderState cart
     // const orderExists = await Order.findOne({ userId });
@@ -51,7 +54,7 @@ async function createOrders(req, res, _next) {
           }
         });
       }); 
-      res.json(`Order creada ID:${order.id}`);
+      return res.json(`Order creada ID:${order.id}`);
       //Si la orden existe se fusiona
     } else {
       const order_Products = await Order_Product.findAll({ where: { orderId: orderExists.id } });
@@ -79,7 +82,7 @@ async function createOrders(req, res, _next) {
         }
       });
     }
-    res.send(`Actualizo la orden ID: ${orderExists.id}`);
+    return res.send(`Actualizo la orden ID: ${orderExists.id}`);
   } catch (err) {
     console.log(err);
     res.send('Order is not created ERROR');

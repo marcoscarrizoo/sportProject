@@ -75,6 +75,7 @@ export default function ProductCard({
 
   const detail = useSelector((state) => state.products.productDetail);
   const userId = useSelector(store => store.user.uid);
+  const cart = useSelector(store => store.cart.items)
   const dispatch = useDispatch();
   const history = useHistory()
 
@@ -89,7 +90,7 @@ export default function ProductCard({
   };
 
   const handleAddToCart = () => {
-    let cart = JSON.parse(window.localStorage.getItem("cart"))
+    // let cart = JSON.parse(window.localStorage.getItem("cart"))
 
     let product = cart?.find( e => e.id === id)
 

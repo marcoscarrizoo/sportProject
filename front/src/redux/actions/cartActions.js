@@ -9,6 +9,7 @@ export const CART_RESET = "CART_RESET";
 export const CHANGE_PRODUCT_QTY = "CHANGE_PRODUCT_QTY";
 export const LOAD_CART = "LOAD_CART";
 export const UPDATE_TOTAL = "UPDATE_TOTAL";
+export const FUSION_CART = "FUSION_CART";
 
 export const addToCart = (id, quantity, price, userId) => async (dispatch) => {
   let product = {
@@ -16,33 +17,45 @@ export const addToCart = (id, quantity, price, userId) => async (dispatch) => {
     quantity,
     price,
   };
-  //console.log(product);
+
+  // userId = "d1687b07-058c-414a-bb5a-77a8d897be57";
+  // // RUTA DE ACTUALIZACION AL BACK                                                --------
+  // let info = {userId, productId: id, cantidad final}
+  // if(userId) await axios.put( url + "/order/addOrder", info)     
+
   try {
     let cart = JSON.parse(localStorage.getItem("cart"));
 
     if (!cart || !cart.length) {
-      localStorage.setItem("cart", JSON.stringify([{...product, quantity: 1}]));
+      quantity = 1;
+      localStorage.setItem("cart", JSON.stringify([{ ...product, quantity }]));
     } else {
       let ids = cart.map((e) => e.id);
       if (!ids.includes(id)) {
-        cart.push({...product, quantity: 1});
+        quantity = 1;
+        cart.push({ ...product, quantity });
       } else {
         for (var item of cart) {
           if (item.id === id) {
             item.quantity = quantity === "add" ? ++item.quantity : quantity;
             item.price = price;
+            quantity = item.quantity;
           }
         }
       }
+      let info = { userId, products:[{productId: id, quantity}]};
+      if (userId) await axios.put(url + "/order/addOrder", info);
+
       localStorage.setItem("cart", JSON.stringify(cart));
     }
+
+
+
     dispatch({
       type: ADD_TO_CART,
       payload: JSON.parse(localStorage.getItem("cart")),
     });
 
-    // RUTA DE ACTUALIZACION AL BACK                                                --------
-    if(userId) await axios.put( url + "/update/" + userId, {userId, productId: id})           
 
     //localStorage.setItem("cart", JSON.stringify(cart));
     //sweetAlert("Agregado", "success", "OK", 1000);
@@ -83,7 +96,7 @@ export const changeProductQuantity =
     localStorage.setItem("cart", JSON.stringify(cart));
 
     // RUTA DE ACTUALIZACION AL BACK                                                  ---------
-    if(userId) await axios.put( url + "/update/" + userId, {userId, productId: id, quantity})
+    if (userId) await axios.put(url + "/order/addOrder", { userId, products: [{ productId: id, quantity }] })
   };
 
 export const loadCart = () => {
