@@ -149,7 +149,7 @@ const users = [
 const orders = [
     //Primera order (Etapa 1)
     {
-        "orderState": "cart",
+        "orderState": "CART",
         "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
         "productId": 1,
         "quantity": 1

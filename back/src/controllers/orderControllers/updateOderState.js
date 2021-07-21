@@ -1,26 +1,35 @@
 const { User, Product, Order } = require("../../db");
 
-//Ruta localhost:3001/order/update/:id
+//Ruta localhost:3001/update/orderState
 //Recibe un id por params y devuelve una order, actualizada.
+/*
+Body = {
+    userId,
+    orderState
+}
+*/
 async function updateOderState(req, res, next) {
   try {
-    const { id } = req.params;
-    const { userId, productId, quantity } = req.body;
-    const order = await Order.findByPk(id);
-    const product = await Product.findByPk(productId);
-    const newQuantity = orderProduct.quantity + quantity;
-    const newPrice = product.price * newQuantity;
-    const newTotal = newPrice + order.total;
-    const newOrder = await order.update({
+    const {
       userId,
-      productId,
-      quantity,
-      price: newPrice,
-      total: newTotal,
+      orderState
+    } = req.body;
+    const order = await Order.findOne({
+      where: {
+        userId
+      }
     });
-    return res.json(newOrder);
+    if (order) {
+      order.orderState = orderState;
+      await order.save();
+      return res.json(order);
+    }else{
+      return res.status(404).json({
+        message: "No se encontró la orden"
+      });
+    }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 }
 

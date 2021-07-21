@@ -14,10 +14,10 @@ const router = Router();
 //Si no, crea la orden.
 router.get("/", getAllOrders);
 router.get("/update/:id", updateOrderById);
-router.get("/delete/:id", deleteOrderByIdUser);
 router.get("/:userId", getOrdersByUserId);
 router.delete("/delete/product", deleteProductById);
 router.put("/create/update", createUpdateOrder);
-router.put("/update/orderstate", updateOderState);
+router.put("/update/orderState", updateOderState);
+router.delete("/delete/:userId", deleteOrderByIdUser);
 
 module.exports = router;

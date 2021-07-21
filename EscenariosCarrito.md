@@ -1,5 +1,5 @@
 # Escenarios
-## 1-Crear/Actualizar Carrito
+## 1-Crear/Actualizar Carrito quantity products
 ### Ruta funcionando, faltan detalles verificar si la orden es de tipo carrito
 ```js
 //Ruta
@@ -103,35 +103,55 @@ const body = {
 'localhost:3001/order/d1687b07-058c-414a-bb5a-77a8d897be57'
 ```
 
-## 4-Cambiar estado del carrito por userId
+## 4-Cambiar estado de la orden por userId
 ### Esta es para el caso de que el estado de cambie a lualquiera de los siguientes:
 - PENDING 
 - PROCESSING
 - COMPLETED
 - CANCELED
+- CART
 
 ```js
-//DELETE localhost:3001/order/delete/product
-//Devuelve `Producto ID: ${productId} eliminado`
+//DELETE localhost:3001/update/orderState
+//Devuelve `Estado de la orden ahora es orderState`
 //Back recibe body:
 const body = {
   userId,
-  productId
+  orderState: "PENDING" || "PROCESSING" || "COMPLETED" || "CANCELED" || "CART"
 }
+```
+## Consulta Ruta prueba - Cambio de estado de la orden por userId
+
+### Recordar que tiene que existir la orden para poder eliminar productos
+```js
+//DELETE localhost:3001/order/addOrder
+//Consulta 1
+{
+        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+        "orderState":"PROCESSING"
+    }
+```
+# Lo que si gue no esta terminado.
+## 3-Cambiar stock de products, cuando orderState === 'processing'
+
+```js
+//Ruta
+//PUT /no se todavía la ruta
+//Back recibe body:
+const body = {
+        orderState === 'processing'
+        userId,
+        productsId:[]
+    }
 ```
 
 ## 5-Vaciar el carrito de la orden por userId
-### 
+### Elimina la orderState CART que este en el back de ese usuario
 ```js
-//DELETE localhost:3001/order/delete/product
-//Devuelve `Producto ID: ${productId} eliminado`
-//Back recibe body:
-const body = {
-  userId,
-  productId
-}
+//DELETE localhost:3001/order/delete/:userId
+//Devuelve `Orden eliminada ID: ${orderId} eliminada`
+//Back recibe por params un userId
 ```
-
 ## Consulta Ruta prueba - Eliminar un solo producto del carrito por su ID
 
 ### Recordar que tiene que existir la orden para poder eliminar productos
@@ -170,7 +190,7 @@ Modelo
 [
   {
     "id": "7155b2bd-ece6-438a-b665-c76033564aac",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",
@@ -207,7 +227,7 @@ Modelo
   },
   {
     "id": "84133c87-bf34-49f2-97d7-32c682e7d341",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",
@@ -244,7 +264,7 @@ Modelo
   },
   {
     "id": "4dc04d29-1b06-4358-a236-d7db0649be67",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",

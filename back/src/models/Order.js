@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
       },
       orderState: {
-        type: DataTypes.ENUM("cart", "pending","processing", "canceled", "completed"),
-        defaultValue: "cart",
+        type: DataTypes.ENUM("CART", "PENDING","PROCESSING", "CANCELED", "COMPLETED"),
+        defaultValue: "CART",
         allowNull: false,
       },
       shippingState: {
