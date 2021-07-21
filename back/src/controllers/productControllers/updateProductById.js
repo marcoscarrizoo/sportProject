@@ -30,9 +30,9 @@ async function updateProductById(req, res, next) {
             await product.addCategory(category);
         });
         // console.log(`Producto ${name} actualizado ${id}`)
-        res.send(`Producto ${name} actualizado ${id}`);
+        return res.send(`Producto ${name} actualizado ${id}`);
     } catch (error) {
-        res.send(`Producto no actualizado`);
+        return res.send(`Producto no actualizado`);
         next(error);
     }
 }

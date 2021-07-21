@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
       },
       orderState: {
-        type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
+        type: DataTypes.ENUM("cart", "pending","processing", "canceled", "completed"),
         defaultValue: "cart",
         allowNull: false,
       },
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
           "initial", //appears as soon as payment is verified
           "created",
           "processing",
-          "cancelled",
+          "canceled",
           "completed"
         ),
         defaultValue: "not initialized"
