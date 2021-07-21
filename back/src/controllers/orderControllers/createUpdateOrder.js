@@ -27,10 +27,10 @@ async function createUpdateOrder(req, res, _next) {
       products,
       userId
     } = req.body;
-    //Se busca la orden por userId y que sea orderState 'cart'
+    //Se busca la orden por userId y que sea orderState 'CART'
     const orderExists = await Order.findOne({ where:{
       userId,
-      orderState: 'cart',
+      orderState: 'CART',
     }
    });
     //Si la order no existe, se crea y se retorna el orderId
