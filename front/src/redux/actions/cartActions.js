@@ -71,6 +71,7 @@ export const cartReset = () => (dispatch) => {
   localStorage.setItem("cart", "[]");
 };
 
+
 export const changeProductQuantity =
   (id, quantity, userId) => async (dispatch, getState) => {
     let cart = getState().cart.items;
@@ -106,6 +107,7 @@ export const checkout = () => async (dispatch, getState) => {
 };
 
 export const updateTotal = () => async (dispatch) => {
+  
   var cart = JSON.parse(localStorage.getItem("cart"));
   var total = 0;
   if (cart?.length) {
