@@ -1,76 +1,75 @@
-const { User, Product, Order } = require("../../db");
+const { User, Product, Order, Order_Product } = require("../../db");
 
-//Valida si orderState es opcion valida de la DB.
-//Retorna true o false
-const orderStateValidate = (orderState) => {
-  if (orderState === 'cart') return true;
-  if (orderState === 'processing') return true;
-  if (orderState === 'cancelled') return true;
-  if (orderState === 'completed') return true;
-  return false;
+/*Ruta POST localhost:3001/orders/create
+-Retorna un orderId
+-Si no la encuentra devuelve, 'Order is not create ERROR' 404
+-Recibo un body:
+
+body = {
+  userId,
+//array de uno o varios productos, con id y cantidad
+  products:[
+      {
+          productId,
+          quantity
+      },
+      {
+          productId,
+          quantity
+      },
+  ]
 }
-//Valida si shippingState es opcion valida de la DB.
-//Retorna true o false
-const shippingStateValidate = (shippingState) => {
-  if (shippingState === 'not initialized') return true;
-  if (shippingState === 'initial') return true;
-  if (shippingState === 'created') return true;
-  if (shippingState === 'processing') return true;
-  if (shippingState === 'cancelled') return true;
-  if (shippingState === 'completed') return true;
-  if (shippingState === undefined) return true;
-  return false;
-}
-
-
-//Ruta localhost:3001/order/addOrder
-//Recive order state, productId, quantity, userId.
-//Retorna un orderId
-//Si no la encuentra devuelve, 'Order is not create ERROR'
-
-
+*/
 async function createOrder(req, res, _next) {
-  console.log('Entra en createOrder');
   try {
     const {
-      orderState,
-      shippingState,
-      shippingLocation,
-      shippingCost,
-      paymentState,
-      productId,
-      quantity,
-      userId,//Verificar como viene del front
+      products,
+      userId
     } = req.body;
-    if (!orderStateValidate(orderState)) res.send('Estado orden debe ser: cart, processing, cancelled o completed');
-    const order = await Order.create({ orderState, userId });
-    console.log('order', order.id);
-    if (!shippingStateValidate(shippingState)) res.send('Estado shipping debe ser: initial, created, processing, cancelled o completed');
-    const product = await Product.findByPk(productId);
-    //hacer un array de productos
-    console.log('product', product.name);
-    const user = await User.findByPk(userId);
-    console.log('user', user.name);
-    product.addOrder(order, {
-      through: {
-        price: product.price,
-        quantity: quantity
+    //Si no hay productos cargados, devuelve error
+    if (products.length == 0) {
+      return res.status(400).json({
+        message: "ERROR debe cargar al menos un producto"
+      });
+    }
+    //Se busca la orden por userId y que sea orderState 'CART'
+    const order = await Order.findOne({
+      where: {
+        userId,
+        orderState: 'CART',
       }
     });
-    user.addOrder(order);
-    res.json(order.id);
-  } catch (error) {
-    console.error(error);
-    res.send('Order is not create ERROR');
+    //Si la order no existe, se crea y se retorna el orderId
+    if (!order) {
+      //Crea la orden
+      const order = await Order.create({ userId });
+      //Busca el usuario por userId
+      const user = await User.findByPk(userId);
+      //Asocia user a la order
+      user.addOrder(order);
+      //Recorre los productos que vienen por body
+      products.forEach(async product => {
+        //Busca el producto por productId
+        const productData = await Product.findByPk(product.productId);
+        //Asocia product a la order, con la cantidad y el precio (de la DB);
+        order.addProduct(productData, {
+          through: {
+            quantity: product.quantity,
+            price: productData.price
+          }
+        });
+      });
+      return res.json({
+        message: `Order create ID: ${order.id}`
+      });
+      //Si la orden existe se fusiona
+    } else res.status(404).send("Existe una orden con ese ID")
+  } catch (err) {
+    console.log(err);
+    next(err);
   }
-  res.json('orders');
 }
 
-// orderState type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
-// shippingState type: DataTypes.ENUM("initial","created","processing","cancelled","completed")
-// shippingLocation: type: DataTypes.STRING
-// shippingCost: type: DataTypes.FLOAT
-// paymentState: type: DataTypes.STRING
 
 module.exports = {
   createOrder,

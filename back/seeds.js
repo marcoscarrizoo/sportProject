@@ -7,8 +7,8 @@ const products = [
       "https://http2.mlstatic.com/D_NQ_NP_2X_871368-MLA31115313342_062019-F.webp",
       "https://http2.mlstatic.com/D_NQ_NP_701787-MLA41888172848_052020-O.webp",
     ],
-    "price": 2250.0,
-    "stock": 3,
+    "price": 2250.21,
+    "stock": 103,
     "categories": [
       {
         "name": "suplemento",
@@ -24,8 +24,8 @@ const products = [
       "https://http2.mlstatic.com/D_NQ_NP_707077-MLA40743470620_022020-O.webp",
       "https://http2.mlstatic.com/D_NQ_NP_779555-MLA40743624545_022020-O.webp",
     ],
-    "price": 1315.0,
-    "stock": 4,
+    "price": 1315.19,
+    "stock": 109,
     "categories": [
       {
         "name": "suplemento",
@@ -42,8 +42,8 @@ const products = [
       "https://http2.mlstatic.com/D_NQ_NP_904826-MLA44008957239_112020-O.webp",
       "https://http2.mlstatic.com/D_NQ_NP_779555-MLA40743624545_022020-O.https://http2.mlstatic.com/D_NQ_NP_687475-MLA41534188094_042020-O.webp",
     ],
-    "price": 1011.1,
-    "stock": 5,
+    "price": 1011.19,
+    "stock": 105,
     "categories": [
       {
         "name": "suplemento",
@@ -59,8 +59,8 @@ const products = [
     "images": [
       "https://http2.mlstatic.com/D_NQ_NP_749209-MLA32861738659_112019-O.webp",
     ],
-    "price": 349,
-    "stock": 6,
+    "price": 349.29,
+    "stock": 157,
     "categories": [
       {
         "name": "Shaker",
@@ -76,8 +76,8 @@ const products = [
     "images": [
       "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1000x1000-FITNES34.jpg&w=500&q=100",
     ],
-    "price": 10805,
-    "stock": 6,
+    "price": 10805.12,
+    "stock": 178,
     "categories": [
       {
         "name": "articulos de gimnasio",
@@ -85,7 +85,7 @@ const products = [
           "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
       },
     ]
-  }
+  },
 ];
 
 const users = [
@@ -131,7 +131,7 @@ const users = [
 const orders = [
     //Primera order (Etapa 1)
     {
-        "orderState": "cart",
+        "orderState": "CART",
         "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
         "productId": 1,
         "quantity": 1

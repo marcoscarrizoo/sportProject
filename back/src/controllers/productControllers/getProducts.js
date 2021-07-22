@@ -26,7 +26,7 @@ async function getProducts(req, res, next) {
         model: Category,
       },
     });
-    res.json(products1);
+    return res.json(products1);
   } catch (error) {
     console.error(error);
   }

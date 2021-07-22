@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
       },
       orderState: {
-        type: DataTypes.ENUM("cart", "processing", "cancelled", "completed"),
-        defaultValue: "cart",
+        type: DataTypes.ENUM("CART", "PENDING","PROCESSING", "CANCELED", "COMPLETED"),
+        defaultValue: "CART",
         allowNull: false,
       },
       shippingState: {
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
           "initial", //appears as soon as payment is verified
           "created",
           "processing",
-          "cancelled",
+          "canceled",
           "completed"
         ),
         defaultValue: "not initialized"
@@ -62,13 +62,6 @@ module.exports = (sequelize) => {
             defaultValue:0
           }
       },
-      
-      // shippingCost: {
-      //   type: DataTypes.FLOAT,
-      // },Elena nos comento que no era necesario
-    //Me parece importante los campos de creado y actualizado. (Knut)
-    //{ timestamps: false }
-    // createdAT does not appear
-    // updateAT does not appear
+
   );
 };

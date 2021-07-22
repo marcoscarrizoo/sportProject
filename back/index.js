@@ -31,11 +31,10 @@ conn.sync({ force: false }).then(() => {
   // server.listen(3000, async () => {
   server.listen(process.env.PORT, async () => {
     console.log(`listening at PORT ${process.env.PORT}`);
-    //Esta funcion carga productos del archivo seeds en la DB
-
-
-    //await createProductsSeeds();
-   // await createUsersSeeds();
+    
+    //Estas funciones carga productos y usuarios del archivo seeds, en la DB
+    await createProductsSeeds();
+    await createUsersSeeds();
 
   });
 });

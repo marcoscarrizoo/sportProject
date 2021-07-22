@@ -9,7 +9,7 @@ const mercadoRoutes = require("./mercadopago");
 
 router.use("/product", productRoutes);
 router.use("/category", categoryRoutes);
-router.use("/order", orderRoutes);
+router.use("/orders", orderRoutes);
 router.use("/user", userRoutes);
 router.use("/mercadopago", mercadoRoutes);
 
