@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       images: {
-        type: DataTypes.ARRAY(DataTypes.STRING(600)),
+        type: DataTypes.ARRAY(DataTypes.STRING),
       },
       price: {
         type: DataTypes.FLOAT,
