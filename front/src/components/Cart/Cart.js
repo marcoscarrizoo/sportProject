@@ -51,8 +51,11 @@ export default function Cart() {
     setstate(cartItems);
   }, [dispatch]);
 
-
-  console.log(cartItems);
+const update = () => {
+ 
+  dispatch(updateTotal())
+}
+  console.log('cartItems',cartItems);
 
   return (
     <div className="cart">
@@ -92,7 +95,7 @@ export default function Cart() {
         <div className="buttons">
           <button className="comprar">COMPRAR</button>
           <Button
-            onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+             onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
           >
             Vaciar 
           </Button>

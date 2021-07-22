@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkout } from "../../redux/actions/cartActions";
 import { Container, Typography, Button } from "@material-ui/core";
-
+import { useHistory } from "react-router";
 export default function CartTotal({ state }) {
   var cart = JSON.parse(localStorage.getItem("cart"));
   console.log("total ", cart);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const [total, settotal] = useState("");
 
@@ -24,7 +25,11 @@ export default function CartTotal({ state }) {
 
   //const cartItemsLocalStorage = localStorage.getItem("cart");
 
-  const handleGoToCheckout = () => dispatch(checkout());
+  const handleGoToCheckout = () => {
+    console.log('boom')
+    dispatch(checkout());
+    history.push('/direccionDeEnvio')
+  }
 
   return (
     <Container>
