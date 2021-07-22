@@ -4,11 +4,6 @@ module.exports = (sequelize) => {
   sequelize.define(
     "location",
     {
-      id: {
-        primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
       description: {
         type: DataTypes.STRING,
         allowNull: false,
