@@ -2,9 +2,10 @@ const { User, Product, Order, Order_Product } = require("../../db");
 
 
 /*
-Ruta localhost:3001/order/delete/product
+Ruta localhost:3001/orders/delete/product
 Elimina un producto de una orden
-Recibe body = {
+
+body = {
   userId,
   productId
 }

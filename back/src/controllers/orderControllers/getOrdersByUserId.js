@@ -1,22 +1,24 @@
 const { User, Product, Order } = require("../../db");
 
-//Ruta localhost:3001/order/:userId
+//Ruta localhost:3001/orders/user/:id
 //Recibe un userId por params y devuelve ordenes por usurio
 //Si no lo consigue devuelve: user id not found;
 async function getOrdersByUserId(req, res, _next) {
   try {
-    const { userId } = req.params;
-    if(!userId)return res.send(`Debe ser un userId valido.`);
+    const { id } = req.params;
+    console.log("id: ", id);
+    if(!id)return res.send(`Debe ser un id valido.`);
     //Verificar si el usuario tiene ordenes
     //Buscar todas las ordenes
-    const order = await Order.findOne({where:{userId}});
-    if(!order)return res.send(`El usuario con ${userId} no tiene ordenes a su nombre.`);
-    const orders = await Order.findAll({
-      where:{userId},
-      include: [Product,User]
-    });
+    const orders = await Order.findAll({where:{
+      userId:id
+    },include:[Product,User]
+  });
+    
+    if(!orders)return res.send(`El usuario con ${id} no tiene ordenes a su nombre.`);
+  
     //Mover a su lugar
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(id);
     const ordersDetails = await orders.map(order => {
       return {
         id: order.id,

@@ -40,12 +40,5 @@ module.exports = (sequelize) => {
           defaultValue: "not initialized"
         },
       },
-      // shippingCost: {
-      //   type: DataTypes.FLOAT,
-      // },Elena nos comento que no era necesario
-    //Me parece importante los campos de creado y actualizado. (Knut)
-    //{ timestamps: false }
-    // createdAT does not appear
-    // updateAT does not appear
   );
 };

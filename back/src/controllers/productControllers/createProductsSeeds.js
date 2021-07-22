@@ -22,7 +22,9 @@ async function createProductsSeeds() {
             },
             defaults: { image },
           });
-          product.addCategory(category);
+          if (category) {
+            product.addCategory(category);
+          } 
         });
       }
     )

@@ -7,7 +7,7 @@ const userRoutes = require("./usersRoutes");
 
 router.use("/product", productRoutes);
 router.use("/category", categoryRoutes);
-router.use("/order", orderRoutes);
+router.use("/orders", orderRoutes);
 router.use("/user", userRoutes);
 
 module.exports = router;
