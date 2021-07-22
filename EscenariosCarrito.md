@@ -1,10 +1,12 @@
 # Escenarios
-## 1-Crear/Actualizar Carrito
-### Ruta funcionando, faltan detalles verificar si la orden es de tipo carrito
+
+## 1-Crear Orden
+
+### Crea una nueva orden por defecto es de tipo CART, si no carga productos devuelve error 404, si existe de vuelve error 404
+
+### POST /orders/create
+
 ```js
-//Ruta
-//PUT /localhost:3001/create/update
-//Back recibe body:
 const body = {
         userId,
 //array de productos, con id y cantidad
@@ -20,134 +22,151 @@ const body = {
         ]
     }
 ```
-## Consulta Ruta prueba - Crear/Actualizar Carrito
+
+### Modelo de consutla POST /orders/create
+
 ```js
-//PUT localhost:3001/order/addOrder
-//Consulta 1
 {
-        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
-        "products":[
+  "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+    "products": [
+      {
+        "productId": 3,
+        "quantity": 13
+      },
+      {
+        "productId": 2,
+        "quantity": 6
+      },
+      {
+        "productId": 1,
+        "quantity": 6
+      }
+    ]
+}
+```
+
+## 2-Update Orden
+
+### Modifica cualquier dato que se pase por body, debe recibir orderID por params, si es de tipo CART, modifica las cantidades de los productos. Todos los datos del body, son opcionales.
+
+### PUT /orders/update/:id
+
+```js
+body = {
+      orderState,
+      shippingState,
+      shippingLocation,
+      paymentState,      
+      products,
+//array de uno o varios productos, con id y cantidad
+  products:[
+      {
+          productId,
+          quantity
+      },
+      {
+          productId,
+          quantity
+      },
+  ]
+}
+```
+
+### Modelo de consutlas PUT /orders/update
+
+```js
+//Consulta 1
+//localhost:3001/orders/update/869aa921-e7be-4169-8f95-4ced11d093c8
+{
+  "products": [
+    {
+      "productId": 3,
+      "quantity": 33
+    },
+    {
+      "productId": 4,
+      "quantity": 44
+    }
+  ]
+}
+//Consulta 2
+//localhost:3001/orders/update/869aa921-e7be-4169-8f95-4ced11d093c8
+{
+  "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+    "orderState": "PENDING"
+}
+```
+## 3-Delete Orden
+
+### Elimina una order, segun su id, para el caso de cancelar cart o el administrador quiera eliminar alguna orden.
+
+### DELETE /orders/delete/:id
+
+```js
+const body = {
+        userId,
+//array de productos, con id y cantidad
+        products:[
             {
-                "productId":1,
-                "quantity":3
+                productId,
+                quantity
             },
             {
-                "productId":2,
-                "quantity":6
-            }
+                productId,
+                quantity
+            },
         ]
     }
-//Consulta 2
-{
-    "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
-        "products": [
-            {
-                "productId": 3,
-                "quantity": 13
-            },
-            {
-                "productId": 2,
-                "quantity": 6
-            },
-            {
-                "productId": 1,
-                "quantity": 6
-            }
-        ]
-}
-
 ```
 
-## 2-Eliminar un solo producto del carrito por su ID
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders/delete/d02baf64-58cd-422c-9c0f-122708f8f534
+
+XXXXXXXXXx
+## 4-GET Orden por ID
+
+### Obtiene una order completa con product y user, de cualquier estado por su ID.
+
+### GET /orders/:id
+
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders/delete/d02baf64-58cd-422c-9c0f-122708f8f534
+
+# 5-GET todas las ordenes
+
+### Obtiene todas las ordenes, existentes.
+
+### GET /orders
+
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders
+
+# 6-GET todas las ordenes de un usuario
+
+### Obtiene todas las ordenes, existentes.
+
+### GET /orders/user/:id
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders
+
+## 7-Delete Product cuando se elimina de carrito
+### Borra el producto de la orden, si no existe devuelve error 404
+XXX Hasta aqui llegue mañana reviso
 ```js
-//DELETE localhost:3001/order/delete/product
-//Devuelve `Producto ID: ${productId} eliminado`
-//Back recibe body:
-const body = {
-  userId,
-  productId
-}
+//GET localhost:3001/order/:orderId
+//Devuelve la oder con toda la información
+//Back recibe por params un :orderId
 ```
-## Consulta Ruta prueba - Eliminar un solo producto del carrito por su ID
+## Consulta Ruta prueba - Obtener order por orderId
 
 ### Recordar que tiene que existir la orden para poder eliminar productos
 ```js
-//DELETE localhost:3001/order/addOrder
 //Consulta 1
-{
-        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
-"productId":2
-    }
-//Consulta 2
-{
-        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
-"productId":3
-    }
-
-```
-
-## 3-Obtener lista de las ordenes del carrito segun userId
-### Funcion para administrador
-```js
-//Funcion
-//GET localhost:3001/order/:userId
-//Devuelve las ordenes del usuario
-//Back recibe por query.params un userId
-```
-## Consulta Ruta prueba - Lista de las ordenes del carrito segun userId
-
-### Recordar que tiene que existir la orden para poder eliminar productos
-```js
-//GET localhost:3001/order/d1687b07-058c-414a-bb5a-77a8d897be57
-//Consulta 1
-'localhost:3001/order/d1687b07-058c-414a-bb5a-77a8d897be57'
-```
-
-## 4-Cambiar estado del carrito por userId
-### Esta es para el caso de que el estado de cambie a lualquiera de los siguientes:
-- PENDING 
-- PROCESSING
-- COMPLETED
-- CANCELED
-
-```js
-//DELETE localhost:3001/order/delete/product
-//Devuelve `Producto ID: ${productId} eliminado`
-//Back recibe body:
-const body = {
-  userId,
-  productId
-}
-```
-
-## 5-Vaciar el carrito de la orden por userId
-### 
-```js
-//DELETE localhost:3001/order/delete/product
-//Devuelve `Producto ID: ${productId} eliminado`
-//Back recibe body:
-const body = {
-  userId,
-  productId
-}
-```
-
-## Consulta Ruta prueba - Eliminar un solo producto del carrito por su ID
-
-### Recordar que tiene que existir la orden para poder eliminar productos
-```js
-//DELETE localhost:3001/order/addOrder
-//Consulta 1
-{
-        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
-"productId":2
-    }
-//Consulta 2
-{
-        "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
-"productId":3
-    }
-
+//GET localhost:3001/order/f9bc2d5e-111b-4214-b581-e67e216b936e
 ```
 # Lo que si gue no esta terminado.
 ## 3-Cambiar stock de products, cuando orderState === 'processing'
@@ -170,7 +189,7 @@ Modelo
 [
   {
     "id": "7155b2bd-ece6-438a-b665-c76033564aac",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",
@@ -207,7 +226,7 @@ Modelo
   },
   {
     "id": "84133c87-bf34-49f2-97d7-32c682e7d341",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",
@@ -244,7 +263,7 @@ Modelo
   },
   {
     "id": "4dc04d29-1b06-4358-a236-d7db0649be67",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",

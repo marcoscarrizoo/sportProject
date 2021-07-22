@@ -86,24 +86,6 @@ const products = [
       },
     ]
   },
-  {
-    "name": "Pasta De Mani Mantequilla Vitapower",
-    "description":
-      "Pasta de Mani Vitapower Origen: Brasil peso: 1kg cero grasas trans cero azucar agregado.",
-    "images": [
-      "https://http2.mlstatic.com/D_NQ_NP_812537-MLA41430185432_042020-O.webp",
-      "https://http2.mlstatic.com/D_NQ_NP_958780-MLA41430158985_042020-O.webp",
-    ],
-    "price": 1450.11,
-    "stock": 186,
-    "categories": [
-      {
-        "name": "suplemento",
-        "image":
-          "https://https://www.mundodeportivo.com/r/GODO/MD/p8/ContraPortada/Imagenes/2021/04/27/Recortada/img_asola_20210401-060032_imagenes_md_propias_asola_71jcb9zm-l_ac_ux575_-klCB-U493486885716btG-572x326@MundoDeportivo-Web.jpg.mlstatic.com/D_NQ_NP_756133-MLA41827275963_052020-O.webp",
-      }
-    ]
-  },
 ];
 
 const users = [
@@ -149,7 +131,7 @@ const users = [
 const orders = [
     //Primera order (Etapa 1)
     {
-        "orderState": "cart",
+        "orderState": "CART",
         "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
         "productId": 1,
         "quantity": 1
