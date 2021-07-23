@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./themeconfig";
 import NavBar from "./components/NavBar/NavBar";
@@ -8,18 +9,17 @@ import Catalogo from "./components/Catalogo/Catalogo";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Admin from "./components/Admin/Admin";
 import Home from "./components/Home/Home";
-import SignUp from './components/SignUp_SignIn/SignUp';
+import SignUp from "./components/SignUp_SignIn/SignUp";
 import SignIn from "./components/SignUp_SignIn/SignIn";
 import Cart from "./components/Cart/Cart";
-import Sedes from './components/Dashboard/Sedes';
-import Activities from './components/Dashboard/Activities';
-import OurPlans from './components/Dashboard/OurPlans';
-import ResetPassword from './components/SignUp_SignIn/ResetPassword/ResetPassword';
-import SendResetSuccess from './components/SignUp_SignIn/ResetPassword/ResetSuccess';
+import Sedes from "./components/Dashboard/Sedes";
+import Activities from "./components/Dashboard/Activities";
+import OurPlans from "./components/Dashboard/OurPlans";
+import ResetPassword from "./components/SignUp_SignIn/ResetPassword/ResetPassword";
+import SendResetSuccess from "./components/SignUp_SignIn/ResetPassword/ResetSuccess";
 
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
 export const url = process.env.REACT_APP_API || "http://localhost:3001";
-
 
 function App() {
   return (
@@ -31,14 +31,25 @@ function App() {
         <Route path="/productos" component={Catalogo} />
         <Route path="/producto/:id" component={ProductDetail} />
         <Route path="/admin" component={Admin} />
-        <Route path='/registrarse' component={SignUp}/>
-        <Route path='/iniciarSesion' component={SignIn}/>
-        <Route path='/cart' component={Cart}/>  
-        <Route path='/sedes' component={Sedes}/>
-        <Route path='/actividades' component={Activities}/>
-        <Route path='/planes' component={OurPlans}/>
-        <Route path='/restablecer' component={ResetPassword}/>
-        <Route path='/restablecido' component={SendResetSuccess}/>
+        <Route path="/registrarse" component={SignUp} />
+        <Route path="/iniciarSesion" component={SignIn} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/sedes" component={Sedes} />
+        <Route path="/actividades" component={Activities} />
+        <Route path="/planes" component={OurPlans} />
+        <Route path="/restablecer" component={ResetPassword} />
+        <Route path="/restablecido" component={SendResetSuccess} />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable={false}
+          pauseOnHover={false}
+        />
       </ThemeProvider>
     </React.Fragment>
   );

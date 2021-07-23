@@ -4,7 +4,7 @@ const productRoutes = require("./productRoutes");
 const categoryRoutes = require("./categoryRoutes");
 const orderRoutes = require("./orderRoutes");
 const userRoutes = require("./usersRoutes");
-const locationRoutes = require("./locationsRoutes");
+const locationRoutes = require("./locationRoutes");
 
 router.use("/product", productRoutes);
 router.use("/category", categoryRoutes);
