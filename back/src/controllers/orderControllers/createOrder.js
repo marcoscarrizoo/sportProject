@@ -63,7 +63,7 @@ async function createOrder(req, res, _next) {
         message: `Order create ID: ${order.id}`
       });
       //Si la orden existe se fusiona
-    } else res.status(404).send("Existe una orden con ese ID")
+    } else res.status(404).send("Existe una orden estado CART para este usuario.")
   } catch (err) {
     console.log(err);
     next(err);
