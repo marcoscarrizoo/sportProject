@@ -27,6 +27,7 @@ export let doUserLogin = (user) => async (dispatch, getState) => {
     type: LOGIN_SUCESS
   })
   // saveStorage(getState())
+
 };
 
 
@@ -77,19 +78,21 @@ export function saveStorage(storage) {
 
 
 //hace el login con google
-export let doGoogleLogIn = () => (dispatch, getState) => {
+export let doGoogleLogIn = () => async (dispatch, getState) => {
   dispatch({
     type: LOGIN, //el login solo pasa el fetching a true (sirve en caso de queres mostrar un mensaje de carga ya que puede tardar unos segundos en autenticar)
   });
 
   return loginWithGoogle() //retorna la promesa
-    .then(async (user, dispatch) => {
-
+    .then((user) => {
       let form = {
         id: user.uid,
         email: user.email,
       }
-      await axios.post(url + "/user/create", form);
+      axios.post(url + "/user/create", form);
+      return user;
+    })
+    .then((user) => {
       dispatch({
         type: LOGIN_SUCESS,
         payload: {
@@ -99,7 +102,7 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
           photo: user.photoURL,
         },
       });
-      saveStorage(getState());
+      saveStorage(getState().user);
     })
     .catch((e) => {
       dispatch({
