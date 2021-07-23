@@ -17,28 +17,28 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
     quantity,
     price,
   };
-  
+
   let user = JSON.parse(window.localStorage.getItem("storage"));
   let cartId = JSON.parse(window.localStorage.getItem("cartid"));
 
   try {
 
-    if( user?.uid ){
-      let info = { userId: user.uid ,products: [{productId: id, quantity}]}
-      
-      if(cartId) {
-        await axios.put( url + "/orders/update/" + cartId, info)
-      } 
+    if (user?.uid) {
+      let info = { userId: user.uid, products: [{ productId: id, quantity }] }
+
+      if (cartId) {
+        await axios.put(url + "/orders/update/" + cartId, info)
+      }
       else {
-        let res = await axios.post( url + "/orders/create", info)
+        let res = await axios.post(url + "/orders/create", info)
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
       }
     }
 
     else {
-    
+
       let cart = JSON.parse(localStorage.getItem("cart"));
-      
+
       if (!cart || !cart.length) {
         quantity = 1;
         localStorage.setItem("cart", JSON.stringify([{ ...product, quantity }]));
@@ -59,16 +59,16 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
 
         localStorage.setItem("cart", JSON.stringify(cart));
       }
-      
+
       dispatch({
         type: ADD_TO_CART,
         payload: JSON.parse(localStorage.getItem("cart")),
       });
-      
+
     }
 
-    } catch (e) {
-      console.log(e);
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -76,10 +76,10 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 
   try {
     let user = JSON.parse(localStorage.getItem("storage"));
-    
+
     if (user?.uid) {
-      let info = { userId: user.uid ,productId: id }
-      axios.delete( url + "/orders/delete/product", {data: {...info}})
+      let info = { userId: user.uid, productId: id }
+      axios.delete(url + "/orders/delete/product", { data: { ...info } })
     }
     else {
       let cart = getState().cart.items;
@@ -99,12 +99,22 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 };
 
 export const cartReset = () => (dispatch) => {
-  dispatch({
-    type: CART_RESET,
-    payload: [],
-  });
-  //sweetAlert("Vaciado", "success", "OK", 1000);
-  localStorage.setItem("cart", "[]");
+
+
+  let user = JSON.parse(localStorage.getItem("storage"));
+
+  if (user?.uid) {
+    let cartId = JSON.parse(localStorage.getItem("cartid"));
+    axios.delete( url + "/orders/delete/" + cartId)
+  }
+  else {
+    dispatch({
+      type: CART_RESET,
+      payload: [],
+    });
+    //sweetAlert("Vaciado", "success", "OK", 1000);
+    localStorage.setItem("cart", "[]");
+  }
 };
 
 
@@ -129,7 +139,7 @@ export const changeProductQuantity =
     }
   };
 
-export const loadCart = () => 
+export const loadCart = () =>
   async (dispatch) => {
 
     let user = JSON.parse(localStorage.getItem("storage"));
@@ -138,15 +148,15 @@ export const loadCart = () =>
       let cartId = JSON.parse(localStorage.getItem("cartid"));
       let cart = await axios.get(url + "/orders/" + cartId)
 
-      cart = cart.data.products.map( e => { 
-        return { 
+      cart = cart.data.products.map(e => {
+        return {
           id: e.id,
           name: e.name,
           ...e.Order_Product
         }
       });
 
-     dispatch({
+      dispatch({
         type: LOAD_CART,
         register: true,
         payload: cart,
@@ -176,38 +186,33 @@ export const updateTotal = () => {
 };
 
 
-export const fusionCart = async () => {
+export const fusionCart = async (id) => {
   try {
-  let user = JSON.parse(localStorage.getItem("storage"));
-  let products = JSON.parse(localStorage.getItem("cart"));
+    let user = JSON.parse(localStorage.getItem("storage")) || id;
+    let products = JSON.parse(localStorage.getItem("cart"));
 
-  if(products){
-    console.log("entro al if de products")
-    
-    products = products.map(e => {                               
-      return {
-        productId: e.id,
-        quantity: e.quantity,
-      }
-    })
-  }
-  
-    console.log("entro al fusionCart")
+    if (products) {
 
-    if( user?.uid ){
+      products = products.map(e => {
+        return {
+          productId: e.id,
+          quantity: e.quantity,
+        }
+      })
+    }
 
-      console.log("hay un user uid")
-      if(products?.length > 0) {
-        let info = { userId: user.uid ,products}
-        console.log(info)
-        let res = await axios.post( url + "/orders/create", info)
+    if (user?.uid) {
+
+      if (products?.length > 0) {
+        let info = { userId: user.uid, products }
+        let res = await axios.post(url + "/orders/create", info)
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
-        if(res.data.message === false) {
+        if (res.data.message === false) {
           await axios.put(url + "/orders/update/" + res.data.cartId, info)
         }
-      } 
+      }
       else {
-        let res = await axios.post( url + "/orders/create", { userId: user.uid })
+        let res = await axios.post(url + "/orders/create", { userId: user.uid })
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
       }
       window.localStorage.removeItem("cart")
@@ -215,7 +220,7 @@ export const fusionCart = async () => {
 
 
   } catch (error) {
-    console.log("tiro errooooooorrrrrrrrrrrrrrrrr",error)
+    console.log("tiro errooooooorrrrrrrrrrrrrrrrr", error)
   }
 };
 

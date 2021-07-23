@@ -59,7 +59,6 @@ export default function SignIn() {
     .then(user => {
 
       let info = { uid: user.user.uid, log: true }
-      console.log(user.uid)
       window.localStorage.setItem("storage", JSON.stringify(info))
 
       dispatch({
@@ -71,11 +70,11 @@ export default function SignIn() {
       })
       dispatch(doUserLogin(user.user))
     })
-    .then( async () => {
-      console.log("entro a hacer la fusion")
-      await dispatch(fusionCart())
-      dispatch(loadCart())
-    })
+    // .then( async () => {
+    //   console.log("entro a hacer la fusion")
+    //   await dispatch(fusionCart())
+    //   dispatch(loadCart())
+    // })
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
         setMsgError('password incorrecta')
@@ -91,13 +90,19 @@ export default function SignIn() {
   }
 
   
-let googleLogIn = async () => {
-  await dispatch(doGoogleLogIn())
-  // await dispatch(fusionCart())
-  // dispatch(loadCart())
+let googleLogIn =  () => {
+  dispatch(doGoogleLogIn())
 }
 
-if(loggedIn) {
+if(user?.uid) {
+  
+  try {
+    fusionCart( user )
+    loadCart()
+  } catch (error) {
+    console.log("errrroooooooooor         ",error)
+  }
+
   history.push("/")
       Swal.fire(
         {
