@@ -26,24 +26,19 @@ export default function Cart() {
   const classes = useStyle();
   const dispatch = useDispatch();
   const history = useHistory()
-  let cartItems = JSON.parse(localStorage.getItem("cart"));
+  let user = JSON.parse(localStorage.getItem("storage"));
   const total = useSelector((state) => state.cart.total);
+  const products = useSelector((store) => store.cart.items);
 
-  const [state, setstate] = useState("");
-
-  // if (!total) {
-  //   history.push('/productos')
-  //   Swal.fire(
-  //     {
-  //       text: 'carrito vacio',
-  //       icon: 'warning',
-  //       width: '20rem',
-  //       timer: '3000',
-  //       showConfirmButton: false
-  //     }
-  //   )
-  // }
   useEffect(() => {
+<<<<<<< HEAD
+
+    if(!user){
+      dispatch(loadCart());
+    }
+    
+  }, [dispatch]);
+=======
     console.log("useEffect de cart");
     dispatch(loadCart());
     dispatch(updateTotal());
@@ -51,16 +46,20 @@ export default function Cart() {
     setstate(cartItems);
   }, [dispatch]);
 
-
-  console.log(cartItems);
+const update = () => {
+ 
+  dispatch(updateTotal())
+}
+  console.log('cartItems',cartItems);
+>>>>>>> dev
 
   return (
     <div className="cart">
       <div className="items">
         <h3 className="titles" > PRODUCTOS</h3>
         {
-          cartItems?.length
-            ? cartItems.map((product) => (
+          products?.length
+            ? products.map((product) => (
               <CartItem
                 key={product.id}
                 id={product.id}
@@ -92,7 +91,7 @@ export default function Cart() {
         <div className="buttons">
           <button className="comprar">COMPRAR</button>
           <Button
-            onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+             onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
           >
             Vaciar 
           </Button>
@@ -102,34 +101,34 @@ export default function Cart() {
   );
 }
 
-/* const cart = [
-  {
-    image: "image1",
-    name: "mancuerna",
-    precio: 300,
-    cantidad: 1,
-    descripcion:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in laoreet felis. In fermentum massa pharetra egestas rutrum. Sed varius nibh vitae libero bibendum, a imperdiet diam mattis. Duis volutpat libero non odio viverra, id semper elit convallis. Sed molestie nibh nec nulla elementum sodales. Phasellus maximus sapien a tincidunt elementum. Proin vitae mauris non quam sollicitudin semper sit amet quis mauris. ",
-  },
-  {
-    image: "image2",
-    name: "vitaminas",
-    precio: 150,
-    cantidad: 1,
-    descripcion:
-      "Proin id ipsum nec lorem aliquam eleifend a et nisi. Donec mattis turpis ut urna lacinia faucibus. Phasellus eleifend lacus nec quam pharetra sagittis. Integer massa quam, tincidunt id nibh vitae, tempor aliquam felis. Aliquam pulvinar nisl erat, ut mollis mauris volutpat vitae. Ut sit amet ipsum pharetra, aliquam magna nec, tincidunt lectus. Duis metus ante, sollicitudin a leo at, eleifend pretium est.",
-  },
-  {
-    image: "image3",
-    name: "musculosa",
-    precio: 340,
-    cantidad: 1,
-    descripcion:
-      "Fusce non consectetur odio. Quisque augue quam, porta vitae nisi nec, porta congue erat. Aliquam erat volutpat. Vivamus turpis felis, porttitor semper pharetra non, efficitur quis augue. Mauris sit amet egestas quam. Suspendisse eget sollicitudin libero. Maecenas id elementum nibh.",
-  },
-]; */
 
 
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import CartItem from "./CartItem";
+// import Swal from "sweetalert2";
+// import {
+//   loadCart,
+//   cartReset,
+//   updateTotal,
+// } from "../../redux/actions/cartActions";
+// import { Container, makeStyles, Typography, Button } from "@material-ui/core";
+// import { Link, useHistory } from 'react-router-dom';
+
+// import { AiFillShopping } from 'react-icons/ai';
+// import { FcShipped } from 'react-icons/fc';
+
+// const useStyle = makeStyles({
+//   cart: {
+//     marginLeft: "0px",
+//   },
+//   title: {
+//     color: "gray",
+//   },
+// });
 
 // export default function Cart() {
 //   const classes = useStyle();
@@ -140,18 +139,18 @@ export default function Cart() {
 
 //   const [state, setstate] = useState("");
 
-// if(!total ) {
-//   history.push('/productos')
-//   Swal.fire(
-//     {
-//       text:'carrito vacio',
-//       icon: 'warning', 
-//       width:'20rem', 
-//       timer: '3000', 
-//       showConfirmButton: false 
-//     }
-//   )
-// }
+//   // if (!total) {
+//   //   history.push('/productos')
+//   //   Swal.fire(
+//   //     {
+//   //       text: 'carrito vacio',
+//   //       icon: 'warning',
+//   //       width: '20rem',
+//   //       timer: '3000',
+//   //       showConfirmButton: false
+//   //     }
+//   //   )
+//   // }
 //   useEffect(() => {
 //     console.log("useEffect de cart");
 //     dispatch(loadCart());
@@ -164,38 +163,49 @@ export default function Cart() {
 //   console.log(cartItems);
 
 //   return (
-//     <div className={classes.cart}>
-//       {cartItems.length ? (
-//         <Container>
-//           <div>
-//             <h4 className={classes.title}>Mis Productos</h4>
-//           </div>
-//           <hr />
-//           <Container>
-//             <Container>
-//               {cartItems.map((product) => (
-//                 <CartItem
-//                   key={product.id}
-//                   id={product.id}
-//                   Qty={product.quantity}
-//                 />
-//               ))}
-//             </Container>
-//           </Container>
-//           <hr />
-//           <Container>
-//             <Typography> Total: $ {total}</Typography>
-//             <Button>Comprar</Button>
-//             <Button
-//               onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
-//             >
-//               Vaciar Carrito
-//             </Button>
-//           </Container>
-//         </Container>
-//       ) : (
-//         <Typography>Vacio</Typography>
-//       )}
+//     <div className="cart">
+//       <div className="items">
+//         <h3 className="titles" > PRODUCTOS</h3>
+//         {
+//           cartItems?.length
+//             ? cartItems.map((product) => (
+//               <CartItem
+//                 key={product.id}
+//                 id={product.id}
+//                 Qty={product.quantity}
+//               />
+//             ))
+//             : 
+//               <Link to="/productos" className="carrito-v">
+//               <img className="carrito-vacio" src="https://www.elpatrondelmate.com.ar/images/carritovacio.png" alt="carrito vacio"/>
+//               </Link>
+//         }
+//       </div>
+//       <div className="totales">
+//         <h3 className="titles titles-total" > TOTALES </h3>
+//         <div className="subtotales">
+//           <AiFillShopping className="subtotales-icons" />
+//           <h4> SUBTOTAL: </h4>
+//           <h4>{`$${total}`}</h4>
+//         </div>
+//         <div className="subtotales">
+//           <FcShipped className="subtotales-icons" />
+//           <h5> Envio: </h5>
+//           <h5> Sin envio </h5>
+//         </div>
+//         <div className="subtotales subtotales-total">
+//           <h3> TOTAL:</h3>
+//           <h3>{`$${total}`}</h3>
+//         </div>
+//         <div className="buttons">
+//           <button className="comprar">COMPRAR</button>
+//           <Button
+//             onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+//           >
+//             Vaciar 
+//           </Button>
+//         </div>
+//       </div>
 //     </div>
 //   );
 // }

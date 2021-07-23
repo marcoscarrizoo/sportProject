@@ -25,10 +25,7 @@ module.exports = (sequelize) => {
         ),
         defaultValue: "not initialized"
       },
-      shippingLocation: {
-        type: DataTypes.STRING,
-        defaultValue: "not initialized"
-      },
+      
       paymentState: {
         type: DataTypes.ENUM(
           "not initialized",
@@ -39,6 +36,32 @@ module.exports = (sequelize) => {
           ),
           defaultValue: "not initialized"
         },
+        shippingAddress: {
+          type: DataTypes.STRING,
+          defaultValue: "not initialized"
+        },
+        shippingZip: {
+          type: DataTypes.INTEGER,
+        },
+        shippingLocated: {
+          type: DataTypes.STRING,
+        },
+        shippingCity: {
+          type: DataTypes.STRING,
+        },
+        payment_id: {
+          type: DataTypes.INTEGER,
+          defaultValue: 0,
+          },
+          payment_status: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+          },
+          merchant_order_id:{
+            type: DataTypes.BIGINT,
+            defaultValue:0
+          }
       },
+
   );
 };
