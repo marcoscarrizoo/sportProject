@@ -8,10 +8,10 @@ import {
   updateTotal,
 } from "../../redux/actions/cartActions";
 import { Container, makeStyles, Typography, Button } from "@material-ui/core";
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from "react-router-dom";
 
-import { AiFillShopping } from 'react-icons/ai';
-import { FcShipped } from 'react-icons/fc';
+import { AiFillShopping } from "react-icons/ai";
+import { FcShipped } from "react-icons/fc";
 
 const useStyle = makeStyles({
   cart: {
@@ -25,55 +25,37 @@ const useStyle = makeStyles({
 export default function Cart() {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   let user = JSON.parse(localStorage.getItem("storage"));
   const total = useSelector((state) => state.cart.total);
   const products = useSelector((store) => store.cart.items);
 
   useEffect(() => {
-<<<<<<< HEAD
-
-    if(!user){
+    if (!user) {
       dispatch(loadCart());
     }
-    
   }, [dispatch]);
-=======
-    console.log("useEffect de cart");
-    dispatch(loadCart());
-    dispatch(updateTotal());
-    cartItems = JSON.parse(localStorage.getItem("cart"));
-    setstate(cartItems);
-  }, [dispatch]);
-
-const update = () => {
- 
-  dispatch(updateTotal())
-}
-  console.log('cartItems',cartItems);
->>>>>>> dev
 
   return (
     <div className="cart">
       <div className="items">
-        <h3 className="titles" > PRODUCTOS</h3>
-        {
-          products?.length
-            ? products.map((product) => (
-              <CartItem
-                key={product.id}
-                id={product.id}
-                Qty={product.quantity}
-              />
-            ))
-            : 
-              <Link to="/productos" className="carrito-v">
-              <img className="carrito-vacio" src="https://www.elpatrondelmate.com.ar/images/carritovacio.png" alt="carrito vacio"/>
-              </Link>
-        }
+        <h3 className="titles"> PRODUCTOS</h3>
+        {products?.length ? (
+          products.map((product) => (
+            <CartItem key={product.id} id={product.id} Qty={product.quantity} />
+          ))
+        ) : (
+          <Link to="/productos" className="carrito-v">
+            <img
+              className="carrito-vacio"
+              src="https://www.elpatrondelmate.com.ar/images/carritovacio.png"
+              alt="carrito vacio"
+            />
+          </Link>
+        )}
       </div>
       <div className="totales">
-        <h3 className="titles titles-total" > TOTALES </h3>
+        <h3 className="titles titles-total"> TOTALES </h3>
         <div className="subtotales">
           <AiFillShopping className="subtotales-icons" />
           <h4> SUBTOTAL: </h4>
@@ -91,20 +73,15 @@ const update = () => {
         <div className="buttons">
           <button className="comprar">COMPRAR</button>
           <Button
-             onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+            onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
           >
-            Vaciar 
+            Vaciar
           </Button>
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -159,7 +136,6 @@ const update = () => {
 //     setstate(cartItems);
 //   }, [dispatch]);
 
-
 //   console.log(cartItems);
 
 //   return (
@@ -175,7 +151,7 @@ const update = () => {
 //                 Qty={product.quantity}
 //               />
 //             ))
-//             : 
+//             :
 //               <Link to="/productos" className="carrito-v">
 //               <img className="carrito-vacio" src="https://www.elpatrondelmate.com.ar/images/carritovacio.png" alt="carrito vacio"/>
 //               </Link>
@@ -202,7 +178,7 @@ const update = () => {
 //           <Button
 //             onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
 //           >
-//             Vaciar 
+//             Vaciar
 //           </Button>
 //         </div>
 //       </div>

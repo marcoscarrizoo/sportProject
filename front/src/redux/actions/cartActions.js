@@ -17,31 +17,29 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
     quantity,
     price,
   };
-  
+
   let user = JSON.parse(window.localStorage.getItem("storage"));
   let cartId = JSON.parse(window.localStorage.getItem("cartid"));
 
   try {
+    if (user?.uid) {
+      let info = { userId: user.uid, products: [{ productId: id, quantity }] };
 
-    if( user?.uid ){
-      let info = { userId: user.uid ,products: [{productId: id, quantity}]}
-      
-      if(cartId) {
-        await axios.put( url + "/orders/update/" + cartId, info)
-      } 
-      else {
-        let res = await axios.post( url + "/orders/create", info)
-        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
+      if (cartId) {
+        await axios.put(url + "/orders/update/" + cartId, info);
+      } else {
+        let res = await axios.post(url + "/orders/create", info);
+        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId));
       }
-    }
-
-    else {
-    
+    } else {
       let cart = JSON.parse(localStorage.getItem("cart"));
-      
+
       if (!cart || !cart.length) {
         quantity = 1;
-        localStorage.setItem("cart", JSON.stringify([{ ...product, quantity }]));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([{ ...product, quantity }])
+        );
       } else {
         let ids = cart.map((e) => e.id);
         if (!ids.includes(id)) {
@@ -59,34 +57,30 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
 
         localStorage.setItem("cart", JSON.stringify(cart));
       }
-      
+
       dispatch({
         type: ADD_TO_CART,
         payload: JSON.parse(localStorage.getItem("cart")),
       });
-      
     }
-
-    } catch (e) {
-      console.log(e);
+  } catch (e) {
+    console.log(e);
   }
 };
 
 export const removeFromCart = (id) => async (dispatch, getState) => {
-
   try {
     let user = JSON.parse(localStorage.getItem("storage"));
-  
-    console.log("-------------------------")
-    console.log(user.uid)
-    console.log("-------------------------")
-    console.log(id)
-    
+
+    console.log("-------------------------");
+    console.log(user.uid);
+    console.log("-------------------------");
+    console.log(id);
+
     if (user?.uid) {
-      let info = { userId: user.uid ,productId: id }
-      await axios.delete(url + "/orders/delete/product", info)
-    }
-    else {
+      let info = { userId: user.uid, productId: id };
+      await axios.delete(url + "/orders/delete/product", info);
+    } else {
       let cart = getState().cart.items;
       let newCart = cart.filter((e) => e.id !== id);
       dispatch({
@@ -96,9 +90,8 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
       localStorage.setItem("cart", JSON.stringify(newCart));
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 
   //sweetAlert("Eliminado", "success", "OK", 1000);
 };
@@ -112,18 +105,15 @@ export const cartReset = () => (dispatch) => {
   localStorage.setItem("cart", "[]");
 };
 
-
 export const changeProductQuantity =
   (id, quantity) => async (dispatch, getState) => {
-
     let user = JSON.parse(localStorage.getItem("storage"));
 
     if (user?.uid) {
       let cartId = JSON.parse(localStorage.getItem("cartid"));
-      let info = { products: [{ productId: id, quantity }] }
-      await axios.put(url + "/orders/update/" + cartId, info)
-    }
-    else {
+      let info = { products: [{ productId: id, quantity }] };
+      await axios.put(url + "/orders/update/" + cartId, info);
+    } else {
       let cart = getState().cart.items;
       for (var item of cart) {
         if (item.id === id) {
@@ -134,38 +124,35 @@ export const changeProductQuantity =
     }
   };
 
-export const loadCart = () => 
-  async (dispatch) => {
+export const loadCart = () => async (dispatch) => {
+  let user = JSON.parse(localStorage.getItem("storage"));
 
-    let user = JSON.parse(localStorage.getItem("storage"));
+  if (user?.uid) {
+    let cartId = JSON.parse(localStorage.getItem("cartid"));
+    let cart = await axios.get(url + "/orders/" + cartId);
 
-    if (user?.uid) {
-      let cartId = JSON.parse(localStorage.getItem("cartid"));
-      let cart = await axios.get(url + "/orders/" + cartId)
+    cart = cart.data.products.map((e) => {
+      return {
+        id: e.id,
+        name: e.name,
+        ...e.Order_Product,
+      };
+    });
 
-      cart = cart.data.products.map( e => { 
-        return { 
-          id: e.id,
-          name: e.name,
-          ...e.Order_Product
-        }
-      });
-
-     dispatch({
-        type: LOAD_CART,
-        register: true,
-        payload: cart,
-      });
-
-    } else {
-      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      dispatch({
-        type: LOAD_CART,
-        register: false,
-        payload: cart,
-      });
-    }
-  };
+    dispatch({
+      type: LOAD_CART,
+      register: true,
+      payload: cart,
+    });
+  } else {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    dispatch({
+      type: LOAD_CART,
+      register: false,
+      payload: cart,
+    });
+  }
+};
 
 export const checkout = () => async (dispatch, getState) => {
   const cart = JSON.parse(localStorage.getItem("cart"));
@@ -176,64 +163,40 @@ export const checkout = () => async (dispatch, getState) => {
   }
 };
 
-<<<<<<< HEAD
 export const updateTotal = () => {
   return { type: UPDATE_TOTAL };
 };
 
-
 export const fusionCart = async () => {
   try {
-  let user = JSON.parse(localStorage.getItem("storage"));
-  let products = JSON.parse(localStorage.getItem("cart"));
+    let user = JSON.parse(localStorage.getItem("storage"));
+    let products = JSON.parse(localStorage.getItem("cart"));
 
-  if(products){
-    
-    products = products.map(e => {                               
-      return {
-        productId: e.id,
-        quantity: e.quantity,
-      }
-    })
-  }
-  
-  
-    if( user?.uid ){
-
-      if(products?.length > 0) {
-        let info = { userId: user.uid ,products}
-        let res = await axios.post( url + "/orders/create", info)
-        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
-      } 
-      else {
-        let res = await axios.post( url + "/orders/create", { userId: user.uid })
-        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
-      }
-=======
-export const updateTotal = () => async (dispatch) => {
-  
-  var cart = JSON.parse(localStorage.getItem("cart"));
-  var total = 0;
-  if (cart?.length) {
-    for (var i of cart) {
-      total += parseFloat(i.price) * parseFloat(i.quantity);
->>>>>>> dev
+    if (products) {
+      products = products.map((e) => {
+        return {
+          productId: e.id,
+          quantity: e.quantity,
+        };
+      });
     }
 
-
+    if (user?.uid) {
+      if (products?.length > 0) {
+        let info = { userId: user.uid, products };
+        let res = await axios.post(url + "/orders/create", info);
+        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId));
+      } else {
+        let res = await axios.post(url + "/orders/create", {
+          userId: user.uid,
+        });
+        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId));
+      }
+    }
   } catch (error) {
-    console.log("tiro errooooooorrrrrrrrrrrrrrrrr",error)
+    console.log("tiro errooooooorrrrrrrrrrrrrrrrr", error);
   }
 };
-
-
-
-
-
-
-
-
-
 
 // import axios from "axios";
 // import { newUser } from "./userActions";
@@ -258,7 +221,7 @@ export const updateTotal = () => async (dispatch) => {
 //   // userId = "d1687b07-058c-414a-bb5a-77a8d897be57";
 //   // // RUTA DE ACTUALIZACION AL BACK                                                --------
 //   // let info = {userId, productId: id, cantidad final}
-//   // if(userId) await axios.put( url + "/order/addOrder", info)     
+//   // if(userId) await axios.put( url + "/order/addOrder", info)
 
 //   try {
 //     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -286,13 +249,10 @@ export const updateTotal = () => async (dispatch) => {
 //       localStorage.setItem("cart", JSON.stringify(cart));
 //     }
 
-
-
 //     dispatch({
 //       type: ADD_TO_CART,
 //       payload: JSON.parse(localStorage.getItem("cart")),
 //     });
-
 
 //     //localStorage.setItem("cart", JSON.stringify(cart));
 //     //sweetAlert("Agregado", "success", "OK", 1000);
