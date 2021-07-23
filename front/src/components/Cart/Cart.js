@@ -31,27 +31,12 @@ export default function Cart() {
   const products = useSelector((store) => store.cart.items);
 
   useEffect(() => {
-<<<<<<< HEAD
 
     if(!user){
       dispatch(loadCart());
     }
     
   }, [dispatch]);
-=======
-    console.log("useEffect de cart");
-    dispatch(loadCart());
-    dispatch(updateTotal());
-    cartItems = JSON.parse(localStorage.getItem("cart"));
-    setstate(cartItems);
-  }, [dispatch]);
-
-const update = () => {
- 
-  dispatch(updateTotal())
-}
-  console.log('cartItems',cartItems);
->>>>>>> dev
 
   return (
     <div className="cart">

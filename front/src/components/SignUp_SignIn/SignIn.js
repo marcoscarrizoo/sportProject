@@ -72,7 +72,7 @@ export default function SignIn() {
     })
     .then( async () => {
       await dispatch(fusionCart())
-      await dispatch(loadCart())
+      dispatch(loadCart())
     })
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
