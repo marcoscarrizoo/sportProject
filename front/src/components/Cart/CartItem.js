@@ -61,8 +61,8 @@ export default function (props) {
       .then((data) => setDetail(data));
   }, []);
 
-  const removeProductFromCart = async () => {
-    await dispatch(removeFromCart(id));
+  async function removeProductFromCart(id){
+    await dispatch(removeFromCart(id))
 
     let user = JSON.parse(localStorage.getItem("storage"));
 
@@ -77,8 +77,7 @@ export default function (props) {
         showConfirmButton: false 
       }
     )
-
-  };
+  }
 
   const handleChangeQuantity = async (e) => {
     const { value } = e.target;
@@ -108,7 +107,7 @@ export default function (props) {
             max={detail.stock}
             onChange={handleChangeQuantity}
           />
-          <Button variant="contained" onClick={removeProductFromCart}>
+          <Button variant="contained" onClick={() => removeProductFromCart(id)}>
             <i class="fa fa-trash" aria-hidden="true"></i>
             borrar
           </Button>

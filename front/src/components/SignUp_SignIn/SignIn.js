@@ -59,6 +59,7 @@ export default function SignIn() {
     .then(user => {
 
       let info = { uid: user.user.uid, log: true }
+      console.log(user.uid)
       window.localStorage.setItem("storage", JSON.stringify(info))
 
       dispatch({
@@ -71,8 +72,9 @@ export default function SignIn() {
       dispatch(doUserLogin(user.user))
     })
     .then( async () => {
+      console.log("entro a hacer la fusion")
       await dispatch(fusionCart())
-      await dispatch(loadCart())
+      dispatch(loadCart())
     })
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
@@ -89,8 +91,10 @@ export default function SignIn() {
   }
 
   
-let googleLogIn = () => {
-  dispatch(doGoogleLogIn())
+let googleLogIn = async () => {
+  await dispatch(doGoogleLogIn())
+  // await dispatch(fusionCart())
+  // dispatch(loadCart())
 }
 
 if(loggedIn) {

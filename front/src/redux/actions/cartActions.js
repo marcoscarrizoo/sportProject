@@ -72,19 +72,14 @@ export const addToCart = (id, quantity, price) => async (dispatch) => {
   }
 };
 
-export const removeFromCart = (id) => async (dispatch, getState) => {
+export const removeFromCart = (id) => (dispatch, getState) => {
 
   try {
     let user = JSON.parse(localStorage.getItem("storage"));
-  
-    console.log("-------------------------")
-    console.log(user.uid)
-    console.log("-------------------------")
-    console.log(id)
     
     if (user?.uid) {
       let info = { userId: user.uid ,productId: id }
-      await axios.delete(url + "/orders/delete/product", info)
+      axios.delete( url + "/orders/delete/product", {data: {...info}})
     }
     else {
       let cart = getState().cart.items;
@@ -176,7 +171,6 @@ export const checkout = () => async (dispatch, getState) => {
   }
 };
 
-<<<<<<< HEAD
 export const updateTotal = () => {
   return { type: UPDATE_TOTAL };
 };
@@ -188,6 +182,7 @@ export const fusionCart = async () => {
   let products = JSON.parse(localStorage.getItem("cart"));
 
   if(products){
+    console.log("entro al if de products")
     
     products = products.map(e => {                               
       return {
@@ -197,27 +192,25 @@ export const fusionCart = async () => {
     })
   }
   
-  
+    console.log("entro al fusionCart")
+
     if( user?.uid ){
 
+      console.log("hay un user uid")
       if(products?.length > 0) {
         let info = { userId: user.uid ,products}
+        console.log(info)
         let res = await axios.post( url + "/orders/create", info)
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
+        if(res.data.message === false) {
+          await axios.put(url + "/orders/update/" + res.data.cartId, info)
+        }
       } 
       else {
         let res = await axios.post( url + "/orders/create", { userId: user.uid })
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
       }
-=======
-export const updateTotal = () => async (dispatch) => {
-  
-  var cart = JSON.parse(localStorage.getItem("cart"));
-  var total = 0;
-  if (cart?.length) {
-    for (var i of cart) {
-      total += parseFloat(i.price) * parseFloat(i.quantity);
->>>>>>> dev
+      window.localStorage.removeItem("cart")
     }
 
 

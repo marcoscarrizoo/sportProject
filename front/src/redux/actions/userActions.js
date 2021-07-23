@@ -1,7 +1,7 @@
 import axios from "axios";
 import { url } from "../../App";
 import { auth, loginWithGoogle } from "../../firebase";
-import { FUSION_CART } from "./cartActions";
+import { fusionCart, FUSION_CART, loadCart } from "./cartActions";
 
 export const LOGIN = "LOGIN";
 export const LOGIN_WITH_USER = "LOGIN_WiTH_USER";
@@ -27,7 +27,6 @@ export let doUserLogin = (user) => async (dispatch, getState) => {
     type: LOGIN_SUCESS
   })
   // saveStorage(getState())
-
 };
 
 
@@ -83,24 +82,14 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
     type: LOGIN, //el login solo pasa el fetching a true (sirve en caso de queres mostrar un mensaje de carga ya que puede tardar unos segundos en autenticar)
   });
 
-  // let products = JSON.parse(window.localStorage.getItem("cart"))
-
-  // products = products.map(e => {
-  //   return {
-  //     productId: e.id,
-  //     quantity: e.quantity,
-  //   }
-  // })
-
   return loginWithGoogle() //retorna la promesa
-    .then(async (user) => {
+    .then(async (user, dispatch) => {
 
-      // let userId = user.uid                                      ------------------
-      // let userId = "d1687b07-058c-414a-bb5a-77a8d897be57"
-      // let info = { userId, products }
-
-      // await axios.put(url + "/order/addOrder", info);
-
+      let form = {
+        id: user.uid,
+        email: user.email,
+      }
+      await axios.post(url + "/user/create", form);
       dispatch({
         type: LOGIN_SUCESS,
         payload: {
@@ -112,16 +101,6 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
       });
       saveStorage(getState());
     })
-    // .then ( async () => {
-      
-    //   // LO QUE RECIBE DEL BACK LO MANDA A REDUX Y AL LOCAL STORAGE   -----------------
-
-    //   // let orderBack = await axios.get( url + "algo" + quizasIdUsuario)
-    //   // let { products } = orderBack
-    //   // dispatch({ type: FUSION_CART, payload: orderBack})
-    //   // saveStorage(products)
-
-    // })
     .catch((e) => {
       dispatch({
         type: LOGIN_ERROR,

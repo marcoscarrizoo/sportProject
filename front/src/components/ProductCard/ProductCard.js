@@ -105,7 +105,7 @@ export default function ProductCard({
         history.push("/cart")
       }
       else {
-      dispatch(addToCart(id, product?.stock ? product.stock + 1 : 1, price));
+      await dispatch(addToCart(id, product?.quantity ? product.quantity + 1 : 1, price));
       Swal.fire(
         {
           text:'Se agrego al carrito',
