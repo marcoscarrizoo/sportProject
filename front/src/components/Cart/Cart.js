@@ -1,31 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
-import Swal from "sweetalert2";
 import {
   loadCart,
   cartReset,
   updateTotal,
 } from "../../redux/actions/cartActions";
-import { Container, makeStyles, Typography, Button } from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 import { Link, useHistory } from 'react-router-dom';
 
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
 
-const useStyle = makeStyles({
-  cart: {
-    marginLeft: "0px",
-  },
-  title: {
-    color: "gray",
-  },
-});
 
 export default function Cart() {
-  const classes = useStyle();
   const dispatch = useDispatch();
-  const history = useHistory()
   let user = JSON.parse(localStorage.getItem("storage"));
   const total = useSelector((state) => state.cart.total);
   const products = useSelector((store) => store.cart.items);

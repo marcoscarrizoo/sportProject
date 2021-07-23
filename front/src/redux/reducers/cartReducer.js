@@ -6,6 +6,7 @@ import {
   LOAD_CART,
   UPDATE_TOTAL,
 } from "../actions/cartActions";
+import { USER_LOG_OUT } from "../actions/userActions";
 
 const initialState = {
   items: JSON.parse(localStorage.getItem("cart") || "[]"),
@@ -52,6 +53,11 @@ export default function cartReducers(state = initialState, action) {
             return t + (s.price * s.quantity)
           },0)
         }
+      }
+      case USER_LOG_OUT: return {
+        ...state,
+        items: [],
+        total: 0
       }
 
     default:
