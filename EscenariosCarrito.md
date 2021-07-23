@@ -123,7 +123,6 @@ const body = {
 
 ### localhost:3001/orders/delete/d02baf64-58cd-422c-9c0f-122708f8f534
 
-XXXXXXXXXx
 ## 4-GET Orden por ID
 
 ### Obtiene una order completa con product y user, de cualquier estado por su ID.
@@ -153,13 +152,17 @@ XXXXXXXXXx
 
 ### localhost:3001/orders
 
-## 7-Delete Product cuando se elimina de carrito
-### Borra el producto de la orden, si no existe devuelve error 404
-XXX Hasta aqui llegue mañana reviso
+## 7-Delete Product, cuando se elimina de carrito
+
+### Recibe por body el userId y el productId, y elimina el producto si existe una order con estado CART y ese producto, de lo contrario devuelve error 404
+
+### Modelo de consutla DELETE /orders/delete
+
 ```js
-//GET localhost:3001/order/:orderId
-//Devuelve la oder con toda la información
-//Back recibe por params un :orderId
+{
+  "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+    "productId": 2
+}
 ```
 ## Consulta Ruta prueba - Obtener order por orderId
 
