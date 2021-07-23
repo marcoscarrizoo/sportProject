@@ -11,7 +11,6 @@ body = {
 }
 */
 async function deleteProductById(req, res, next) {
-  console.log("deleteProductById");
   try {
     //Debe es cambiar el estado
     const { userId, productId } = req.body;
