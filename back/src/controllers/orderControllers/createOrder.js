@@ -20,7 +20,7 @@ body = {
   ]
 }
 */
-async function createOrder(req, res, _next) {
+async function createOrder(req, res, next) {
   try {
     const {
       products,

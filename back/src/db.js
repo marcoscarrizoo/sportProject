@@ -73,11 +73,11 @@ Product.belongsToMany(Order, { through: Order_Product });
 User.hasMany(Order);
 Order.belongsTo(User);
 
-Product.hasMany(Review);
-Review.belongsTo(Product);
+// Product.hasMany(Review);
+// Review.belongsTo(Product);
 
-User.hasMany(Review);
-Review.belongsTo(User);
+// User.hasMany(Review);
+// Review.belongsTo(User);
 
 module.exports = {
   ...sequelize.models,
