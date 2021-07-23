@@ -27,11 +27,11 @@ async function createOrder(req, res, _next) {
       userId
     } = req.body;
     //Si no hay productos cargados, devuelve error
-    if (products.length == 0) {
-      return res.status(400).json({
-        message: "ERROR debe cargar al menos un producto"
-      });
-    }
+    // if (products.length == 0) {
+    //   return res.status(400).json({
+    //     message: "ERROR debe cargar al menos un producto"
+    //   });
+    // }
     //Se busca la orden por userId y que sea orderState 'CART'
     const order = await Order.findOne({
       where: {
@@ -48,7 +48,8 @@ async function createOrder(req, res, _next) {
       //Asocia user a la order
       user.addOrder(order);
       //Recorre los productos que vienen por body
-      products.forEach(async product => {
+
+      products?.forEach(async product => {
         //Busca el producto por productId
         const productData = await Product.findByPk(product.productId);
         //Asocia product a la order, con la cantidad y el precio (de la DB);
@@ -60,10 +61,14 @@ async function createOrder(req, res, _next) {
         });
       });
       return res.json({
-        message: `Order create ID: ${order.id}`
+        message: `Orden ID: ${order.id} creada exitosamente`,
+        cartId: `${order.id}`
       });
       //Si la orden existe se fusiona
-    } else res.status(404).send("Existe una orden con ese ID")
+    } else res.json({
+      message: `Orden existente ID:${order.id}`,
+      cartId: `${order.id}`
+    })
   } catch (err) {
     console.log(err);
     next(err);

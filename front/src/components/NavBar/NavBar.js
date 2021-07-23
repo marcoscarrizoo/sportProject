@@ -22,6 +22,7 @@ import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { auth } from "../../firebase";
+import { loadCart } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
   textDeco: {
@@ -162,6 +163,11 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  function handleLoadCart() {
+    dispatch(loadCart())
+  }
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -276,7 +282,7 @@ export default function PrimarySearchAppBar() {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link className={classes.text} to="/cart">
+            <Link className={classes.text} to="/cart" onClick={ handleLoadCart }>
               <IconButton color="inherit">
                 <Badge badgeContent={carrito} color="secondary">
                   <ShoppingCartIcon />

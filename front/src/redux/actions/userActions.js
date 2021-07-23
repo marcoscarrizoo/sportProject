@@ -21,27 +21,7 @@ export let newUser = (form) => async (dispatch) => {
 };
 
 //hace el login con mail, contra, y deja guardado en el localstorage la sesion
-export let doUserLogin = () => async (dispatch, getState) => {
-
-  let products = JSON.parse(window.localStorage.getItem("cart"))
-
-  // products = products.map(e => {                               ---------------------
-  //   return {
-  //     productId: e.id,
-  //     quantity: e.quantity,
-  //   }
-  // })
-
-  // // let userId = user.uid                                      ------------------
-  // let userId = "d1687b07-058c-414a-bb5a-77a8d897be57"
-  // let info = { userId, products }
-
-  // let order = await axios.put(url + "/order/addOrder", info)
-
-  // // LO QUE RECIBE DEL BACK LO MANDA A REDUX Y AL LOCAL STORAGE   -----------------
-  // // dispatch({ type: FUSION_CART, payload: order})
-  // // saveStorage(order) ---------------------
-
+export let doUserLogin = (user) => async (dispatch, getState) => {
 
   dispatch({
     type: LOGIN_SUCESS
@@ -103,23 +83,23 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
     type: LOGIN, //el login solo pasa el fetching a true (sirve en caso de queres mostrar un mensaje de carga ya que puede tardar unos segundos en autenticar)
   });
 
-  let products = JSON.parse(window.localStorage.getItem("cart"))
+  // let products = JSON.parse(window.localStorage.getItem("cart"))
 
-  products = products.map(e => {
-    return {
-      productId: e.id,
-      quantity: e.quantity,
-    }
-  })
+  // products = products.map(e => {
+  //   return {
+  //     productId: e.id,
+  //     quantity: e.quantity,
+  //   }
+  // })
 
   return loginWithGoogle() //retorna la promesa
     .then(async (user) => {
 
       // let userId = user.uid                                      ------------------
-      let userId = "d1687b07-058c-414a-bb5a-77a8d897be57"
-      let info = { userId, products }
+      // let userId = "d1687b07-058c-414a-bb5a-77a8d897be57"
+      // let info = { userId, products }
 
-      await axios.put(url + "/order/addOrder", info);
+      // await axios.put(url + "/order/addOrder", info);
 
       dispatch({
         type: LOGIN_SUCESS,
@@ -130,18 +110,18 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
           photo: user.photoURL,
         },
       });
-      // saveStorage(getState());
+      saveStorage(getState());
     })
-    .then ( async () => {
+    // .then ( async () => {
       
-      // LO QUE RECIBE DEL BACK LO MANDA A REDUX Y AL LOCAL STORAGE   -----------------
+    //   // LO QUE RECIBE DEL BACK LO MANDA A REDUX Y AL LOCAL STORAGE   -----------------
 
-      // let orderBack = await axios.get( url + "algo" + quizasIdUsuario)
-      // let { products } = orderBack
-      // dispatch({ type: FUSION_CART, payload: orderBack})
-      // saveStorage(products)
+    //   // let orderBack = await axios.get( url + "algo" + quizasIdUsuario)
+    //   // let { products } = orderBack
+    //   // dispatch({ type: FUSION_CART, payload: orderBack})
+    //   // saveStorage(products)
 
-    })
+    // })
     .catch((e) => {
       dispatch({
         type: LOGIN_ERROR,
