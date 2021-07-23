@@ -112,6 +112,7 @@ export const cartReset = () => (dispatch) => {
   localStorage.setItem("cart", "[]");
 };
 
+
 export const changeProductQuantity =
   (id, quantity) => async (dispatch, getState) => {
 
@@ -175,6 +176,7 @@ export const checkout = () => async (dispatch, getState) => {
   }
 };
 
+<<<<<<< HEAD
 export const updateTotal = () => {
   return { type: UPDATE_TOTAL };
 };
@@ -207,6 +209,15 @@ export const fusionCart = async () => {
         let res = await axios.post( url + "/orders/create", { userId: user.uid })
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
       }
+=======
+export const updateTotal = () => async (dispatch) => {
+  
+  var cart = JSON.parse(localStorage.getItem("cart"));
+  var total = 0;
+  if (cart?.length) {
+    for (var i of cart) {
+      total += parseFloat(i.price) * parseFloat(i.quantity);
+>>>>>>> dev
     }
 
 
