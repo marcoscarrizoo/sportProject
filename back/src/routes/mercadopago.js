@@ -5,7 +5,7 @@ const router = Router();
 
 
 
-router.get("/", mercadoPago);
+router.get("/:id", mercadoPago);
 router.get("/pagos", payment);
 
 

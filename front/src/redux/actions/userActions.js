@@ -103,5 +103,13 @@ export let doGoogleLogIn = () => (dispatch, getState) => {
 };
 
 
-//cierra sesion de google 
 
+export const getOrderByUserId = (id) => {
+  return async (dispatch) => {
+    const user = await axios.get('http://localhost3001/user/user/'+id)
+      dispatch({
+      type: "ORDER_BY_USER_ID",
+      payload: user.data,
+    });
+  };
+};

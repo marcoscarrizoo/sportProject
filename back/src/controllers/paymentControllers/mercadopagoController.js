@@ -1,4 +1,5 @@
-const {Order} = require("../../db");
+const {Order, Order_Product, Product} = require("../../db");
+
 const {TOKEN} = process.env;
 const mercadopago = require ("mercadopago");
 
@@ -9,23 +10,25 @@ mercadopago.configure({
 
 
 async function mercadoPago(req, res,next){
-    console.log('holi')
-    const id_orden= 1
-
-    const carrito = [
-        {title: "Producto 1", quantity: 5, price: 10.52},
-        {title: "Producto 2", quantity: 15, price: 100.52},
-        {title: "Producto 3", quantity: 6, price: 200}
-      ]
+    const id_orden = req.params.id
+    console.log('reqqqq',req.params.id)
 
 
-    const items_ml = carrito.map(i => ({
-        title: i.title,
+    const cart = await Order.findOne({
+        where : {id: id_orden, orderState: 'CART'}, 
+        include:  [Product] 
+    })
+
+    console.log('carritoooo',cart.products)
+    console.log('Productoooos',Product)
+
+    const items_ml = cart.products.map(i => ({
+        title: i.name,
         unit_price: i.price, 
-        quantity: i.quantity 
+        quantity: i.Order_Product.quantity
     }))
 
-   console.log(items_ml)
+    console.log('iteeeeeeems',items_ml)
 
     //creando un objeto de preferencia
     let preference = {
@@ -42,7 +45,7 @@ async function mercadoPago(req, res,next){
         },
         back_urls: {
             sucess: 'http://localhost:3001/mercadopago/pagos',
-            failure: 'http://localhost:3001/mercadopago/pagos',
+            failure: 'http://localhost:3000',
             pending: 'http://localhost:3001/mercadopago/pagos',
         },    
        
@@ -65,6 +68,7 @@ mercadopago.preferences.create(preference)
 
 
 async function payment(req, res, next){
+    console.log('reeeeeq',req)
     const payment_id=req.query.payment_id;
     const payment_status=req.query.status;
     const external_reference=req.query.external_reference

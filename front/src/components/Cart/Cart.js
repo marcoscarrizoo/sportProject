@@ -9,7 +9,7 @@ import {
 } from "../../redux/actions/cartActions";
 import { Container, makeStyles, Typography, Button } from "@material-ui/core";
 import { Link, useHistory } from 'react-router-dom';
-
+import { Redirect } from "react-router";
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
 
@@ -55,6 +55,11 @@ const update = () => {
  
   dispatch(updateTotal())
 }
+
+const redirect = () => {
+ return <Redirect to="/direccionDeEnvio" />
+}
+
   console.log('cartItems',cartItems);
 
   return (
@@ -93,7 +98,9 @@ const update = () => {
           <h3>{`$${total}`}</h3>
         </div>
         <div className="buttons">
+          <Link to='/direccionDeEnvio'> 
           <button className="comprar">COMPRAR</button>
+          </Link>
           <Button
              onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
           >
