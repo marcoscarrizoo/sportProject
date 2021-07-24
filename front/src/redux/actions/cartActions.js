@@ -1,5 +1,4 @@
 import axios from "axios";
-import { newUser } from "./userActions";
 
 import { url } from "../../App";
 
@@ -98,23 +97,31 @@ export const removeFromCart = (id) => (dispatch, getState) => {
   //sweetAlert("Eliminado", "success", "OK", 1000);
 };
 
-export const cartReset = () => (dispatch) => {
+export const cartReset = () => async (dispatch) => {
 
 
   let user = JSON.parse(localStorage.getItem("storage"));
+  let cartId = JSON.parse(localStorage.getItem("cartid"));
 
-  if (user?.uid) {
-    let cartId = JSON.parse(localStorage.getItem("cartid"));
-    axios.delete( url + "/orders/delete/" + cartId)
+  
+  if (user?.uid && cartId) {
+
+    console.log("entro aca wey")
+    await axios.delete( url + "/orders/delete/"+cartId)
+    window.localStorage.removeItem("cartid")
   }
   else {
-    dispatch({
-      type: CART_RESET,
-      payload: [],
-    });
     //sweetAlert("Vaciado", "success", "OK", 1000);
-    localStorage.setItem("cart", "[]");
+    localStorage.removeItem("cart");
   }
+
+  return dispatch({
+    type: CART_RESET,
+    payload: {
+      items: [],
+      total: 0
+    }
+  });
 };
 
 
