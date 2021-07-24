@@ -21,6 +21,9 @@ import AddressForm from './components/Checkout/AddressForm';
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
 export const url = process.env.REACT_APP_API || "http://localhost:3001";
 
+// window.onbeforeunload = function() {
+//   return "¿Desea recargar la página web?";
+// };
 
 function App() {
   return (

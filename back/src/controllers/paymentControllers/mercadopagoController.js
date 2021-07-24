@@ -10,8 +10,9 @@ mercadopago.configure({
 
 
 async function mercadoPago(req, res,next){
-    const id_orden = req.params.id
-    console.log('reqqqq',req.params.id)
+    console.log('FUNCTION DE MERCADO PAGOO!!!')
+    const id_orden = req.params.orderId
+    console.log('ID_ORDEN_NUEVO', id_orden)
 
 
     const cart = await Order.findOne({
@@ -19,8 +20,6 @@ async function mercadoPago(req, res,next){
         include:  [Product] 
     })
 
-    console.log('carritoooo',cart.products)
-    console.log('Productoooos',Product)
 
     const items_ml = cart.products.map(i => ({
         title: i.name,
@@ -28,7 +27,6 @@ async function mercadoPago(req, res,next){
         quantity: i.Order_Product.quantity
     }))
 
-    console.log('iteeeeeeems',items_ml)
 
     //creando un objeto de preferencia
     let preference = {
@@ -55,7 +53,7 @@ async function mercadoPago(req, res,next){
 mercadopago.preferences.create(preference) 
 .then(response => {
     console.log('RESPUESTA RESPONSE',response)
-    global.id = response.body.id
+     global.id = response.body.id
     console.log('BODY.ID',response.body.id)
     
     res.json({id: global.id})
@@ -68,7 +66,6 @@ mercadopago.preferences.create(preference)
 
 
 async function payment(req, res, next){
-    console.log('reeeeeq',req)
     const payment_id=req.query.payment_id;
     const payment_status=req.query.status;
     const external_reference=req.query.external_reference

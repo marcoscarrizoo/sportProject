@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Swal from 'sweetalert2'
 import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn,saveStorage } from '../../redux/actions/userActions';
+import { addToCart, fusionCart, loadCart } from '../../redux/actions/cartActions';
 
 
 function Copyright() {
@@ -56,17 +57,24 @@ export default function SignIn() {
     e.preventDefault()
     auth.signInWithEmailAndPassword(email, pass)
     .then(user => {
+
+      let info = { uid: user.user.uid, log: true }
+      window.localStorage.setItem("storage", JSON.stringify(info))
+
       dispatch({
         type: LOGIN_SUCESS,
         payload: {
           uid: user.user.uid,
           email: user.user.email,
-          
-          
         }
       })
-      dispatch(doUserLogin())
+      dispatch(doUserLogin(user.user))
     })
+    // .then( async () => {
+    //   console.log("entro a hacer la fusion")
+    //   await dispatch(fusionCart())
+    //   dispatch(loadCart())
+    // })
     .catch(error => {
       if(error.code === 'auth/wrong-password') {
         setMsgError('password incorrecta')
@@ -78,15 +86,23 @@ export default function SignIn() {
         setMsgError('usuario y password incorrectas')
     }
     })
-    
+
   }
 
   
-let googleLogIn = () => {
+let googleLogIn =  () => {
   dispatch(doGoogleLogIn())
 }
 
-if(loggedIn) {
+if(user?.uid) {
+  
+  try {
+    fusionCart( user )
+    loadCart()
+  } catch (error) {
+    console.log("errrroooooooooor         ",error)
+  }
+
   history.push("/")
       Swal.fire(
         {

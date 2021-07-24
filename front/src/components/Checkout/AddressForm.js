@@ -137,7 +137,8 @@ function Application() {
   //console.log('useeeeerID',userId)
 
 function mercado() {
-  axios.get("http://localhost:3001/mercadopago" )
+  console.log('ordeeeeerid', orderId)
+  axios.get(`http://localhost:3001/mercadopago/${orderId}`)
   .then(data=>{
     console.log('daataaaaaaaaaaaaaa',data.data)
     setDatos(data.data)      
@@ -146,9 +147,11 @@ function mercado() {
     
 
   useEffect(()=>{
-    axios.get("http://localhost:3001/orders/user/"+ userId)
+    console.log('USSEEEEER ID', userId)
+    axios.get(`http://localhost:3001/orders/user/${userId}`)
     .then((response)=>{
       const info = response.data.ordersDetails[0].id
+      console.log('ORDEEER',info)
       setOrderId(info)
       mercado()
     }).catch(err => console.error(err)) 

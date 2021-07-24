@@ -70,14 +70,16 @@ Category.hasMany(Plan);
 Order.belongsToMany(Product, { through: Order_Product });
 Product.belongsToMany(Order, { through: Order_Product });
 
-User.hasMany(Order);
-Order.belongsTo(User);
+Order.hasMany(Order_Product)
+Order_Product.belongsTo(Order)
 
-//Product.hasMany(Review);
-//Review.belongsTo(Product);
 
-//User.hasMany(Review);
-//Review.belongsTo(User);
+
+// Product.hasMany(Review);
+// Review.belongsTo(Product);
+
+// User.hasMany(Review);
+// Review.belongsTo(User);
 
 module.exports = {
   ...sequelize.models,

@@ -12,11 +12,11 @@ const router = Router();
 
 router.post("/create", createOrder);
 router.put("/update/:id", updateOrder);
+router.delete("/delete/product", deleteProductById);
 router.delete("/delete/:id", deleteOrder);
 router.get("/:id", getOrderById);
-router.get("/", getAllOrders);
 router.get("/user/:id", getOrdersByUserId);
-router.delete("/delete/product", deleteProductById);
+router.get("/", getAllOrders);
 
 
 module.exports = router;
