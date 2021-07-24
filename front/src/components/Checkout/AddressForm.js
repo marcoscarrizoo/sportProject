@@ -131,34 +131,35 @@ import { BsInfo } from 'react-icons/bs';
 function Application() {
   const [datos, setDatos] = useState("")
   const [orderId, setOrderId] = useState("")
-  //const [orderDetail, setOrderDetail] = useState("")
-  //const dispatch = useDispatch()
   const userId = useSelector(store => store.user.uid)
-  //console.log('useeeeerID',userId)
 
-function mercado() {
-  console.log('ordeeeeerid', orderId)
-  axios.get(`http://localhost:3001/mercadopago/${orderId}`)
-  .then(data=>{
-    console.log('daataaaaaaaaaaaaaa',data.data)
-    setDatos(data.data)      
-  }).catch(err => console.error(err)) 
-}
+// function mercado() {
+//   axios.get(`http://localhost:3001/mercadopago/${orderId}`)
+//   .then(data=>{
+//     console.log('DATA DE LA FUNCION MERCADO',data.data)
+//     setDatos(data.data)      
+//   }).catch(err => console.error(err)) 
+// }
     
 
   useEffect(()=>{
-    console.log('USSEEEEER ID', userId)
     axios.get(`http://localhost:3001/orders/user/${userId}`)
     .then((response)=>{
       const info = response.data.ordersDetails[0].id
-      console.log('ORDEEER',info)
       setOrderId(info)
-      mercado()
-    }).catch(err => console.error(err)) 
+      
+    })
+    axios.get(`http://localhost:3001/mercadopago/${orderId}`)
+    .then(data => {
+      setDatos(data.data)
+    })
+    .catch(err => console.error(err)) 
     
 
-  },[userId])
-
+  },[orderId, userId])
+console.log('datos ID',datos)
+console.log('ORDER ID',orderId)
+console.log('userID', userId)
   // let productos= orderDetail.map((elem)=>(
   //   {
   //     title: elem.title,

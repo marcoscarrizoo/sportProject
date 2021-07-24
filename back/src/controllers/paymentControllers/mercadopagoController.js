@@ -48,8 +48,8 @@ async function mercadoPago(req, res,next){
         },    
        
 }
-
-
+ 
+ 
 mercadopago.preferences.create(preference) 
 .then(response => {
     console.log('RESPUESTA RESPONSE',response)
@@ -66,18 +66,21 @@ mercadopago.preferences.create(preference)
 
 
 async function payment(req, res, next){
+    console.log('FUNCION PAYMEEEENT')
     const payment_id=req.query.payment_id;
     const payment_status=req.query.status;
     const external_reference=req.query.external_reference
     const merchant_order_id = req.query.merchant_order_id
 
+    
     //aca editamos el status de mi orden 
     Order.findByPk(external_reference)
-    .then((order) => {
-        order.payment_id = payment_id
-        order.payment.status = payment_status
-        order.merchant_order_id = merchant_order_id
-        order.status = 'completed'
+    .then(order => {
+        console.log(order)
+        // order.payment_id = payment_id
+        // order.payment.status = payment_status
+        // order.merchant_order_id = merchant_order_id
+        order.orderState = 'COMPLETED'
         //console.info('salvando order')
         order.save()
         .then(() => {
@@ -91,7 +94,8 @@ async function payment(req, res, next){
     .catch(error => {
         return res.redirect(`http://localhost:3000/error=${error}&where=al+buscar`)
     })
-}
+    
+} 
 
 async function pagosId(req, res){
     const mp = new mercadopago (PROD_ACCESS_TOKEN)
