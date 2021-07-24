@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { url } from "../../App";
 import Swal from "sweetalert2";
 import {
@@ -18,8 +18,6 @@ import {
   Container,
   Typography,
   makeStyles,
-  TextField,
-  Input,
 } from "@material-ui/core";
 
 {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -21,7 +21,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { auth } from "../../firebase";
 import { loadCart } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -108,7 +107,6 @@ export default function PrimarySearchAppBar() {
   const user = useSelector((store) => store.user.loggedIn);
   const userName = useSelector((store) => store.user.email);
   const products = useSelector(store => store.cart)
-  const carrito = products.items.length
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -284,7 +282,12 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             <Link className={classes.text} to="/cart" onClick={ handleLoadCart }>
               <IconButton color="inherit">
-                <Badge badgeContent={carrito} color="secondary">
+                <Badge badgeContent={
+                  products?.items.length
+                  ? products.items.reduce((a, i) => a + i.quantity,0)
+                  : 0 } 
+                  
+                color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
