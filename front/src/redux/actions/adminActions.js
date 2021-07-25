@@ -1,16 +1,12 @@
 import axios from "axios";
 import { url } from "../../App";
 
-export const DELETE_PRODUCT = "DELETE_PRODUCT"
-
-
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const ORDERS = "ORDERS";
 
 export const postCategory = (form) => async (dispatch) => {
   try {
-    const info = await axios.post(
-      url + "/category/create",
-      form
-    );
+    const info = await axios.post(url + "/category/create", form);
     console.log(info.data);
   } catch (e) {
     console.log(e);
@@ -20,10 +16,7 @@ export const postCategory = (form) => async (dispatch) => {
 export const postProduct = (form) => async (dispatch) => {
   console.log("Form actions", form);
   try {
-    const info = await axios.post(
-      url + "/product/addProducts",
-      form
-    );
+    const info = await axios.post(url + "/product/addProducts", form);
     console.log(info.data);
   } catch (e) {
     console.log(e);
@@ -31,43 +24,50 @@ export const postProduct = (form) => async (dispatch) => {
 };
 export const updateCategory = (idCategory, info) => async (dispatch) => {
   try {
-    const data = await axios.put(url + '/category/update/' + idCategory, info)
-    console.log(data)
+    const data = await axios.put(url + "/category/update/" + idCategory, info);
+    console.log(data);
+  } catch (e) {
+    console.log(e);
   }
-  catch (e) {
-    console.log(e)
-  }
-}
+};
 
 export const deleteCategory = (name) => async (dispatch) => {
   try {
-    const info = await axios.delete(
-      url + "/category/delete/" + name
-    );
+    const info = await axios.delete(url + "/category/delete/" + name);
     console.log(info);
   } catch (e) {
     console.log(e);
   }
 };
 
-
 export function deleteProduct(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(url + "/product/delete/" + id)
-      dispatch({ type: DELETE_PRODUCT, payload: id })
+      await axios.delete(url + "/product/delete/" + id);
+      dispatch({ type: DELETE_PRODUCT, payload: id });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 
 export function editProduct(info, id) {
   return async function () {
     try {
-      await axios.put(url + "/product/update/" + id, info)
+      await axios.put(url + "/product/update/" + id, info);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+}
+
+export function getOrders() {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(url + "/orders");
+      dispatch({ type: ORDERS, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }

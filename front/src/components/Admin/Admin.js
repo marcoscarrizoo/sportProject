@@ -8,6 +8,7 @@ import Creators from "./Creators/Creators";
 import AdmUsers from "./AdmUsers/AdmUsers";
 import LocationAdd from "../Locations/LocationAdd";
 import LocationManager from "../Locations/LocationManager";
+import AdminOrders from "../Admin/AdmOrders/AdmOrders";
 
 const Admin = () => {
   return (
@@ -23,6 +24,7 @@ const Admin = () => {
       <Route path="/admin/product/:id" component={EditProduct} />
       <Route path="/admin/crear-sucursal" component={LocationAdd} />
       <Route path="/admin/sucursales" component={LocationManager} />
+      <Route path="/admin/ordenes" component={AdminOrders} />
     </div>
   );
 };
