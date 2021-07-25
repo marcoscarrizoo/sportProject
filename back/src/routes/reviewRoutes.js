@@ -15,10 +15,10 @@ const {
 
 const router = Router();
 
-router.get("/check", checkReviewer);
+router.post("/check", checkReviewer);
 router.post("/add", createReview);
-router.delete("/delete", deleteReview);
+router.post("/delete", deleteReview);
 router.put("/update", updateReview);
-router.get("/", getReviews);
+router.post("/", getReviews);
 
 module.exports = router;

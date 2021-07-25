@@ -43,14 +43,14 @@ export default function AdmOrders() {
         <h3 className="info">Info</h3>
         <h3 className="select">Acciones</h3>
       </div>
-      {orders.map((order) => (
+      {state.map((order) => (
         <div className="cards">
           <h5 className="id">{order.id}</h5>
           <h3 className="userId">{order.userId}</h3>
           <h5 className="orderState">{order.orderState.toUpperCase()}</h5>
           <h5 className="createdAt">{order.createdAt}</h5>
           <div className="info">
-            <Link to={`/admin/usuario/${order.id}`} className="Link">
+            <Link to={`/admin/orden/${order.id}`} className="Link">
               <BsInfoCircleFill />
             </Link>
           </div>
