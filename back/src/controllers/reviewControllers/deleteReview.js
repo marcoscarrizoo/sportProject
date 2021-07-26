@@ -2,6 +2,7 @@ const { Review } = require("../../db");
 
 async function deleteReview(req, res, next) {
   //comment: string, rating: number
+  console.log("Delete: ", req.body);
   const { userId, productId } = req.body;
   try {
     const review = await Review.findOne({ where: { userId, productId } });

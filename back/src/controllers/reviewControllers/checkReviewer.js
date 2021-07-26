@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 
 async function checkReviewer(req, res, next) {
   //comment: string, rating: number
+  console.log("Check Body: ", req.body);
   const { userId, productId } = req.body;
   try {
     const userOrders = await Order.findAll({
