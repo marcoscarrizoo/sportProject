@@ -4,11 +4,12 @@ import CartItem from "./CartItem";
 import {
   loadCart,
   cartReset,
+  updateTotal,
 } from "../../redux/actions/cartActions";
 import { makeStyles, Button } from "@material-ui/core";
 import { Link, useHistory } from 'react-router-dom';
 import { Redirect } from "react-router";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
 import Dialog from '@material-ui/core/Dialog';
