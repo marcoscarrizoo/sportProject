@@ -2,10 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import {
+<<<<<<< HEAD
   cartReset, loadCart,
 } from "../../redux/actions/cartActions";
 import { Button } from "@material-ui/core";
 import { Link } from 'react-router-dom';
+=======
+  loadCart,
+  cartReset,
+  updateTotal,
+} from "../../redux/actions/cartActions";
+import { makeStyles, Button } from "@material-ui/core";
+import { Link, useHistory } from 'react-router-dom';
+import { Redirect } from "react-router";
+// import { Button } from "@material-ui/core";
+>>>>>>> a0fc475193fe53a4879391ed64469472a1aba486
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
 import Dialog from '@material-ui/core/Dialog';
