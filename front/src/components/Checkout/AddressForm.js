@@ -123,33 +123,62 @@
 import { useEffect, useState } from 'react'
 import Comprar from './Checkout'
 import axios from 'axios'
+import { useDispatch } from 'react-redux';
+import {getOrderByUserId} from '../../redux/actions/userActions'
+import { useSelector } from 'react-redux';
+import { BsInfo } from 'react-icons/bs';
 
 function Application() {
   const [datos, setDatos] = useState("")
+  const [orderId, setOrderId] = useState("")
+  const userId = useSelector(store => store.user.uid)
+
+// function mercado() {
+//   axios.get(`http://localhost:3001/mercadopago/${orderId}`)
+//   .then(data=>{
+//     console.log('DATA DE LA FUNCION MERCADO',data.data)
+//     setDatos(data.data)      
+//   }).catch(err => console.error(err)) 
+// }
+    
 
   useEffect(()=>{
-    axios
-    .get("http://localhost:3001/mercadopago")
-    .then((data)=>{
+    axios.get(`http://localhost:3001/orders/user/${userId}`)
+    .then((response)=>{
+      const info = response.data.ordersDetails[0].id
+      setOrderId(info)
+      
+    })
+    axios.get(`http://localhost:3001/mercadopago/${orderId}`)
+    .then(data => {
       setDatos(data.data)
-      console.info('Contenido de data:', data)
-    }).catch(err => console.error(err)) 
-  },[])
+    })
+    .catch(err => console.error(err)) 
+    
 
-
-  const productos = [
-    {title: "Producto 1", quantity: 5, price: 10.52},
-    {title: "Producto 2", quantity: 15, price: 100.52},
-    {title: "Producto 3", quantity: 6, price: 200}
-  ]
+  },[orderId, userId])
+console.log('datos ID',datos)
+console.log('ORDER ID',orderId)
+console.log('userID', userId)
+  // let productos= orderDetail.map((elem)=>(
+  //   {
+  //     title: elem.title,
+  //     price:  elem.price,
+  //   quantity: elem.quantity
+  // }
+  // )
+  // )
+  
+  
   return (
     <div className="App">
-      { !datos
-        ? <p>Aguarde un momento....</p> 
-        : <Comprar productos={productos} data={datos}/>
-      }
+  
+          <Comprar data={datos}/>  
+      
     </div>
   );
 }
 
 export default Application;
+
+//productos={productos} data={datos}

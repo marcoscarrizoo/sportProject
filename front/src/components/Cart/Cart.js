@@ -5,12 +5,12 @@ import {
   loadCart,
   cartReset,
 } from "../../redux/actions/cartActions";
+import { makeStyles, Button } from "@material-ui/core";
+import { Link, useHistory } from 'react-router-dom';
+import { Redirect } from "react-router";
 import { Button } from "@material-ui/core";
-import { Link } from 'react-router-dom';
-
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -28,12 +28,15 @@ export default function Cart() {
 
   useEffect(() => {
 
-    if (!user) {
-      dispatch(loadCart());
-    }
+const update = () => {
+ 
+  dispatch(updateTotal())
+} }
+  ,[]) 
 
-  }, [dispatch]);
-
+const redirect = () => {
+ return <Redirect to="/direccionDeEnvio" />
+}
   const handleClickOpen = (e) => {
     if (products?.length) setOpen(true);
   };
@@ -84,7 +87,9 @@ export default function Cart() {
           <h3>{`$${total}`}</h3>
         </div>
         <div className="buttons">
+          <Link to='/direccionDeEnvio'> 
           <button className="comprar">COMPRAR</button>
+          </Link>
           <Button
             onClick={handleClickOpen}
           >
@@ -225,3 +230,4 @@ export default function Cart() {
 //     </div>
 //   );
 // }
+  
