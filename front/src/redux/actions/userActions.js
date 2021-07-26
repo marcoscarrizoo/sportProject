@@ -1,7 +1,6 @@
 import axios from "axios";
 import { url } from "../../App";
 import { auth, loginWithGoogle } from "../../firebase";
-import { fusionCart, FUSION_CART, loadCart } from "./cartActions";
 
 export const LOGIN = "LOGIN";
 export const LOGIN_WITH_USER = "LOGIN_WiTH_USER";
@@ -13,7 +12,7 @@ export const USER_LOG_OUT = "USER_LOG_OUT";
 //crea nuevo usuario en la base de datos con id, mail, nombre, apellido
 export let newUser = (form) => async (dispatch) => {
   try {
-    const data = await axios.post(url + "/user/create", form);
+    await axios.post(url + "/user/create", form);
     // console.log("dataaaa", data);
   } catch (e) {
     // console.log(e);

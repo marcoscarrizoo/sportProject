@@ -18,8 +18,8 @@ import Typography from '@material-ui/core/Typography';
 
 import Container from '@material-ui/core/Container';
 import Swal from 'sweetalert2'
-import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn,saveStorage } from '../../redux/actions/userActions';
-import { addToCart, fusionCart, loadCart } from '../../redux/actions/cartActions';
+import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn } from '../../redux/actions/userActions';
+import { fusionCart, loadCart } from '../../redux/actions/cartActions';
 
 
 function Copyright() {
@@ -45,11 +45,9 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [msgError, setMsgError] = useState(null)
-  const [log, setLog] = useState(null)
 
 
   const loggedIn = useSelector(store => store.user.loggedIn)
-  const fetching = useSelector(store => store.user.fetching)
 
   
   //hace el loggin con mail y password
@@ -100,7 +98,7 @@ if(user?.uid) {
     fusionCart( user )
     loadCart()
   } catch (error) {
-    console.log("errrroooooooooor         ",error)
+    console.log(error)
   }
 
   history.push("/")

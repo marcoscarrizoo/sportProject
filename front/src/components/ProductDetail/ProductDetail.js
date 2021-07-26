@@ -6,16 +6,12 @@ import { useParams } from "react-router";
 import { getProductDetail } from "../../redux/actions/productsActions";
 import { addToCart } from "../../redux/actions/cartActions";
 import Swal from "sweetalert2";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
-import loader from "../../defaultImgs/loader.gif";
 import { resetProductDetail } from "../../redux/actions/productsActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +56,7 @@ export default function ProductDetail() {
     if(detail){
     setImage(detail.images[0])}
     return ()=>dispatch(resetProductDetail())
-  }, [dispatch, id]);
+  }, [dispatch, id, detail]);
 
 
   function changeImg(e) {

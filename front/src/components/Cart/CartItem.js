@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { url } from "../../App";
 import Swal from "sweetalert2";
 import {
   removeFromCart,
   changeProductQuantity,
-  updateTotal,
   loadCart,
 } from "../../redux/actions/cartActions";
 import "./cart.css";
@@ -19,13 +17,6 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-
-{
-  /* <i class="fa fa-trash" aria-hidden="true"></i> */
-}
-
-/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"; */
 
 //styles
 const useStyle = makeStyles({
@@ -45,19 +36,18 @@ const useStyle = makeStyles({
 });
 
 //function
-export default function (props) {
+export default function CartItem(props) {
   const { id, Qty } = props;
 
   const dispatch = useDispatch();
   const classes = useStyle();
-  const history = useHistory();
 
   const [detail, setDetail] = useState({});
   useEffect(() => {
     fetch(`${url}/product/` + id)
       .then((res) => res.json())
       .then((data) => setDetail(data));
-  }, []);
+  }, [id]);
 
   async function removeProductFromCart(id){
     await dispatch(removeFromCart(id))

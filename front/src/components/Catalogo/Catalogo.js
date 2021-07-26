@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import SortBar from "./Sortbar";
-import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
