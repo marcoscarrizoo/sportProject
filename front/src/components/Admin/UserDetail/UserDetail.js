@@ -96,6 +96,8 @@ export default function UserDetail() {
     useEffect(() => {
         dispatch(getUserDetail(id))
         dispatch(getUserOrders(id))
+
+        // return () => {}
     }, [dispatch, id])
 
     return (

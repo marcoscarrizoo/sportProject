@@ -56,10 +56,7 @@ const useStyles = makeStyles({
   div: {
     display: "flex",
     flexDirection: "column",
-<<<<<<< HEAD
-=======
     flexWrap: "wrap",
->>>>>>> fixed
   },
 });
 

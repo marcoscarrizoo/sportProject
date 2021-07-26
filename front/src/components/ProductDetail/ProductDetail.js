@@ -54,18 +54,10 @@ export default function ProductDetail() {
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-<<<<<<< HEAD
     if(detail){
     setImage(detail.images[0])}
     return ()=>dispatch(resetProductDetail())
   }, [dispatch, id, detail]);
-=======
-    if (detail) {
-      setImage(detail.images[0]);
-    }
-    return () => dispatch(resetProductDetail());
-  }, [dispatch, id]);
->>>>>>> fixed
 
   function changeImg(e) {
     setImage(e.target.src);
