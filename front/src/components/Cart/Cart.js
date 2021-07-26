@@ -4,16 +4,23 @@ import CartItem from "./CartItem";
 import {
   loadCart,
   cartReset,
-  updateTotal,
 } from "../../redux/actions/cartActions";
 import { makeStyles, Button } from "@material-ui/core";
 import { Link, useHistory } from 'react-router-dom';
 import { Redirect } from "react-router";
+import { Button } from "@material-ui/core";
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 export default function Cart() {
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
   let user = JSON.parse(localStorage.getItem("storage"));
   const total = useSelector((state) => state.cart.total);
@@ -30,8 +37,19 @@ const update = () => {
 const redirect = () => {
  return <Redirect to="/direccionDeEnvio" />
 }
+  const handleClickOpen = (e) => {
+    if (products?.length) setOpen(true);
+  };
 
-  
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleReset = () => {
+    dispatch(cartReset())
+    setOpen(false)
+  }
+
 
   return (
     <div className="cart">
@@ -46,10 +64,10 @@ const redirect = () => {
                 Qty={product.quantity}
               />
             ))
-            : 
-              <Link to="/productos" className="carrito-v">
-              <img className="carrito-vacio" src="https://www.elpatrondelmate.com.ar/images/carritovacio.png" alt="carrito vacio"/>
-              </Link>
+            :
+            <Link to="/productos" className="carrito-v">
+              <img className="carrito-vacio" src="https://www.elpatrondelmate.com.ar/images/carritovacio.png" alt="carrito vacio" />
+            </Link>
         }
       </div>
       <div className="totales">
@@ -73,12 +91,33 @@ const redirect = () => {
           <button className="comprar">COMPRAR</button>
           </Link>
           <Button
-             onClick={(() => dispatch(cartReset()), dispatch(updateTotal()))}
+            onClick={handleClickOpen}
           >
-            Vaciar 
+            Vaciar
           </Button>
         </div>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Estas seguro/a?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Se eliminaran todos los productos del carrito
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <button onClick={handleClose} className="buttons-c cancel-c">
+            Cancelar
+          </button>
+          <button onClick={handleReset} className="buttons-c delete-c" autoFocus>
+            Confirmar
+          </button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

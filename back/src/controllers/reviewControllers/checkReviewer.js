@@ -1,8 +1,9 @@
-const { Product, Review, Order } = require("../../db");
+const { Product, Review, User, Order, Order_Product } = require("../../db");
+const { Op } = require("sequelize");
 
-async function createReview(req, res, next) {
+async function checkReviewer(req, res, next) {
   //comment: string, rating: number
-  const { userId, productId, comment, rating } = req.body;
+  const { userId, productId } = req.body;
   try {
     const userOrders = await Order.findAll({
       where: {
@@ -16,26 +17,23 @@ async function createReview(req, res, next) {
         },
       ],
     });
-
     if (userOrders?.length) {
       const findRev = await Review.findOne({ where: { userId, productId } });
       if (findRev) {
-        res.json("ya has comentado sobre este producto");
+        //ya comento ... mando el review para poder mostrarlo al principio
+        // y ademas para darle opcion al usuario a editarlo si asi lo desea
+        res.json(findRev);
       }
-      const review = await Review.create({
-        userId,
-        productId,
-        comment,
-        rating,
-      });
-      res.json(review);
+      // no ha comentado
+      res.send(true);
     }
-    res.json("No orders found with those Specs");
+    //no puede comentar
+    res.send(false);
   } catch (error) {
     console.error(error);
   }
 }
 
 module.exports = {
-  createReview,
+  checkReviewer,
 };
