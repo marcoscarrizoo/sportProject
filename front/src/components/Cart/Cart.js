@@ -28,7 +28,8 @@ export default function Cart() {
     if(!user){
       dispatch(loadCart())
     }
-  }, [dispatch])
+
+  }, [dispatch, user]);
 
   const handleClickOpen = (e) => {
     if (products?.length) setOpen(true);

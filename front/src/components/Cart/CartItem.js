@@ -18,10 +18,6 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-
-/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"; */
-
 //styles
 const useStyle = makeStyles({
   item: {
@@ -45,7 +41,6 @@ export default function CartItem(props) {
 
   const dispatch = useDispatch();
   const classes = useStyle();
-
 
   const [detail, setDetail] = useState({});
   useEffect(() => {

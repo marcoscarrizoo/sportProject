@@ -2,7 +2,55 @@ import axios from "axios";
 import { url } from "../../App";
 
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const ORDERS = "ORDERS";
+export const DELETE_USER = "DELETE_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const GET_USERS = "GET_USERS";
+export const USER_DETAIL = "USER_DETAIL";
+export const GET_USER_ORDERS = "GET_USER_ORDERS";
+export const GET_ORDERS = "GET_ORDERS";
+
+export function getUsers(){
+  return async (dispatch) => {
+    try {
+      const info = await axios.get( url + "/user")
+      return dispatch({ type: GET_USERS, payload: info.data })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+
+export function getUserDetail(payload){
+  console.log(payload)
+  return { type: USER_DETAIL, payload}
+}
+
+export function getUserOrders(id){
+  // console.log(id)
+  return async (dispatch) => {
+    try {
+      const info = await axios.get( url + "/orders")
+      let payload = info.data.filter( e => e.userId === id && e.orderState !== "CART")
+      return dispatch({ type: GET_USER_ORDERS, payload })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function getOrders(){
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get( url + "/orders")
+      let payload = data.filter( e =>  e.orderState !== "CART")
+      return dispatch({ type: GET_ORDERS, payload })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 
 export const postCategory = (form) => async (dispatch) => {
   try {
@@ -55,17 +103,6 @@ export function editProduct(info, id) {
   return async function () {
     try {
       await axios.put(url + "/product/update/" + id, info);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function getOrders() {
-  return async function (dispatch) {
-    try {
-      const { data } = await axios.get(url + "/orders");
-      dispatch({ type: ORDERS, payload: data });
     } catch (error) {
       console.log(error);
     }

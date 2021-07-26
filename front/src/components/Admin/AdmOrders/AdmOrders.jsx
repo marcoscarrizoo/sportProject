@@ -13,7 +13,7 @@ import { getOrders } from "../../../redux/actions/adminActions";
 import "./AdmOrders.css";
 
 export default function AdmOrders() {
-  const orders = useSelector((state) => state.admin.orders);
+  const orders = useSelector((state) => state.adm.orders);
   const dispatch = useDispatch();
 
   const initialState = [];
@@ -43,7 +43,7 @@ export default function AdmOrders() {
         <h3 className="info">Info</h3>
         <h3 className="select">Acciones</h3>
       </div>
-      {state.map((order) => (
+      {state?.map((order) => (
         <div className="cards">
           <h5 className="id">{order.id}</h5>
           <h3 className="userId">{order.userId}</h3>

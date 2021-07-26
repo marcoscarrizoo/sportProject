@@ -4,8 +4,8 @@ import productReducer from "./reducers/productReducer";
 import userReducer from "./reducers/userReducer";
 import cartReducer from "./reducers/cartReducer";
 import { restoreSessionAction } from "./actions/userActions";
+import admReducer from "./reducers/admReducer";
 import locationReducer from "./reducers/locationReducers";
-import adminReducer from "./reducers/adminReducer";
 import reviewsReducer from "./reducers/reviewsReducer";
 
 //aca van los reducers
@@ -13,8 +13,8 @@ let rootReducer = combineReducers({
   products: productReducer,
   user: userReducer,
   cart: cartReducer,
+  adm: admReducer,
   location: locationReducer,
-  admin: adminReducer,
   reviews: reviewsReducer,
 });
 

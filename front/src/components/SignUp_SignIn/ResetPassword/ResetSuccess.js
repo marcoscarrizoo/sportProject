@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Link, Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import useStyles from "./resetOk";
 
 const SendResetSuccess = () => {

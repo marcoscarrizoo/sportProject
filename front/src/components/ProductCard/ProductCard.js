@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import BlockIcon from "@material-ui/icons/Block";
 import Popover from "@material-ui/core/Popover";
-import "./productCard.css";
+import "./productCard.css"
 import Swal from "sweetalert2";
 
 const useStyles = makeStyles({
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
   popover: {
     pointerEvents: "none",
-    backgroundColor: "#25252542",
+    // backgroundColor: "#25252542",
   },
   paper: {
     maxWidth: 300,
@@ -46,9 +46,12 @@ const useStyles = makeStyles({
     width: "auto",
   },
   card: {
-    display: "flex",
-    flexDirection: "column",
     width: "90%",
+  },
+  text: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   div: {
     display: "flex",
@@ -67,7 +70,6 @@ export default function ProductCard({
 }) {
 
   const classes = useStyles();
-  const userId = useSelector(store => store.user.uid);
   const cart = useSelector(store => store.cart.items)
   const dispatch = useDispatch();
   const history = useHistory()
@@ -141,8 +143,9 @@ export default function ProductCard({
                 aria-haspopup="true"
                 onMouseEnter={handlePopoverOpen}
                 onMouseLeave={handlePopoverClose}
+                className={classes.text}
               >
-                <span className="text">{name}</span>
+                {name}
               </Typography>
               <Popover
                 id="mouse-over-popover"
