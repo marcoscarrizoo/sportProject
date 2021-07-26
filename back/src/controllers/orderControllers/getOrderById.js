@@ -4,7 +4,7 @@ const { User, Product, Order } = require("../../db");
 //Recibe orderId por params y devuelve detalle de una order
 //Si no lo consigue devuelve: order id:  orderId not found;
 async function getOrderById(req, res, _next) {
-  console.log("getOrderById");
+  console.log('reeeeeq', req);
   try {
     const { id } = req.params;
     const order = await Order.findByPk(id,

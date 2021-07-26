@@ -1,4 +1,5 @@
-const {Order} = require("../../db");
+const {Order, Order_Product, Product} = require("../../db");
+
 const {TOKEN} = process.env;
 const mercadopago = require ("mercadopago");
 
@@ -9,23 +10,23 @@ mercadopago.configure({
 
 
 async function mercadoPago(req, res,next){
-    console.log('holi')
-    const id_orden= 1
-
-    const carrito = [
-        {title: "Producto 1", quantity: 5, price: 10.52},
-        {title: "Producto 2", quantity: 15, price: 100.52},
-        {title: "Producto 3", quantity: 6, price: 200}
-      ]
+    console.log('FUNCTION DE MERCADO PAGOO!!!')
+    const id_orden = req.params.orderId
+    console.log('ID_ORDEN_NUEVO', id_orden)
 
 
-    const items_ml = carrito.map(i => ({
-        title: i.title,
+    const cart = await Order.findOne({
+        where : {id: id_orden, orderState: 'CART'}, 
+        include:  [Product] 
+    })
+
+
+    const items_ml = cart.products.map(i => ({
+        title: i.name,
         unit_price: i.price, 
-        quantity: i.quantity 
+        quantity: i.Order_Product.quantity
     }))
 
-   console.log(items_ml)
 
     //creando un objeto de preferencia
     let preference = {
@@ -42,17 +43,17 @@ async function mercadoPago(req, res,next){
         },
         back_urls: {
             sucess: 'http://localhost:3001/mercadopago/pagos',
-            failure: 'http://localhost:3001/mercadopago/pagos',
+            failure: 'http://localhost:3000',
             pending: 'http://localhost:3001/mercadopago/pagos',
         },    
        
 }
-
-
+ 
+ 
 mercadopago.preferences.create(preference) 
 .then(response => {
     console.log('RESPUESTA RESPONSE',response)
-    global.id = response.body.id
+     global.id = response.body.id
     console.log('BODY.ID',response.body.id)
     
     res.json({id: global.id})
@@ -65,18 +66,21 @@ mercadopago.preferences.create(preference)
 
 
 async function payment(req, res, next){
+    console.log('FUNCION PAYMEEEENT')
     const payment_id=req.query.payment_id;
     const payment_status=req.query.status;
     const external_reference=req.query.external_reference
     const merchant_order_id = req.query.merchant_order_id
 
+    
     //aca editamos el status de mi orden 
     Order.findByPk(external_reference)
-    .then((order) => {
-        order.payment_id = payment_id
-        order.payment.status = payment_status
-        order.merchant_order_id = merchant_order_id
-        order.status = 'completed'
+    .then(order => {
+        console.log(order)
+        // order.payment_id = payment_id
+        // order.payment.status = payment_status
+        // order.merchant_order_id = merchant_order_id
+        order.orderState = 'COMPLETED'
         //console.info('salvando order')
         order.save()
         .then(() => {
@@ -90,7 +94,8 @@ async function payment(req, res, next){
     .catch(error => {
         return res.redirect(`http://localhost:3000/error=${error}&where=al+buscar`)
     })
-}
+    
+} 
 
 async function pagosId(req, res){
     const mp = new mercadopago (PROD_ACCESS_TOKEN)

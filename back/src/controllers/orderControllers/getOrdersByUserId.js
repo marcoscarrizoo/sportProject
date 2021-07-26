@@ -4,9 +4,10 @@ const { User, Product, Order } = require("../../db");
 //Recibe un userId por params y devuelve ordenes por usurio
 //Si no lo consigue devuelve: user id not found;
 async function getOrdersByUserId(req, res, _next) {
+  console.log('GET.ORDER.BY.USERID')
   try {
     const { id } = req.params;
-    console.log("id: ", id);
+    console.log("userrrrrrrid: ", id);
     if(!id)return res.send(`Debe ser un id valido.`);
     //Verificar si el usuario tiene ordenes
     //Buscar todas las ordenes

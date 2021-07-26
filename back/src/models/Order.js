@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
         },
         shippingAddress: {
           type: DataTypes.STRING,
-         // defaultValue: "not initialized"
+          defaultValue: "not initialized"
         },
         shippingZip: {
           type: DataTypes.INTEGER,
@@ -50,8 +50,8 @@ module.exports = (sequelize) => {
           type: DataTypes.STRING,
         },
         payment_id: {
-          type: DataTypes.INTEGER,
-          defaultValue: 0,
+          type: DataTypes.UUID,
+         // defaultValue: 0,
           },
           payment_status: {
             type: DataTypes.STRING,
@@ -60,7 +60,7 @@ module.exports = (sequelize) => {
           merchant_order_id:{
             type: DataTypes.BIGINT,
             defaultValue:0
-          }
+          } 
       },
 
   );
