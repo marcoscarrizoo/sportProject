@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { addToCart, loadCart } from "../../redux/actions/cartActions";
-import { toast } from "react-toastify";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -55,8 +54,6 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
-    // alignContent: 'center',
-    // justifyContent: 'space-around',
   },
 });
 
