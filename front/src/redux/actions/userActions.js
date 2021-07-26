@@ -25,7 +25,7 @@ export let doUserLogin = (user) => async (dispatch, getState) => {
   dispatch({
     type: LOGIN_SUCESS
   })
-  // saveStorage(getState())
+  saveStorage(getState().user)
 
 };
 
@@ -61,7 +61,7 @@ export let doLogOut = () => (dispatch) => {
 export let restoreSessionAction = () => (dispatch) => {
   let storage = localStorage.getItem("storage");
   storage = JSON.parse(storage); //lo convertimos en un objeto
-  if (storage && storage.user) {
+  if (storage && storage.uid) {
     dispatch({
       type: LOGIN_SUCESS,
       payload: storage,
