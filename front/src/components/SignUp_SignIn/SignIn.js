@@ -73,15 +73,18 @@ export default function SignIn() {
     //   await dispatch(fusionCart())
     //   dispatch(loadCart())
     // })
-    .catch(error => {
+    .catch(error => { console.log(error)
       if(error.code === 'auth/wrong-password') {
         setMsgError('password incorrecta')
     }
     if(error.code === 'auth/user-not-found') {
-        setMsgError('usuario incorrecto')
+        setMsgError('usuario no registado')
     }
-    if(error.code === 'auth/user-not-found' && 'auth/wrong-password') {
-        setMsgError('usuario y password incorrectas')
+    if(error.code === 'auth/wrong-password') {
+        setMsgError('password incorrecta')
+    }
+    if(error.code === "auth/invalid-email") {
+      setMsgError('debes ingresar un correo valido')
     }
     })
 
@@ -153,7 +156,7 @@ if(user?.uid) {
               id="password"
               autoComplete="current-password"
             />
-        {msgError != null? <div>{msgError} </div>: <span></span>}
+        {msgError != null? <div style={{color:'red'}}>{msgError} </div>: <span></span>}
            
             
               <Button
