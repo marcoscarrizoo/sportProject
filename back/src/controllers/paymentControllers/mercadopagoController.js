@@ -42,7 +42,7 @@ async function mercadoPago(req, res,next){
             installments: 3 //cantidad maxima de cuotas 
         },
         back_urls: {
-            sucess: 'http://localhost:3001/mercadopago/pagos',
+            success: 'http://localhost:3001/mercadopago/pagos',
             failure: 'http://localhost:3000',
             pending: 'http://localhost:3001/mercadopago/pagos',
         },    
