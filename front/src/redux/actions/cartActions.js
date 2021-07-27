@@ -154,8 +154,16 @@ export const loadCart = () =>
     if (user?.uid) {
       let cartId = JSON.parse(localStorage.getItem("cartid"));
       let cart = await axios.get(url + "/orders/" + cartId)
+      if(cart.data.orderState === "COMPLETED"){
+        let res = await axios.post(url + "/orders/create", {userId:user.uid})
+        window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
+        cart = await axios.get(url + "/orders/" + res.data.cartId)
+      }
 
-      cart = cart.data.products.map(e => {
+      console.log("--------------------------")
+      console.log(cart.data.products)
+      console.log("--------------------------")
+      cart = cart?.data.products.map(e => {
         return {
           id: e.id,
           name: e.name,
@@ -213,6 +221,9 @@ export const fusionCart = async (id) => {
       if (products?.length > 0) {
         let info = { userId: user.uid, products }
         let res = await axios.post(url + "/orders/create", info)
+        if(res.data.status === "COMPLETED"){
+          res = await axios.post(url + "/orders/create", {userId:user.uid})
+        }
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
         if (res.data.message === false) {
           await axios.put(url + "/orders/update/" + res.data.cartId, info)
@@ -220,6 +231,9 @@ export const fusionCart = async (id) => {
       }
       else {
         let res = await axios.post(url + "/orders/create", { userId: user.uid })
+        if(res.data.status === "COMPLETED"){
+          res = await axios.post(url + "/orders/create", {userId:user.uid})
+        }
         window.localStorage.setItem("cartid", JSON.stringify(res.data.cartId))
       }
       window.localStorage.removeItem("cart")

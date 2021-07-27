@@ -61,11 +61,13 @@ async function createOrder(req, res, next) {
         });
       });
       return res.json({
+        status: `${order.orderState}`,
         message: true,
         cartId: `${order.id}`
       });
       //Si la orden existe se fusiona
     } else res.json({
+      status: `${order.orderState}`,
       message: false,
       cartId: `${order.id}`
     })
