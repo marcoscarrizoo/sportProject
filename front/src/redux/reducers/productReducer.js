@@ -32,7 +32,11 @@ export default function reducer(state = initialState, action) {
     case GET_PRODUCTS:
       return {
         ...state,
-        products: action.payload,
+        products: action.payload.sort((a, b) => {
+          if (a.name > b.name) return 1;
+          if (a.name < b.name) return -1;
+          return 0;
+        })
       };
     case DELETE_PRODUCT:
       return {

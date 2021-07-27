@@ -19,7 +19,7 @@ export default function admReducer(state = initialState, action) {
         case USER_DETAIL:
             return {
                 ...state,
-                userDetail: {...state.users.find( e => e.id === action.payload)}
+                userDetail: action.payload
             }
         case GET_USER_ORDERS:
             return {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteLocation,
   updateLocation,
@@ -29,8 +29,8 @@ export default function LocationDeleteEdit({ location }) {
   console.log("location", location);
 
   const { id } = location;
-  const store = useSelector((store) => store);
-  const locations = store.locations;
+  // const store = useSelector((store) => store);
+  // const locations = store.locations;
   const dispatch = useDispatch();
 
   const initialState = {

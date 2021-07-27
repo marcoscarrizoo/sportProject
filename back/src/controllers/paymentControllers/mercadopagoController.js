@@ -37,7 +37,9 @@ async function mercadoPago(req, res, next) {
         },
         back_urls: {
             success: 'http://localhost:3001/mercadopago/pagos',
-            failure: 'http://localhost:3001/mercadopago/pagos',
+
+            failure: 'http://localhost:3000',
+
             pending: 'http://localhost:3001/mercadopago/pagos',
         },
     }

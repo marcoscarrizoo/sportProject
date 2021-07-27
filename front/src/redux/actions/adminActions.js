@@ -21,17 +21,24 @@ export function getUsers(){
 }
 
 
-export function getUserDetail(payload){
-  console.log(payload)
-  return { type: USER_DETAIL, payload}
+export function getUserDetail(id){
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get( url + "/user")
+      let payload = data.filter( e => e.id === id)[0]
+      return dispatch({ type: USER_DETAIL, payload})
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 export function getUserOrders(id){
   // console.log(id)
   return async (dispatch) => {
     try {
-      const info = await axios.get( url + "/orders")
-      let payload = info.data.filter( e => e.userId === id && e.orderState !== "CART")
+      const {data} = await axios.get( url + "/orders")
+      let payload = data.filter( e => e.userId === id && e.orderState !== "CART")
       return dispatch({ type: GET_USER_ORDERS, payload })
     } catch (error) {
       console.log(error)

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addLocation } from "../../redux/actions/locationActions";
 import { TextField, makeStyles, Button } from "@material-ui/core";
@@ -21,7 +21,7 @@ export default function LocationAdd() {
   const dispatch = useDispatch();
 
   //history set
-  const history = useHistory();
+  // const history = useHistory();
 
   //store data
   const store = useSelector((store) => store);
