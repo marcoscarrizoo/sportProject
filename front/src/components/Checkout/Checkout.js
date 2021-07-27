@@ -2,7 +2,7 @@ import { useEffect } from "react";
 //import axios from 'axios'
 
 export default function Comprar({ data }) {
-  console.log('componente comprar',data.id)
+  console.log('componente comprar', data)
   useEffect(() => {
     if(data){
       const script = document.createElement("script");

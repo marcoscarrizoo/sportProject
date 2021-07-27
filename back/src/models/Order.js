@@ -4,13 +4,13 @@ module.exports = (sequelize) => {
   sequelize.define(
     "order",
     {
-      id:{
+      id: {
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
       orderState: {
-        type: DataTypes.ENUM("CART", "PENDING","PROCESSING", "CANCELED", "COMPLETED"),
+        type: DataTypes.ENUM("CART", "PENDING", "PROCESSING", "CANCELED", "COMPLETED"),
         defaultValue: "CART",
         allowNull: false,
       },
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         ),
         defaultValue: "not initialized"
       },
-      
+
       paymentState: {
         type: DataTypes.ENUM(
           "not initialized",
@@ -33,35 +33,34 @@ module.exports = (sequelize) => {
           "processing",
           "cancelled",
           "completed"
-          ),
-          defaultValue: "not initialized"
-        },
-        shippingAddress: {
-          type: DataTypes.STRING,
-          defaultValue: "not initialized"
-        },
-        shippingZip: {
-          type: DataTypes.INTEGER,
-        },
-        shippingLocated: {
-          type: DataTypes.STRING,
-        },
-        shippingCity: {
-          type: DataTypes.STRING,
-        },
-        payment_id: {
-          type: DataTypes.UUID,
-         // defaultValue: 0,
-          },
-          payment_status: {
-            type: DataTypes.STRING,
-            defaultValue: "",
-          },
-          merchant_order_id:{
-            type: DataTypes.BIGINT,
-            defaultValue:0
-          } 
+        ),
+        defaultValue: "not initialized"
       },
-
+      shippingAddress: {
+        type: DataTypes.STRING,
+        defaultValue: "not initialized"
+      },
+      shippingZip: {
+        type: DataTypes.INTEGER,
+      },
+      shippingLocated: {
+        type: DataTypes.STRING,
+      },
+      shippingCity: {
+        type: DataTypes.STRING,
+      },
+      // payment_id: {
+        // type: DataTypes.UUID,
+        // defaultValue: 0,
+      // },
+      // payment_status: {
+      //   type: DataTypes.STRING,
+      //   defaultValue: "",
+      // },
+      // merchant_order_id: {
+      //   type: DataTypes.BIGINT,
+      //   defaultValue: 0
+      // }
+    },
   );
 };
