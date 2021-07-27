@@ -40,8 +40,8 @@ conn.sync({ force: false }).then(() => {
     console.log(`listening at PORT ${process.env.PORT}`);
 
     //Estas funciones carga productos y usuarios del archivo seeds, en la DB
-   await createProductsSeeds();
+    await createProductsSeeds();
     await createUsersSeeds();
-    await createOrderSeeds();
+    // await createOrderSeeds();
   });
 });
