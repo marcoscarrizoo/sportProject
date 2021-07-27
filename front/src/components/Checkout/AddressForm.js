@@ -143,16 +143,19 @@ function Application() {
     
 
   useEffect(()=>{
+
     axios.get(`http://localhost:3001/orders/user/${userId}`)
     .then((response)=>{
       const info = response.data.ordersDetails[0].id
+      console.log('useEffect 2 orderId',info)
       setOrderId(info)
-      
     })
     axios.get(`http://localhost:3001/mercadopago/${orderId}`)
     .then(data => {
+      console.log('DATA DE LA FUNCION MERCADO',data)
       setDatos(data.data)
     })
+  
     .catch(err => console.error(err)) 
     
 
