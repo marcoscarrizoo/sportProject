@@ -160,9 +160,6 @@ export const loadCart = () =>
         cart = await axios.get(url + "/orders/" + res.data.cartId)
       }
 
-      console.log("--------------------------")
-      console.log(cart.data.products)
-      console.log("--------------------------")
       cart = cart?.data.products.map(e => {
         return {
           id: e.id,
