@@ -38,7 +38,9 @@ module.exports = (sequelize) => {
       },
       shippingAddress: {
         type: DataTypes.STRING,
-        // defaultValue: "not initialized"
+
+        //defaultValue: "not initialized"
+
       },
       shippingZip: {
         type: DataTypes.INTEGER,

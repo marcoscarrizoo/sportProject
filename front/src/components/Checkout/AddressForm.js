@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Comprar from './Checkout'
+import Checkout from './Checkout'
 import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import {getOrderByUserId} from '../../redux/actions/userActions'
@@ -36,12 +36,13 @@ console.log('userID', userId)
   return (
     <div className="App">
   
-          <Comprar data={datos}/>  
+          <Checkout data={datos}/>  
       
     </div>
   );
 }
 
-export default Application;
+ export default Application;
 
 //productos={productos} data={datos}
+

@@ -81,7 +81,7 @@ export default function Cart() {
           <h3>{`$${total}`}</h3>
         </div>
         <div className="buttons">
-          <NavLink to='/direccionDeEnvio'>
+          <NavLink to='/direccion'>
             <button className="comprar">COMPRAR</button>
           </NavLink>
           <Button

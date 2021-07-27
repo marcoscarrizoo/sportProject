@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import AddressForm from "./AddressForm";
 //import axios from 'axios'
 
-export default function Comprar({ data }) {
+export default function Checkout({ data }) {
   console.log('componente comprar', data)
   useEffect(() => {
     if(data){
@@ -27,6 +28,7 @@ export default function Comprar({ data }) {
   return (
     <div>
       <form id="form1"></form>
+      
     </div>
   );
 }
