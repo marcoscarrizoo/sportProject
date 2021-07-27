@@ -64,11 +64,19 @@ export default function SignUp() {
       
       .catch((e) => {
         
-        if (e.code === "auth/email-already-in-use") {
+        if(e.code === "auth/invalid-email" && e.code === "auth/weak-password") {
+          setMsgError('ingrese un email valido la contraseña debe contener al menos 6 digitos')
+        }
+        else if (e.code === "auth/email-already-in-use") {
           setMsgError("el correo ingresado ya esta en uso");
         }
+        else if(e.code === "auth/weak-password") {
+          setMsgError('la contraseña debe contener al menos 6 digitos')
+        }
+        else if(e.code === "auth/invalid-email") {
+          setMsgError('ingrese un email valido, por ejemplo: email@gmail.com')
+        }
 
-        
       });
   };
 
@@ -145,7 +153,7 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
-            {msgError != null ? <div>{msgError} </div> : <span></span>}
+            {msgError != null ? <div style={{color:"red"}}>{msgError} </div> : <span></span>}
             
           </Grid>
           <Button

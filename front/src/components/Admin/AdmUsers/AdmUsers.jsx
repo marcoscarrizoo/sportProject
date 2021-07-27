@@ -57,12 +57,13 @@ export default function AdmUsers() {
     const handleAction = async () => {
         if (accion === "eliminar") {
             await axios.delete(url + "/user/delete/" + id);
+            
         }
         else {
             await axios.put(url + "/user/update/" + id, { userType: accion });
         }
         dispatch(getUsers());
-        handleClose()
+        handleClose();
     };
 
     const handleClose = () => {

@@ -18,7 +18,7 @@ export default function LocationManager() {
 
   useEffect(() => {
     dispatch(getLocations());
-  }, [location]);
+  }, [dispatch ,location]);
 
   return (
     <Grid

@@ -5,7 +5,7 @@ import {
   cartReset, loadCart,
 } from "../../redux/actions/cartActions";
 import { Button } from "@material-ui/core";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AiFillShopping } from 'react-icons/ai';
 import { FcShipped } from 'react-icons/fc';
 import Dialog from '@material-ui/core/Dialog';
@@ -25,7 +25,7 @@ export default function Cart() {
 
 
   useEffect(() => {
-    if(!user){
+    if (!user) {
       dispatch(loadCart())
     }
 
@@ -81,9 +81,9 @@ export default function Cart() {
           <h3>{`$${total}`}</h3>
         </div>
         <div className="buttons">
-          <Link to='/direccionDeEnvio'> 
-          <button className="comprar">COMPRAR</button>
-          </Link>
+          <NavLink to='/direccionDeEnvio'>
+            <button className="comprar">COMPRAR</button>
+          </NavLink>
           <Button
             onClick={handleClickOpen}
           >
@@ -224,4 +224,3 @@ export default function Cart() {
 //     </div>
 //   );
 // }
-  
