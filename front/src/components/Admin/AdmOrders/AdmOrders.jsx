@@ -16,13 +16,9 @@ export default function AdmOrders() {
   const orders = useSelector((state) => state.adm.orders);
   const dispatch = useDispatch();
 
-  const initialState = [];
-  const [state, setstate] = useState(initialState);
-
   useEffect(() => {
     dispatch(getOrders());
-    setstate(orders);
-  }, []);
+  }, [dispatch]);
 
   /*   const mock = [
     {
@@ -43,7 +39,7 @@ export default function AdmOrders() {
         <h3 className="info">Info</h3>
         <h3 className="select">Acciones</h3>
       </div>
-      {state?.map((order) => (
+      {orders?.map((order) => (
         <div className="cards">
           <h5 className="id">{order.id}</h5>
           <h3 className="userId">{order.userId}</h3>
