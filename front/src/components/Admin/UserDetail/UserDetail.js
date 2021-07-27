@@ -117,15 +117,15 @@ export default function UserDetail() {
               <p>{`NUMERO DE ORDENES: ${userDetail.userOrders?.length}`}</p>
             </div>
         }
+        <div className="aud-orders">
         {
           userDetail?.userOrders === null
           ? <h1> Cargando </h1>
           : userDetail?.userOrders?.map( order => 
-            <Link to={`/admin/orden/${order.id}`}>
               <UserOrders order={order}/>
-            </Link>
           )
         }
+        </div>
     </div>
   )
 }
