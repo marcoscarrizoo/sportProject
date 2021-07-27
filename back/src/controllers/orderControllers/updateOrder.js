@@ -1,15 +1,21 @@
 const { User, Product, Order, Order_Product } = require("../../db");
+//RUta update
 
 /*Ruta PUT localhost:3001/orders/update/:id
 -Retorna un id order actualizada
 -Si no la encuentra devuelve, 'Order is not found ERROR 404'
 -Recibo un body y params:
 Todos los datos del body son opcionales
+
 body = {
       orderState,
       shippingState,
       shippingLocation,
       paymentState,      
+      shippingAddress,
+      shippingZip,
+      shippingLocated,
+      shippingCity,
       products,
 //array de uno o varios productos, con id y cantidad
   products:[
@@ -34,6 +40,10 @@ async function updateOrder(req, res, _next) {
       shippingLocation,
       paymentState,
       products,
+      shippingAddress,
+      shippingZip,
+      shippingLocated,
+      shippingCity,
     } = req.body;
     //Se busca la orden por primary key'
     const order = await Order.findByPk(id)
@@ -83,6 +93,10 @@ async function updateOrder(req, res, _next) {
         shippingState,
         shippingLocation,
         paymentState,
+        shippingAddress,
+        shippingZip,
+        shippingLocated,
+        shippingCity
       });
       return res.json(`Orden actualizada ID:${order.id}`);
     } catch (err) {
