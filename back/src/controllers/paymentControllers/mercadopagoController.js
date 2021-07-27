@@ -37,9 +37,7 @@ async function mercadoPago(req, res, next) {
         },
         back_urls: {
             success: 'http://localhost:3001/mercadopago/pagos',
-
             failure: 'http://localhost:3000',
-
             pending: 'http://localhost:3001/mercadopago/pagos',
         },
     }
@@ -113,10 +111,13 @@ async function pagosId(req, res) {
 4509 9535 6623 3704
 11/25
 123
-Americna
+
+American de prueba
 371180303257522
 11/26
 1234
+Ruta de pagado
+/mercadopago/pagos?collection_id=1239156144&collection_status=approved&payment_id=1239156144&status=approved&external_reference=0c1cc39e-34b7-4989-bcbe-bc8b55796bfb&payment_type=credit_card&merchant_order_id=3010520422&preference_id=794718240-f39710af-4b2d-40ff-818e-4e265edc0ffb&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
 */
 
 
