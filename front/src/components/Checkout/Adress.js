@@ -14,6 +14,7 @@ import Container from "@material-ui/core/Container";
 import { useDispatch } from 'react-redux';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { url } from '../../App'
 
 export default function Address() {
   const classes = useStyles();
@@ -24,33 +25,24 @@ export default function Address() {
   const [located, setLocated] = useState('')
   const [datos, setDatos] = useState('')
 
-  const [orderId, setOrderId] = useState("")
-  const userId = useSelector(store => store.user.uid)
-
+const orderId = JSON.parse(localStorage.getItem('cartid'))
+console.log('orderid',orderId)
   const info = { 
     shippingAddress: address,
     shippingZip: codePost,
     shippingLocated:  city,
     shippingCity: located
   }
-   useEffect(()=>{
+   
 
-    axios.get(`http://localhost:3001/orders/user/${userId}`)
-    .then((response)=>{
-      const info = response.data.ordersDetails[0].id
-      console.log('useEffect',info)
-      setOrderId(info)
-    })
-   },[userId])
-  
-
-const handleSubmit = (e) => {
+const handleSubmit = async(e) => {
   e.preventDefault()
-  axios.put(`localhost:3001/orders/update/${orderId}`, info)
-  .then(data => console.log(data),
-      <Redirect to='/direccionDeEnvio' />
-  )
-  .catch(error => console.log(error))
+  try {
+    const {data} = axios.put(`${url}/orders/update/${orderId}`, info)
+    console.log(data)
+  }catch (error){
+    console.log(error)
+  }
 }
   return (
     <div>
