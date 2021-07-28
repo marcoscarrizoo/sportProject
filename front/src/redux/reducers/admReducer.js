@@ -1,11 +1,12 @@
 //actions
-import { GET_ORDERS, GET_USERS, GET_USER_ORDERS, USER_DETAIL } from "../actions/adminActions"
+import { GET_ORDERS, GET_USERS, GET_USER_ORDERS, ORDER_DETAIL, USER_DETAIL } from "../actions/adminActions"
 
 //states 
 const initialState = {
     users: null,
     userDetail: null,
     orders: null,
+    orderDetail: null,
 }
 
 
@@ -33,6 +34,11 @@ export default function admReducer(state = initialState, action) {
             return {
                 ...state,
                 orders: action.payload,
+            }
+        case ORDER_DETAIL:
+            return {
+                ...state,
+                orderDetail: action.payload,
             }
         default:
             return state
