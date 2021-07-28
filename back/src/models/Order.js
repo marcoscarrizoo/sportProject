@@ -27,14 +27,9 @@ module.exports = (sequelize) => {
       },
 
       paymentState: {
-        type: DataTypes.ENUM(
-          "not initialized",
-          "initial",
-          "processing",
-          "cancelled",
-          "completed"
-        ),
-        defaultValue: "not initialized"
+        type: DataTypes.STRING
+        ,
+        defaultValue: "notInitialized"
       },
       shippingAddress: {
         type: DataTypes.STRING,
@@ -51,10 +46,9 @@ module.exports = (sequelize) => {
       shippingCity: {
         type: DataTypes.STRING,
       },
-      // payment_id: {
-        // type: DataTypes.UUID,
-        // defaultValue: 0,
-      // },
+      payment_id: {
+        type: DataTypes.STRING,
+      },
       // payment_status: {
       //   type: DataTypes.STRING,
       //   defaultValue: "",
