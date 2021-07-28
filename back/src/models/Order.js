@@ -18,10 +18,12 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM(
           "not initialized",
           "initial", //appears as soon as payment is verified
-          "created",
-          "processing",
-          "canceled",
-          "completed"
+         "despachado",
+         "entregado"
+          // "created",
+          // "processing",
+          // "canceled",
+          // "completed"
         ),
         defaultValue: "not initialized"
       },

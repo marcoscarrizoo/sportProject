@@ -29,6 +29,7 @@ export default function Address() {
   const history = useHistory()
 const orderId = JSON.parse(localStorage.getItem('cartid'))
 console.log('orderid',orderId)
+
   const info = { 
     shippingAddress: address,
     shippingZip: codePost,
