@@ -4,7 +4,7 @@ const { User, Product, Order } = require("../../db");
 //Recibe un userId por params y devuelve ordenes por usurio
 //Si no lo consigue devuelve: user id not found;
 async function getOrdersByUserId(req, res, _next) {
-  console.log('getOrdersByUserId id:', req.params.id)
+  // console.log('getOrdersByUserId id:', req.params.id)
   try {
     const { id } = req.params;
     if(!id)return res.send(`Debe ser un id valido.`);
