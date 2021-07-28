@@ -16,6 +16,9 @@ async function mercadoPago(req, res, next) {
         where: { id: orderId, orderState: 'CART' },
         include: [Product]
     })
+    //Cambio estado de la orden
+    order.orderState = "PROCESSING"
+    order.save()
     //Todos los productos de la orden
     const items_ml = order.products.map(product => ({
         title: product.name,
@@ -41,7 +44,7 @@ async function mercadoPago(req, res, next) {
             pending: 'http://localhost:3001/mercadopago/pagos',
         },
     }
-
+    
     mercadopago.preferences.create(preference)
         .then(response => {
             // console.log('RESPUESTA RESPONSE', response)
@@ -114,9 +117,18 @@ async function pagosId(req, res) {
 
 American de prueba
 371180303257522
-11/26
+11/25
 1234
-Ruta de pagado
+
+Secuencia despues ingresar direccion
+PUT /orders/update/faac272e-a92d-4a15-a472-c9363559aa00 200 13.956 ms - 59
+GET /orders/user/zn7dwHGLgSebMjYiHoBhndpvaHU2 200 17.058 ms - 756
+GET /orders/user/zn7dwHGLgSebMjYiHoBhndpvaHU2 304 13.256 ms - -
+FUNCTION DE MERCADO PAGOO!!!
+GGG global.id 794718240-50994c28-15ac-4b34-aabc-20279f64fa78
+GET /mercadopago/faac272e-a92d-4a15-a472-c9363559aa00 200 640.308 ms - 177
+
+Ruta de pagado:
 /mercadopago/pagos?collection_id=1239156144&collection_status=approved&payment_id=1239156144&status=approved&external_reference=0c1cc39e-34b7-4989-bcbe-bc8b55796bfb&payment_type=credit_card&merchant_order_id=3010520422&preference_id=794718240-f39710af-4b2d-40ff-818e-4e265edc0ffb&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
 */
 
