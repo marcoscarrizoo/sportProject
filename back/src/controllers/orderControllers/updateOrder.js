@@ -34,6 +34,7 @@ body = {
 async function updateOrder(req, res, _next) {
   try {
     const { id } = req.params;
+    console.log('IDDDD',id)
     const {
       orderState,
       shippingState,
@@ -45,8 +46,10 @@ async function updateOrder(req, res, _next) {
       shippingLocated,
       shippingCity,
     } = req.body;
+    console.log('BODYYY', req.body)
     //Se busca la orden por primary key'
     const order = await Order.findByPk(id)
+    console.log('order',order)
     //Si la order no existe, se crea y se retorna el orderId
     if (!order) {
       return res.status(404).send({
@@ -88,6 +91,7 @@ async function updateOrder(req, res, _next) {
         });
       }
     }
+    
       order.update({
         orderState,
         shippingState,
