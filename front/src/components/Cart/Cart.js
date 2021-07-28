@@ -82,7 +82,7 @@ export default function Cart() {
         </div>
         <div className="buttons">
           <NavLink to='/direccion'>
-            <button className="comprar">COMPRAR</button>
+            <p className="comprar">COMPRAR</p>
           </NavLink>
           <Button
             onClick={handleClickOpen}

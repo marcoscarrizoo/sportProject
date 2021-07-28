@@ -5,7 +5,7 @@ export default function UserOrders({ order }) {
 
     return (
         <div className="UserOrders">
-            <p>{order?.id}</p>
+            <p className="orderID">{order?.id}</p>
             <h3>
                 {`TOTAL: $${order?.products.reduce((a, s) =>
                     a + (s.Order_Product.quantity * s.Order_Product.price), 0)

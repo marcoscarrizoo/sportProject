@@ -42,15 +42,24 @@
 }
 
 .id {
-  width: 5%;
+  width: 20%;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
 }
-.userId {
-  width: 30%;
+.openId{
+  cursor: pointer;
+  overflow: inherit;
+  text-overflow: inherit;
+}
+.total {
+  width: 10%;
 }
 
 .orderState {
-  width: 15%;
+  width: 10%;
 }
 
 .createdAt {
@@ -59,10 +68,17 @@
 }
 
 .info {
-  width: 10%;
+  width: 5%;
 }
 
 .select {
   width: 15%;
   align-items: center;
+}
+
+.popover {
+  pointer-events: none;
+  max-width: 300;
+  display: "flex";
+  align-content: "center";
 }
