@@ -1,8 +1,20 @@
 import { useEffect } from "react";
 import AddressForm from "./AddressForm";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import { Card } from "@material-ui/core";
+import { mergeClasses } from "@material-ui/styles";
 //import axios from 'axios'
+import { red } from '@material-ui/core/colors';
+
+
+const useStyles = makeStyles((theme) => ({
+
+
+}))
+
 
 export default function Checkout({ data }) {
+  const classes = useStyles()
   console.log('componente comprar', data)
   useEffect(() => {
     if(data){
@@ -20,15 +32,18 @@ export default function Checkout({ data }) {
       document.getElementById("form1").appendChild(script)
       
       return () => {
-        document.getElementById("form1")?.removeChild(script);
+        //document.getElementById("form1")?.removeChild(script);
       };
     }
   }, [data]);
 
   return (
     <div>
+    <Card >
+      COMPRAR
       <form id="form1"></form>
       
+    </Card>
     </div>
   );
 }
