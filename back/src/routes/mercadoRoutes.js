@@ -1,5 +1,7 @@
 const { Router } = require("express");
-const { mercadoPago, payment, pagosId } = require('../controllers/paymentControllers/mercadopagoController');
+const { pagosId } = require('../controllers/paymentControllers/mercadopagoController');
+const { payment } = require('../controllers/paymentControllers/payment');
+const { mercadoPago } = require('../controllers/paymentControllers/mercadoPago');
 
 const router = Router();
 
