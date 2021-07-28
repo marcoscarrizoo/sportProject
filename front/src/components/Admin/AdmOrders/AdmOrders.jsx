@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import axios from 'axios'
+import {url} from '../../../App'
 import { Link } from "react-router-dom";
-
+import { Button } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -18,6 +19,8 @@ export default function AdmOrders() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState("id");
 
+
+ console.log(orders)
   useEffect(() => {
     dispatch(getOrders());
   }, [dispatch]);
@@ -42,15 +45,35 @@ export default function AdmOrders() {
     },
   ]; */
 
+const handleShipping= (e) => {
+  console.log('hola')
+const dis = e.target.name 
+const orderId = e.target.value
+console.log('e.target', e.target)
+const shipping = {
+  shippingState: dis
+}
+try {
+  const {data} = axios.put(`${url}/orders/update/${orderId}`, shipping) ;
+  console.log(data)
+}catch (error){
+  console.log(error)
+}
+}
+
+
   return (
     <div className="orders">
       <div className="titulos cards">
         <h3 className="id">ID</h3>
         <h3 className="total">TOTAL</h3>
-        <h3 className="orderState">ESTADO</h3>
+        <h3 className="orderState">PAGO</h3>
         <h3 className="createdAt">ULTIMA ACTUALIZACION</h3>
         <h3 className="info">Info</h3>
         <h3 className="select">Acciones</h3>
+        <h3 className="select">Entrega</h3>
+        <h3 className="state">Estado de Envio</h3>
+        
       </div>
       {orders?.map((order) => (
         <div className="cards">
@@ -76,7 +99,7 @@ export default function AdmOrders() {
               </InputLabel>
               <Select
                 native
-                value=""
+                value=''
                 // onChange={handleChange}
                 inputProps={{
                   name: "Opciones",
@@ -86,9 +109,17 @@ export default function AdmOrders() {
                 <option value={order.id}>Cancelar</option>
                 <option value={order.id}>Eliminar</option>
                 <option value={order.id}>Editar</option>
+             
               </Select>
             </FormControl>
           </div>
+            
+          <button value={order.id} name='despachado' onClick={handleShipping}>Despachado</button>
+          <button value={order.id} name='entregado' onClick={handleShipping}>Entregado</button>
+          <h5 className="state">{order.shippingState.toUpperCase()}</h5>
+          
+            
+          
         </div>
       ))}
     </div>
