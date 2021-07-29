@@ -243,13 +243,13 @@ const products = [
   
 ];
 
-const users = [
+const users = [ 
   {
     id: "d1687b07-058c-414a-bb5a-77a8d897be57",
     firstName: "Knut",
     lastName: "Waale",
     email: "knutwaale@gmail.com",
-    password: "1234",
+    password: "123456",
     userType: "S",
   },
   {
