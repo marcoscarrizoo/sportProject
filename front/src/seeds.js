@@ -52,6 +52,33 @@ const products = [
     ],
   },
 ];
+
+const orders = [
+  //Primera order (Etapa 1)
+  {
+    orderState: "COMPLETED",
+    userId: "Z3pPS8iC3WcYthfpqZD7IREadNl1",
+    products: [
+      { productId: 1, quantity: 1 },
+      { productId: 3, quantity: 1 },
+    ],
+  },
+  {
+    orderState: "CART",
+    userId: "Z3pPS8iC3WcYthfpqZD7IREadNl1",
+    products: [{ productId: 3, quantity: 1 }],
+  },
+  {
+    orderState: "COMPLETED",
+    userId: "Z3pPS8iC3WcYthfpqZD7IREadNl1",
+    products: [
+      { productId: 1, quantity: 1 },
+      { productId: 2, quantity: 1 },
+    ],
+  },
+];
+
 module.exports = {
   products,
+  orders,
 };
