@@ -62,9 +62,15 @@ export default function Checkout({ data, product , pro}) {
       </ul>
       )}
       <h1 style={{color: 'purple', boxShadow: '0 0 5px' , width: '200px'}}>TOTAL: ${product}</h1>
-    <div style={{marginLeft: '15%'}}><form id="form1"></form></div> 
+    <div style={{marginLeft: '15%'}}>
+      <form id="form1"></form>
+    </div> 
     </div> 
     </div>
     </div>
+    // <div>
+    //   <form id="form1"></form>
+    // </div>
+    
   );
 }

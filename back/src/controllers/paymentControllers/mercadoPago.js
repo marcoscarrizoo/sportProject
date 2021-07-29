@@ -59,9 +59,10 @@ async function mercadoPago(req, res, next) {
                 // console.log('RESPUESTA RESPONSE', response)
                 global.id = response.body.id
                 console.log('response.body.init_point', response.body.init_point)
+                console.log('globalid', global.id)
                 res.json({
                     id: global.id,
-                    // init_point: response.body.init_point
+                     //init_point: response.body.init_point
                  })
             })
             .catch(function (error) {

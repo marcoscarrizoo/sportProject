@@ -42,7 +42,7 @@ const {
   
       //Estas funciones carga productos y usuarios del archivo seeds, en la DB
       await createProductsSeeds();
-      await createUsersSeeds();
+      //await createUsersSeeds();
       // await createOrderSeeds();
     });
   });
