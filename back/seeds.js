@@ -62,7 +62,7 @@ const products = [
     stock: 157,
     categories: [
       {
-        name: "Shaker",
+        name: "shaker",
         image:
           "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
       },
@@ -85,6 +85,162 @@ const products = [
       },
     ],
   },
+  {
+    name: "Proteina Isolatada WHEY",
+    description:
+      "Proteina GOLD STANDAR 1 kg",
+    images: [
+      "https://iluvstore.com/img/p/1/0/6/4/6/10646-home_default.jpg",
+    ],
+    price: 10805.12,
+    stock: 178,
+    categories: [
+      {
+        name: "suplemento",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Proteina Best Wey",
+    description:
+      "2 proteinas Xtrenght Best Wey Protein 2 kg",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_658201-MLA32038658595_092019-O.jpg",
+    ],
+    price: 15000.10,
+    stock: 100,
+    categories: [
+      {
+        name: "suplemento",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Platinum Whey Protein",
+    description:
+      "Premium Wey Prtein 3kg - START NUTRATION",
+    images: [
+      "https://d3ugyf2ht6aenh.cloudfront.net/stores/306/768/products/premium-whey-protein-3kg1-658fafe48ca8ae50ac16170452694698-480-0.png",
+    ],
+    price: 15000.10,
+    stock: 100,
+    categories: [
+      {
+        name: "suplemento",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker GOT",
+    description:
+      "Shaker Protein 100 ml, vaso smart",
+    images: [
+      "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/133/104/products/tienda-nube-muscetta-31-281-883f2c42693b578c0015905360360177-1024-1024.jpg",
+    ],
+    price: 1000,
+    stock: 100,
+    categories: [
+      {
+        name: "shaker",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker GOLD",
+    description:
+      "Shaker Premium 1 litro",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_844426-MLA42194466610_062020-V.jpg",
+    ],
+    price: 1500,
+    stock: 100,
+    categories: [
+      {
+        name: "shaker",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker protein Gentech",
+    description:
+      "Shaker Blender color rosa 500cc",
+    images: [
+      "https://d3ugyf2ht6aenh.cloudfront.net/stores/885/784/products/shaker_rosa_gentech1-76023962f5711f7e7d15901109627044-480-0.jpg",
+    ],
+    price: 1500,
+    stock: 100,
+    categories: [
+      {
+        name: "shaker",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Rueda Abdomen",
+    description:
+      "Rueda para hacer abdominales en casa",
+    images: [
+      "https://www.dhresource.com/0x0/f2/albu/g7/M01/13/95/rBVaSVsp3DqAGVxvAAGKCL3T2Wc837.jpg/factory-direct-two-wheel-abdominal-abdomen.jpg",
+    ],
+    price: 3500,
+    stock: 100,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Kit Entrenamiento intenso",
+    description:
+      "Incluye elastico y pesas para entrenamiento de piernas",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_908604-MLA46212230882_052021-V.jpg",
+    ],
+    price: 5600,
+    stock: 100,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  
+  {
+    name: "Soga Fitness",
+    description:
+      "Soga para entrenamiento intensivo",
+    images: [
+      "https://www.digitalsport.com.ar/files/products/5b97ecf06121f-290656-500x500.jpg",
+    ],
+    price: 1200,
+    stock: 100,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  
+  
 ];
 
 const users = [
