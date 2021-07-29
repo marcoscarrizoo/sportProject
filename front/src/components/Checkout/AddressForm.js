@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import Checkout from './Checkout'
 import axios from 'axios'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {getOrderByUserId} from '../../redux/actions/userActions'
-import { useSelector } from 'react-redux';
 import { BsInfo } from 'react-icons/bs';
 
 function Application() {
   const [datos, setDatos] = useState("")
   const [orderId, setOrderId] = useState("")
   const userId = useSelector(store => store.user.uid)
+  const products = useSelector(store => store.cart.total)
+  const productos = useSelector(store => store.cart.items)
+  
 
   useEffect(()=>{
     axios.get(`http://localhost:3001/orders/user/${userId}`)
@@ -30,11 +32,11 @@ function Application() {
 console.log('datos ID',datos)
 console.log('ORDER ID',orderId)
 console.log('userID', userId)  
-  
+console.log('products',products)
   return (
     <div className="App">
   
-          <Checkout data={datos}/>  
+          <Checkout pro={productos} product={products} data={datos}/>  
       
     </div>
   );

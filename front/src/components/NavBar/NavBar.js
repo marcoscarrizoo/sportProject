@@ -7,6 +7,7 @@ import { getProducts } from "../../redux/actions/productsActions";
 import { doLogOut } from "../../redux/actions/userActions";
 /* styles */
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
 import Swal from "sweetalert2";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -133,6 +134,10 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  const menu = () => {
+    history.push('/')
+  }
   const handleSignUp = () => {
     history.push("/registrarse");
     setAnchorEl(null);
@@ -231,11 +236,11 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <IconButton
             edge="start"
-            className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
+            onClick={menu}
+            
           >
-            <MenuIcon />
+           < HomeIcon/>
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link className={classes.link} to="/">
