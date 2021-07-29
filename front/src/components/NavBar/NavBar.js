@@ -164,6 +164,7 @@ export default function PrimarySearchAppBar() {
 
   const handleLogOut = () => {
     dispatch(doLogOut());
+    history.push("/");
     
     Swal.fire({
       text: "Esperamos verte pronto",
