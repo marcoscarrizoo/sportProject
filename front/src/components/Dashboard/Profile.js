@@ -20,6 +20,7 @@ const Profile=(props)=>{
     
   useEffect(() => {
       if(user){
+          console.log("USER EN USEEFFECT", user)
     dispatch(getOrdersByUserId(user));}
   }, [dispatch, user]);
 
