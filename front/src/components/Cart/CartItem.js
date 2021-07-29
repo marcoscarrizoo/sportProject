@@ -54,17 +54,17 @@ export default function CartItem(props) {
 
     let user = JSON.parse(localStorage.getItem("storage"));
 
-    if(user?.uid) dispatch(loadCart());
-
-    Swal.fire(
+    
+    await Swal.fire(
       {
         text:'eliminado',
         icon: 'error', 
         width:'20rem', 
-        timer: '3000', 
+        timer: '500', 
         showConfirmButton: false 
       }
-    )
+      )
+      if(user?.uid) await dispatch(loadCart());
   }
 
   const handleChangeQuantity = async (e) => {

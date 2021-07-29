@@ -38,6 +38,7 @@ export default function AdmUsers() {
 
 
     const handleClickOpen = (e) => {
+        console.log(e.target)
         setId(e.target.value)
         if(e.target.label === "Suspender") {
             setAccion("F")
@@ -57,7 +58,6 @@ export default function AdmUsers() {
     const handleAction = async () => {
         if (accion === "eliminar") {
             await axios.delete(url + "/user/delete/" + id);
-            
         }
         else {
             await axios.put(url + "/user/update/" + id, { userType: accion });

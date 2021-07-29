@@ -15,6 +15,8 @@ import { useDispatch } from 'react-redux';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { url } from '../../App'
+import { useHistory } from "react-router";
+
 
 export default function Address() {
   const classes = useStyles();
@@ -24,9 +26,10 @@ export default function Address() {
   const [city, setCity] = useState('')
   const [located, setLocated] = useState('')
   const [datos, setDatos] = useState('')
-
+  const history = useHistory()
 const orderId = JSON.parse(localStorage.getItem('cartid'))
 console.log('orderid',orderId)
+
   const info = { 
     shippingAddress: address,
     shippingZip: codePost,
@@ -38,8 +41,10 @@ console.log('orderid',orderId)
 const handleSubmit = async(e) => {
   e.preventDefault()
   try {
-    const {data} = axios.put(`${url}/orders/update/${orderId}`, info)
-    console.log(data)
+    const {data} = axios.put(`${url}/orders/update/${orderId}`, info) ;
+    history.push('/direccionDeEnvio')
+    
+    
   }catch (error){
     console.log(error)
   }

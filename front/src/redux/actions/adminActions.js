@@ -8,6 +8,7 @@ export const GET_USERS = "GET_USERS";
 export const USER_DETAIL = "USER_DETAIL";
 export const GET_USER_ORDERS = "GET_USER_ORDERS";
 export const GET_ORDERS = "GET_ORDERS";
+export const ORDER_DETAIL = "ORDER_DETAIL";
 
 export function getUsers(){
   return async (dispatch) => {
@@ -40,6 +41,18 @@ export function getUserOrders(id){
       const {data} = await axios.get( url + "/orders")
       let payload = data.filter( e => e.userId === id && e.orderState !== "CART")
       return dispatch({ type: GET_USER_ORDERS, payload })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function getOrderDetail(cartId) {
+  console.log("entro a getOrderDetail")
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(url + "/orders/" + cartId);
+      return dispatch({type: ORDER_DETAIL, payload: data})
     } catch (error) {
       console.log(error)
     }
