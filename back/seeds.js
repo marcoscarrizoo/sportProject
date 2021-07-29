@@ -127,7 +127,7 @@ const users = [
     password: "1234",
   },
   {
-    id: "VPQbE7zf5JezEZyrDl7EWfpzNOC2",
+    id: "Z3pPS8iC3WcYthfpqZD7IREadNl1",
     firstName: "Fran",
     lastName: "Garrido",
     email: "fg0611@gmail.com",
@@ -139,8 +139,11 @@ const orders = [
   //Primera order (Etapa 1)
   {
     orderState: "COMPLETED",
-    userId: "VPQbE7zf5JezEZyrDl7EWfpzNOC2",
-    products: [{ productId: 1, quantity: 1 }],
+    userId: "Z3pPS8iC3WcYthfpqZD7IREadNl1",
+    products: [
+      { productId: 1, quantity: 1 },
+      { productId: 3, quantity: 1 },
+    ],
   },
   {
     orderState: "CART",
