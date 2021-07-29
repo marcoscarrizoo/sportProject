@@ -4,6 +4,15 @@ const mercadopago = require("mercadopago");
 /*
 RURTA CONSULTA
 mercadoPago/:orderId
+
+
+
+***********************************************
+***********************************************
+Necesito es el user id, por params, query o body
+***********************************************
+***********************************************
+
 */
 async function mercadoPago(req, res, next) {
     console.log('function mercadoPago')
@@ -28,7 +37,7 @@ async function mercadoPago(req, res, next) {
     //creando un objeto de preferencia
     let preference = {
         items: items_ml,  //(todos los items)
-        external_reference: `${orderId}`,// (nos identifica la orden)
+        external_reference: `${order.id}`,// (nos identifica la orden)
         payment_methods: {
             excluded_payment_types: [
                 {
@@ -49,7 +58,7 @@ async function mercadoPago(req, res, next) {
         .then(response => {
             // console.log('RESPUESTA RESPONSE', response)
             global.id = response.body.id
-            res.json({ id: global.id, init_point: response.body.init_point })
+            res.json({ id: global.id})
         })
         .catch(error => {
             console.log(error)
