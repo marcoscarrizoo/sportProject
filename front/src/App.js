@@ -17,8 +17,9 @@ import OurPlans from './components/Dashboard/OurPlans';
 import ResetPassword from './components/SignUp_SignIn/ResetPassword/ResetPassword';
 import SendResetSuccess from './components/SignUp_SignIn/ResetPassword/ResetSuccess';
 import AddressForm from './components/Checkout/AddressForm';
-import Checkout from './components/Checkout/Checkout';
 import Address from './components/Checkout/Adress';
+import Profile from "./components/Dashboard/Profile";
+
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
 export const url = process.env.REACT_APP_API || "http://localhost:3001";
 
@@ -45,7 +46,9 @@ function App() {
         <Route path='/restablecer' component={ResetPassword}/>
         <Route path='/restablecido' component={SendResetSuccess}/>
         <Route path='/direccionDeEnvio' component={AddressForm}/>
-        <Route path='/direccion' component={Address}/>
+        <Route path='/direccion' component={Address}/>        
+        <Route exact path='/profile' component={Profile}/>
+        
       </ThemeProvider>
     </React.Fragment>
   );

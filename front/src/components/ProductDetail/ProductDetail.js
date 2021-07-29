@@ -50,7 +50,8 @@ export default function ProductDetail() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const [image, setImage] = React.useState(null);
+  // const [image, setImage] = React.useState("Hacer click para ampliar imagen");
+  const [image, setImage] = React.useState(detail?detail.images[0]:"Hacer click para ampliar imagen");
 
   useEffect(() => {
     dispatch(getProductDetail(id));
@@ -104,7 +105,8 @@ export default function ProductDetail() {
             )}
           </div>
           <div className="secondblock">
-            <img src={detail.images[0]} alt={image} className="centerimage" />
+            {/* <img src={detail? detail.images[0]: null} alt={image} className="centerimage" /> */}
+            <img src={image} alt={image} className="centerimage" />
           </div>
 
           <div className="thirdblock">
