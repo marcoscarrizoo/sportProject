@@ -15,12 +15,13 @@ function Application() {
   const productos = useSelector(store => store.cart.items)
   
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     try {
-      if (userId !== undefined) {
+      if (userId ) {
         const data = await axios.get(`${url}/mercadopago/${userId}`)
-        setDatos(data)
-        console.log("NUMERO DE ORDEN", datos)
+         setDatos(data.data)
+        console.log("NUMERO DE ORDEN", data)
       }
     } catch (error) {
       console.log(error)
