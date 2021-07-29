@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Container from '@material-ui/core/Container';
 import Swal from 'sweetalert2'
-import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn } from '../../redux/actions/userActions';
+import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn, getUserType } from '../../redux/actions/userActions';
 import { fusionCart, loadCart } from '../../redux/actions/cartActions';
 
 
@@ -67,6 +67,7 @@ export default function SignIn() {
           }
         })
         dispatch(doUserLogin(user.user))
+        dispatch(getUserType(user.user.uid))
       })
       // .then( async () => {
       //   console.log("entro a hacer la fusion")
