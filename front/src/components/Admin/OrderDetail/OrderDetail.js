@@ -36,13 +36,13 @@ export default function OrderDetail() {
                 <div className="od-info-c">
                     <h4>Datos del comprador</h4>
                     <p>{`ID: ${order?.user.id}`}</p>
-                    <p>{`Ciudad: ${order?.user.firstName}`}</p>
-                    <p>{`Ciudad: ${order?.user.lastName}`}</p>
-                    <p>{`Ciudad: ${order?.user.email}`}</p>
+                    <p>{`Nombre: ${order?.user.firstName}`}</p>
+                    <p>{`Apellido: ${order?.user.lastName}`}</p>
+                    <p>{`Email: ${order?.user.email}`}</p>
                 </div>
             </div>
             <div className="od-products">
-                <div className="od-p-d titles">
+                <div className="od-p-d od-titles">
                     <h3 className="id">ID</h3>
                     <h3 className="product-name">PRODUCTO</h3>
                     <h3 className="unit">UNIDADES</h3>
@@ -64,7 +64,7 @@ export default function OrderDetail() {
                         s + e.Order_Product.quantity,0)}
                     </h3>
                     <h3 className="total-p">{`$${order?.products.reduce( (s,e) => 
-                        s + (e.Order_Product.quantity * e.Order_Product.price),0)}`}</h3>
+                        s + (e.Order_Product.quantity * e.Order_Product.price),0).toFixed(2)}`}</h3>
                 </div>
             </div>
         </div>
