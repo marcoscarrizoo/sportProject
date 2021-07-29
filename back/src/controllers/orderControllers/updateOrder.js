@@ -30,7 +30,6 @@ body = {
 */
 
 async function updateOrder(req, res, _next) {
-  console.log('bodyyyyyy',req.body)
   try {
     const { id } = req.params;
     const {
