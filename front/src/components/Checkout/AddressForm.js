@@ -12,8 +12,12 @@ function Application() {
   // const [orderId, setOrderId] = useState("")
   const orderId = JSON.parse(window.localStorage.getItem("cartid"))
   const userId = useSelector(store => store.user.uid)
+/*
+*********************************
+useEffect de Brian
+*********************************
 
-  useEffect(async () => {
+useEffect(async () => {
     try {
       if (orderId) {
         console.log("-----------------",orderId)
@@ -25,6 +29,22 @@ function Application() {
       console.log(error)
     }
   }, [orderId, userId])
+*/
+  useEffect(async () => {
+    console.log('Knut useEffect')
+    try {
+      if (userId !== undefined) {
+        console.log('Knut IF', userId)
+
+        const data = await axios.get(`${url}/mercadopago/${userId}`)
+        setDatos(data)
+        console.log("NUMERO DE ORDEN", datos)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [userId])
+  
   // useEffect(()=>{
   //   axios.get(`http://localhost:3001/orders/user/${userId}`)
   //   .then((response)=>{
