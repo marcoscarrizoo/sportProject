@@ -51,7 +51,7 @@ async function mercadoPago(req, res, next) {
         }
         mercadopago.preferences.create(preference)
             .then(response => {
-                // console.log('RESPUESTA RESPONSE', response)
+                console.log('RESPUESTA RESPONSE', response)
                 global.id = response.body.id
                 res.json({ id: global.id })
             })
