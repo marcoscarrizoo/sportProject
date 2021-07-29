@@ -10,10 +10,15 @@ import UserDetail from "./UserDetail/UserDetail";
 import LocationAdd from "../Locations/LocationAdd";
 import LocationManager from "../Locations/LocationManager";
 import AdminOrders from "../Admin/AdmOrders/AdmOrders";
+import { useSelector } from "react-redux";
 
-const Admin = () => {
-  return (
-    <div className="body">
+const Admin = () => {    
+      let admin= useSelector((store) => store.user.userType);
+
+return (<div>
+    { 
+      (admin === "S"||admin==="A") && (
+        <div className="body">
       <Route path="/admin" component={SideBar} />
       <Route
         exact
@@ -28,7 +33,10 @@ const Admin = () => {
       <Route path="/admin/sucursales" component={LocationManager} />
       <Route path="/admin/ordenes" component={AdminOrders} />
     </div>
-  );
+    )
+    }
+   </div>
+  )
 };
 
 export default Admin;
