@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import Checkout from './Checkout'
 import axios from 'axios'
-import { useDispatch } from 'react-redux';
-import { getOrderByUserId } from '../../redux/actions/userActions'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {getOrderByUserId} from '../../redux/actions/userActions'
 import { BsInfo } from 'react-icons/bs';
 import { url } from '../../App';
 
@@ -12,30 +11,13 @@ function Application() {
   // const [orderId, setOrderId] = useState("")
   const orderId = JSON.parse(window.localStorage.getItem("cartid"))
   const userId = useSelector(store => store.user.uid)
-/*
-*********************************
-useEffect de Brian
-*********************************
+  const products = useSelector(store => store.cart.total)
+  const productos = useSelector(store => store.cart.items)
+  
 
-useEffect(async () => {
-    try {
-      if (orderId) {
-        console.log("-----------------",orderId)
-        const data = await axios.get(`${url}/mercadopago/${orderId}`)
-        setDatos(data)
-        console.log("NUMERO DE ORDEN",datos)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }, [orderId, userId])
-*/
   useEffect(async () => {
-    console.log('Knut useEffect')
     try {
       if (userId !== undefined) {
-        console.log('Knut IF', userId)
-
         const data = await axios.get(`${url}/mercadopago/${userId}`)
         setDatos(data)
         console.log("NUMERO DE ORDEN", datos)
@@ -43,24 +25,7 @@ useEffect(async () => {
     } catch (error) {
       console.log(error)
     }
-  }, [userId])
-  
-  // useEffect(()=>{
-  //   axios.get(`http://localhost:3001/orders/user/${userId}`)
-  //   .then((response)=>{
-  //     const info = response.data.ordersDetails[0].id
-  //     console.log('useEffect 2 orderId',info)
-  //     setOrderId(info)
-  //     if(orderId){
-  //       axios.get(`http://localhost:3001/mercadopago/${orderId}`)
-  //       .then(data => {
-  //         console.log('DATA DE LA FUNCION MERCADO',data)
-  //         setDatos(data.data)
-  //       })
-  //     }
-  //   })
-  //   .catch(err => console.error(err)) 
-  // },[orderId, userId])
+  }, [userId]);
   console.log('datos ID', datos)
   console.log('ORDER ID', orderId)
   console.log('userID', userId)
@@ -68,13 +33,9 @@ useEffect(async () => {
   return (
     <div className="App">
 
-      <Checkout data={datos} />
-
+      <Checkout pro={productos} product={products} data={datos}/>
     </div>
   );
 }
 
 export default Application;
-
-//productos={productos} data={datos}
-

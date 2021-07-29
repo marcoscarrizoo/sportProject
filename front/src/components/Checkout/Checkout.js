@@ -9,11 +9,23 @@ import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
 
-
+div: {
+  display: 'flex',
+  width: '200px',
+  marginLeft: '30%',
+  marginTop: '10px',
+  
+},
+form:{
+  marginLeft: '100px'
+},
+name: {
+  fontSize: '30px'
+}
 }))
 
 
-export default function Checkout({ data }) {
+export default function Checkout({ data, product , pro}) {
   const classes = useStyles()
   console.log('componente comprar', data)
   useEffect(() => {
@@ -38,12 +50,21 @@ export default function Checkout({ data }) {
   }, [data]);
 
   return (
-    <div>
-    <Card >
-      COMPRAR
-      <form id="form1"></form>
+    <div className={classes.div}>
+    <div className={classes.buy}>
       
-    </Card>
+      <img src='https://seogenial.com/wp-content/uploads/2020/08/mercado-pago-peru.jpg'></img>
+     <div className={classes.form}>
+     <h1>COMPRA</h1> 
+    {pro.map(e => 
+      <ul>
+        <li className={classes.name}>{e.name} <br/> <div style={{color: 'blue'}}>${e.price}</div></li>
+      </ul>
+      )}
+      <h1 style={{color: 'purple', boxShadow: '0 0 5px' , width: '200px'}}>TOTAL: ${product}</h1>
+    <div style={{marginLeft: '15%'}}><form id="form1"></form></div> 
+    </div> 
+    </div>
     </div>
   );
 }
