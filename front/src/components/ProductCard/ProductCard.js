@@ -175,17 +175,11 @@ export default function ProductCard({
               <Typography variant="body2" color="textSecondary" component="p">
                 {categories}
               </Typography>
+              
               <Button
                 className={classes.button}
                 variant="contained"
                 color="primary"
-              >
-                comprar ahora
-              </Button>
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="secondary"
                 onClick={handleAddToCart}
               >
                 agregar al carrito

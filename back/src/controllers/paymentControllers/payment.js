@@ -35,7 +35,8 @@ async function payment(req, res, next) {
             order.save()
                 .then(() => {
                     console.info('redict sucess')
-                    return res.redirect('http://localhost:3000')
+                    
+                    return res.redirect('http://localhost:3000/products')
                 })
                 .catch(erro => {
                     return res.redirect(`http://localhost:3000/?error=${error}&where=al+salvar`)

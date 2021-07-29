@@ -64,7 +64,7 @@ export default function ProductReviews({ productId }) {
     revs?.length && revs.reduce((acc, num) => acc + num, 0) / revs.length;
 
   //rating state, changing
-  const [value, setValue] = useState(4);
+  const [value, setValue] = useState(0);
 
   const initialEdit = false;
   const initialForm = {
@@ -77,6 +77,7 @@ export default function ProductReviews({ productId }) {
   const [form, setForm] = useState(initialForm);
 
   useEffect(() => {
+    rating === 0 && setValue(rating);
     dispatch(
       getRevs({
         productId,
