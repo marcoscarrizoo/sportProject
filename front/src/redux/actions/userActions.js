@@ -126,7 +126,7 @@ export const getOrderByUserId = (id) => {
 
 export const getOrdersByUserId = (id) => {
   return async (dispatch) => {
-    const {data} = await axios.get('http://localhost3001/user/user/'+id)
+    const {data} = await axios.get('http://localhost3001/orders/user/'+id)
     let payload = data.filter( e =>e.orderState !== "CART")
       dispatch({
       type: ORDERS_BY_USER_ID,
