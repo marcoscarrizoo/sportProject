@@ -146,18 +146,7 @@ export default function ProductReviews({ productId }) {
             <Box component="fieldset" mb={3} borderColor="transparent">
               <Rating name="read-only" value={check.rating} readOnly />
             </Box>
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              className={classes.button}
-              startIcon={<SaveIcon />}
-              onClick={() => {
-                setedit(true);
-              }}
-            >
-              Editar
-            </Button>
+            
             <Button
               variant="contained"
               color="primary"
