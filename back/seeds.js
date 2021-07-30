@@ -144,7 +144,7 @@ const products = [
       "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/133/104/products/tienda-nube-muscetta-31-281-883f2c42693b578c0015905360360177-1024-1024.jpg",
     ],
     price: 1000,
-    stock: 100,
+    stock: 0,
     categories: [
       {
         name: "shaker",
@@ -234,6 +234,91 @@ const products = [
     categories: [
       {
         name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Mancuernas",
+    description:
+      "mancuerna 4 kg",
+    images: [
+      "https://www.mideporte.pe/wp-content/uploads/2020/03/MANCUERNAS-NEOPRENE-ROJO-4KG.png",
+    ],
+    price: 1200,
+    stock: 100,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Colchoneta Fitness",
+    description:
+      "colchoneta para entrenar en casa y lograr el cuerpo que queres",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_893137-MLA31044866528_062019-O.jpg",
+    ],
+    price: 400,
+    stock: 0,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Bici Estatica",
+    description:
+      "Bici para hacer cardio en casa con 5 velocidades",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_639917-MCO45227001403_032021-O.jpg",
+    ],
+    price: 20500,
+    stock: 10,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker electrico",
+    description:
+      "Shaker electrico 450 ml , para batir tus suplementos favorito",
+    images: [
+      "https://images-eu.ssl-images-amazon.com/images/I/51Is49UedKL.jpg",
+    ],
+    price: 999,
+    stock: 50,
+    categories: [
+      {
+        name: "shaker",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker vaso batidor electrico",
+    description:
+      "Shaker vaso batidor 1 litro",
+    images: [
+      "https://bazarchef.com.ar/wp-content/uploads/2021/07/bz-jc01-E.jpg",
+    ],
+    price: 1500,
+    stock: 10,
+    categories: [
+      {
+        name: "shaker",
         image:
           "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
       },
