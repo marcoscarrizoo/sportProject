@@ -116,7 +116,7 @@ export let doGoogleLogIn = () => async (dispatch, getState) => {
 
 export const getOrderByUserId = (id) => {
   return async (dispatch) => {
-    const user = await axios.get('http://localhost3001/user/user/'+id)
+    const user = await axios.get( url +'/user/user/'+id)
       dispatch({
       type: "ORDER_BY_USER_ID",
       payload: user.data,
@@ -127,7 +127,7 @@ export const getOrderByUserId = (id) => {
 export const getOrdersByUserId = (id) => {
  // console.log('id de la action', id)
   return async function (dispatch) {
-    const {data} = await axios.get('http://localhost:3001/orders/user/'+id)
+    const {data} = await axios.get( url + '/orders/user/'+id)
     
     let payload = data.ordersDetails.filter( e =>e.orderState !== "CART")
     console.log('payload',payload)
