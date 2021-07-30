@@ -32,7 +32,7 @@ const {
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-
+// export const url = process.env.REACT_APP_API || "http://localhost:3001";
 require("dotenv").config();
 /**
  * ****************************************************************
