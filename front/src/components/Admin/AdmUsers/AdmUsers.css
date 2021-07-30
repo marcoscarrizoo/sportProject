@@ -44,11 +44,12 @@
 
 
 .email {
-    width: 50%;
+    width: 40%;
 }
 
 .type-user {
-    width: 15%;
+    text-align: center;
+    width: 20%;
 }
 
 

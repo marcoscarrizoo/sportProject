@@ -139,11 +139,11 @@ export const getOrdersByUserId = (id) => {
 };
 
 export function getUserType(id){
-  return async () => {
+  return async (dispatch) => {
     try {
-      const info = await axios.get( url + "/user/getUserType/" + id)
-     // return dispatch({ type: GET_USER_TYPE, payload: info.data })
-     window.localStorage.setItem('userType', JSON.stringify(info.data))
+      const {data} = await axios.get( url + "/user/getUserType/" + id)
+     return dispatch({ type: GET_USER_TYPE, payload: data })
+    //  window.localStorage.setItem('userType', JSON.stringify(info.data)) //// MARCOS
       
     } catch (error) {
       console.log(error)
