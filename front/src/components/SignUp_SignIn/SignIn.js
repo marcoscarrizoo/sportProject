@@ -18,8 +18,10 @@ import Typography from '@material-ui/core/Typography';
 
 import Container from '@material-ui/core/Container';
 import Swal from 'sweetalert2'
-import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn } from '../../redux/actions/userActions';
+import { doUserLogin, LOGIN_SUCESS, doGoogleLogIn, getUserType, doLogOut } from '../../redux/actions/userActions';
 import { fusionCart, loadCart } from '../../redux/actions/cartActions';
+import axios from 'axios';
+import { url } from '../../App';
 
 
 function Copyright() {
@@ -67,6 +69,7 @@ export default function SignIn() {
           }
         })
         dispatch(doUserLogin(user.user))
+        // dispatch(getUserType(user.user.uid)) ///                MARCOS
       })
       // .then( async () => {
       //   console.log("entro a hacer la fusion")
@@ -98,25 +101,63 @@ export default function SignIn() {
     dispatch(doGoogleLogIn())
   }
 
+  async function checkUserType (){
+
+    try {
+      await dispatch(getUserType(user.uid)) // MIO
+      if(user.userType === "F" || user.userType === "D"){
+        dispatch(doLogOut());
+        history.push("/iniciarSesion")
+        Swal.fire(
+          {
+            text: 'Cuenta suspendida',
+            icon: 'warning',
+            width: '20rem',
+            // timer: '3000',
+            showConfirmButton: true
+          }
+        )
+      }
+      else {
+        history.push("/")
+        Swal.fire(
+          {
+            text: 'Bienvenido',
+            icon: 'success',
+            width: '20rem',
+            timer: '3000',
+            showConfirmButton: false
+          }
+        )
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+
   if (user?.uid) {
 
     try {
       fusionCart(user)
       loadCart()
+
+      checkUserType()
+      // history.push("/")
+      // Swal.fire(
+      //   {
+      //     text: 'Bienvenido',
+      //     icon: 'success',
+      //     width: '20rem',
+      //     timer: '3000',
+      //     showConfirmButton: false
+      //   }
+      // )
     } catch (error) {
       console.log(error)
     }
-
-    history.push("/")
-    Swal.fire(
-      {
-        text: 'Bienvenido',
-        icon: 'success',
-        width: '20rem',
-        timer: '3000',
-        showConfirmButton: false
-      }
-    )
+    
   }
 
 

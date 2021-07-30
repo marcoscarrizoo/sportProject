@@ -26,6 +26,7 @@ export default function AdmUsers() {
 
     const dispatch = useDispatch();
     const users = useSelector((store) => store.adm.users);
+    const admin = useSelector(store => store.user.userType)
     const [open, setOpen] = useState(false);
     const [id, setId] = useState(null)
     const [accion, setAccion] = useState(null)
@@ -38,30 +39,15 @@ export default function AdmUsers() {
 
 
     const handleClickOpen = (e) => {
-        console.log(e.target)
-        setId(e.target.value)
-        if(e.target.label === "Suspender") {
-            setAccion("F")
-        }
-        if(e.target.label === "Banear") {
-            setAccion("D")
-        }
-        if(e.target.label === "Eliminar") {
-            setAccion("eliminar")
-        }
-        if(e.target.label === "Promover a ADMIN") {
-            setAccion("A")
-        }
-        setOpen(true);
+        const name = e.target.title;
+        const value = e.target.value;
+        setId(value)
+        setAccion({ userType: name })
+        setOpen(true)
     };
 
     const handleAction = async () => {
-        if (accion === "eliminar") {
-            await axios.delete(url + "/user/delete/" + id);
-        }
-        else {
-            await axios.put(url + "/user/update/" + id, { userType: accion });
-        }
+        await axios.put(url + "/user/update/" + id, accion);
         dispatch(getUsers());
         handleClose();
     };
@@ -103,24 +89,33 @@ export default function AdmUsers() {
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
-                                    <option
-                                        value={u.id}
-                                        name="F"
-                                        onClick={handleClickOpen}>Suspender</option>
-                                    <option
-                                        value={u.id}
-                                        name="D"
-                                        onClick={handleClickOpen}>Banear</option>
-                                    <option
-                                        value={u.id}
-                                        name="eliminar"
-                                        onClick={handleClickOpen}>Eliminar</option>
                                     {
                                         (u.userType !== "A" && u.userType !== "S") &&
                                         <option
                                             value={u.id}
-                                            name="A"
-                                            onClick={handleClickOpen}>Promover a ADMIN</option>
+                                            title="F"
+                                            onClick={handleClickOpen}>Suspender</option>
+                                    }
+                                    {
+                                        (u.userType !== "A" && u.userType !== "S") &&
+                                        <option
+                                            value={u.id}
+                                            title="D"
+                                            onClick={handleClickOpen}>Banear</option>
+                                    }
+                                    {
+                                        (u.userType === "A" && admin === "S") &&
+                                        <option
+                                            value={u.id}
+                                            title="B"
+                                            onClick={handleClickOpen}>Tipo USUARIO</option>
+                                    }
+                                    {
+                                        (u.userType !== "A" && u.userType !== "S") &&
+                                        <option
+                                            value={u.id}
+                                            title="A"
+                                            onClick={handleClickOpen}>Tipo ADMIN</option>
                                     }
                                 </Select>
                             </FormControl>

@@ -107,12 +107,16 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const user = useSelector((store) => store.user.loggedIn);
   const userName = useSelector((store) => store.user.email);
+  // const userType = JSON.parse(localStorage.getItem('userType'))      MARCOS
+  const userType = useSelector((store) => store.user.userType);
+  
   const products = useSelector(store => store.cart)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
 
+  console.log("user type", userType)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -138,6 +142,7 @@ export default function PrimarySearchAppBar() {
   const menu = () => {
     history.push('/')
   }
+
   const handleSignUp = () => {
     history.push("/registrarse");
     setAnchorEl(null);
@@ -148,12 +153,20 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  const handleUser = () => {
+    history.push("/profile");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const handleLogOut = () => {
     dispatch(doLogOut());
+    history.push("/");
     
     Swal.fire({
       text: "Esperamos verte pronto",
@@ -182,7 +195,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {!user ? (
+      
+{!user ? (
         <div>
           <MenuItem onClick={handleLoggin}>Inicar Sesion</MenuItem>
           <MenuItem onClick={handleSignUp}>Registrarse</MenuItem>
@@ -190,10 +204,13 @@ export default function PrimarySearchAppBar() {
       ) : (
         <div>
           <MenuItem onClick={handleAdmin}><AccountCircleIcon/>{userName}</MenuItem>
-          <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+         {userType==="S"||userType==="A"? <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+         :
+         <MenuItem onClick={handleUser}>Perfil</MenuItem>}
           <MenuItem onClick={handleLogOut}>Cerrar Sesion</MenuItem>
         </div>
       )}
+      
     </Menu>
   );
 

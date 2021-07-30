@@ -1,3 +1,4 @@
+
 const {
   createProductsSeeds,
 } = require("./src/controllers/productControllers/createProductsSeeds");
@@ -37,7 +38,7 @@ require("dotenv").config();
  * ****************************************************************
  * Agregar un process.env.PORT y agregarlo en el .env PORT = 3001 *
  * ************************************************************** */
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   // server.listen(3000, async () => {
   server.listen(process.env.PORT, async () => {
     console.log(`listening at PORT ${process.env.PORT}`);

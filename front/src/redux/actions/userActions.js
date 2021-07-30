@@ -8,6 +8,8 @@ export const LOGIN_SUCESS = "LOGIN_SUCESS";
 export const LOGIN_SUCESS_GOOGLE = "LOGIN_SUCESS_GOOGLE";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const USER_LOG_OUT = "USER_LOG_OUT";
+export const GET_USER_TYPE = "GET_USER_TYPE"
+export const ORDERS_BY_USER_ID= "ORDERS_BY_USER_ID"
 
 //crea nuevo usuario en la base de datos con id, mail, nombre, apellido
 export let newUser = (form) => async (dispatch) => {
@@ -21,7 +23,6 @@ export let newUser = (form) => async (dispatch) => {
 
 //hace el login con mail, contra, y deja guardado en el localstorage la sesion
 export let doUserLogin = (user) => async (dispatch, getState) => {
-
   dispatch({
     type: LOGIN_SUCESS
   })
@@ -123,6 +124,32 @@ export const getOrderByUserId = (id) => {
   };
 };
 
+export const getOrdersByUserId = (id) => {
+ // console.log('id de la action', id)
+  return async function (dispatch) {
+    const {data} = await axios.get('http://localhost:3001/orders/user/'+id)
+    
+    let payload = data.ordersDetails.filter( e =>e.orderState !== "CART")
+    console.log('payload',payload)
+      dispatch({
+      type: ORDERS_BY_USER_ID,
+      payload
+    });
+  };
+};
+
+export function getUserType(id){
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get( url + "/user/getUserType/" + id)
+     return dispatch({ type: GET_USER_TYPE, payload: data })
+    //  window.localStorage.setItem('userType', JSON.stringify(info.data)) //// MARCOS
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 
 

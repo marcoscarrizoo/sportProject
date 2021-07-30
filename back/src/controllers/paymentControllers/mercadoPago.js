@@ -1,6 +1,10 @@
 const { Order, Order_Product, Product } = require("../../db");
 const mercadopago = require("mercadopago");
 
+mercadopago.configure({
+    access_token: 'TEST-6526025757594263-072114-48b8fe283514f9ea144ed66ecc48f689-794718240'
+
+});
 /*
 RURTA CONSULTA
 mercadoPago/:orderId
@@ -49,15 +53,21 @@ async function mercadoPago(req, res, next) {
                 pending: 'http://localhost:3001/mercadopago/pagos',
             },
         }
+        // console.log('preference',preference) select id, "orderState", "paymentState", "payment_id", "userId" from orders;
         mercadopago.preferences.create(preference)
             .then(response => {
-                console.log('RESPUESTA RESPONSE', response)
+                // console.log('RESPUESTA RESPONSE', response)
                 global.id = response.body.id
-                res.json({ id: global.id })
+                console.log('response.body.init_point', response.body.init_point)
+                console.log('globalid', global.id)
+                res.json({
+                    id: global.id,
+                     //init_point: response.body.init_point
+                 })
             })
-            .catch(error => {
-
-            })
+            .catch(function (error) {
+                console.log(error);
+            });
     } catch (error) {
         console.log(error)
     }

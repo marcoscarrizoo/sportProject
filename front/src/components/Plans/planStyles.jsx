@@ -3,10 +3,11 @@ import { makeStyles } from "@material-ui/core";
 export default makeStyles({
     root: {
       width: '300px',
-      height: '400px',
+      height: '420px',
       boxShadow: '0 0 3px',
       backgroundColor: 'rgba(150, 150, 150, 0.849)',
-      margin: '30px'
+      margin: '30px',
+      
     },
     bullet: {
       display: 'inline-block',
@@ -23,14 +24,17 @@ export default makeStyles({
     },
     button: {
       width: '100%',
-      marginTop: '82px',
+      marginTop: '90px',
       
     },
     button2: {
       width: '100%',
-      marginTop: '45px'
+      marginTop: '55px'
     },
-    
+    button3: {
+      width: '100%',
+      marginBottom: '30px'
+    },
     buttons: {
       marginLeft: '40px'
     },
@@ -52,5 +56,11 @@ export default makeStyles({
       display: "grid",
       gridTemplateColumns: "repeat(3, 1fr)",
       marginLeft: '30%',
+    },
+    datos: {
+      display: 'flex',
+      justifyContent: 'center',
+      fontSize: '25px',
+      
     }
   });
