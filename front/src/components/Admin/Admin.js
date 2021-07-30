@@ -16,7 +16,7 @@ import Categories from "./Categories/Categories";
 
 
 const Admin = () => {    
-      let admin= useSelector((store) => store.user.userType);
+ const admin = JSON.parse(localStorage.getItem('userType'))
 
 return (<div>
     { 
