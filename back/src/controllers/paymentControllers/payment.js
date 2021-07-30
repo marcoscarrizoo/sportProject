@@ -1,12 +1,32 @@
-const { Order, Order_Product, Product } = require("../../db");
+const { Order, Order_Product, Product, User } = require("../../db");
+const nodemailer = require('nodemailer');
 
-const { TOKEN } = process.env;
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+      user:'sportgymfitness198@gmail.com',
+      pass:'botlgntwqdomgxqo'
+  },
+});
+
+// const { TOKEN } = process.env;
 const mercadopago = require("mercadopago");
 
 mercadopago.configure({
     access_token: 'TEST-6526025757594263-072114-48b8fe283514f9ea144ed66ecc48f689-794718240'
 
 });
+let mail = async (userMail,firstName) => {
+    await transporter.sendMail({
+        from: '"Sportgym 👻" <foo@example.com>', // sender address
+        to: userMail, // list of receivers
+        subject: `Compra Exitosa ${firstName} ✔`, // Subject line
+        text: "Excelente compra", // plain text body
+        html: "<b>Hello world?</b>", // html body
+    });
+}
 
 //mercadopago/pagos
 async function payment(req, res, next) {
@@ -25,8 +45,17 @@ async function payment(req, res, next) {
         processing_mode,    //aggregator
         merchant_account_id,//null
 } = req.query;
-
-    //aca editamos el status de mi orden 
+//Obtenemmos el mail del user
+// const orderm = await Order.findByPk('cc64ab40-bd46-4b02-9cac-277301c294d8',
+const orderm = await Order.findByPk(external_reference,
+    {include: [
+        {
+            model: User,
+            attributes: ["email"]
+        }]}
+        );
+        console.log('orderm.user.email',orderm.user.email)
+        await mail(orderm.user.email, firstName);
     Order.findByPk(external_reference)
         .then(order => {
             order.payment_id = payment_id;
@@ -36,7 +65,7 @@ async function payment(req, res, next) {
                 .then(() => {
                     console.info('redict sucess')
                     
-                    return res.redirect('http://localhost:3000/products')
+                    return res.redirect('http://localhost:3000')
                 })
                 .catch(erro => {
                     return res.redirect(`http://localhost:3000/?error=${error}&where=al+salvar`)
@@ -48,6 +77,7 @@ async function payment(req, res, next) {
 
 }
 //mercadopago/pagos
+
 async function pagosId(req, res) {
     console.log('pagosId access_token,', PROD_ACCESS_TOKEN)
     // const mp = new mercadopago(access_token)

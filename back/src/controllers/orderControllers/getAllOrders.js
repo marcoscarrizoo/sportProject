@@ -2,7 +2,7 @@ const { User, Product, Order } = require("../../db");
 
 async function getAllOrders(req, res, _next) {
   try {
-    console.log("getAllOrders");
+    // console.log("getAllOrders");
     const orders = await Order.findAll({
       include: [Product, User]
     });
