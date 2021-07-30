@@ -33,7 +33,7 @@ const {
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const api = process.env.API || "http://localhost:3001";
-const front = process.env.FRONT || "http://localhost:3001";
+const front = process.env.FRONT || "http://localhost:3000";
 require("dotenv").config();
 /**
  * ****************************************************************
