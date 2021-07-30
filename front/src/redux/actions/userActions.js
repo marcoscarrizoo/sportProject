@@ -125,9 +125,12 @@ export const getOrderByUserId = (id) => {
 };
 
 export const getOrdersByUserId = (id) => {
-  return async (dispatch) => {
-    const {data} = await axios.get('http://localhost3001/orders/user/'+id)
-    let payload = data.filter( e =>e.orderState !== "CART")
+ // console.log('id de la action', id)
+  return async function (dispatch) {
+    const {data} = await axios.get('http://localhost:3001/orders/user/'+id)
+    
+    let payload = data.ordersDetails.filter( e =>e.orderState !== "CART")
+    console.log('payload',payload)
       dispatch({
       type: ORDERS_BY_USER_ID,
       payload
@@ -138,8 +141,10 @@ export const getOrdersByUserId = (id) => {
 export function getUserType(id){
   return async (dispatch) => {
     try {
-      const info = await axios.get( url + "/user/getUserType/" + id)
-      return dispatch({ type: GET_USER_TYPE, payload: info.data })
+      const {data} = await axios.get( url + "/user/getUserType/" + id)
+     return dispatch({ type: GET_USER_TYPE, payload: data })
+    //  window.localStorage.setItem('userType', JSON.stringify(info.data)) //// MARCOS
+      
     } catch (error) {
       console.log(error)
     }

@@ -33,7 +33,6 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 fetching: false,
                 loggedIn: true,
-                userType: action.payload,
                 ...action.payload
             }
         case LOGIN_SUCESS_GOOGLE:

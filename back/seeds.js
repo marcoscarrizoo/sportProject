@@ -144,7 +144,7 @@ const products = [
       "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/133/104/products/tienda-nube-muscetta-31-281-883f2c42693b578c0015905360360177-1024-1024.jpg",
     ],
     price: 1000,
-    stock: 100,
+    stock: 0,
     categories: [
       {
         name: "shaker",
@@ -239,17 +239,102 @@ const products = [
       },
     ],
   },
+  {
+    name: "Mancuernas",
+    description:
+      "mancuerna 4 kg",
+    images: [
+      "https://www.mideporte.pe/wp-content/uploads/2020/03/MANCUERNAS-NEOPRENE-ROJO-4KG.png",
+    ],
+    price: 1200,
+    stock: 100,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Colchoneta Fitness",
+    description:
+      "colchoneta para entrenar en casa y lograr el cuerpo que queres",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_893137-MLA31044866528_062019-O.jpg",
+    ],
+    price: 400,
+    stock: 0,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Bici Estatica",
+    description:
+      "Bici para hacer cardio en casa con 5 velocidades",
+    images: [
+      "https://http2.mlstatic.com/D_NQ_NP_639917-MCO45227001403_032021-O.jpg",
+    ],
+    price: 20500,
+    stock: 10,
+    categories: [
+      {
+        name: "articulos de gimnasio",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker electrico",
+    description:
+      "Shaker electrico 450 ml , para batir tus suplementos favorito",
+    images: [
+      "https://images-eu.ssl-images-amazon.com/images/I/51Is49UedKL.jpg",
+    ],
+    price: 999,
+    stock: 50,
+    categories: [
+      {
+        name: "shaker",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
+  {
+    name: "Shaker vaso batidor electrico",
+    description:
+      "Shaker vaso batidor 1 litro",
+    images: [
+      "https://bazarchef.com.ar/wp-content/uploads/2021/07/bz-jc01-E.jpg",
+    ],
+    price: 1500,
+    stock: 10,
+    categories: [
+      {
+        name: "shaker",
+        image:
+          "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/FITNES34/1200x900-FITNES34-2.jpg&w=500&q=100",
+      },
+    ],
+  },
   
   
 ];
 
-const users = [
+const users = [ 
   {
     id: "d1687b07-058c-414a-bb5a-77a8d897be57",
     firstName: "Knut",
     lastName: "Waale",
     email: "knutwaale@gmail.com",
-    password: "1234",
+    password: "123456",
     userType: "S",
   },
   {
@@ -316,8 +401,78 @@ const orders = [
   },
 ];
 
+const locations = [
+  {
+    description: "La Isla",
+    lat: -34.58469156566315,
+    lng: -58.39677700514054,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "Recoleta",
+    lat: -34.587689246485276,
+    lng: -58.39785443486049,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "Barrio Norte",
+    lat: -34.58986618904399,
+    lng: -58.3974905355163,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "Puerto Madero",
+    lat: -34.617423999879875,
+    lng: -58.36099524562233,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "San Telmo",
+    lat: -34.62119585895379,
+    lng: -58.3714838619852,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "San Miguel",
+    lat: -34.615905189337646,
+    lng: -58.37099866285961,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+];
+
 module.exports = {
   products,
   users,
   orders,
+  locations,
 };

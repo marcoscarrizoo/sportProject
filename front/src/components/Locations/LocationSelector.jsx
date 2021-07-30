@@ -84,7 +84,7 @@ export default function LocationSelector() {
           {options}
         </Select>
       </FormControl>
-      <LocationDraw location={location} />
+      <LocationDraw location={selection} />
     </div>
   );
 }

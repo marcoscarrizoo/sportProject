@@ -107,7 +107,9 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const user = useSelector((store) => store.user.loggedIn);
   const userName = useSelector((store) => store.user.email);
-  const userType =  useSelector((store) => store.user.userType);
+  // const userType = JSON.parse(localStorage.getItem('userType'))      MARCOS
+  const userType = useSelector((store) => store.user.userType);
+  
   const products = useSelector(store => store.cart)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
