@@ -110,7 +110,7 @@ export default function SignIn() {
         history.push("/iniciarSesion")
         Swal.fire(
           {
-            text: 'Cuenta suspendida',
+            text: 'Cuenta suspendida, comuniquese en sportgymfitness198@gmail.com',
             icon: 'warning',
             width: '20rem',
             // timer: '3000',

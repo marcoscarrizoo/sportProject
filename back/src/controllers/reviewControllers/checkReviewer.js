@@ -23,13 +23,13 @@ async function checkReviewer(req, res, next) {
       if (findRev) {
         //ya comento ... mando el review para poder mostrarlo al principio
         // y ademas para darle opcion al usuario a editarlo si asi lo desea
-        res.json(findRev);
+        return res.json(findRev);
       }
       // no ha comentado
-      res.send(true);
+      return res.send(true);
     }
     //no puede comentar
-    res.send(false);
+    return res.send(false);
   } catch (error) {
     console.error(error);
   }

@@ -8,7 +8,7 @@ async function updateReview(req, res, next) {
       { comment, rating },
       { returning: true, where: { userId, productId } }
     );
-    res.json(review[1]);
+    return res.json(review[1]);
   } catch (error) {
     console.error(error);
   }

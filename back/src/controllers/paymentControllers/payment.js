@@ -23,9 +23,9 @@ let mail = async (userMail,firstName, lastName) => {
     await transporter.sendMail({
         from: '"Sportgym" <foo@example.com>', // sender address
         to: userMail, // list of receivers
-        subject: `Compra Exitosa ${firstName} ✔`, // Subject line
-        text: `Hola ${firstName} ${lastName}`, // plain text body
-        html: `<b>Hola ${firstName} ${lastName}, excelente compra, te avisaremos cuando se despache la entrega, para  cualquier consulta relacionada o no con tu pedido, te puedes responder este correo electrónico o escribirnos por sportgymfitness198@gmail.com. Atentamente sportGym, tu sucursal, de la salud física. </b>`, // html body
+        subject: `Compra Exitosa ${firstName ? firstName : ""} ✔`, // Subject line
+        text: `Hola ${firstName && lastName ? `${firstName, lastName}`: "!"}`, // plain text body
+        html: `<b>Hola ${firstName && lastName ? `${firstName, lastName}`: ""}, excelente compra, te avisaremos cuando se despache la entrega, para  cualquier consulta relacionada o no con tu pedido, te puedes responder este correo electrónico o escribirnos por sportgymfitness198@gmail.com. Atentamente sportGym, tu sucursal, de la salud física. </b>`, // html body
     });
 }
 

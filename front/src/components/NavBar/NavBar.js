@@ -203,7 +203,7 @@ export default function PrimarySearchAppBar() {
         </div>
       ) : (
         <div>
-          <MenuItem onClick={handleAdmin}><AccountCircleIcon/>{userName}</MenuItem>
+          <MenuItem><AccountCircleIcon/>{userName}</MenuItem>
          {userType==="S"||userType==="A"? <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
          :
          <MenuItem onClick={handleUser}>Perfil</MenuItem>}
