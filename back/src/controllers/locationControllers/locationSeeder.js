@@ -5,8 +5,12 @@ async function locationsSeeder(req, res, next) {
   //body comes with {description: string, lat: float & lng: float}
   try {
     if (locations?.length) {
-      locations.forEach(async (loc) => {
-        await Location.create(loc);
+      
+      locations.forEach(async ({description,lat,lng,images}) => {
+        await Location.findOrCreate({
+          where: {description},
+          defaults: {description,lat, lng, images}
+        });
       });
     }
     console.log("DB precargada con locations seeds");
