@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
 
 // const { TOKEN } = process.env;
 const mercadopago = require("mercadopago");
+const { front } = require("../../..");
 
 mercadopago.configure({
     access_token: 'TEST-6526025757594263-072114-48b8fe283514f9ea144ed66ecc48f689-794718240'
@@ -66,14 +67,14 @@ const orderm = await Order.findByPk(external_reference,
                 .then(() => {
                     console.info('redict sucess')
                     
-                    return res.redirect('http://localhost:3000')
+                    return res.redirect(front)
                 })
                 .catch(erro => {
-                    return res.redirect(`http://localhost:3000/?error=${error}&where=al+salvar`)
+                    return res.redirect(`${front}/?error=${error}&where=al+salvar`)
                 })
         })
         .catch(error => {
-            return res.redirect(`http://localhost:3000/error=${error}&where=al+buscar`)
+            return res.redirect(`${front}/error=${error}&where=al+buscar`)
         })
 
 }

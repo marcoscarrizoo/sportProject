@@ -1,11 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { url } from "../../App";
 
 export const getLocations = () => {
   return async (dispatch) => {
     try {
-      const result = await fetch(`http://localhost:3001/location/`);
+      const result = await fetch(`${url}/location/`);
       const locations = await result.json();
       dispatch({
         type: "GET_LOCATIONS",
@@ -28,7 +29,7 @@ export const getLocation = (id) => {
   return async (dispatch) => {
     let location;
     try {
-      const result = await fetch(`http://localhost:3001/location/${id}`);
+      const result = await fetch(`${url}/location/${id}`);
       location = await result.json();
       dispatch({
         type: "GET_LOCATION",
@@ -50,7 +51,7 @@ export const getLocation = (id) => {
 export const addLocation = (data) => {
   return async (dispatch) => {
     try {
-      const result = await fetch(`http://localhost:3001/location/create`, {
+      const result = await fetch(`${url}/location/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -75,10 +76,10 @@ export const addLocation = (data) => {
 
 export const deleteLocation = (id) => {
   return async (dispatch) => {
-    //http://localhost:3001/location/delete?id=bc54b265-dc56-4719-b9f6-2267b47b15f9
+    //${url}/location/delete?id=bc54b265-dc56-4719-b9f6-2267b47b15f9
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/location/delete/${id}`
+        `${url}/location/delete/${id}`
       );
       const resJson = await data.json();
       if (typeof resJson.message === "string") {
@@ -100,7 +101,7 @@ export const deleteLocation = (id) => {
 
 export const updateLocation = ({ id, description, lat, lng }) => {
   return async (dispatch) => {
-    //http://localhost:3001/location/update?id=bc54b265-dc56-4719-b9f6-2267b47b15f9
+    //${url}/location/update?id=bc54b265-dc56-4719-b9f6-2267b47b15f9
     /*  {
       "description": "av general paz 539",
       "lat": -31.408666942379764,
@@ -115,7 +116,7 @@ export const updateLocation = ({ id, description, lat, lng }) => {
       console.log(id);
 
       const { data } = await axios.put(
-        `http://localhost:3001/location/update/${id}`,
+        `${url}/location/update/${id}`,
         body
       );
       const resJson = await data.json();
