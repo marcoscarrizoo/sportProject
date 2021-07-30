@@ -29,7 +29,7 @@ export default function OrderDetail() {
                 <div className="od-info-c">
                     <h4>Datos de envio</h4>
                     <p>{`Estado de envio: ${order?.shippingState}`}</p>
-                    <p>{`Direccion de envio: ${order?.shippingAddres}`}</p>
+                    <p>{`Direccion de envio: ${order?.shippingAddres ? order.shippingAddres : "N/A"}`}</p>
                     <p>{`Codigo postal: ${order?.shippingZip}`}</p>
                     <p>{`Ciudad: ${order?.shippingCity}`}</p>
                 </div>
