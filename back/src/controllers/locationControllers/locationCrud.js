@@ -27,8 +27,7 @@ async function getLocation(req, res, next) {
 async function createLocation(req, res, next) {
   //body comes with {description: string, lat: float & lng: float}
   try {
-    const location = await Location.create(req.body);
-    console.log(location);
+    await Location.create(req.body);
     return res.json({ message: "Sucursal Agregada" });
   } catch (error) {
     next(error);

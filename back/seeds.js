@@ -160,8 +160,78 @@ const orders = [
   },
 ];
 
+const locations = [
+  {
+    description: "La Isla",
+    lat: -34.58469156566315,
+    lng: -58.39677700514054,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "Recoleta",
+    lat: -34.587689246485276,
+    lng: -58.39785443486049,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "Barrio Norte",
+    lat: -34.58986618904399,
+    lng: -58.3974905355163,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "Puerto Madero",
+    lat: -34.617423999879875,
+    lng: -58.36099524562233,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "San Telmo",
+    lat: -34.62119585895379,
+    lng: -58.3714838619852,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+  {
+    description: "San Miguel",
+    lat: -34.615905189337646,
+    lng: -58.37099866285961,
+    images: [
+      "https://www.laviezine.com/wp-content/uploads/2015/11/Wills-Gym.jpeg",
+      "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/2K6FEBTZEVGK5DPDCBYZW3YTAY.jpg",
+      "https://www.noosaaquaticcentre.com.au/wp-content/uploads/2017/07/Noosa-Aquatic-Gym.jpg",
+      "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811522_sumario_normal.jpg",
+    ],
+  },
+];
+
 module.exports = {
   products,
   users,
   orders,
+  locations,
 };

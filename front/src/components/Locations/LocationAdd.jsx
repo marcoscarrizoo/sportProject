@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import { addLocation } from "../../redux/actions/locationActions";
 import { TextField, makeStyles, Button } from "@material-ui/core";
 import LocationDraw from "./LocationDraw";
-import "react-toastify/dist/ReactToastify.css";
+import FileLoader from "../FileLoader/FileLoader";
+import "./locationux.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LocationAdd() {
   //dispatch and history hooks assignations
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   //history set
   // const history = useHistory();
@@ -31,6 +33,7 @@ export default function LocationAdd() {
     description: "",
     lat: 5.910430501036732,
     lng: -62.538044106211686,
+    images: null,
   };
 
   const [location, setLocation] = useState(initialState);
@@ -64,53 +67,57 @@ export default function LocationAdd() {
       description: location.description,
       lat: parseFloat(location.lat),
       lng: parseFloat(location.lng),
+      images: location.images,
     };
     dispatch(addLocation(newLocation));
     setLocation(initialState);
-    document.getElementById("addForm").reset();
     if (locations?.message) {
       toast.info(locations.message);
     }
   };
 
-  const classes = useStyles();
+  function submitImg(url) {
+    const { images } = location;
+    var newimgs = [];
+    if (images) {
+      newimgs = [...images, url];
+    } else {
+      newimgs.push(url);
+    }
+    setLocation({ ...location, images: newimgs });
+  }
 
   return (
-    <div>
-      <form
-        id="addForm"
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={sendData}
-      >
-        <TextField
-          id="1"
-          name="description"
-          label="Dirección"
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-        <TextField
-          id="2"
-          name="lat"
-          label="Lat"
-          type="number"
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-        <TextField
-          id="3"
-          name="lng"
-          label="Lng"
-          type="number"
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-        <Button variant="contained" color="primary" type="submit">
-          Agregar
-        </Button>
-      </form>
+    <div className="container">
+      <TextField
+        id="1"
+        name="description"
+        label="Dirección"
+        variant="outlined"
+        onChange={handleInputChange}
+      />
+      <TextField
+        id="2"
+        name="lat"
+        label="Lat"
+        type="number"
+        variant="outlined"
+        onChange={handleInputChange}
+      />
+      <TextField
+        id="3"
+        name="lng"
+        label="Lng"
+        type="number"
+        variant="outlined"
+        onChange={handleInputChange}
+      />
+
+      <FileLoader submit={submitImg} />
+      <Button variant="contained" color="primary" onClick={sendData}>
+        Agregar
+      </Button>
+
       <LocationDraw location={location} />
     </div>
   );

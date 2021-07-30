@@ -1,6 +1,7 @@
 import firebase from "firebase/app"; //importamos firebase (hacemos npm install firebase )
 import "firebase/auth"; //esto nos va a servir para hacer la autenticacion
 import "firebase/firestore"; //firestore es lo que nos ofrece una base de datos en la nube
+import "firebase/storage";
 
 //esta informacion la sacamos de la web cuando creamos proyecto, lo encontramos en
 //configuracion del proyecto y se llama CONFIGURACION DEL SDK
@@ -16,10 +17,12 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 //ejecutamos la funcion auth es una variable para despues poder utilizar luego
 let auth = firebase.auth();
+let storage = firebase.storage();
 
 //exportamos auth para poder utilizarlo en otros archivos y componentes
 
-export { auth };
+export { auth, storage };
+export default firebase;
 
 //loggearse con email y password
 export function loginUser() {
