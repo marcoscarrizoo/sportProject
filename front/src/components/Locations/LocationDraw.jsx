@@ -17,10 +17,8 @@ function LocationDraw({ location }) {
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
-      <GoogleMap mapContainerStyle={containerStyle} center={pos} zoom={10}>
-        <Marker position={pos} />
-        {/* Child components, such as markers, info windows, etc. */}
-        <></>
+      <GoogleMap mapContainerStyle={containerStyle} center={pos} zoom={15}>
+        {pos && <Marker position={pos} />}
       </GoogleMap>
     </LoadScript>
   );
