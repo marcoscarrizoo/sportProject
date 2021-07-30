@@ -1,6 +1,6 @@
 const { Order, Order_Product, Product } = require("../../db");
 const mercadopago = require("mercadopago");
-const { url, api, front } = require("../../..");
+const { url, api, front } = require("../../../index");
 
 mercadopago.configure({
     access_token: 'TEST-6526025757594263-072114-48b8fe283514f9ea144ed66ecc48f689-794718240'
