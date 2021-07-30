@@ -42,22 +42,16 @@
     background-color: #ededed;
 }
 
-.id {
-    width: 5%;
-    text-align: center;
-}
-.name {
-    width: 30%;
+
+.email {
+    width: 40%;
 }
 
 .type-user {
-    width: 15%;
+    text-align: center;
+    width: 20%;
 }
 
-.purchases {
-    width: 15%;
-    text-align: center;
-}
 
 .info {
     width: 10%;

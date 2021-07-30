@@ -66,7 +66,7 @@ export default function ControlledAccordions() {
                         </Typography>
                 </AccordionDetails>
                     </Link>
-                    <Link to="/admin/crear-producto-categoria" className={classes.link}>
+                    <Link to="/admin/crear-producto" className={classes.link}>
                 <AccordionDetails className={classes.info}>
                         <Typography >
                             Crear
@@ -90,7 +90,7 @@ export default function ControlledAccordions() {
                         </Typography>
                 </AccordionDetails>
                     </Link>
-                    <Link to="/admin/crear-producto-categoria" className={classes.link}>
+                    <Link to="/admin/crear-categoria" className={classes.link}>
                 <AccordionDetails className={classes.info}>
                         <Typography >
                             Crear

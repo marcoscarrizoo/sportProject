@@ -1,49 +1,12 @@
 # Escenarios
 
-## 1-Eliminar producto carrito
+## 1-Crear Orden
+
+### Crea una nueva orden por defecto es de tipo CART, si no carga productos devuelve error 404, si existe de vuelve error 404
+
+### POST /orders/create
 
 ```js
-//Ruta
-//DELETE /no se todavía la ruta
-//Back recibe body:
-const body = {
-    productId,
-    userId
-}
-```
-
-## 2-Cambiar stock de products, cuando orderState === 'processing'
-
-```js
-//Ruta
-//PUT /no se todavía la ruta
-//Back recibe body:
-const body = {
-        orderState === 'processing'
-        userId,
-        productsId:[]
-    }
-```
-## 3-Cambiar quantity de un producto del cart
-
-```js
-//Ruta
-//PUT /no se todavía la ruta
-//Back recibe body:
-const body = {
-        userId,
-        productId,
-//Por defecto quantity agrega 1, si no, establece el quantity en el valor que se pase por body. Es decir, si no se pasa valor se iguala a uno mas.
-        quantity
-    }
-```
-## 4-Cuando un usuario se loguea y tiene carrito
-
-La ruta es put porque si tiene orden previa se va a fusionar, si no, se crea. (Creo que debe funcionar)
-```js
-//Ruta
-//PUT /no se todavía la ruta
-//Back recibe body:
 const body = {
         userId,
 //array de productos, con id y cantidad
@@ -59,13 +22,177 @@ const body = {
         ]
     }
 ```
+
+### Modelo de consutla POST /orders/create
+
+```js
+{
+  "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+    "products": [
+      {
+        "productId": 3,
+        "quantity": 13
+      },
+      {
+        "productId": 2,
+        "quantity": 6
+      },
+      {
+        "productId": 1,
+        "quantity": 6
+      }
+    ]
+}
+```
+
+## 2-Update Orden
+
+### Modifica cualquier dato que se pase por body, debe recibir orderID por params, si es de tipo CART, modifica las cantidades de los productos. Todos los datos del body, son opcionales.
+
+### PUT /orders/update/:id
+
+```js
+body = {
+      orderState,
+      shippingState,
+      shippingLocation,
+      paymentState,      
+      products,
+//array de uno o varios productos, con id y cantidad
+  products:[
+      {
+          productId,
+          quantity
+      },
+      {
+          productId,
+          quantity
+      },
+  ]
+}
+```
+
+### Modelo de consutlas PUT /orders/update
+
+```js
+//Consulta 1
+//localhost:3001/orders/update/869aa921-e7be-4169-8f95-4ced11d093c8
+{
+  "products": [
+    {
+      "productId": 3,
+      "quantity": 33
+    },
+    {
+      "productId": 4,
+      "quantity": 44
+    }
+  ]
+}
+//Consulta 2
+//localhost:3001/orders/update/869aa921-e7be-4169-8f95-4ced11d093c8
+{
+  "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+    "orderState": "PENDING"
+}
+```
+## 3-Delete Orden
+
+### Elimina una order, segun su id, para el caso de cancelar cart o el administrador quiera eliminar alguna orden.
+
+### DELETE /orders/delete/:id
+
+```js
+const body = {
+        userId,
+//array de productos, con id y cantidad
+        products:[
+            {
+                productId,
+                quantity
+            },
+            {
+                productId,
+                quantity
+            },
+        ]
+    }
+```
+
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders/delete/d02baf64-58cd-422c-9c0f-122708f8f534
+
+## 4-GET Orden por ID
+
+### Obtiene una order completa con product y user, de cualquier estado por su ID.
+
+### GET /orders/:id
+
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders/delete/d02baf64-58cd-422c-9c0f-122708f8f534
+
+# 5-GET todas las ordenes
+
+### Obtiene todas las ordenes, existentes.
+
+### GET /orders
+
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders
+
+# 6-GET todas las ordenes de un usuario
+
+### Obtiene todas las ordenes, existentes.
+
+### GET /orders/user/:id
+### Modelo de consutla DELETE /orders/delete
+
+### localhost:3001/orders
+
+## 7-Delete Product, cuando se elimina de carrito
+
+### Recibe por body el userId y el productId, y elimina el producto si existe una order con estado CART y ese producto, de lo contrario devuelve error 404
+
+### Modelo de consutla DELETE /orders/delete
+
+```js
+{
+  "userId": "d1687b07-058c-414a-bb5a-77a8d897be57",
+    "productId": 2
+}
+```
+## Consulta Ruta prueba - Obtener order por orderId
+
+### Recordar que tiene que existir la orden para poder eliminar productos
+```js
+//Consulta 1
+//GET localhost:3001/order/f9bc2d5e-111b-4214-b581-e67e216b936e
+```
+# Lo que si gue no esta terminado.
+## 3-Cambiar stock de products, cuando orderState === 'processing'
+
+```js
+//Ruta
+//PUT /no se todavía la ruta
+//Back recibe body:
+const body = {
+        orderState === 'processing'
+        userId,
+        productsId:[]
+    }
+```
+
+
 ## Json que devuelve la ruta getOrdersByUserId
 Modelo
 ```js
 [
   {
     "id": "7155b2bd-ece6-438a-b665-c76033564aac",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",
@@ -102,7 +229,7 @@ Modelo
   },
   {
     "id": "84133c87-bf34-49f2-97d7-32c682e7d341",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",
@@ -139,7 +266,7 @@ Modelo
   },
   {
     "id": "4dc04d29-1b06-4358-a236-d7db0649be67",
-    "orderState": "cart",
+    "orderState": "CART",
     "shippingState": "not initialized",
     "shippingLocation": "not initialized",
     "paymentState": "not initialized",

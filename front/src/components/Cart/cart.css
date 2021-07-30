@@ -92,9 +92,19 @@
   align-items: center;
 }
 
-.comprar {
+.buttons a {
+  text-decoration: none;
   width: 80%;
-  height: 30px;
+  text-align: center;
+  transition: 0.7s;
+}
+.buttons a:hover {
+  width: 100%;
+}
+
+.comprar {
+  width: 100%;
+  padding: 5px 0;
   background-color: green;
   color: white;
   border: none;
@@ -106,6 +116,7 @@
 .comprar:hover {
   width: 100%;
   background-color: #00800088;
+  border-radius: 10px;
 }
 
 input {

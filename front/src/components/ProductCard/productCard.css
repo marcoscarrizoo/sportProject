@@ -1,8 +1,6 @@
 .text {
-    display: block;
-    width: 98%;
-    overflow: hidden;
+    width: 100%;
     white-space: nowrap;
-    text-overflow: Ellipsis;
-    /* background-color: #25252542; */
+    overflow: hidden;
+    text-overflow: ellipsis;
   }

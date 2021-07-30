@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { getProducts } from "../../redux/actions/productsActions";
 import { doLogOut } from "../../redux/actions/userActions";
 /* styles */
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
 import Swal from "sweetalert2";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -21,7 +22,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { auth } from "../../firebase";
+import { loadCart } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
   textDeco: {
@@ -106,11 +107,16 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const user = useSelector((store) => store.user.loggedIn);
   const userName = useSelector((store) => store.user.email);
+  // const userType = JSON.parse(localStorage.getItem('userType'))      MARCOS
+  const userType = useSelector((store) => store.user.userType);
+  
+  const products = useSelector(store => store.cart)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
 
+  console.log("user type", userType)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -132,6 +138,11 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  const menu = () => {
+    history.push('/')
+  }
+
   const handleSignUp = () => {
     history.push("/registrarse");
     setAnchorEl(null);
@@ -142,12 +153,20 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  const handleUser = () => {
+    history.push("/profile");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const handleLogOut = () => {
     dispatch(doLogOut());
+    history.push("/");
     
     Swal.fire({
       text: "Esperamos verte pronto",
@@ -160,6 +179,11 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  function handleLoadCart() {
+    dispatch(loadCart())
+  }
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -171,18 +195,22 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {!user ? (
+      
+{!user ? (
         <div>
           <MenuItem onClick={handleLoggin}>Inicar Sesion</MenuItem>
           <MenuItem onClick={handleSignUp}>Registrarse</MenuItem>
         </div>
       ) : (
         <div>
-          <MenuItem onClick={handleAdmin}><AccountCircleIcon/>{userName}</MenuItem>
-          <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+          <MenuItem><AccountCircleIcon/>{userName}</MenuItem>
+         {userType==="S"||userType==="A"? <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+         :
+         <MenuItem onClick={handleUser}>Perfil</MenuItem>}
           <MenuItem onClick={handleLogOut}>Cerrar Sesion</MenuItem>
         </div>
       )}
+      
     </Menu>
   );
 
@@ -225,11 +253,11 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <IconButton
             edge="start"
-            className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
+            onClick={menu}
+            
           >
-            <MenuIcon />
+           < HomeIcon/>
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link className={classes.link} to="/">
@@ -274,9 +302,14 @@ export default function PrimarySearchAppBar() {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link className={classes.text} to="/cart">
+            <Link className={classes.text} to="/cart" onClick={ handleLoadCart }>
               <IconButton color="inherit">
-                <Badge color="secondary">
+                <Badge badgeContent={
+                  products?.items.length
+                  ? products.items.reduce((a, i) => a + i.quantity,0)
+                  : 0 } 
+                  
+                color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>

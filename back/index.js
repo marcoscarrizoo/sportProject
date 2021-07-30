@@ -1,5 +1,16 @@
-const { createProductsSeeds } = require("./src/controllers/productControllers/createProductsSeeds");
-const { createUsersSeeds } = require("./src/controllers/usersControllers/createUsersSeeds");
+
+const {
+  createProductsSeeds,
+} = require("./src/controllers/productControllers/createProductsSeeds");
+const {
+  createUsersSeeds,
+} = require("./src/controllers/usersControllers/createUsersSeeds");
+const {
+  createOrderSeeds,
+} = require("./src/controllers/orderControllers/createOrderSeeds");
+const {
+  locationsSeeder,
+} = require("./src/controllers/locationControllers/locationSeeder");
 //                       _oo0oo_
 //                      o8888888o
 //                      88" . "88
@@ -21,21 +32,21 @@ const { createUsersSeeds } = require("./src/controllers/usersControllers/createU
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-
+// export const url = process.env.REACT_APP_API || "http://localhost:3001";
 require("dotenv").config();
 /**
  * ****************************************************************
  * Agregar un process.env.PORT y agregarlo en el .env PORT = 3001 *
  * ************************************************************** */
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false}).then(() => {
   // server.listen(3000, async () => {
   server.listen(process.env.PORT, async () => {
     console.log(`listening at PORT ${process.env.PORT}`);
-    //Esta funcion carga productos del archivo seeds en la DB
 
-
+    //Estas funciones carga productos y usuarios del archivo seeds, en la DB
     await createProductsSeeds();
     await createUsersSeeds();
-
+    await createOrderSeeds();
+    await locationsSeeder();
   });
 });

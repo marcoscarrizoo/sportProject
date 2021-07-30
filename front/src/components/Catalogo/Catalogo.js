@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import SortBar from "./Sortbar";
-import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../redux/actions/productsActions";
+import { loadCart } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -38,6 +38,7 @@ export default function Catalogo() {
   const classes = useStyles();
 
   useEffect(() => {
+    dispatch(loadCart())
     if (!state.products.products?.length) {
       dispatch(getProducts());
     }

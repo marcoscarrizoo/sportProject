@@ -5,20 +5,15 @@ import Swal from "sweetalert2";
 import useStyles from "./signupStyles";
 import {newUser} from '../../redux/actions/userActions'
 
-
-import axios from 'axios'
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from 'react-redux';
 
@@ -42,7 +37,6 @@ export default function SignUp() {
    const [firstName, setFirstName] = useState("")
    const [lastName, setLastName] = useState("")
    const [email, setEmail] = useState("");
-   const [user, setUser] = useState(null)
    const [pass, setPass] = useState("");
     const [msgError, setMsgError] = useState(null);
   
@@ -70,11 +64,19 @@ export default function SignUp() {
       
       .catch((e) => {
         
-        if (e.code === "auth/email-already-in-use") {
+        if(e.code === "auth/invalid-email" && e.code === "auth/weak-password") {
+          setMsgError('ingrese un email valido la contraseña debe contener al menos 6 digitos')
+        }
+        else if (e.code === "auth/email-already-in-use") {
           setMsgError("el correo ingresado ya esta en uso");
         }
+        else if(e.code === "auth/weak-password") {
+          setMsgError('la contraseña debe contener al menos 6 digitos')
+        }
+        else if(e.code === "auth/invalid-email") {
+          setMsgError('ingrese un email valido, por ejemplo: email@gmail.com')
+        }
 
-        
       });
   };
 
@@ -151,7 +153,7 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
-            {msgError != null ? <div>{msgError} </div> : <span></span>}
+            {msgError != null ? <div style={{color:"red"}}>{msgError} </div> : <span></span>}
             
           </Grid>
           <Button
