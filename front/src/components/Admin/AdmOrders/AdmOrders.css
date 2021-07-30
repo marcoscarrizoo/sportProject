@@ -76,6 +76,10 @@
   align-items: center;
 }
 
+.state {
+  width: 10%;
+}
+
 .popover {
   pointer-events: none;
   max-width: 300;
