@@ -18,13 +18,14 @@ mercadopago.configure({
     access_token: 'TEST-6526025757594263-072114-48b8fe283514f9ea144ed66ecc48f689-794718240'
 
 });
-let mail = async (userMail,firstName) => {
+const mensaje = ''
+let mail = async (userMail,firstName, lastName) => {
     await transporter.sendMail({
-        from: '"Sportgym 👻" <foo@example.com>', // sender address
+        from: '"Sportgym" <foo@example.com>', // sender address
         to: userMail, // list of receivers
         subject: `Compra Exitosa ${firstName} ✔`, // Subject line
-        text: "Excelente compra", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        text: `Hola ${firstName} ${lastName}`, // plain text body
+        html: `<b>Hola ${firstName} ${lastName}, excelente compra, te avisaremos cuando se despache la entrega, para  cualquier consulta relacionada o no con tu pedido, te puedes responder este correo electrónico o escribirnos por sportgymfitness198@gmail.com. Atentamente sportGym, tu sucursal, de la salud física. </b>`, // html body
     });
 }
 
@@ -51,11 +52,11 @@ const orderm = await Order.findByPk(external_reference,
     {include: [
         {
             model: User,
-            attributes: ["email"]
+            attributes: ["email", "firstName", "lastName"]
         }]}
         );
-        console.log('orderm.user.email',orderm.user.email)
-        await mail(orderm.user.email, firstName);
+        console.log('orderm.user.email',orderm)
+        await mail(orderm.user.email, orderm.user.firstName, orderm.user.lastName);
     Order.findByPk(external_reference)
         .then(order => {
             order.payment_id = payment_id;
