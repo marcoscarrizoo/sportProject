@@ -87,11 +87,8 @@ const products = [
   },
   {
     name: "Proteina Isolatada WHEY",
-    description:
-      "Proteina GOLD STANDAR 1 kg",
-    images: [
-      "https://iluvstore.com/img/p/1/0/6/4/6/10646-home_default.jpg",
-    ],
+    description: "Proteina GOLD STANDAR 1 kg",
+    images: ["https://iluvstore.com/img/p/1/0/6/4/6/10646-home_default.jpg"],
     price: 10805.12,
     stock: 178,
     categories: [
@@ -104,12 +101,11 @@ const products = [
   },
   {
     name: "Proteina Best Wey",
-    description:
-      "2 proteinas Xtrenght Best Wey Protein 2 kg",
+    description: "2 proteinas Xtrenght Best Wey Protein 2 kg",
     images: [
       "https://http2.mlstatic.com/D_NQ_NP_658201-MLA32038658595_092019-O.jpg",
     ],
-    price: 15000.10,
+    price: 15000.1,
     stock: 100,
     categories: [
       {
@@ -121,12 +117,11 @@ const products = [
   },
   {
     name: "Platinum Whey Protein",
-    description:
-      "Premium Wey Prtein 3kg - START NUTRATION",
+    description: "Premium Wey Prtein 3kg - START NUTRATION",
     images: [
       "https://d3ugyf2ht6aenh.cloudfront.net/stores/306/768/products/premium-whey-protein-3kg1-658fafe48ca8ae50ac16170452694698-480-0.png",
     ],
-    price: 15000.10,
+    price: 15000.1,
     stock: 100,
     categories: [
       {
@@ -138,8 +133,7 @@ const products = [
   },
   {
     name: "Shaker GOT",
-    description:
-      "Shaker Protein 100 ml, vaso smart",
+    description: "Shaker Protein 100 ml, vaso smart",
     images: [
       "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/133/104/products/tienda-nube-muscetta-31-281-883f2c42693b578c0015905360360177-1024-1024.jpg",
     ],
@@ -155,8 +149,7 @@ const products = [
   },
   {
     name: "Shaker GOLD",
-    description:
-      "Shaker Premium 1 litro",
+    description: "Shaker Premium 1 litro",
     images: [
       "https://http2.mlstatic.com/D_NQ_NP_844426-MLA42194466610_062020-V.jpg",
     ],
@@ -172,8 +165,7 @@ const products = [
   },
   {
     name: "Shaker protein Gentech",
-    description:
-      "Shaker Blender color rosa 500cc",
+    description: "Shaker Blender color rosa 500cc",
     images: [
       "https://d3ugyf2ht6aenh.cloudfront.net/stores/885/784/products/shaker_rosa_gentech1-76023962f5711f7e7d15901109627044-480-0.jpg",
     ],
@@ -189,8 +181,7 @@ const products = [
   },
   {
     name: "Rueda Abdomen",
-    description:
-      "Rueda para hacer abdominales en casa",
+    description: "Rueda para hacer abdominales en casa",
     images: [
       "https://www.dhresource.com/0x0/f2/albu/g7/M01/13/95/rBVaSVsp3DqAGVxvAAGKCL3T2Wc837.jpg/factory-direct-two-wheel-abdominal-abdomen.jpg",
     ],
@@ -206,8 +197,7 @@ const products = [
   },
   {
     name: "Kit Entrenamiento intenso",
-    description:
-      "Incluye elastico y pesas para entrenamiento de piernas",
+    description: "Incluye elastico y pesas para entrenamiento de piernas",
     images: [
       "https://http2.mlstatic.com/D_NQ_NP_908604-MLA46212230882_052021-V.jpg",
     ],
@@ -221,11 +211,10 @@ const products = [
       },
     ],
   },
-  
+
   {
     name: "Soga Fitness",
-    description:
-      "Soga para entrenamiento intensivo",
+    description: "Soga para entrenamiento intensivo",
     images: [
       "https://www.digitalsport.com.ar/files/products/5b97ecf06121f-290656-500x500.jpg",
     ],
@@ -241,8 +230,7 @@ const products = [
   },
   {
     name: "Mancuernas",
-    description:
-      "mancuerna 4 kg",
+    description: "mancuerna 4 kg",
     images: [
       "https://www.mideporte.pe/wp-content/uploads/2020/03/MANCUERNAS-NEOPRENE-ROJO-4KG.png",
     ],
@@ -275,8 +263,7 @@ const products = [
   },
   {
     name: "Bici Estatica",
-    description:
-      "Bici para hacer cardio en casa con 5 velocidades",
+    description: "Bici para hacer cardio en casa con 5 velocidades",
     images: [
       "https://http2.mlstatic.com/D_NQ_NP_639917-MCO45227001403_032021-O.jpg",
     ],
@@ -309,8 +296,7 @@ const products = [
   },
   {
     name: "Shaker vaso batidor electrico",
-    description:
-      "Shaker vaso batidor 1 litro",
+    description: "Shaker vaso batidor 1 litro",
     images: [
       "https://bazarchef.com.ar/wp-content/uploads/2021/07/bz-jc01-E.jpg",
     ],
@@ -324,11 +310,9 @@ const products = [
       },
     ],
   },
-  
-  
 ];
 
-const users = [ 
+const users = [
   {
     id: "d1687b07-058c-414a-bb5a-77a8d897be57",
     firstName: "Knut",
@@ -361,14 +345,14 @@ const users = [
     password: "1234",
   },
   {
-    id: "49750430-28da-4202-bb69-30dd23d918c4",
+    id: "2BDoabi6sPPsH58LQFR3Xy7k1gM2",
     firstName: "Francisco",
     lastName: "Garrido",
-    email: "fgarrido@gmail.com",
+    email: "kodeforge@gmail.com",
     password: "1234",
   },
   {
-    id: "Z3pPS8iC3WcYthfpqZD7IREadNl1",
+    id: "VPQbE7zf5JezEZyrDl7EWfpzNOC2",
     firstName: "Fran",
     lastName: "Garrido",
     email: "fg0611@gmail.com",
