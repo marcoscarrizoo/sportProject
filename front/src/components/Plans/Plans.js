@@ -55,8 +55,8 @@ const annualPremium = () => {
 const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.jpg'
   return (
       <div className={classes.container} style={{backgroundImage:`url(${foto})`}}>
-        <div className={classes.grid}>
-          <div>
+        
+        <div className={classes.plans}>
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography className={classes.title} gutterBottom>
@@ -102,17 +102,17 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
         <Button
           className={classes.button}
           color="secondary"
-          size="big"
+          size="large"
           variant="contained"
         >
           SPORTGYM
         </Button>
       </CardActions>
     </Card>
-    </div>
+    
 
     
-            <div>
+            
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography className={classes.title} gutterBottom>
@@ -143,7 +143,7 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
             <h2>$50.960</h2>
           )}
         </div>
-        <Typography variant="body2" component="p">
+        <Typography variant="h5" component="p">
           MATRICULA BONIFICADA 100%
         </Typography>
 
@@ -164,15 +164,16 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
         <Button
           className={classes.button2}
           color="secondary"
-          size="big"
+          size="large"
           variant="contained"
         >
           SPORTGYM
         </Button>
       </CardActions>
     </Card>
+    
     </div>
-            <div>
+            
     <Card className={classes.root} variant="outlined">
     <form onSubmit={handleSubmit}>
         <Typography className={classes.datos} gutterBottom>
@@ -237,6 +238,7 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
                 fullWidth
                 variant="contained"
                 color="secondary"
+                size="large"
                 
               >
                 QUIERO ASESORAMIENTO
@@ -244,8 +246,8 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
        
       </form>
     </Card>
-    </div>
-    </div>
+    
+    
     </div>
   );
 }
