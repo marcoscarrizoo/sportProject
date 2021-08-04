@@ -6,7 +6,7 @@ const Activities = () => {
     return (
         <div>
             <div className='box2'>
-                <h1 className='title'>ACTIVIDADES</h1>
+                <h1 className='activities'>ACTIVIDADES</h1>
             </div>
             <ActivitiesImgs/>
         </div>

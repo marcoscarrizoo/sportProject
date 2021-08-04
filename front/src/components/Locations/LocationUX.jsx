@@ -128,18 +128,18 @@ const useStyles = makeStyles((theme) => ({
   },
   div: {
     display: "flex",
-    flexDirection: 'row',
+    flexWrap: 'wrap'
     
   },
-  div2: {
-    
-    margin: "10px",
-    width: '30%'
-    
-  },
+ 
   root: {
     maxWidth: 345,
-    
+    margin: '50px 100px',
+    transition: '0.5s',
+    '&:hover': {
+      background: '#bdbdbd',
+      margin: '100px 100px'
+    }
   },
   media: {
     height: 100,
@@ -210,7 +210,7 @@ export default function LocationUx() {
   return (
     <div className={classes.div}>
       {sedes.map((e) => (
-        <div className={classes.div2}>
+       
           <Card className={classes.root}>
             
             <CardMedia className={classes.media} image={e.img} />
@@ -224,7 +224,7 @@ export default function LocationUx() {
               </Typography>
             </CardContent>
           </Card>
-        </div>
+        
       ))}
     </div>
   );
