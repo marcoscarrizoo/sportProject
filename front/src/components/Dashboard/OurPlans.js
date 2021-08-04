@@ -5,7 +5,7 @@ const OurPlans = () => {
     return (
         <div>
             <div className='box'>
-                <h1 className='title'>PLANES</h1>
+                <h1 className='ourPlans-title'>PLANES</h1>
             </div>
 
             <div className='text'>

@@ -1,17 +1,13 @@
 .box {
-background-color: #f0f2f2;
-height: 270px;
-background-image: url('https://img.etimg.com/photo/msid-74747053,quality-100/for-miles-a-great-bodyweight-workout-would-include-squats-push-ups-walking-lunges-.jpg');
+background-color: rgba(0, 0, 0, 0.87);
 
-background-position-y: center;
-background-size: cover;
 }
 
-.title {
+.ourPlans-title {
     font-size: 90px;
     display: flex;
     justify-content: center;
-    color: rgb(54, 54, 54)
+    color: rgba(161, 161, 161, 0.863);
    
 }
 
