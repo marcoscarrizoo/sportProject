@@ -2,11 +2,15 @@ import { makeStyles } from "@material-ui/core";
 
 export default makeStyles({
     root: {
-      width: '300px',
-      height: '420px',
+      width: '400px',
+      height: '520px',
       boxShadow: '0 0 3px',
       backgroundColor: 'rgba(150, 150, 150, 0.849)',
       margin: '30px',
+      '&:hover': {
+        background: '#bdbdbd',
+       
+      }
       
     },
     bullet: {
@@ -43,14 +47,23 @@ export default makeStyles({
     },
     container: {
       
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        backgroundPosition: "center",
-       backgroundSize: "cover",
+      display: "flex",
+      flexDirection: 'row',
+      // gridTemplateColumns: "repeat(3, 1fr)",
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundPosition: "center",
+      backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
-        transition: "0.4s",
-        height: '100vh'
+      transition: "0.4s",
+      height: '92vh'
       
+    },
+    plans: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '60%',
+      marginLeft: '350px'
     },
     grid: {
       display: "grid",
@@ -62,5 +75,6 @@ export default makeStyles({
       justifyContent: 'center',
       fontSize: '25px',
       
-    }
+    },
+   
   });
