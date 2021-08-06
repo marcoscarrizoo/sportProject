@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import BlockIcon from "@material-ui/icons/Block";
 import Popover from "@material-ui/core/Popover";
-import "./productCard.css"
+
 import Swal from "sweetalert2";
 
 const useStyles = makeStyles({
