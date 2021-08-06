@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       width: "100%",
+      color: "#ffff"
     },
     width: '50%',
     display: 'flex',
@@ -31,11 +32,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems:'center',
-    backgroundColor:"#fff",
+    backgroundColor:"#ffffffa4",
+    border:"solid 5px #212121",
+    // color: "#ffff",
     width:"75%",
     marginRight:"2%",
     marginTop:"15px",
-    borderRadius:"15px"
+    borderRadius:"15px",
+    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
 }));
 
@@ -156,10 +160,10 @@ export default function CreateProduct({ edit }) {
       });
 
     }
-
+    
     dispatch(getProducts())
   };
-
+  
   return (
     <div className={classes.div}>
       { edit && <h2> Actualizacion de producto</h2> }
@@ -169,7 +173,7 @@ export default function CreateProduct({ edit }) {
         noValidate
         autoComplete="off"
         onSubmit={(e) => handleSubmit(e)}
-      >
+        >
         <div>
           <TextField
             required
@@ -199,16 +203,12 @@ export default function CreateProduct({ edit }) {
             variant="outlined"
             onChange={(e) => handleChangeProduct(e)}
             value={product.images}
-
           />
 
           <TextField
             id="price"
             label="Precio"
             type="number"
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
             variant="outlined"
             onChange={(e) => handleChangeProduct(e)}
             value={product.price}
@@ -271,7 +271,7 @@ export default function CreateProduct({ edit }) {
         <Button
           type="submit"
           variant="contained"
-          color="primary"
+          color="secondary"
           className={classes.submit}
         >
           {edit ? "Actualizar Producto" : "Agregar Producto"}

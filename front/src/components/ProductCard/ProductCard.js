@@ -179,7 +179,7 @@ export default function ProductCard({
               <Button
                 className={classes.button}
                 variant="contained"
-                color="primary"
+                color="secondary"
                 onClick={handleAddToCart}
               >
                 agregar al carrito
