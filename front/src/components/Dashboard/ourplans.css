@@ -48,7 +48,7 @@ background-color: rgba(0, 0, 0, 0.87);
 }
 
 .data {
-    border: solid 3px;
+    /* border: solid 3px; */
     justify-content: center;
     background-color: rgba(17, 0, 255, 0);
 }
