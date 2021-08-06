@@ -32,7 +32,8 @@ const {
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-// export const url = process.env.REACT_APP_API || "http://localhost:3001";
+const api = process.env.API || "http://localhost:3001";
+const front = process.env.FRONT || "http://localhost:3000";
 require("dotenv").config();
 /**
  * ****************************************************************
@@ -50,3 +51,8 @@ conn.sync({ force: false}).then(() => {
     await locationsSeeder();
   });
 });
+
+module.exports = {
+  api,
+  front
+}

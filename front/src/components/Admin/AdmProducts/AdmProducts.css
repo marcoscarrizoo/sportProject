@@ -1,13 +1,14 @@
 .admProducts {
     box-sizing: border-box;
-    width: 75%;
+    width: 100%;
+    max-width: 97%;
     min-height: 80vh ;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: white;
+    /* background-color: white; */
+    margin: 0 1%;
     margin-top: 15px;
-    margin-right: 2%;
     padding: 10px 0;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -28,7 +29,8 @@
 
 
 .product-cards {
-    background-color: white;
+    color: #ffff;
+    background-color: #212121;
     width: 98%;
     min-height: 50px;
     display: flex;
@@ -39,9 +41,9 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.titulos {
+/* .titulos {
     background-color: #ededed;
-}
+} */
 
 .name {
     width: 30%;
@@ -63,7 +65,7 @@
 }
 .edit-l {
     text-decoration: none;
-    color: blue;
+    color: #ffff00;
     font-size: 2em;
     background-color: transparent;
 }

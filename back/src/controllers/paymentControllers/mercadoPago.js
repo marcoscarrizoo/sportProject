@@ -1,5 +1,6 @@
 const { Order, Order_Product, Product } = require("../../db");
 const mercadopago = require("mercadopago");
+const { url, api, front } = require("../../../index");
 
 mercadopago.configure({
     access_token: 'TEST-6526025757594263-072114-48b8fe283514f9ea144ed66ecc48f689-794718240'
@@ -48,9 +49,9 @@ async function mercadoPago(req, res, next) {
                 installments: 3 //cantidad maxima de cuotas 
             },
             back_urls: {
-                success: 'http://localhost:3001/mercadopago/pagos',
-                failure: 'http://localhost:3000',
-                pending: 'http://localhost:3001/mercadopago/pagos',
+                success:  api + '/mercadopago/pagos',
+                failure:  front ,
+                pending:  api + '/mercadopago/pagos',
             },
         }
         // console.log('preference',preference) select id, "orderState", "paymentState", "payment_id", "userId" from orders;
