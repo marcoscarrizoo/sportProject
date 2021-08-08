@@ -7,9 +7,7 @@ const containerStyle = {
 };
 
 function LocationDraw({ location }) {
-  const apiKey =
-    process.env.GOOGLE_MAPS_API_KEY ||
-    "AIzaSyBAjB7JUJkHdTJZDtv2Ot713ZG7dT0gcOw";
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   const pos = {
     lat: parseFloat(location.lat),
     lng: parseFloat(location.lng),
