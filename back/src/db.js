@@ -7,30 +7,18 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 //Evalua si esta en produccion o desarrollo.
 const sequelize =
   process.env.NODE_ENV === "production"
-    ? 
-      new Sequelize( {
-        database = DB_NAME,
-        dialect = 'postgres',
-        hots: DB_HOST,
-        port: 5432,
-        username: DB_USER,
-        password: DB_PASSWORD,
-        pool: {
-          max: 3, 
-          min: 1,
-          idle: 10000,
-        },
+    ? //Si esta en produccion, sequelize se enlaza con la base de datos de heroku
+      new Sequelize(process.env.DATABASE_URL, {
+        dialect: "postgres",
+        protocol: "postgres",
         dialectOptions: {
           ssl: {
-            require: true,
-            rejectUnauthorized: false
+            rejectUnauthorized: false,
           },
-          keepAlive: true,
         },
-        ssl: true,
       })
-    : 
-
+    : //Si esta en desarrollo, sequelize se enlaza con la base de datos local.
+      // console.log('Prueba DATABASE_URL', process.env.DATABASE_URL);
       new Sequelize(
         `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
         {
@@ -82,10 +70,8 @@ Category.hasMany(Plan);
 Order.belongsToMany(Product, { through: Order_Product });
 Product.belongsToMany(Order, { through: Order_Product });
 
-Order.hasMany(Order_Product)
-Order_Product.belongsTo(Order)
-
-
+Order.hasMany(Order_Product);
+Order_Product.belongsTo(Order);
 
 // Product.hasMany(Review);
 // Review.belongsTo(Product);
