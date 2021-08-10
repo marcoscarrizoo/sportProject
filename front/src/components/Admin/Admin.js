@@ -18,7 +18,8 @@ import Categories from "./Categories/Categories";
 const Admin = () => {    
  const admin = useSelector( store => store.user.userType)
 
-return (<div>
+return (
+  <div>
     { 
       (admin === "S"||admin==="A") && (
         <div className="body">

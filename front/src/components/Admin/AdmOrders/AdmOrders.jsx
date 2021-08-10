@@ -33,29 +33,13 @@ export default function AdmOrders() {
   }, [dispatch]);
 
 
-  const handlePopoverOpen = (event) => {
-    setAnchorEl("openId");
-  };
+  // const handlePopoverOpen = (event) => {
+  //   setAnchorEl("openId");
+  // };
 
-  const handlePopoverClose = () => {
-    setAnchorEl("id");
-  };
-
-  const handleShipping = (e) => {
-    console.log('hola')
-    const dis = e.target.name
-    const orderId = e.target.value
-    console.log('e.target', e.target)
-    const shipping = {
-      shippingState: dis
-    }
-    try {
-      const { data } = axios.put(`${url}/orders/update/${orderId}`, shipping);
-      console.log(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const handlePopoverClose = () => {
+  //   setAnchorEl("id");
+  // };
 
   const handleClickOpen = (e) => {
     setId(e.target.value)
@@ -79,7 +63,6 @@ const handleAction = async () => {
         await axios.delete(url + "/orders/delete/" + id);
     }
     else {
-        console.log(id)
         await axios.put(url + "/orders/update/" + id, accion);
     }
     handleClose();
@@ -95,24 +78,21 @@ const handleAction = async () => {
 
   return (
     <div className="orders">
-      <div className="titulos cards">
+      <div className="cards">
         <h3 className="id">ID</h3>
         <h3 className="total">TOTAL</h3>
         <h3 className="orderState">PAGO</h3>
         <h3 className="createdAt">ULTIMA ACTUALIZACION</h3>
         <h3 className="info">Info</h3>
         <h3 className="select">Acciones</h3>
-        {/* <h3 className="select">Entrega</h3> */}
         <h3 className="state">Estado de Envio</h3>
 
       </div>
       {orders?.map((order) => (
         <div className="cards">
           <h5 className={`${anchorEl}`}
-
-            // style={{width:`${}`}}
-            onMouseEnter={handlePopoverOpen}
-            onMouseLeave={handlePopoverClose}
+            // onMouseEnter={handlePopoverOpen}
+            // onMouseLeave={handlePopoverClose}
           >{order.id}</h5>
           <h3 className="total">{`$${order.products.reduce((s, i) =>
             s + (i.Order_Product.quantity * i.Order_Product.price), 0).toFixed(2)}`}</h3>

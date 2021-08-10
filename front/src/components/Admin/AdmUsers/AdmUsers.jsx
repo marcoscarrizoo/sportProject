@@ -61,7 +61,7 @@ export default function AdmUsers() {
 
     return (
         <div className="admUsers">
-            <div className="titulos user-cards">
+            <div className="user-cards">
                 <h3 className="email">Usuario</h3>
                 <h3 className="type-user">Tipo de usuario</h3>
                 <h3 className="info">Info</h3>
@@ -82,8 +82,7 @@ export default function AdmUsers() {
                                 <InputLabel htmlFor="outlined-age-native-simple">Opciones</InputLabel>
                                 <Select
                                     native
-                                    value=""
-                                    // onChange={handleChange}
+                                    value="Opciones"
                                     inputProps={{
                                         name: 'Opciones',
                                         id: 'outlined-age-native-simple',

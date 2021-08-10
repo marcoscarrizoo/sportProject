@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
@@ -17,6 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { deleteProduct } from "../../../redux/actions/adminActions";
 
 import './AdmProducts.css'
+import CreatorButton from './CreatorButton';
 
 export default function AdmProducts() {
 
@@ -48,7 +49,8 @@ export default function AdmProducts() {
 
     return (
         <div className="admProducts">
-            <div className="titulos product-cards">
+            <CreatorButton text="Crear Producto" route="/admin/crear-producto"/>
+            <div className="product-cards">
                 <h3 className="name">NOMBRE</h3>
                 <h3 className="stock">STOCK</h3>
                 <h3 className="price">PRECIO</h3>
@@ -64,7 +66,7 @@ export default function AdmProducts() {
                         <p className="price">{`$${p.price}`}</p>
                         <div className="edit">
                             <Link to={`/admin/product/${p.id}`} className="edit-l">
-                                <AiFillEdit/>
+                                <AiFillEdit />
                             </Link>
                         </div>
                         <div className="delete">
