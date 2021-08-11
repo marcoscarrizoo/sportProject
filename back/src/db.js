@@ -6,26 +6,33 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 //Evalua si esta en produccion o desarrollo.
 const sequelize =
-  process.env.NODE_ENV === "production"
-    ? //Si esta en produccion, sequelize se enlaza con la base de datos de heroku
-      new Sequelize(process.env.DATABASE_URL, {
-        dialect: "postgres",
-        protocol: "postgres",
-        dialectOptions: {
-          ssl: {
-            rejectUnauthorized: false,
-          },
-        },
-      })
-    : //Si esta en desarrollo, sequelize se enlaza con la base de datos local.
-      // console.log('Prueba DATABASE_URL', process.env.DATABASE_URL);
-      new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-        {
-          logging: false,
-          native: false,
-        }
-      );
+process.env.NODE_ENV === "production"
+? new Sequelize({
+    database: DB_NAME,
+    dialect: "postgres",
+    host: DB_HOST,
+    port: 5432,
+    username: DB_USER,
+    password: DB_PASSWORD,
+    pool: {
+      max: 3,
+      min: 1,
+      idle: 10000,
+    },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        // Ref.: https://github.com/brianc/node-postgres/issues/2009
+        rejectUnauthorized: false,
+      },
+      keepAlive: true,
+    },
+    ssl: true,
+  })
+: new Sequelize(
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/gym`,
+    { logging: false, native: false }
+  );
 
 const basename = path.basename(__filename);
 
