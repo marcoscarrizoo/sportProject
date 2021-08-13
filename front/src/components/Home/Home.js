@@ -122,23 +122,40 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import './home.css'
+import Plans from '../Plans/Plans'
+import Footer from '../Footer'
+import { Button } from '@material-ui/core'
+
 
 const Home = () => {
-const history = useHistory()
+  const history = useHistory()
 
   function catalog() {
-   history.push('/productos')
+    history.push('/productos')
   }
 
   return (
-    <div className='home-home'>
-      <div className='home-position'>
-        <h1 className='home-title'>TRANSFORMÁ TU VIDA</h1>
-       
+    <div className='home-container'>
       
-      <button onClick={catalog} className='home-button'>CATALOGO</button>
+      <div className='div-home'>
+        <div className='home-position'>
+        <h1 className='home-title'>TRANSFORMÁ TU VIDA</h1>
+        <button onClick={catalog} className='home-button'>INGRESAR</button>
+        </div>
        
+      </div>
+
+      <div>
+        <Plans/>
+      </div>
+      
+
+     <div>
+       <Footer/>
      </div>
+
+
+
     </div>
   )
 }

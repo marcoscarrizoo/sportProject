@@ -59,12 +59,7 @@ export default makeStyles({
       height: '92vh'
       
     },
-    plans: {
-      display: 'flex',
-      flexDirection: 'row',
-      width: '60%',
-      marginLeft: '350px'
-    },
+   
     grid: {
       display: "grid",
       gridTemplateColumns: "repeat(3, 1fr)",

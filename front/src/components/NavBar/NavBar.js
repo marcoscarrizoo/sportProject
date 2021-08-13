@@ -6,8 +6,8 @@ import Search from "./Search";
 import { getProducts } from "../../redux/actions/productsActions";
 import { doLogOut } from "../../redux/actions/userActions";
 /* styles */
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import HomeIcon from "@material-ui/icons/Home";
 import Swal from "sweetalert2";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -25,9 +25,13 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import { loadCart } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
-  textDeco: {
-    textDecoration: "none",
-  },
+  // navBar: {
+  //   display: "flex",
+  // },
+  // textDeco: {
+  //   textDecoration: "none",
+  //   height: "100px",
+  // },
   text: {
     color: "white",
   },
@@ -37,14 +41,9 @@ const useStyles = makeStyles((theme) => ({
   },
   buttons: {
     display: "flex",
-    marginLeft: "150px",
-    padding: "25px",
-  },
-  grow: {
-    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(10),
   },
   title: {
     display: "none",
@@ -84,9 +83,9 @@ const useStyles = makeStyles((theme) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    width: "50%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "10ch",
     },
   },
   sectionDesktop: {
@@ -97,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
+
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -109,14 +109,14 @@ export default function PrimarySearchAppBar() {
   const userName = useSelector((store) => store.user.email);
   // const userType = JSON.parse(localStorage.getItem('userType'))      MARCOS
   const userType = useSelector((store) => store.user.userType);
-  
-  const products = useSelector(store => store.cart)
+
+  const products = useSelector((store) => store.cart);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log("user type", userType)
+  console.log("user type", userType);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -133,6 +133,10 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
   const handleAdmin = () => {
     history.push("/admin");
     setAnchorEl(null);
@@ -140,14 +144,15 @@ export default function PrimarySearchAppBar() {
   };
 
   const menu = () => {
-    history.push('/')
-  }
+    history.push("/");
+  };
 
   const handleSignUp = () => {
     history.push("/registrarse");
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
   const handleLoggin = () => {
     history.push("/iniciarSesion");
     setAnchorEl(null);
@@ -160,14 +165,34 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const handleProducts = () => {
+    history.push("/productos");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handlePlans = () => {
+    history.push("/planes");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleActivities = () => {
+    history.push("/actividades");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleSedes = () => {
+    history.push("/sedes");
+    setAnchorEl(null);
+    handleMobileMenuClose();
   };
 
   const handleLogOut = () => {
     dispatch(doLogOut());
     history.push("/");
-    
+
     Swal.fire({
       text: "Esperamos verte pronto",
       icon: "success",
@@ -175,13 +200,13 @@ export default function PrimarySearchAppBar() {
       timer: "3000",
       showConfirmButton: false,
     });
-    
+
     setAnchorEl(null);
     handleMobileMenuClose();
   };
 
   function handleLoadCart() {
-    dispatch(loadCart())
+    dispatch(loadCart());
   }
 
   const menuId = "primary-search-account-menu";
@@ -195,22 +220,25 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      
-{!user ? (
+      {!user ? (
         <div>
           <MenuItem onClick={handleLoggin}>Inicar Sesion</MenuItem>
           <MenuItem onClick={handleSignUp}>Registrarse</MenuItem>
         </div>
       ) : (
         <div>
-          <MenuItem><AccountCircleIcon/>{userName}</MenuItem>
-         {userType==="S"||userType==="A"? <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
-         :
-         <MenuItem onClick={handleUser}>Perfil</MenuItem>}
+          <MenuItem>
+            <AccountCircleIcon />
+            {userName}
+          </MenuItem>
+          {userType === "S" || userType === "A" ? (
+            <MenuItem onClick={handleAdmin}>Administrar</MenuItem>
+          ) : (
+            <MenuItem onClick={handleUser}>Perfil</MenuItem>
+          )}
           <MenuItem onClick={handleLogOut}>Cerrar Sesion</MenuItem>
         </div>
       )}
-      
     </Menu>
   );
 
@@ -231,6 +259,42 @@ export default function PrimarySearchAppBar() {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
+        <p>Carrito</p>
+      </MenuItem>
+      <MenuItem onClick={handleProducts}>
+        <IconButton color="inherit">
+          <Badge>
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>productos</p>
+      </MenuItem>
+
+      <MenuItem onClick={handlePlans}>
+        <IconButton color="inherit">
+          <Badge>
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Nuestros Planes</p>
+      </MenuItem>
+
+      <MenuItem onClick={handleActivities}>
+        <IconButton color="inherit">
+          <Badge>
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Actividades</p>
+      </MenuItem>
+
+      <MenuItem onClick={handleSedes}>
+        <IconButton color="inherit">
+          <Badge>
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Sedes</p>
       </MenuItem>
 
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -248,18 +312,13 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
+    <div className={classes.navBar}>
+      <AppBar position='static'>
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={menu}
-            
-          >
-           < HomeIcon/>
+          <IconButton edge="start" color="inherit" onClick={menu}>
+            <HomeIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h4" noWrap>
             <Link className={classes.link} to="/">
               SportGYM
             </Link>
@@ -267,7 +326,7 @@ export default function PrimarySearchAppBar() {
 
           <Search />
 
-          <div className={classes.buttons}>
+          <div className={classes.sectionDesktop}>
             <Link className={classes.textDeco} to="/sedes">
               {" "}
               <Button className={classes.text}>Sedes</Button>{" "}
@@ -280,62 +339,58 @@ export default function PrimarySearchAppBar() {
               {" "}
               <Button className={classes.text}>nuestros planes</Button>{" "}
             </Link>
-            <Button
-              className={classes.text}
-              onClick={() => {
-                dispatch(getProducts());
-                history.push("/productos");
-              }}
-            >
-              productos
-            </Button>
-          </div>
-          <Link className={classes.textDeco} to="/asociate">
-            <Button
-              className={classes.asociate}
-              variant="contained"
-              color="secondary"
-            >
-              ASOCIATE
-            </Button>{" "}
-          </Link>
+            <Link>
+              <Button
+                className={classes.text}
+                onClick={() => {
+                  dispatch(getProducts());
+                  history.push("/productos");
+                }}
+              >
+                productos
+              </Button>
+            </Link>
 
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <Link className={classes.text} to="/cart" onClick={ handleLoadCart }>
+            <Link className={classes.text} to="/cart" onClick={handleLoadCart}>
               <IconButton color="inherit">
-                <Badge badgeContent={
-                  products?.items.length
-                  ? products.items.reduce((a, i) => a + i.quantity,0)
-                  : 0 } 
-                  
-                color="secondary">
+                <Badge
+                  badgeContent={
+                    products?.items.length
+                      ? products.items.reduce((a, i) => a + i.quantity, 0)
+                      : 0
+                  }
+                  color="secondary"
+                >
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
             </Link>
-              {user? 
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle color='secondary'/>Bienvenido
-            </IconButton> :
- <IconButton
- edge="end"
- aria-label="account of current user"
- aria-controls={menuId}
- aria-haspopup="true"
- onClick={handleProfileMenuOpen}
- color="inherit"
->
- <AccountCircle/>
-</IconButton> }
+            {user ? (
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle color="secondary" />
+                Bienvenido
+              </IconButton>
+            ) : (
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
           </div>
+
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -344,7 +399,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
           </div>
         </Toolbar>

@@ -120,6 +120,7 @@ import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import HomeIcon from '@material-ui/icons/Home';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import './location.css'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -208,10 +209,10 @@ export default function LocationUx() {
   ];
 
   return (
-    <div className={classes.div}>
+    <div className='location-container'>
       {sedes.map((e) => (
        
-          <Card className={classes.root}>
+          <Card className='root'>
             
             <CardMedia className={classes.media} image={e.img} />
             <CardHeader className={classes.title} title={e.name} />

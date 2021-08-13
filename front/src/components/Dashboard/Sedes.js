@@ -1,12 +1,15 @@
 import React from "react";
+import Footer from "../Footer";
 import LocationUX from "../Locations/LocationUX";
 import './sedes.css'
 
 const Sedes = () => {
   return (
-    <div style={{width: '100%', minHeight: '92vh', color: 'red'}}>
-      <h1 className="sedes">SEDES</h1>
-      <LocationUX />
+    <div className='sedes-container'>
+      <div><h1 className="sedes">SEDES</h1></div>
+      <div><LocationUX /></div>
+      <div><Footer/></div>
+      
     </div>
   );
 };

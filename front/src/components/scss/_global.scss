@@ -1,0 +1,33 @@
+//aca colocamos las propiedades globales 
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit
+}
+
+body {
+    margin: 0 ;
+    padding: 0 ;
+    line-height: 1.6 ; 
+
+}
+
+img {
+    width: 80%; 
+    height: auto;
+}
+
+nav, .servicios, .presentacion, .footer-content {
+    width: 80%;
+    margin: auto;
+}
+
+.titulo-servicios, .presentacion {
+    margin-bottom: 10%;
+}
+
+//variables 
+

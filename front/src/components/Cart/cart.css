@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: #ededed;
+  background-color: #3a3737ef;
   min-height: 89.5vh;
   padding-top: 20px;
   padding-bottom: 40px;
@@ -16,20 +16,18 @@
   display: flex;
   justify-content: center;
   padding-top: 30px;
+  
 }
 
 .carrito-vacio {
-  background-color: green;
+  background-color: #ffff00;
   border-radius: 100%;
   color: black;
-  width: 50%;
+  width: 30%;
   transition: 0.3s;
 }
 
-.carrito-vacio:hover {
-  background-color: rgba(0, 128, 0, 0.59);
-  width: 55%;
-}
+
 
 .items {
   width: 65%;
@@ -105,8 +103,8 @@
 .comprar {
   width: 100%;
   padding: 5px 0;
-  background-color: green;
-  color: white;
+  background-color: #ffff00;
+  color: black;
   border: none;
   margin: 10px 0;
   transition: 0.2s;
@@ -115,7 +113,6 @@
 
 .comprar:hover {
   width: 100%;
-  background-color: #00800088;
   border-radius: 10px;
 }
 

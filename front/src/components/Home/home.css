@@ -1,38 +1,57 @@
-.home-home {
-    background-image: url('https://img.etimg.com/photo/msid-74747053,quality-100/for-miles-a-great-bodyweight-workout-would-include-squats-push-ups-walking-lunges-.jpg');
-    height: 92vh;
-    background-position-y: center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-}
-
-.home-title {
-    color:rgba(161, 161, 161, 0.863);
-    
-}
+ .home-title {
+  color: rgba(161, 161, 161, 0.863);
+  display: flex;
+  text-align: center;
+} 
 
 .home-button {
-    width: 70%;
-    padding: 0 15px;
-    color: rgba(0, 0, 0, 0.863);
-    height: 100px;
-    border-radius: 15px;
-    background-color: rgba(251, 255, 0, 0.534);
-    font-size: 1.7em;
-    margin-bottom: 10px;
-    
+  width: 70%;
+  padding: 0 15px;
+  color: rgba(0, 0, 0, 0.863);
+  height: 100px;
+  border-radius: 15px;
+  background-color: rgba(251, 255, 0, 0.534);
+  font-size: 1.7em;
+  margin-bottom: 10px;
 }
 
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  
+  
+  
+ 
+}
+
+
+.div-home {
+    display: flex;
+    background-image: url("https://img.etimg.com/photo/msid-74747053,quality-100/for-miles-a-great-bodyweight-workout-would-include-squats-push-ups-walking-lunges-.jpg");
+    background-position-y: center;
+    background-size:cover;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+  } 
+
+.home-title {
+  color:rgba(161, 161, 161, 0.863);
+  
+}
+
+
+
 .home-position {
-background-color: rgba(0, 0, 0, 0.137);
+display: flex;
+background-color: rgba(0, 0, 0, 0.575);
 padding: 15px;
-align-self: center; 
-margin-right: 300px;
 border: solid 3px;
 width: 25%;
 height: 20%;
-display: flex;
 justify-content: space-between;
 flex-direction: column;
 align-items: center;
@@ -41,5 +60,23 @@ border-radius: 10px
 }
 
 .home-button:hover {
-background-color: yellow
+background-color: rgba(255, 255, 0, 0.411)
+}
+
+@media(max-width: 600px) {
+  .home-position {
+    display: flex;
+    padding: 20px;
+    width: 50%;
+    height: 20%;
+ 
+    
+    }
+    .home-button {
+      width: 100%;
+      
+ 
+    }
+    
+    
 }

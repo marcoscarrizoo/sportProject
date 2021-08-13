@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../Footer'
 import './ourplans.css'
 
 const OurPlans = () => {
@@ -40,7 +41,7 @@ const OurPlans = () => {
                 </div>
                   
         </div>
-        
+        <Footer/>
         </div>
     )
 }

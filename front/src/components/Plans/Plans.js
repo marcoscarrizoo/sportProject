@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm, ValidationError } from "@formspree/react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,8 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import useStyles from "./planStyles";
 import CheckIcon from "@material-ui/icons/Check";
 import { TextField } from "@material-ui/core";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { useHistory } from "react-router";
+import "./plans.css";
 
 export default function OutlinedCard() {
   const classes = useStyles();
@@ -18,22 +19,20 @@ export default function OutlinedCard() {
   const [monthlyPremium, setMonthlyPremium] = useState(false);
   const [annualyPremium, setAnnualyPremium] = useState(false);
   const [state, handleSubmit] = useForm("mjvjaygp");
-  const history = useHistory()
+  const history = useHistory();
 
   if (state.succeeded) {
     return (
-      Swal.fire(
-        {
-          text: 'Nos pondremos en contacto a la brevedad',
-          icon: 'success',
-          width: '20rem',
-          timer: '6000',
-          showConfirmButton: false
-        }
-      ),
-      history.push('/productos')
-    )
-}
+      Swal.fire({
+        text: "Nos pondremos en contacto a la brevedad",
+        icon: "success",
+        width: "20rem",
+        timer: "6000",
+        showConfirmButton: false,
+      }),
+      history.push("/productos")
+    );
+  }
   const month = () => {
     setAnnualy(false);
     setMonthly(true);
@@ -43,26 +42,21 @@ export default function OutlinedCard() {
     setAnnualy(true);
   };
 
-const monthPremium = () => {
-    setMonthlyPremium(true)
-    setAnnualyPremium(false)
-} 
-const annualPremium = () => {
-    setAnnualyPremium(true)
-    setMonthlyPremium(true)
-} 
+  const monthPremium = () => {
+    setMonthlyPremium(true);
+    setAnnualyPremium(false);
+  };
+  const annualPremium = () => {
+    setAnnualyPremium(true);
+    setMonthlyPremium(true);
+  };
 
-const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.jpg'
+  
   return (
-      <div className={classes.container} style={{backgroundImage:`url(${foto})`}}>
-        
-        <div className={classes.plans}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} gutterBottom>
-          PLAN STANDAR
-        </Typography>
-        <div className={classes.buttons}>
+    <div className='plans-container'>
+      <div className='card'>
+        <h1>plan estandar</h1>
+        <div>
           <Button
             onClick={month}
             value={monthly}
@@ -79,17 +73,17 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
           >
             Anual
           </Button>
-        </div>
-        <div className={classes.price}>
+        
+          </div>
+        
           {monthly === true && annualy === false ? (
             <h2>$4200</h2>
           ) : (
             <h2>$40.320</h2>
           )}
-        </div>
-        <Typography variant="body2" component="p">
-          MATRICULA BONIFICADA 100%
-        </Typography>
+        
+
+        <h3>matricula 100% bonificada</h3>
 
         <p>
           <CheckIcon /> Musculacion{" "}
@@ -97,28 +91,20 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
         <p>
           <CheckIcon /> Acceso a una sola una sucursal (a eleccion)
         </p>
-      </CardContent>
-      <CardActions>
-        <Button
+
+        {/* <Button
           className={classes.button}
           color="secondary"
           size="large"
           variant="contained"
         >
           SPORTGYM
-        </Button>
-      </CardActions>
-    </Card>
-    
+        </Button> */}
+      </div>
 
-    
-            
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} gutterBottom>
-          PLAN PREMIUM
-        </Typography>
-        <div className={classes.buttons}>
+      <div className='card'>
+        <h1>plan premium</h1>
+        <div>
           <Button
             onClick={monthPremium}
             value={monthlyPremium}
@@ -136,16 +122,14 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
             Anual
           </Button>
         </div>
-        <div className={classes.price}>
+        <div>
           {monthlyPremium === true && annualyPremium === false ? (
             <h2>$4900</h2>
           ) : (
             <h2>$50.960</h2>
           )}
         </div>
-        <Typography variant="h5" component="p">
-          MATRICULA BONIFICADA 100%
-        </Typography>
+        <h3>matricucla 100% bonificada</h3>
 
         <p>
           <CheckIcon /> Musculacion{" "}
@@ -154,100 +138,82 @@ const foto = 'https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.j
           <CheckIcon /> Acceso a todas las sucursales
         </p>
         <p>
-          <CheckIcon /> Acceso a piscina 
+          <CheckIcon /> Acceso a piscina
         </p>
         <p>
-          <CheckIcon /> Actividades sin limite 
+          <CheckIcon /> Actividades sin limite
         </p>
-      </CardContent>
-      <CardActions>
-        <Button
-          className={classes.button2}
-          color="secondary"
-          size="large"
-          variant="contained"
-        >
-          SPORTGYM
-        </Button>
-      </CardActions>
-    </Card>
-    
+      </div>
+
+      <div className='card'>
+        <form onSubmit={handleSubmit}>
+          <h1>DATOS DE CONTACTO</h1>
+          <TextField
+            // onChange={(e) => { setEmail(e.target.value) }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Nombre"
+            id="name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            autoFocus
+          />
+
+          <TextField
+            // onChange={(e) => { setEmail(e.target.value) }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Correo electronico"
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            // onChange={(e) => { setEmail(e.target.value) }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Celular"
+            id="phone"
+            name="phone"
+            type="text"
+            autoComplete="phone"
+            autoFocus
+          />
+          <TextField
+            // onChange={(e) => { setEmail(e.target.value) }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="consulta"
+            id="consulta"
+            name="consulta"
+            type="text"
+            autoComplete="consulta"
+            autoFocus
+          />
+          <Button
+            className={classes.button3}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            size="large"
+          >
+            QUIERO ASESORAMIENTO
+          </Button>
+        </form>
+      </div>
     </div>
-            
-    <Card className={classes.root} variant="outlined">
-    <form onSubmit={handleSubmit}>
-        <Typography className={classes.datos} gutterBottom>
-        DATOS DE CONTACTO
-        </Typography>
-        <TextField
-               // onChange={(e) => { setEmail(e.target.value) }}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Nombre"
-                id="name"
-                name="name"
-                type='text'
-                autoComplete="name"
-                autoFocus
-              />
-              
-      <TextField
-               // onChange={(e) => { setEmail(e.target.value) }}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Correo electronico"
-                id="email"
-                name="email"
-                type='email'
-                autoComplete="email"
-                autoFocus
-              />
-      <TextField
-               // onChange={(e) => { setEmail(e.target.value) }}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Celular"
-                id="phone"
-                name="phone"
-                type='text'
-                autoComplete="phone"
-                autoFocus
-              />
-      <TextField
-               // onChange={(e) => { setEmail(e.target.value) }}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="consulta"
-                id="consulta"
-                name="consulta"
-                type='text'
-                autoComplete="consulta"
-                autoFocus
-              />
-              <Button
-                className={classes.button3}
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                size="large"
-                
-              >
-                QUIERO ASESORAMIENTO
-              </Button>
-       
-      </form>
-    </Card>
     
-    
-    </div>
   );
 }

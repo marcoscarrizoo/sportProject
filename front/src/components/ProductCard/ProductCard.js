@@ -15,6 +15,7 @@ import BlockIcon from "@material-ui/icons/Block";
 import Popover from "@material-ui/core/Popover";
 
 import Swal from "sweetalert2";
+import Footer from "../Footer";
 
 const useStyles = makeStyles({
   root: {
@@ -222,6 +223,7 @@ export default function ProductCard({
           </CardActionArea>
         </Card>
       )}
+      
     </div>
   );
 }

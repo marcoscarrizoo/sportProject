@@ -6,13 +6,14 @@ import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../redux/actions/productsActions";
 import { loadCart } from "../../redux/actions/cartActions";
+import Footer from "../Footer";
 
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     paddingTop: "20px",
     display: "flex",
-    backgroundColor: "#ededed",
+    backgroundColor: "#3a3737ef",
     justifyContent: "space-around",
   },
   sortBar: {
@@ -25,10 +26,14 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
+    
+    
   },
   card: {
     margin: "20px",
     minWidth: "250px",
+    boxShadow: '0 0 10px'
+    
   },
 }));
 
@@ -85,6 +90,7 @@ export default function Catalogo() {
           )}
         </Grid>
       </Grid>
+      <Footer/>
     </div>
   );
 }
