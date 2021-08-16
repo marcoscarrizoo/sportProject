@@ -1,20 +1,35 @@
 .card {
-box-shadow: 0 0 10px;
+
 display: flex;
 flex-direction: column;
 text-align: center;
 height: 500px;
-width: 500px;
+width: 300px;
 margin: 20px;
-background-color: #36363652
+/* justify-content: space-evenly; */
+background-color: #201e1e;
+color: rgba(161, 161, 161, 0.863);
 } 
+.card2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 450px;
+    width: 250px;
+    margin: 20px;
+    padding: 30px;
+    justify-content: space-evenly;
+    background-color: #201e1e;
+    color: rgba(161, 161, 161, 0.863);  
+}
 
 .plans-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* height: 100vh; */
-    background-image: url("https://www.motivaction.nl/images/Expertise/Sport-marktonderzoek.jpg");
+     height: 100%;
+    /* background-image: url("https://p4.wallpaperbetter.com/wallpaper/175/658/396/metal-texture-metal-texture-wallpaper-preview.jpg"); */
+    background-image: url("https://p4.wallpaperbetter.com/wallpaper/7/252/1023/simple-texture-gradient-wallpaper-preview.jpg");
     background-position-x: center;
     background-size:cover;
     justify-content: center;
@@ -25,3 +40,18 @@ background-color: #36363652
     
 }
 
+.namedata {
+    background-color: rgba(161, 161, 161, 0.863);
+}
+
+.box3 {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    font-size: 60px;
+    color: rgba(161, 161, 161, 0.863);
+    text-align: center;
+    }
+
+    .button3 {
+        margin-top: 20px;
+    }

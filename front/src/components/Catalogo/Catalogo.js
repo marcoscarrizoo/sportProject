@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     paddingTop: "20px",
     display: "flex",
-    backgroundColor: "#3a3737ef",
+    backgroundImage: "url('https://p4.wallpaperbetter.com/wallpaper/7/252/1023/simple-texture-gradient-wallpaper-preview.jpg')",
     justifyContent: "space-around",
   },
   sortBar: {

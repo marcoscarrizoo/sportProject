@@ -119,45 +119,76 @@
 
 // export default Home;
 
-import React from 'react'
-import { useHistory } from 'react-router'
-import './home.css'
-import Plans from '../Plans/Plans'
-import Footer from '../Footer'
-import { Button } from '@material-ui/core'
-
+import React from "react";
+import { useHistory } from "react-router";
+import "./home.css";
+import Plans from "../Plans/Plans";
+import Footer from "../Footer";
+import { Button } from "@material-ui/core";
+import Activities from "../Dashboard/Activities";
+import OurPlans from "../Dashboard/OurPlans";
 
 const Home = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   function catalog() {
-    history.push('/productos')
+    history.push("/productos");
   }
 
   return (
-    <div className='home-container'>
-      
-      <div className='div-home'>
-        <div className='home-position'>
-        <h1 className='home-title'>TRANSFORMÁ TU VIDA</h1>
-        <button onClick={catalog} className='home-button'>INGRESAR</button>
-        </div>
-       
+    <div className="home-container">
+      <div className="div-home">
+        {/* <div className='home-position'>
+          <button onClick={catalog} className='home-button'>Nuestro Catalogo</button>
+        </div> */}
       </div>
 
       <div>
-        <Plans/>
+        <Activities />
       </div>
-      
 
-     <div>
-       <Footer/>
-     </div>
+      <div>
+        <Plans />
+      </div>
 
+      <div>
+        <OurPlans />
+      </div>
 
-
+      <div>
+        <Footer />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
+
+// const itemData2 = [
+//   {
+//       img: 'https://www.bsaspersonaltrainer.com.ar/wp-content/uploads/2014/07/Musculacion-estetica-6-metodos-infalibles-para-hipertrofiar.jpg',
+//       title: 'Musculación'
+//   },
+//   {
+//       img: 'https://e00-marca.uecdn.es/assets/multimedia/imagenes/2019/07/18/15634659732891.png',
+//       title: 'CrossFit'
+//   },
+
+//   {
+//       img: 'https://coolwallpapers.me/picsup/5724879-muay-thai-boxing-wallpapers.jpg',
+//       title: 'Kick Boxing'
+//   },
+//   {
+//       img: 'https://unycos.com/blog/wp-content/uploads/2019/03/entrenando-para-evitar-errores-que-cometemos-al-nadar.jpg',
+//       title: 'Natacion'
+//   },
+//   {
+//       img: 'https://img.wallpapersafari.com/desktop/728/410/1/7/b1vtO7.jpg',
+//       title: 'Calistenia'
+//   },
+//   {
+//       img: 'https://www.mensjournal.com/wp-content/uploads/2018/06/CyclingClass.jpg?quality=86&strip=all',
+//       title: 'Spinning'
+//   }
+
+// ]

@@ -6,7 +6,7 @@ import './sedes.css'
 const Sedes = () => {
   return (
     <div className='sedes-container'>
-      <div><h1 className="sedes">SEDES</h1></div>
+    <h1 className="sedes">SEDES</h1>
       <div><LocationUX /></div>
       <div><Footer/></div>
       

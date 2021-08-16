@@ -88,22 +88,25 @@ export default function ProductDetail() {
     );
   } else {
     return (
-      <div className="div">
-        <div className="bigone">
-          <div className="miniblock">
-            {detail ? (
-              detail.images.map((e) => (
-                <img
-                  src={e}
-                  alt={e}
-                  className="miniatureImages"
-                  onClick={(e) => changeImg(e)}
-                />
-              ))
-            ) : (
-              <span>imagen no encontrada</span>
-            )}
+ <div className="detail-container">
+    <div className="card-detail">
+        <div className="miniblock">
+                {detail ? (
+                  detail.images.map((e) => (
+                    <img
+                      src={e}
+                      alt={e}
+                      className="miniatureImages"
+                      onClick={(e) => changeImg(e)}
+                    />
+                  ))
+                ) : (
+                  <span>imagen no encontrada</span>
+                )}
           </div>
+
+
+
           <div className="secondblock">
             {/* <img src={detail? detail.images[0]: null} alt={image} className="centerimage" /> */}
             <img src={image} alt={image} className="centerimage" />
@@ -150,12 +153,15 @@ export default function ProductDetail() {
               </Button>
             </CardActions>
           </div>
-        </div>
-        <div className="detail">
-          <p>{detail.description}</p>
-        </div>
-        <ProductReviews productId={id} />
-      </div>
+    </div>
+        
+  </div>
     );
   }
 }
+
+
+{/* <div className="detail">
+          <p>{detail.description}</p>
+        </div> */}
+        {/* <ProductReviews productId={id} /> */}

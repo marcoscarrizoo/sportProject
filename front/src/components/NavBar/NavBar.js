@@ -327,18 +327,17 @@ export default function PrimarySearchAppBar() {
           <Search />
 
           <div className={classes.sectionDesktop}>
+          <Link className={classes.textDeco} to="/">
+              {" "}
+              <Button className={classes.text}>Inicio</Button>{" "}
+            </Link>
+
             <Link className={classes.textDeco} to="/sedes">
               {" "}
               <Button className={classes.text}>Sedes</Button>{" "}
             </Link>
-            <Link className={classes.textDeco} to="/actividades">
-              {" "}
-              <Button className={classes.text}>actividades</Button>{" "}
-            </Link>
-            <Link className={classes.textDeco} to="/planes">
-              {" "}
-              <Button className={classes.text}>nuestros planes</Button>{" "}
-            </Link>
+            
+            
             <Link>
               <Button
                 className={classes.text}
@@ -347,10 +346,10 @@ export default function PrimarySearchAppBar() {
                   history.push("/productos");
                 }}
               >
-                productos
+                Productos
               </Button>
             </Link>
-
+                <div>
             <Link className={classes.text} to="/cart" onClick={handleLoadCart}>
               <IconButton color="inherit">
                 <Badge
@@ -390,7 +389,9 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             )}
           </div>
+          </div>
 
+          
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"

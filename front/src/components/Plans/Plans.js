@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./planStyles";
 import CheckIcon from "@material-ui/icons/Check";
-import { TextField } from "@material-ui/core";
+import { colors, TextField } from "@material-ui/core";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import "./plans.css";
@@ -19,19 +19,11 @@ export default function OutlinedCard() {
   const [monthlyPremium, setMonthlyPremium] = useState(false);
   const [annualyPremium, setAnnualyPremium] = useState(false);
   const [state, handleSubmit] = useForm("mjvjaygp");
+  const [contact, setContact] = useState('')
   const history = useHistory();
 
   if (state.succeeded) {
-    return (
-      Swal.fire({
-        text: "Nos pondremos en contacto a la brevedad",
-        icon: "success",
-        width: "20rem",
-        timer: "6000",
-        showConfirmButton: false,
-      }),
-      history.push("/productos")
-    );
+    return setContact('nos contactaremos a la brevedad')
   }
   const month = () => {
     setAnnualy(false);
@@ -54,6 +46,9 @@ export default function OutlinedCard() {
   
   return (
     <div className='plans-container'>
+      <div className='box3'>
+               Planes 
+            </div>
       <div className='card'>
         <h1>plan estandar</h1>
         <div>
@@ -145,12 +140,12 @@ export default function OutlinedCard() {
         </p>
       </div>
 
-      <div className='card'>
+      <div className='card2'>
         <form onSubmit={handleSubmit}>
           <h1>DATOS DE CONTACTO</h1>
           <TextField
             // onChange={(e) => { setEmail(e.target.value) }}
-            variant="outlined"
+            variant='outlined'
             margin="normal"
             required
             fullWidth
@@ -160,6 +155,7 @@ export default function OutlinedCard() {
             type="text"
             autoComplete="name"
             autoFocus
+            className='namedata'
           />
 
           <TextField
@@ -174,6 +170,7 @@ export default function OutlinedCard() {
             type="email"
             autoComplete="email"
             autoFocus
+            className='namedata'
           />
           <TextField
             // onChange={(e) => { setEmail(e.target.value) }}
@@ -187,6 +184,7 @@ export default function OutlinedCard() {
             type="text"
             autoComplete="phone"
             autoFocus
+            className='namedata'
           />
           <TextField
             // onChange={(e) => { setEmail(e.target.value) }}
@@ -200,9 +198,11 @@ export default function OutlinedCard() {
             type="text"
             autoComplete="consulta"
             autoFocus
+            className='namedata'
           />
+          <div className='button3'>
           <Button
-            className={classes.button3}
+            
             type="submit"
             fullWidth
             variant="contained"
@@ -211,8 +211,12 @@ export default function OutlinedCard() {
           >
             QUIERO ASESORAMIENTO
           </Button>
-        </form>
+          </div>
+          
+        </form> 
+
       </div>
+
     </div>
     
   );

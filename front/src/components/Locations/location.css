@@ -3,14 +3,13 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: 
-    #3a3737ef
+    background-image: url('https://p4.wallpaperbetter.com/wallpaper/7/252/1023/simple-texture-gradient-wallpaper-preview.jpg');
     
 }
 
 .root {
     max-width: 345;
-    margin: 50px 100px;
+    margin: 50px 50px;
     transition: 0.5s;
   }
 
