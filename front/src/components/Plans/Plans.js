@@ -77,7 +77,7 @@ export default function OutlinedCard() {
             <h2>$40.320</h2>
           )}
         
-
+            <div className='text-plans'>
         <h3>matricula 100% bonificada</h3>
 
         <p>
@@ -86,6 +86,7 @@ export default function OutlinedCard() {
         <p>
           <CheckIcon /> Acceso a una sola una sucursal (a eleccion)
         </p>
+        </div>
 
         {/* <Button
           className={classes.button}
@@ -124,6 +125,7 @@ export default function OutlinedCard() {
             <h2>$50.960</h2>
           )}
         </div>
+        <div className='text-plans'>
         <h3>matricucla 100% bonificada</h3>
 
         <p>
@@ -138,15 +140,18 @@ export default function OutlinedCard() {
         <p>
           <CheckIcon /> Actividades sin limite
         </p>
+       </div> 
       </div>
 
       <div className='card2'>
         <form onSubmit={handleSubmit}>
           <h1>DATOS DE CONTACTO</h1>
+
           <TextField
             // onChange={(e) => { setEmail(e.target.value) }}
             variant='outlined'
             margin="normal"
+            size='small'
             required
             fullWidth
             label="Nombre"
@@ -163,6 +168,7 @@ export default function OutlinedCard() {
             variant="outlined"
             margin="normal"
             required
+            size='small'
             fullWidth
             label="Correo electronico"
             id="email"
@@ -175,6 +181,7 @@ export default function OutlinedCard() {
           <TextField
             // onChange={(e) => { setEmail(e.target.value) }}
             variant="outlined"
+            size='small'
             margin="normal"
             required
             fullWidth
@@ -191,6 +198,7 @@ export default function OutlinedCard() {
             variant="outlined"
             margin="normal"
             required
+            size='small'
             fullWidth
             label="consulta"
             id="consulta"
@@ -207,7 +215,7 @@ export default function OutlinedCard() {
             fullWidth
             variant="contained"
             color="secondary"
-            size="large"
+            size="small"
           >
             QUIERO ASESORAMIENTO
           </Button>

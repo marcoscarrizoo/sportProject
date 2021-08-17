@@ -17,6 +17,8 @@
 .itemsAct{
 width: 50%;
 height: 50vh;
+background-position: center;
+background-attachment: contain;
 background-size: cover ;
 color: white;
 }
@@ -32,8 +34,31 @@ color: white;
         flex-direction: column;
         
     }
+    .act-title {
+        background-color: rgba(0, 0, 0, 0.575);
+        font-size: 30px;
+    }
     .itemsAct{
         width: 100%;
+      justify-content: center;
+        
+        }
+    .box2 {
+        font-size: 20px;
+    }
+}
+
+@media(max-width: 600px) {
+    .act-title {
+        font-size: 15px;
+    }
+    .box2 {
+        font-size: 10px;
+    }
+    .itemsAct{
+        width: 100%;
+        height: 200px;
+        background-position:center ;
       justify-content: center;
         
         }

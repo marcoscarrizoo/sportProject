@@ -26,8 +26,8 @@ export default function Footer() {
 
   return (
     <div className='footer-container'>
-     <div><h1 >SPORTGYM</h1></div> 
-     <div><h3>En SportGym cuidamos tu salud, por eso te recordamos que tu apto médico es indispensable al momento de iniciar una actividad física (leyes nº 139 y 12329)</h3></div>
+     <div><h1 className='footer-title'>SPORTGYM</h1></div> 
+     <div><h3 className='footer-title'>En SportGym cuidamos tu salud, por eso te recordamos que tu apto médico es indispensable al momento de iniciar una actividad física (leyes nº 139 y 12329)</h3></div>
       <div><Copyright /></div>  
           
         

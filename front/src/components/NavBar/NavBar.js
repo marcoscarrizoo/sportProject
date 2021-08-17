@@ -25,13 +25,14 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import { loadCart } from "../../redux/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
-  // navBar: {
-  //   display: "flex",
-  // },
-  // textDeco: {
-  //   textDecoration: "none",
-  //   height: "100px",
-  // },
+  navBar: {
+    
+  },
+  textDeco: {
+    textDecoration: "none",
+    color: 'white',
+    margin: '50px'
+  },
   text: {
     color: "white",
   },
@@ -144,7 +145,8 @@ export default function PrimarySearchAppBar() {
   };
 
   const menu = () => {
-    history.push("/");
+    
+  history.push('/')
   };
 
   const handleSignUp = () => {
@@ -208,7 +210,11 @@ export default function PrimarySearchAppBar() {
   function handleLoadCart() {
     dispatch(loadCart());
   }
-
+function handleCart() {
+  history.push('/cart')
+  setAnchorEl(null);
+    handleMobileMenuClose();
+}
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -253,10 +259,10 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={handleCart}>
         <IconButton color="inherit">
           <Badge>
-            <ShoppingCartIcon />
+            
           </Badge>
         </IconButton>
         <p>Carrito</p>
@@ -264,34 +270,20 @@ export default function PrimarySearchAppBar() {
       <MenuItem onClick={handleProducts}>
         <IconButton color="inherit">
           <Badge>
-            <ShoppingCartIcon />
+            
           </Badge>
         </IconButton>
         <p>productos</p>
       </MenuItem>
 
-      <MenuItem onClick={handlePlans}>
-        <IconButton color="inherit">
-          <Badge>
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <p>Nuestros Planes</p>
-      </MenuItem>
+      
 
-      <MenuItem onClick={handleActivities}>
-        <IconButton color="inherit">
-          <Badge>
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <p>Actividades</p>
-      </MenuItem>
+     
 
       <MenuItem onClick={handleSedes}>
         <IconButton color="inherit">
           <Badge>
-            <ShoppingCartIcon />
+            
           </Badge>
         </IconButton>
         <p>Sedes</p>
@@ -304,7 +296,7 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -340,7 +332,7 @@ export default function PrimarySearchAppBar() {
             
             <Link>
               <Button
-                className={classes.text}
+                className={classes.textDeco}
                 onClick={() => {
                   dispatch(getProducts());
                   history.push("/productos");
@@ -349,8 +341,8 @@ export default function PrimarySearchAppBar() {
                 Productos
               </Button>
             </Link>
-                <div>
-            <Link className={classes.text} to="/cart" onClick={handleLoadCart}>
+                
+            <Link className={classes.textDeco} to="/cart" onClick={handleLoadCart}>
               <IconButton color="inherit">
                 <Badge
                   badgeContent={
@@ -365,7 +357,8 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </Link>
             {user ? (
-              <IconButton
+              
+              <IconButton 
                 edge="end"
                 aria-label="account of current user"
                 aria-controls={menuId}
@@ -376,6 +369,7 @@ export default function PrimarySearchAppBar() {
                 <AccountCircle color="secondary" />
                 Bienvenido
               </IconButton>
+              
             ) : (
               <IconButton
                 edge="end"
@@ -389,7 +383,7 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             )}
           </div>
-          </div>
+          
 
           
           <div className={classes.sectionMobile}>

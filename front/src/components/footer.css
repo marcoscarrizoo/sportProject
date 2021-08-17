@@ -6,3 +6,28 @@
     background-color: rgba(0, 0, 0, 0.87);
     color: gray;
 }
+
+@media(max-width: 900px) {
+    .footer-title {
+        font-size: 20px;
+        padding: 5px;
+    }
+}
+@media(max-width: 700px) {
+    .footer-title {
+        font-size: 15px;
+        padding: 5px;
+    }
+}
+@media(max-width: 600px) {
+    .footer-title {
+        font-size: 12px;
+        padding: 5px;
+    }
+}
+@media(max-width: 322px) {
+    .footer-title {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
