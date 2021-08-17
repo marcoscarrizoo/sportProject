@@ -66,7 +66,7 @@ const ActivitiesImgs = () => {
  
 const itemData2 = [
   {
-      img: 'https://www.bsaspersonaltrainer.com.ar/wp-content/uploads/2014/07/Musculacion-estetica-6-metodos-infalibles-para-hipertrofiar.jpg',
+      img: 'https://i.blogs.es/9cd306/istock-629767578/500_333.jpeg',
       title: 'Musculación'
   },
   {
