@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import SortBar from "./Sortbar";
+
 import ProductCard from "../ProductCard/ProductCard";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -7,15 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../redux/actions/productsActions";
 import { loadCart } from "../../redux/actions/cartActions";
 import Footer from "../Footer";
+import './catalogo.css'
 
 const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    paddingTop: "20px",
-    display: "flex",
-    backgroundImage: "url('https://p4.wallpaperbetter.com/wallpaper/7/252/1023/simple-texture-gradient-wallpaper-preview.jpg')",
-    justifyContent: "space-around",
-  },
+  
   sortBar: {
     width: "20%",
     minWidth: "200px",
@@ -40,7 +36,12 @@ const useStyles = makeStyles(() => ({
 export default function Catalogo() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
+  const [width, setWidth] = useState(window.innerWidth)
   const classes = useStyles();
+
+const listenerWidth = () => {
+  setWidth(window.innerWidth)
+}
 
   useEffect(() => {
     dispatch(loadCart())
@@ -49,25 +50,26 @@ export default function Catalogo() {
     }
   }, [dispatch, state.products.products?.length]);
 
+  useEffect(() => {
+    window.addEventListener('resize', listenerWidth); 
+    return () => {
+      window.removeEventListener('resize', listenerWidth)
+    }
+  })
+
   return (
     <div>
-      <Grid container className={classes.root}>
-        <Grid item xs={2} className={classes.sortBar}>
-          <SortBar />
-        </Grid>
-        <Grid item sm={7} md={9} lg={9} className={classes.cards}>
+    {width > 900 ? 
+    <div className='catalogo-flex'>
+      
+      <div className='sortBar'>
+        <SortBar/>
+      </div>
+        <div className='catalogo-cards'>
           {Array.isArray(state.products.products) &&
           state.products.products.length !== 0 ? (
             state.products.products.map((product) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                className={classes.card}
-                key={product.id}
-              >
+              <div className='card'> 
                 <ProductCard
                   name={product.name}
                   id={product.id}
@@ -76,21 +78,64 @@ export default function Catalogo() {
                   stock={product.stock}
                   categories={product.categories.name}
                 />
-              </Grid>
+              </div>
             ))
           ) : (
             //esta parte podriamos cambiarla por un componente 404, agregue este ProductCard provisorio por si no llegan los productos
-            <Grid item xs={3} className={classes.card}>
+            <div className='card'>
               <ProductCard
                 name="Product NOT FOUND"
                 images="https://previews.123rf.com/images/mike301/mike3011604/mike301160400026/56872882-inusual-error-404-gr%C3%A1fico-de-p%C3%A1gina-no-encontrada.jpg"
                 price="-"
               />
-            </Grid>
+            </div>
           )}
-        </Grid>
-      </Grid>
-      <Footer/>
-    </div>
+
+        </div>
+</div>
+        : 
+        <div>
+        <div className='catalogo-flex'>
+          <h1 style={{color:'white', width:'100%', display:'flex', justifyContent:'center', backgroundColor:'gray'}}>Catalogo</h1>
+          <div className='catalogo-cards'>
+            {Array.isArray(state.products.products) &&
+            state.products.products.length !== 0 ? (
+              state.products.products.map((product) => (
+                <div className='card'> 
+                  <ProductCard
+                    name={product.name}
+                    id={product.id}
+                    images={product.images[0]}
+                    price={product.price}
+                    stock={product.stock}
+                    categories={product.categories.name}
+                  />
+                </div>
+              ))
+            ) : (
+              //esta parte podriamos cambiarla por un componente 404, agregue este ProductCard provisorio por si no llegan los productos
+              <div className='card'>
+                <ProductCard
+                  name="Product NOT FOUND"
+                  images="https://previews.123rf.com/images/mike301/mike3011604/mike301160400026/56872882-inusual-error-404-gr%C3%A1fico-de-p%C3%A1gina-no-encontrada.jpg"
+                  price="-"
+                />
+              </div>
+            )}
+  
+          </div>
+  </div>
+</div>
+          }
+        
+        
+      </div>
+      
+    
   );
 }
+
+
+<div className='sortBar'>
+        <SortBar/>
+      </div>

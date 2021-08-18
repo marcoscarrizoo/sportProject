@@ -32,7 +32,7 @@ function App() {
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <Route path="/" component={NavBar} />
-        <Route exact path="/" component={Home} />
+        <Route  exact path="/" component={Home} />
         <Route path="/asociate" component={Plans} />
         <Route path="/productos" component={Catalogo} />
         <Route path="/producto/:id" component={ProductDetail} />

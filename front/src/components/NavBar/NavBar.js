@@ -23,6 +23,7 @@ import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { loadCart } from "../../redux/actions/cartActions";
+import { AiFillWindows } from "react-icons/ai";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -146,7 +147,7 @@ export default function PrimarySearchAppBar() {
 
   const menu = () => {
     
-  history.push('/')
+  
   };
 
   const handleSignUp = () => {

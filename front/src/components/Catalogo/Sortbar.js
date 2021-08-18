@@ -12,27 +12,18 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import './sort-bar.css'
+
 
 const useStyles = makeStyles(() => ({
-    sortContainer: {
-        width: '90%',
-        height: '700px',
-        display: 'flex',
-        flexDirection: 'column',
-    },
+   
     info: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center'
     },
-    grid: {
-        margin: '20px 10px',
-        backgroundColor: '#ffffff',
-        padding: '15px',
-        borderRadius: '15px',
-        width: '100%'
-    },
+    
     formControl: {
         minWidth: 120,
     },
@@ -74,12 +65,10 @@ export default function SortBar() {
     }
 
     return (
-        <div className={classes.sortContainer}>
-            <Grid container className={classes.info}>
-
-            </Grid>
-            <Grid container className={classes.info}>
-                <Grid item className={classes.grid}>
+        <div className='sort-container'>
+            
+            
+                <div className='grid'>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Orden</FormLabel>
                         <RadioGroup aria-label="Orden" name="order" value={filOrder.order} onChange={handleChange}>
@@ -89,8 +78,8 @@ export default function SortBar() {
                             <FormControlLabel value="maxMin" control={<Radio />} label="Precio: Max-Min" />
                         </RadioGroup>
                     </FormControl>
-                </Grid>
-                <Grid item className={classes.grid}>
+                </div>
+                <div className='grid'>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel htmlFor="outlined-age-native-simple">Categorias</InputLabel>
                         <Select
@@ -109,8 +98,8 @@ export default function SortBar() {
                             }
                         </Select>
                     </FormControl>
-                </Grid>
-            </Grid>
+                </div>
+            
         </div>
     )
 }
