@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Suspense, lazy} from "react";
 import { Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./themeconfig";
@@ -19,7 +19,6 @@ import SendResetSuccess from './components/SignUp_SignIn/ResetPassword/ResetSucc
 import AddressForm from './components/Checkout/AddressForm';
 import Address from './components/Checkout/Adress';
 import Profile from "./components/Dashboard/Profile";
-
 //Esta constante es para tomar la URL para deploy o en su defecto para desarrollo.
 export const url = process.env.REACT_APP_API || "http://localhost:3001";
 
@@ -31,6 +30,7 @@ function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
+        
         <Route path="/" component={NavBar} />
         <Route  exact path="/" component={Home} />
         <Route path="/asociate" component={Plans} />

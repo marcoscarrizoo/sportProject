@@ -1,12 +1,15 @@
 .cart {
   box-sizing: border-box;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   background-color: #3a3737ef;
   min-height: 89.5vh;
   padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 50px;
   padding-bottom: 40px;
 
 }
@@ -122,4 +125,37 @@ input {
   border-radius: 5px;
   font-size: medium;
   text-align: center;
+}
+
+@media(max-width: 600px) {
+  .cart {
+    flex-direction: column;
+    align-items: center;
+  }
+  .totales {
+   width: 60%;
+   height: 250px;
+  }
+  .titles-total {
+    margin-bottom: 0px;
+  }
+  .subtotales {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3px 0;
+    align-items: center;
+  }
+  .buttons {
+    margin-top: 0px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .comprar {
+    font-size: 10px;
+    margin: 0px;
+    justify-content: center;
+  }
 }

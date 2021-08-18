@@ -14,6 +14,7 @@ import { Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import { resetProductDetail } from "../../redux/actions/productsActions";
 import "./ProductDetail.css";
+import Footer from "../Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,7 +91,7 @@ export default function ProductDetail() {
     return (
  <div className="detail-container">
     <div className="card-detail">
-        <div className="miniblock">
+        <div>
                 {detail ? (
                   detail.images.map((e) => (
                     <img
@@ -103,14 +104,14 @@ export default function ProductDetail() {
                 ) : (
                   <span>imagen no encontrada</span>
                 )}
+          
           </div>
 
 
-
-          <div className="secondblock">
+          <div>
             {/* <img src={detail? detail.images[0]: null} alt={image} className="centerimage" /> */}
             <img src={image} alt={image} className="centerimage" />
-          </div>
+            </div>
 
           <div className="thirdblock">
             <h2>{detail.name}</h2>
@@ -154,7 +155,15 @@ export default function ProductDetail() {
             </CardActions>
           </div>
     </div>
-        
+
+
+        {/* <div className="detail">
+        <p>calificaciones sobre este producto</p>
+        <ProductReviews productId={id} />
+        </div> */}
+        {/* <div className='footer-in-details'>
+      <Footer/>
+      </div> */}
   </div>
     );
   }
