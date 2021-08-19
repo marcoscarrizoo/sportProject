@@ -12,6 +12,7 @@ import './catalogo.css'
 import loader from '../../loader.gif'
 
 
+
 const useStyles = makeStyles(() => ({
   
   sortBar: {
@@ -88,12 +89,10 @@ const listenerWidth = () => {
           
           (
             //esta parte podriamos cambiarla por un componente 404, agregue este ProductCard provisorio por si no llegan los productos
-            <div className='card'>
-              <ProductCard
-                name="Cargando..."
-                images={loader}
-                price="-"
-              />
+            <div className='loader-catalogo'>
+              
+               <img src={loader} alt='imagen'/>
+              
             </div>
           )
           }
