@@ -9,6 +9,8 @@ import { getProducts } from "../../redux/actions/productsActions";
 import { loadCart } from "../../redux/actions/cartActions";
 import Footer from "../Footer";
 import './catalogo.css'
+import loader from '../../loader.gif'
+
 
 const useStyles = makeStyles(() => ({
   
@@ -38,6 +40,7 @@ export default function Catalogo() {
   const state = useSelector((state) => state);
   const [width, setWidth] = useState(window.innerWidth)
   const classes = useStyles();
+  const [loading, setLoading] = useState(true)
 
 const listenerWidth = () => {
   setWidth(window.innerWidth)
@@ -45,6 +48,7 @@ const listenerWidth = () => {
 
   useEffect(() => {
     dispatch(loadCart())
+
     if (!state.products.products?.length) {
       dispatch(getProducts());
     }
@@ -80,16 +84,19 @@ const listenerWidth = () => {
                 />
               </div>
             ))
-          ) : (
+          ) : 
+          
+          (
             //esta parte podriamos cambiarla por un componente 404, agregue este ProductCard provisorio por si no llegan los productos
             <div className='card'>
               <ProductCard
-                name="Product NOT FOUND"
-                images="https://previews.123rf.com/images/mike301/mike3011604/mike301160400026/56872882-inusual-error-404-gr%C3%A1fico-de-p%C3%A1gina-no-encontrada.jpg"
+                name="Cargando..."
+                images={loader}
                 price="-"
               />
             </div>
-          )}
+          )
+          }
 
         </div>
 </div>
