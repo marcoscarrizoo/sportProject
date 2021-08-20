@@ -18,12 +18,18 @@ export default function OutlinedCard() {
   const [annualy, setAnnualy] = useState(false);
   const [monthlyPremium, setMonthlyPremium] = useState(false);
   const [annualyPremium, setAnnualyPremium] = useState(false);
+
+  
   const [state, handleSubmit] = useForm("mjvjaygp");
-  const [contact, setContact] = useState('')
-  const history = useHistory();
+  const [men, setMen] = useState('')
 
   if (state.succeeded) {
-    return setContact('nos contactaremos a la brevedad')
+
+    return(
+    <div style={{display: "flex", justifyContent:'center', background: 'black', color:'white'}}>
+      <div style={{fontSize:'40px'}}>Nos pondremos en contacto contigo a la brevedad!!</div>
+    </div> 
+    )
   }
   const month = () => {
     setAnnualy(false);
@@ -148,7 +154,7 @@ export default function OutlinedCard() {
           <h1>DATOS DE CONTACTO</h1>
 
           <TextField
-            // onChange={(e) => { setEmail(e.target.value) }}
+            
             variant='outlined'
             margin="normal"
             size='small'
@@ -164,7 +170,7 @@ export default function OutlinedCard() {
           />
 
           <TextField
-            // onChange={(e) => { setEmail(e.target.value) }}
+             
             variant="outlined"
             margin="normal"
             required
@@ -179,7 +185,7 @@ export default function OutlinedCard() {
             className='namedata'
           />
           <TextField
-            // onChange={(e) => { setEmail(e.target.value) }}
+          
             variant="outlined"
             size='small'
             margin="normal"
@@ -194,7 +200,7 @@ export default function OutlinedCard() {
             className='namedata'
           />
           <TextField
-            // onChange={(e) => { setEmail(e.target.value) }}
+            
             variant="outlined"
             margin="normal"
             required
@@ -212,6 +218,7 @@ export default function OutlinedCard() {
           <Button
             
             type="submit"
+            disabled={state.submitting}
             fullWidth
             variant="contained"
             color="secondary"
@@ -220,6 +227,7 @@ export default function OutlinedCard() {
             QUIERO ASESORAMIENTO
           </Button>
           </div>
+          
           
         </form> 
 
