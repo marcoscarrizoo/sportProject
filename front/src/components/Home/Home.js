@@ -127,14 +127,19 @@ import Footer from "../Footer";
 import { Button } from "@material-ui/core";
 import Activities from "../Dashboard/Activities";
 import OurPlans from "../Dashboard/OurPlans";
+import { useEffect } from 'react';
 
 const Home = () => {
   const history = useHistory();
 
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
   function catalog() {
     history.push("/productos");
   }
 
+  
   return (
     <div className="home-container">
       <div className="div-home">
