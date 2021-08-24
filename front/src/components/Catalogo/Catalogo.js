@@ -9,7 +9,7 @@ import { getProducts } from "../../redux/actions/productsActions";
 import { loadCart } from "../../redux/actions/cartActions";
 import Footer from "../Footer";
 import './catalogo.css'
-import loader from '../../loader.gif'
+import loader from './Spinner-1s-800px (1).png'
 
 
 
@@ -91,7 +91,7 @@ const listenerWidth = () => {
             //esta parte podriamos cambiarla por un componente 404, agregue este ProductCard provisorio por si no llegan los productos
             <div className='loader-catalogo'>
               
-               <img src={loader} alt='imagen'/>
+               <img src={loader} alt='imagen' />
               
             </div>
           )
